@@ -9,16 +9,6 @@ namespace APITest.Mocks
 {
     public static class MockPbm
     {
-        public static List<DOM_RegimeTributario> MontaListaItems()
-        {
-            return new List<DOM_RegimeTributario>()
-            {
-                new DOM_RegimeTributario(){Id=1, RegimeTributario="Simples Nacional"},
-                new DOM_RegimeTributario(){Id=2, RegimeTributario="Simples Nacional Sublin"},
-                new DOM_RegimeTributario(){Id=2, RegimeTributario="Regime Normal"}
-            };
-
-        }
 
         public static Pbm MontaObjetoUnico()
         {
@@ -30,5 +20,16 @@ namespace APITest.Mocks
             return new Pbm { Id = 1, Nome = null, Observacao = "Observação Mock" };
         }
 
+
+        public static List<Pbm> MontaListaItems()
+        {
+            return new List<Pbm>()
+            {
+                new Pbm(){Id=1, Nome = "Teste Mock 1", Observacao = "Observação Mock 1"},
+                new Pbm(){Id=2, Nome = "Teste Mock 2", Observacao = "Observação Mock 2"},
+                new Pbm(){Id=2, Nome = "Teste Mock 3", Observacao = "Observação Mock 3"}
+            };
+
+        }
     }
 }

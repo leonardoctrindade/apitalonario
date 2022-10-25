@@ -82,5 +82,28 @@ namespace APITest
             mock.Verify(x => x.Delete(modelo));
         }
 
+        [Fact]
+        public async Task RetornaPorID()
+        {
+            mock.Setup(p => p.GetEntityById(MockPbm.MontaObjetoUnico().Id)).ReturnsAsync(MockPbm.MontaObjetoUnico());
+            PbmApiController ret = new PbmApiController(mock.Object);
+            var result = await ret.RetornaPbmPorId(1);
+            Assert.Equal("Teste Mock 1", ((Data.Entidades.Pbm)result.Value).Nome);
+        }
+
+
+
+
+        [Fact]
+        public async Task RetornaLista()
+        {
+            mock.Setup(repo => repo.List()).ReturnsAsync(MockPbm.MontaListaItems());
+            var controller = new PbmApiController(mock.Object);
+            var result = await controller.ListaPbm();
+            var viewResult = Assert.IsType<List<Pbm>>(result.Value);
+
+            Assert.Equal(3, viewResult.Count());
+        }
+
     }
 }
