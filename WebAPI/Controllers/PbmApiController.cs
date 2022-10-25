@@ -32,7 +32,9 @@ namespace WebAPI.Controllers
             if (String.IsNullOrEmpty(Pbm.Nome))
                 return Json(BadRequest(ModelState));
 
-            return Json(await Task.FromResult(this.IPbm.Add(Pbm)));
+            Json(await Task.FromResult(this.IPbm.Add(Pbm)));
+
+            return Json(Ok());
         }
 
 
@@ -48,8 +50,8 @@ namespace WebAPI.Controllers
             if (String.IsNullOrEmpty(Pbm.Nome))
                 return Json(BadRequest(ModelState));
 
-            return Json(await Task.FromResult(this.IPbm.Update(Pbm)));
-               
+            Json(await Task.FromResult(this.IPbm.Update(Pbm)));
+            return Json(Ok());
 
         }
 
