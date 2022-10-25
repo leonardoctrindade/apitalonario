@@ -53,6 +53,7 @@ namespace WebAPI
             services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));
             services.AddSingleton<IProduto, RepositoryProduto>();
             services.AddSingleton<IPbm, RepositoryPbm>();
+            services.AddSingleton<IDOM_RegimeTributario, RepositoryDOM_RegimeTributario>();
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

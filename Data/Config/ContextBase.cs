@@ -18,6 +18,7 @@ namespace Data.Config
         public DbSet<Produto> Produto { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Pbm> Pbm { get; set; }
+        public DbSet<DOM_RegimeTributario> DOM_RegimeTributario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,7 +38,7 @@ namespace Data.Config
 
         private string GetStringConectionConfig()
         {
-            string strCon = "";
+            string strCon = "Data Source=mssql.mastersoftbr.com.br;Initial Catalog=mastersoftbr12;Integrated Security=False;User ID=mastersoftbr12;Password=legiao22;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;";
 
             return strCon;
         }
