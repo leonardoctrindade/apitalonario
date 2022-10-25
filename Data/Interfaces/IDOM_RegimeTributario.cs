@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IDOM_RegimeTributario : IGeneric<DOM_RegimeTributario>
     {
-        Task<List<DOM_RegimeTributario>> ListagemCustomizada();
+        Task<DOM_RegimeTributario> RetornaRegimeTributarioPorID(int idRegimeTributarios);
     }
 }

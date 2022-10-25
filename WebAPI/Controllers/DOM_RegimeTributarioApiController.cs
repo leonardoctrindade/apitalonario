@@ -25,6 +25,12 @@ namespace WebAPI.Controllers
             return Json(await this.IDOM_RegimeTributario.List());
         }
 
+        [HttpGet("/api/RetornaRegimeTributarioPorID/{id}")]
+        public async Task<JsonResult> RetornaRegimeTributarioPorID(int id)
+        {
+            return Json(await this.IDOM_RegimeTributario.RetornaRegimeTributarioPorID(id));
+        }
+
 
 
     }

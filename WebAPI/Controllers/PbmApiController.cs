@@ -27,9 +27,12 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("/api/AdicionarPbm")]
-        public async Task AdicionarPbm([FromBody] Pbm Pbm)
+        public async Task<JsonResult> AdicionarPbm([FromBody] Pbm Pbm)
         {
-            await Task.FromResult(this.IPbm.Add(Pbm));
+            if (String.IsNullOrEmpty(Pbm.Nome))
+                return Json(BadRequest(ModelState));
+
+            return Json(await Task.FromResult(this.IPbm.Add(Pbm)));
         }
 
 
@@ -40,9 +43,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarPbm")]
-        public async Task EditarPbm([FromBody] Pbm Pbm)
+        public async Task<JsonResult> EditarPbm([FromBody] Pbm Pbm)
         {
-            await Task.FromResult(this.IPbm.Update(Pbm));
+            if (String.IsNullOrEmpty(Pbm.Nome))
+                return Json(BadRequest(ModelState));
+
+            return Json(await Task.FromResult(this.IPbm.Update(Pbm)));
+               
+
         }
 
         [HttpPost("/api/ExcluirBpm")]
