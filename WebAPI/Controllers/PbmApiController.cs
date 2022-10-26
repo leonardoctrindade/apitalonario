@@ -22,6 +22,7 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaPbm")]
         public async Task<JsonResult> ListaPbm()
         {
+
             return Json(await this.IPbm.List());
         }
 

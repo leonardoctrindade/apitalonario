@@ -45,5 +45,28 @@ namespace APITest
         }
 
 
+        [Fact]
+        public async Task Insere_Sucesso()
+        {
+            var modelo = MockRegimeTributario.MontaObjetoUnico();
+
+            mock.Setup(x => x.Add(It.IsAny<DOM_RegimeTributario>())).Returns(Task.CompletedTask);
+
+            var service = new DOM_RegimeTributarioApiController(mock.Object);
+            await service.AdicionarRegimeTributario(modelo);
+
+            mock.Verify(x => x.Add(modelo));
+        }
+
+        [Fact]
+        public async Task Insere_RegimeTributario_Nao_Preenchido()
+        {
+            var modelo = MockRegimeTributario.MontaObjetoUnicoRegimeTributarioVazio();
+            var apiController = new DOM_RegimeTributarioApiController(mock.Object);
+            var result = await apiController.AdicionarRegimeTributario(modelo);
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+        }
+
+
     }
 }

@@ -25,5 +25,15 @@ namespace APITest.Mocks
             return new DOM_RegimeTributario() { Id = 1, RegimeTributario = "Simples Nacional" };
         }
 
+        public static DOM_RegimeTributario MontaObjetoUnico()
+        {
+            return new DOM_RegimeTributario() { Id = 1, RegimeTributario = "Simples Nacional" };
+        }
+
+        public static DOM_RegimeTributario MontaObjetoUnicoRegimeTributarioVazio()
+        {
+            return new DOM_RegimeTributario() { Id = 1, RegimeTributario = null };
+        }
+
     }
 }

@@ -32,6 +32,24 @@ namespace WebAPI.Controllers
         }
 
 
+        //[HttpPost("/api/AdicionarRegimeTributario")]
+        //public async Task<JsonResult> AdicionarRegimeTributario([FromBody] DOM_RegimeTributario dOM_RegimeTributario)
+        //{
+        //    Json(await Task.FromResult(this.IDOM_RegimeTributario.Add(dOM_RegimeTributario)));
+        //    return Json(Ok());
+        //}
+
+
+        [HttpPost("/api/AdicionarRegimeTributario")]
+        public async Task<JsonResult> AdicionarRegimeTributario([FromBody] DOM_RegimeTributario dOM_RegimeTributario)
+        {
+            if (String.IsNullOrEmpty(dOM_RegimeTributario.RegimeTributario))
+                return Json(BadRequest(ModelState));
+
+            Json(await Task.FromResult(this.IDOM_RegimeTributario.Add(dOM_RegimeTributario)));
+
+            return Json(Ok());
+        }
 
     }
 }
