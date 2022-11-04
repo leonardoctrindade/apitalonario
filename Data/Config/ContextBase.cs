@@ -18,6 +18,7 @@ namespace Data.Config
         public DbSet<Produto> Produto { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Pbm> Pbm { get; set; }
+        public DbSet<Farmacopeia> Farmacopeia { get; set; }
         public DbSet<DOM_RegimeTributario> DOM_RegimeTributario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
