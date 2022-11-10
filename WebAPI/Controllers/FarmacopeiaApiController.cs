@@ -1,12 +1,12 @@
-﻿using Data.Entidades;
-using Data.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System;
 using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+using Data.Entidades;
+using Data.Interfaces;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarFarmacopeia")]
-        public async Task<JsonResult> AdicioanarFarmacopeia([FromBody] Farmacopeia Farmacopeia)
+        public async Task<JsonResult> AdicionarFarmacopeia([FromBody] Farmacopeia Farmacopeia)
         {
             if (String.IsNullOrEmpty(Farmacopeia.Nome))
                 return Json(BadRequest(ModelState));

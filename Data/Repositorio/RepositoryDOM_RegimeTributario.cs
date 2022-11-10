@@ -1,12 +1,12 @@
-﻿using Data.Config;
-using Data.Entidades;
-using Data.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using Data.Config;
 using System.Linq;
 using System.Text;
+using Data.Entidades;
+using Data.Interfaces;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositorio
 {

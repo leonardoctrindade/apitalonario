@@ -1,9 +1,9 @@
-﻿using Data.Entidades;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Text;
+using Data.Entidades;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Data.Config
 {
@@ -14,11 +14,16 @@ namespace Data.Config
             Database.EnsureCreated();
         }
 
-
         public DbSet<Produto> Produto { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Pbm> Pbm { get; set; }
         public DbSet<Farmacopeia> Farmacopeia { get; set; }
+        public DbSet<Ensaio> Ensaio { get; set; }
+        public DbSet<Bairro> Bairro { get; set; }
+        public DbSet<Cidade> Cidade { get; set; }
+        public DbSet<Estado> Estado { get; set; }
+        public DbSet<Pais> Pais { get; set; }
+        public DbSet<Tributo> Tributo { get; set; }
         public DbSet<DOM_RegimeTributario> DOM_RegimeTributario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -36,13 +41,11 @@ namespace Data.Config
             base.OnModelCreating(builder);
         }
 
-
         private string GetStringConectionConfig()
         {
             string strCon = "Data Source=mssql.mastersoftbr.com.br;Initial Catalog=mastersoftbr12;Integrated Security=False;User ID=mastersoftbr12;Password=legiao22;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;";
 
             return strCon;
         }
-
     }
 }

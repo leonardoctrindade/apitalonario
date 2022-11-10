@@ -1,12 +1,12 @@
-﻿using Data.Config;
-using Data.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Win32.SafeHandles;
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System;
 using System.Text;
+using Data.Config;
+using Data.Interfaces;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.Win32.SafeHandles;
+using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices;
 
 namespace Data.Repositorio
 {

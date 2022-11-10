@@ -1,12 +1,12 @@
-﻿using Data.Entidades;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using WebAPI.Token;
+using Data.Entidades;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {

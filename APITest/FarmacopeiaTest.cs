@@ -1,15 +1,15 @@
-﻿using APITest.Mocks;
-using Data.Entidades;
-using Data.Interfaces;
+﻿using Moq;
+using Xunit;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using APITest.Mocks;
+using Data.Entidades;
+using Data.Interfaces;
 using WebAPI.Controllers;
-using Xunit;
-using Moq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace APITest
 {
@@ -25,7 +25,7 @@ namespace APITest
             mock.Setup(y => y.Add(It.IsAny<Farmacopeia>())).Returns(Task.CompletedTask);
 
             var service = new FarmacopeiaApiController(mock.Object);
-            await service.AdicioanarFarmacopeia(modelo);
+            await service.AdicionarFarmacopeia(modelo);
 
             mock.Verify(y => y.Add(modelo));
         }
@@ -35,7 +35,7 @@ namespace APITest
         {
             var modelo = MockFarmacopeia.MontaObjetoNomeVazio();
             var apiController = new FarmacopeiaApiController(mock.Object);
-            var result = await apiController.AdicioanarFarmacopeia(modelo);
+            var result = await apiController.AdicionarFarmacopeia(modelo);
             Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
         }
 

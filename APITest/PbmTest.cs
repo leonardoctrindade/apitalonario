@@ -1,16 +1,13 @@
 using Moq;
-using System;
 using Xunit;
-using WebAPI;
+using System.Linq;
+using APITest.Mocks;
+using Data.Entidades;
 using Data.Interfaces;
 using WebAPI.Controllers;
 using System.Threading.Tasks;
-using Data.Entidades;
-using System.Collections;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using APITest.Mocks;
+using System.Collections.Generic;
 
 namespace APITest
 {
