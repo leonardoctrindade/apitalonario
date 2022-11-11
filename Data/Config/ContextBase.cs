@@ -24,6 +24,7 @@ namespace Data.Config
         public DbSet<Estado> Estado { get; set; }
         public DbSet<Pais> Pais { get; set; }
         public DbSet<Tributo> Tributo { get; set; }
+        public DbSet<Ncm> Ncm { get; set; }
         public DbSet<DOM_RegimeTributario> DOM_RegimeTributario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
