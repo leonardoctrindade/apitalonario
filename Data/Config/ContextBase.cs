@@ -26,6 +26,16 @@ namespace Data.Config
         public DbSet<Tributo> Tributo { get; set; }
         public DbSet<Ncm> Ncm { get; set; }
         public DbSet<DOM_RegimeTributario> DOM_RegimeTributario { get; set; }
+        public DbSet<Classe> Classe { get; set; }
+        public DbSet<ContaCorrente> ContaCorrente { get; set; }
+        public DbSet<Dcb> Dcb { get; set; }
+        public DbSet<Dci> Dci { get; set; }
+        public DbSet<Laboratorio> Laboratorio { get; set; }
+        public DbSet<Nbm> Nbm { get; set; }
+        public DbSet<PrincipioAtivo> PrincipioAtivo { get; set; }
+        public DbSet<Unidade> Unidade { get; set; }
+        public DbSet<Moeda> Moeda { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
