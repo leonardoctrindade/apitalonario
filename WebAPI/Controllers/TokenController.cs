@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
-    public class TokenController : Controller
+   public class TokenController : Controller
     {
 
         private readonly UserManager<ApplicationUser> _userManager;

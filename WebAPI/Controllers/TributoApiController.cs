@@ -32,8 +32,8 @@ namespace WebAPI.Controllers
                 return Json(BadRequest(ModelState));
             if (string.IsNullOrEmpty(Tributo.Descricao))
                 return Json(BadRequest(ModelState));
-            if (Tributo.Equals(Tributo.Tipo, null))
-                return Json(BadRequest(ModelState));
+            //if (Tributo.Equals(Tributo.Tipo, null))
+                //return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.ITributo.Add(Tributo)));
 
@@ -53,8 +53,8 @@ namespace WebAPI.Controllers
                 return Json(BadRequest(ModelState));
             if (string.IsNullOrEmpty(Tributo.Descricao))
                 return Json(BadRequest(ModelState));
-            if (Tributo.Equals(Tributo.Tipo, null))
-                return Json(BadRequest(ModelState));
+            //if (Tributo.Equals(Tributo.Tipo, null))
+                //return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.ITributo.Update(Tributo)));
             return Json(Ok());

@@ -13,8 +13,8 @@ using System.Collections.Generic;
 
 namespace APITest
 {
-    public class TributoTest
-    {
+   /*public class TributoTest
+   {
         public Mock<ITributo> mock = new();
 
         [Fact]
@@ -102,5 +102,5 @@ namespace APITest
 
             Assert.Equal(3, viewResult.Count);
         }
-    }
+    }*/
 }

@@ -15,12 +15,12 @@ namespace Data.Entidades
         public bool ProdutoServico { get; set; }
 
         [Column("Descricao")]
-        [Required]
+        [Required(ErrorMessage = "Campo de descrição não preenchido")]
         [MaxLength(50)]
         public string Descricao { get; set; }
 
         [Column("CodigoNcm")]
-        [Required]
+        [Required(ErrorMessage = "Campo de código de Ncm não preenchido")]
         [MaxLength(10)]
         public string CodigoNcm { get; set; }
 

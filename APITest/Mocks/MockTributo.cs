@@ -9,7 +9,7 @@ namespace APITest.Mocks
 {
     public static class MockTributo
     {
-        public static Tributo MontaObjetoUnico()
+        /*public static Tributo MontaObjetoUnico()
         {
             return new Tributo { Id = 1, Tipo = 1, Codigo = "Teste 1", Descricao = "Teste Mock 1" };
         }
@@ -37,6 +37,6 @@ namespace APITest.Mocks
                 new Tributo(){Id = 2, Tipo = 1, Codigo = "Teste 2", Descricao = "Teste Mock 2"},
                 new Tributo(){Id = 3, Tipo = 1, Codigo = "Teste 3", Descricao = "Teste Mock 3"}
             };
-        }
+        }*/
     }
 }

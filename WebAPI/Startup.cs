@@ -48,12 +48,13 @@ namespace WebAPI
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ContextBase>();
 
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
 
             services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));
             services.AddSingleton<IProduto, RepositoryProduto>();
             services.AddSingleton<IPbm, RepositoryPbm>();
             services.AddSingleton<IDOM_RegimeTributario, RepositoryDOM_RegimeTributario>();
+            services.AddControllers();
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

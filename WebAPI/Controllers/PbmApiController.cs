@@ -56,7 +56,7 @@ namespace WebAPI.Controllers
 
         }
 
-        [HttpPost("/api/ExcluirBpm")]
+        [HttpPost("/api/ExcluirPbm")]
         public async Task ExcluirBpm([FromBody] Pbm Pbm)
         {
             await Task.FromResult(this.IPbm.Delete(Pbm));

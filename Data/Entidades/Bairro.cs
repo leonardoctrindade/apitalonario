@@ -12,7 +12,7 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("Nome")]
-        [Required]
+        [Required(ErrorMessage = "Campo de nome não preenchido")]
         public string Nome { get; set; }
     }
 }

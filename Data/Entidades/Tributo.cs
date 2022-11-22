@@ -13,16 +13,30 @@ namespace Data.Entidades
 
         [Column("Tipo")]
         [Required]
-        public int? Tipo { get; set; }
+        public int TipoTributo { get; set; }
 
         [Column("Descricao")]
-        [Required]
+        [Required(ErrorMessage = "Campo de descrição não preenchido")]
         [MaxLength(1000)]
         public string Descricao { get; set; }
 
         [Column("Codigo")]
-        [Required]
+        [Required(ErrorMessage = "Campo de código não preenchido")]
         [MaxLength(10)]
         public string Codigo { get; set; }
+    }
+
+    public enum TipoTributo : int 
+    {
+        CST = 0,
+        CSOSN = 1,
+        SituacaoDocumento = 2,
+        DocumentosFiscais = 3,
+        CstPisCofins = 4,
+        CstIss = 5,
+        CFPS = 6,
+        CEST = 7,
+        CodigoBeneficioFiscal = 8,
+        CstIpi = 9
     }
 }
