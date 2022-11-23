@@ -33,17 +33,8 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDatabaseDeveloperPageExceptionFilter();
-
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
-            //services.AddControllersWithViews();
-
             services.AddDbContext<ContextBase>(options =>
-              options.UseSqlServer(
+              options.UseNpgsql(
                   Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ContextBase>();
@@ -53,8 +44,6 @@ namespace WebAPI
             services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));
             services.AddSingleton<IProduto, RepositoryProduto>();
             services.AddSingleton<IPbm, RepositoryPbm>();
-            services.AddSingleton<IDOM_RegimeTributario, RepositoryDOM_RegimeTributario>();
-            services.AddControllers();
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
