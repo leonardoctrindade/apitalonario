@@ -39,14 +39,26 @@ namespace WebAPI
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ContextBase>();
 
-            //services.AddControllersWithViews();
-
             services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));
             services.AddSingleton<IProduto, RepositoryProduto>();
-            services.AddSingleton<IPbm, RepositoryPbm>();
+            services.AddSingleton<IFarmacopeia, RepositoryFarmacopeia>();
+            services.AddSingleton<IEnsaio, RepositoryEnsaio>();
+            services.AddSingleton<IBairro, RepositoryBairro>();
+            services.AddSingleton<ICidade, RepositoryCidade>();
+            services.AddSingleton<IEstado, RepositoryEstado>();
+            services.AddSingleton<ITributo, RepositoryTributo>();
+            services.AddSingleton<INcm, RepositoryNcm>();
+            services.AddSingleton<IDOM_RegimeTributario, RepositoryDOM_RegimeTributario>();
+            services.AddSingleton<IPais, RepositoryPais>();
+            services.AddSingleton<IClasse, RepositoryClasse>();
+            services.AddSingleton<IContaCorrente, RepositoryContaCorrente>();
+            services.AddSingleton<IDcb, RepositoryDcb>();
+            services.AddSingleton<INbm, RepositoryNbm>();
+            services.AddSingleton<IPrincipioAtivo, RepositoryPrincipioAtivo>();
+            services.AddSingleton<IUnidade, RepositoryUnidade>();
+            services.AddSingleton<IMoeda, RepositoryMoeda>();
 
-
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>
            {
                option.TokenValidationParameters = new TokenValidationParameters
