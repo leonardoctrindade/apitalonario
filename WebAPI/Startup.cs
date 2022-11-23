@@ -57,8 +57,9 @@ namespace WebAPI
             services.AddSingleton<IPrincipioAtivo, RepositoryPrincipioAtivo>();
             services.AddSingleton<IUnidade, RepositoryUnidade>();
             services.AddSingleton<IMoeda, RepositoryMoeda>();
+            services.AddSingleton<IPbm, RepositoryPbm>();
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>
            {
                option.TokenValidationParameters = new TokenValidationParameters
