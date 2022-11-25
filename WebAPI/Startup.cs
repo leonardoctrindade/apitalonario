@@ -33,47 +33,31 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDatabaseDeveloperPageExceptionFilter();
-
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
-            //services.AddControllersWithViews();
-
             services.AddDbContext<ContextBase>(options =>
-              options.UseSqlServer(
+              options.UseNpgsql(
                   Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ContextBase>();
 
-            //services.AddControllersWithViews();
-
             services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));
             services.AddSingleton<IProduto, RepositoryProduto>();
-            services.AddSingleton<IPbm, RepositoryPbm>();
-            services.AddSingleton<IDOM_RegimeTributario, RepositoryDOM_RegimeTributario>();
             services.AddSingleton<IFarmacopeia, RepositoryFarmacopeia>();
-            services.AddSingleton<IBairro, RepositoryBairro> ();
+            services.AddSingleton<IEnsaio, RepositoryEnsaio>();
+            services.AddSingleton<IBairro, RepositoryBairro>();
             services.AddSingleton<ICidade, RepositoryCidade>();
+            services.AddSingleton<IEstado, RepositoryEstado>();
+            services.AddSingleton<ITributo, RepositoryTributo>();
+            services.AddSingleton<INcm, RepositoryNcm>();
+            services.AddSingleton<IDOM_RegimeTributario, RepositoryDOM_RegimeTributario>();
+            services.AddSingleton<IPais, RepositoryPais>();
             services.AddSingleton<IClasse, RepositoryClasse>();
             services.AddSingleton<IContaCorrente, RepositoryContaCorrente>();
             services.AddSingleton<IDcb, RepositoryDcb>();
-            services.AddSingleton<IDci, RepositoryDci>();
-            services.AddSingleton<IEnsaio, RepositoryEnsaio>();
-            services.AddSingleton<IEstado, RepositoryEstado>();
-            services.AddSingleton<ILaboratorio, RepositoryLaboratorio>();
-            services.AddSingleton<IMoeda, RepositoryMoeda>();
-            services.AddSingleton<IMotivo, RepositoryMotivo>();
             services.AddSingleton<INbm, RepositoryNbm>();
-            services.AddSingleton<INcm, RepositoryNcm>();
-            services.AddSingleton<IPais, RepositoryPais>();
             services.AddSingleton<IPrincipioAtivo, RepositoryPrincipioAtivo>();
-            services.AddSingleton<ITributo, RepositoryTributo>();
             services.AddSingleton<IUnidade, RepositoryUnidade>();
-            services.AddControllers();
-
+            services.AddSingleton<IMoeda, RepositoryMoeda>();
+            services.AddSingleton<IPbm, RepositoryPbm>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>
