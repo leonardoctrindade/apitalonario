@@ -3,6 +3,7 @@ using Data.Entidades;
 using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace WebAPI.Controllers
 {
@@ -18,7 +19,13 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaPais")]
         public async Task<JsonResult> ListaPais()
         {
-            return Json(await this.IPais.List());
+            //return Json(await this.IPais.List());
+            return Json(new List<Pais>()
+            {
+                new Pais { Id = 1, Nome = "Brasil", CodigoIbge = 123, CodigoTelefonico = 55},
+                new Pais { Id = 2, Nome = "França", CodigoIbge = 321, CodigoTelefonico = 66},
+                new Pais { Id = 3, Nome = "Alemanha", CodigoIbge = 666, CodigoTelefonico = 77}
+            });
         }
 
         [HttpPost("/api/AdicionarPais")]

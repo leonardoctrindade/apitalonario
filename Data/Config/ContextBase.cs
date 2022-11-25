@@ -4,6 +4,7 @@ using Data.Entidades;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using MathNet.Numerics;
 
 namespace Data.Config
 {
@@ -55,7 +56,7 @@ namespace Data.Config
         private string GetStringConectionConfig()
 
         {
-            string strCon = "Server=DESKTOP-IKEOLLJ;Database=BancoMaconha;Trusted_Connection=SSPI;Encrypt=false;TrustServerCertificate=true";
+            string strCon = "Data Source=mssql.mastersoftbr.com.br;Initial Catalog=mastersoftbr12;Integrated Security=False;User ID=mastersoftbr12;Password=legiao22;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;";
 
             return strCon;
         }

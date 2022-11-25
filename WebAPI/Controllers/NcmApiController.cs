@@ -3,6 +3,7 @@ using Data.Entidades;
 using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace WebAPI.Controllers
 {
@@ -18,7 +19,13 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaNcm")]
         public async Task<JsonResult> ListaNcm()
         {
-            return Json(await this.INcm.List());
+            //return Json(await this.INcm.List());
+            return Json(new List<Ncm>()
+            {
+                new Ncm() { Id = 1, Descricao = "Teste 1", CodigoNcm = "123Abc", CodigoNcmEx = 123, AliquotaCofins = 1, AliquotaIcmsProduto = 1, AliquotaImportacao = 1, AliquotaNacional =1, AliquotaPis = 1, IdTributoCstCofinsEntrada = 1, IdTributoCstCofinsSaida = 1, IdTributoCstPisEntrada = 1, IdTributoCstPisSaida = 1, PercentualMva = 1, ProdutoServico = true },
+                new Ncm() { Id = 2, Descricao = "Teste 2", CodigoNcm = "123Abc", CodigoNcmEx = 123, AliquotaCofins = 1, AliquotaIcmsProduto = 1, AliquotaImportacao = 1, AliquotaNacional =1, AliquotaPis = 1, IdTributoCstCofinsEntrada = 1, IdTributoCstCofinsSaida = 1, IdTributoCstPisEntrada = 1, IdTributoCstPisSaida = 1, PercentualMva = 1, ProdutoServico = false },
+                new Ncm() { Id = 3, Descricao = "Teste 3", CodigoNcm = "123Abc", CodigoNcmEx = 123, AliquotaCofins = 1, AliquotaIcmsProduto = 1, AliquotaImportacao = 1, AliquotaNacional =1, AliquotaPis = 1, IdTributoCstCofinsEntrada = 1, IdTributoCstCofinsSaida = 1, IdTributoCstPisEntrada = 1, IdTributoCstPisSaida = 1, PercentualMva = 1, ProdutoServico = false }
+            });
         }
 
         [HttpPost("/api/AdicionarNcm")]

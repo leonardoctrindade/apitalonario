@@ -54,6 +54,24 @@ namespace WebAPI
             services.AddSingleton<IProduto, RepositoryProduto>();
             services.AddSingleton<IPbm, RepositoryPbm>();
             services.AddSingleton<IDOM_RegimeTributario, RepositoryDOM_RegimeTributario>();
+            services.AddSingleton<IFarmacopeia, RepositoryFarmacopeia>();
+            services.AddSingleton<IBairro, RepositoryBairro> ();
+            services.AddSingleton<ICidade, RepositoryCidade>();
+            services.AddSingleton<IClasse, RepositoryClasse>();
+            services.AddSingleton<IContaCorrente, RepositoryContaCorrente>();
+            services.AddSingleton<IDcb, RepositoryDcb>();
+            services.AddSingleton<IDci, RepositoryDci>();
+            services.AddSingleton<IEnsaio, RepositoryEnsaio>();
+            services.AddSingleton<IEstado, RepositoryEstado>();
+            services.AddSingleton<ILaboratorio, RepositoryLaboratorio>();
+            services.AddSingleton<IMoeda, RepositoryMoeda>();
+            services.AddSingleton<IMotivo, RepositoryMotivo>();
+            services.AddSingleton<INbm, RepositoryNbm>();
+            services.AddSingleton<INcm, RepositoryNcm>();
+            services.AddSingleton<IPais, RepositoryPais>();
+            services.AddSingleton<IPrincipioAtivo, RepositoryPrincipioAtivo>();
+            services.AddSingleton<ITributo, RepositoryTributo>();
+            services.AddSingleton<IUnidade, RepositoryUnidade>();
             services.AddControllers();
 
 

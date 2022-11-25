@@ -23,7 +23,14 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaFarmacopeia")]
         public async Task<JsonResult> ListaFarmacopeia()
         {
-            return Json(await this.IFarmacopeia.List());
+            //return Json(await this.IFarmacopeia.List());
+
+            return Json(new List<Farmacopeia>()
+            {
+                new Farmacopeia { Id = 1, Nome = "Teste 1", Observacao = "Teste Observação 1"},
+                new Farmacopeia { Id = 2, Nome = "Teste 2", Observacao = "Teste Observação 2"},
+                new Farmacopeia { Id = 3, Nome = "Teste 3", Observacao = "Teste Observação 3"}
+            });
         }
 
         [HttpPost("/api/AdicionarFarmacopeia")]
