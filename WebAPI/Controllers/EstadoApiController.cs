@@ -22,13 +22,7 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaEstado")]
         public async Task<JsonResult> ListaEstado()
         {
-            //return Json(await this.IEstado.List());
-            return Json(new List<Estado>()
-            {
-                new Estado() { Id = 1, Nome = "Santa Catarina", AliquotaFcpEstado = 1, AliquotaIcmsEstado = 1, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, ChecagemContribuinteIsento = false, Sigla = "SC", IdPais = 1},
-                new Estado() { Id = 2, Nome = "Rio Grande do Sul", AliquotaFcpEstado = 1, AliquotaIcmsEstado = 1, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, ChecagemContribuinteIsento = true, Sigla = "RS", IdPais = 2},
-                new Estado() { Id = 3, Nome = "Parana", AliquotaFcpEstado = 1, AliquotaIcmsEstado = 1, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, ChecagemContribuinteIsento = true, Sigla = "PR", IdPais = 3}
-            });
+            return Json(await this.IEstado.List());
         }
 
         [HttpPost("/api/AdicionarEstado")]

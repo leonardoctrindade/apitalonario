@@ -19,13 +19,7 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaPais")]
         public async Task<JsonResult> ListaPais()
         {
-            //return Json(await this.IPais.List());
-            return Json(new List<Pais>()
-            {
-                new Pais { Id = 1, Nome = "Brasil", CodigoIbge = 123, CodigoTelefonico = 55},
-                new Pais { Id = 2, Nome = "França", CodigoIbge = 321, CodigoTelefonico = 66},
-                new Pais { Id = 3, Nome = "Alemanha", CodigoIbge = 666, CodigoTelefonico = 77}
-            });
+            return Json(await this.IPais.List());
         }
 
         [HttpPost("/api/AdicionarPais")]

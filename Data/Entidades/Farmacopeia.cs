@@ -16,7 +16,7 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de nome não preenchido")]
         public string Nome { get; set; }
 
-        [Column("Observação")]
+        [Column("Observacao")]
         public string Observacao { get; set; }
     }
 }
