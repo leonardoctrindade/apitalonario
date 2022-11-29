@@ -56,6 +56,7 @@ namespace WebAPI
             services.AddSingleton<INbm, RepositoryNbm>();
             services.AddSingleton<IPrincipioAtivo, RepositoryPrincipioAtivo>();
             services.AddSingleton<IUnidade, RepositoryUnidade>();
+            services.AddSingleton<IUnidadeConversao, RepositoryUnidadeConversao>();
             services.AddSingleton<IMoeda, RepositoryMoeda>();
             services.AddSingleton<IPbm, RepositoryPbm>();
 

@@ -4,7 +4,6 @@ using Data.Entidades;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using MathNet.Numerics;
 
 namespace Data.Config
 {
@@ -35,14 +34,15 @@ namespace Data.Config
         public DbSet<Nbm> Nbm { get; set; }
         public DbSet<PrincipioAtivo> PrincipioAtivo { get; set; }
         public DbSet<Unidade> Unidade { get; set; }
+        public DbSet<UnidadeConversao> UnidadeConversao { get; set; }
         public DbSet<Moeda> Moeda { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql(GetStringConectionConfig()
-               ,options => options.SetPostgresVersion(new Version(9, 6)));
+                optionsBuilder.UseNpgsql(GetStringConectionConfig(),
+                options => options.SetPostgresVersion(new Version(9, 6)));
                 base.OnConfiguring(optionsBuilder);
             }
         }
@@ -58,7 +58,7 @@ namespace Data.Config
         private string GetStringConectionConfig()
 
         {
-            string strCon = "Server=DESKTOP-IKEOLLJ;Database=BancoMaconha;Trusted_Connection=SSPI;Encrypt=false;TrustServerCertificate=true";
+            string strCon = "User ID=mastersoftbr; Password=legiao22; Host=pgsql.mastersoftbr.com.br; Port=5432; Database=mastersoftbr; Pooling=true;";
 
             return strCon;
         }

@@ -10,6 +10,7 @@ namespace Data.Entidades
     {
         [Column("Id")]
         public int Id { get; set; }
+
         [Column("Descricao")]
         [Required]
         [MaxLength(50)]

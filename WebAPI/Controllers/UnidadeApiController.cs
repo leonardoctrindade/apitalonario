@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WebAPI.Controllers
 {
@@ -27,10 +28,18 @@ namespace WebAPI.Controllers
         {
             if (string.IsNullOrEmpty(unidade.Sigla) || string.IsNullOrEmpty(unidade.Descricao))
                 return Json(BadRequest(ModelState));
+            try
+            {
+                Json(await Task.FromResult(this.IUnidade.Add(unidade)));
+                
+                return Json(Ok());
+            }
+            catch (Exception)
+            {
 
-            Json(await Task.FromResult(this.IUnidade.Add(unidade)));
-
-            return Json(Ok());
+                return Json(BadRequest(ModelState));
+            }
+            
         }
         [HttpGet("/api/RetornarUnidadePorId/{id}")]
         public async Task<JsonResult> RetornarUnidadeProId(int id)
@@ -55,6 +64,5 @@ namespace WebAPI.Controllers
         {
             await Task.FromResult(this.IUnidade.Delete(unidade));
         }
-
     }
 }

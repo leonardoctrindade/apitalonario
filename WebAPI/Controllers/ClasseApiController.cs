@@ -23,7 +23,6 @@ namespace WebAPI.Controllers
         {
             if (string.IsNullOrEmpty(classe.Descricao))
                 return Json(BadRequest(ModelState));
-
             Json(await Task.FromResult(this.IClasse.Add(classe)));
 
             return Json(Ok());
