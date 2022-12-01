@@ -41,7 +41,7 @@ namespace Data.Entidades
         [Required]
         public int IdPais { get; set; }
 
-        [NotMapped]
-        public List<Pais> Pais { get; set; }
+        //[NotMapped]
+        //public List<Pais> Pais { get; set; }
     }
 }
