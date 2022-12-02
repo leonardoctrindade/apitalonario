@@ -33,6 +33,8 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
             services.AddDbContext<ContextBase>(options =>
               options.UseNpgsql(
                   Configuration.GetConnectionString("DefaultConnection")));
@@ -60,6 +62,10 @@ namespace WebAPI
             services.AddSingleton<IMoeda, RepositoryMoeda>();
             services.AddSingleton<IPbm, RepositoryPbm>();
             services.AddSingleton<IContabilista, RepositoryContabilista>();
+            services.AddSingleton<ITransportador, RepositoryTransportador>();
+            services.AddSingleton<IPrescritor, RepositoryPrescritor>();
+            services.AddSingleton<IEspecialidade, RepositoryEspecialidade>();
+            services.AddSingleton<IEspecialidadePrescritor, RepositoryEspecialidadePrescritor>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>

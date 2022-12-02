@@ -21,7 +21,15 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaEspecialidade")]
         public async Task<JsonResult> ListaEspecialidade()
         {
-            return Json(await this.IEspecialidade.List());
+            try
+            {
+                return Json(await this.IEspecialidade.List());
+            }
+            catch (Exception)
+            {
+                return Json(BadRequest(ModelState));
+            }
+            
         }
         [HttpPost("/api/AdicionarEspecialidade")]
         public async Task<JsonResult> AdicionarEspecialidade([FromBody] Especialidade especialidade)
