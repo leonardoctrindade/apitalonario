@@ -58,6 +58,7 @@ namespace WebAPI
             services.AddSingleton<IUnidade, RepositoryUnidade>();
             services.AddSingleton<IMoeda, RepositoryMoeda>();
             services.AddSingleton<IPbm, RepositoryPbm>();
+            services.AddSingleton<IPortador, RepositoryPortador>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>

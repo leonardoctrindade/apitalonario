@@ -35,6 +35,7 @@ namespace Data.Config
         public DbSet<PrincipioAtivo> PrincipioAtivo { get; set; }
         public DbSet<Unidade> Unidade { get; set; }
         public DbSet<Moeda> Moeda { get; set; }
+        public DbSet<Portador> Portador { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
