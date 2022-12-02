@@ -21,7 +21,7 @@ namespace Data.Entidades
         [Column("CodigoBanco")]
         [MaxLength(3)]
         [Required]
-        public decimal CodigoBanco { get; set; }
+        public string CodigoBanco { get; set; }
 
         [Column("Carteira")]
         [MaxLength(10)]
