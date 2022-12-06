@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaBanco")]
         public async Task<JsonResult> ListaBanco()
         {
-            return Json(await this.IBanco.List());
+             return Json(await this.IBanco.List());
         }
 
         [HttpPost("/api/AdicionarBanco")]
@@ -26,8 +26,8 @@ namespace WebAPI.Controllers
         {
             if (String.IsNullOrEmpty(Banco.Nome))
                 return Json(BadRequest(ModelState));
-            if (Banco.CodigoBanco == 0 ) 
-                return Json(BadRequest(ModelState));
+            //if (Banco.CodigoBanco == 0 ) 
+            //    return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.IBanco.Add(Banco)));
 
@@ -45,8 +45,8 @@ namespace WebAPI.Controllers
         {
             if (String.IsNullOrEmpty(Banco.Nome))
                 return Json(BadRequest(ModelState));
-            if (Banco.CodigoBanco == 0)
-                return Json(BadRequest(ModelState));
+            //if (Banco.CodigoBanco == 0)
+            //    return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.IBanco.Update(Banco)));
             return Json(Ok());

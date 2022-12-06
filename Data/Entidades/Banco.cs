@@ -31,7 +31,7 @@ namespace Data.Entidades
         [MaxLength(5)]
         public string Modalidade { get; set; }
 
-        [Column("FormaCobrança")]
+        [Column("FormaCobranca")]
         [MaxLength(1)]
         public string FormaCobranca { get; set; }
 

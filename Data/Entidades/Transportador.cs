@@ -18,10 +18,10 @@ namespace Data.Entidades
         [Required]
         public string Nome { get; set; }
 
-        [Column("CpfOuCnpj")]
+        [Column("CpfCnpj")]
         [MaxLength(20)]
         [Required]
-        public string CpfOuCnpj { get; set; }
+        public string CpfCnpj { get; set; }
 
         [Column("Ie")]
         [MaxLength(20)]
@@ -48,9 +48,9 @@ namespace Data.Entidades
         [Column("IdEstado")]
         public int IdEstado { get; set; }
 
-        [Column("DddTelefone")]
+        [Column("DDD")]
         [MaxLength(5)]
-        public string DddTelefone { get; set; }
+        public string DDD { get; set; }
 
         [Column("Telefone")]
         [MaxLength(10)]
@@ -60,9 +60,9 @@ namespace Data.Entidades
         [MaxLength(20)]
         public string CodigoAntt { get; set; }
 
-        [Column("PlacaVeiculo")]
+        [Column("Placa")]
         [MaxLength(20)]
-        public string PlacaVeiculo { get; set; }
+        public string Placa { get; set; }
 
         [Column("IdEstadoPlaca")]
         public int IdEstadoPlaca { get; set; }

@@ -16,7 +16,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Nome = "Teste Mock 1",
-                CpfOuCnpj = "07072944958",
+                CpfCnpj = "07072944958",
                 Ie = "Teste Mock 1",
                 Cep = "88308390",
                 Endereco = "Rua José Simplicio de Oliveira",
@@ -24,10 +24,10 @@ namespace APITest.Mocks
                 IdBairro = 1,
                 IdCidade = 1,
                 IdEstado = 1,
-                DddTelefone = "047",
+                DDD = "047",
                 Telefone = "988498793",
                 CodigoAntt = "AAA23t52",
-                PlacaVeiculo = "MIA8565",
+                Placa = "MIA8565",
                 IdEstadoPlaca = 2
             };
         }
@@ -38,7 +38,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Nome = null,
-                CpfOuCnpj = "07072944958",
+                CpfCnpj = "07072944958",
                 Ie = "Teste Mock 1",
                 Cep = "88308390",
                 Endereco = "Rua José Simplicio de Oliveira",
@@ -46,10 +46,10 @@ namespace APITest.Mocks
                 IdBairro = 1,
                 IdCidade = 1,
                 IdEstado = 1,
-                DddTelefone = "047",
+                DDD = "047",
                 Telefone = "988498793",
                 CodigoAntt = "AAA23t52",
-                PlacaVeiculo = "MIA8565",
+                Placa = "MIA8565",
                 IdEstadoPlaca = 2
             };
         }
@@ -60,7 +60,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Nome = "Teste Mock 1",
-                CpfOuCnpj = null,
+                CpfCnpj = null,
                 Ie = "Teste Mock 1",
                 Cep = "88308390",
                 Endereco = "Rua José Simplicio de Oliveira",
@@ -68,10 +68,10 @@ namespace APITest.Mocks
                 IdBairro = 1,
                 IdCidade = 1,
                 IdEstado = 1,
-                DddTelefone = "047",
+                DDD = "047",
                 Telefone = "988498793",
                 CodigoAntt = "AAA23t52",
-                PlacaVeiculo = "MIA8565",
+                Placa = "MIA8565",
                 IdEstadoPlaca = 2
             };
         }
@@ -83,7 +83,7 @@ namespace APITest.Mocks
                 new Transportador {
                     Id = 1,
                     Nome = "Teste Mock 1",
-                    CpfOuCnpj = "Teste Mock 1",
+                    CpfCnpj = "Teste Mock 1",
                     Ie = "Teste Mock 1",
                     Cep = "Teste Mock 1",
                     Endereco = "Rua José Simplicio de Oliveira",
@@ -91,16 +91,16 @@ namespace APITest.Mocks
                     IdBairro = 1,
                     IdCidade = 1,
                     IdEstado = 1,
-                    DddTelefone = "047",
+                    DDD = "047",
                     Telefone = "988498793",
                     CodigoAntt = "AAA23t52",
-                    PlacaVeiculo = "MIA8565",
+                    Placa = "MIA8565",
                     IdEstadoPlaca = 1
                 },
                 new Transportador {
                     Id = 1,
                     Nome = "Teste Mock 2",
-                    CpfOuCnpj = "Teste Mock 2",
+                    CpfCnpj = "Teste Mock 2",
                     Ie = "Teste Mock 2",
                     Cep = "Teste Mock 2",
                     Endereco = "Rua José Simplicio de Oliveira",
@@ -108,16 +108,16 @@ namespace APITest.Mocks
                     IdBairro = 2,
                     IdCidade = 2,
                     IdEstado = 2,
-                    DddTelefone = "047",
+                    DDD = "047",
                     Telefone = "988498793",
                     CodigoAntt = "AAA23t52",
-                    PlacaVeiculo = "MIA8565",
+                    Placa = "MIA8565",
                     IdEstadoPlaca = 2
                 },
                 new Transportador {
                     Id = 3,
                     Nome = "Teste Mock 3",
-                    CpfOuCnpj = "Teste Mock 3",
+                    CpfCnpj = "Teste Mock 3",
                     Ie = "Teste Mock 3",
                     Cep = "Teste Mock 3",
                     Endereco = "Rua José Simplicio de Oliveira",
@@ -125,10 +125,10 @@ namespace APITest.Mocks
                     IdBairro = 3,
                     IdCidade = 3,
                     IdEstado = 3,
-                    DddTelefone = "047",
+                    DDD = "047",
                     Telefone = "988498793",
                     CodigoAntt = "AAA23t52",
-                    PlacaVeiculo = "MIA8565",
+                    Placa = "MIA8565",
                     IdEstadoPlaca = 3
                 }
             };

@@ -36,6 +36,8 @@ namespace Data.Config
         public DbSet<Unidade> Unidade { get; set; }
         public DbSet<Moeda> Moeda { get; set; }
         public DbSet<Portador> Portador { get; set; }
+        public DbSet<Banco> Banco { get; set; }
+        public DbSet<Transportador> Transportador { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
