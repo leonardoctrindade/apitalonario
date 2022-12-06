@@ -42,8 +42,6 @@ namespace WebAPI.Controllers
             {
                 Json(await Task.FromResult(this.IPrescritor.Add(prescritor)));
 
-                var id = 0;
-                Console.Write(id);
             }
             catch (Exception)
             {

@@ -35,6 +35,8 @@ namespace Data.Entidades
         public string CpfCnpj { get; set; }
         [Column("DDD")]
         public string DDD { get; set; }
+        [Column("DDDCelular")]
+        public string DDDCelular { get; set; }
         [Column("Telefone")]
         public string Telefone { get; set; }
         [Column("Celular")]
@@ -57,11 +59,32 @@ namespace Data.Entidades
         public string CrmEstado { get; set; }
         [Column("CrmTipo")]
         public string CrmTipo { get; set; }
-        [Column("IdEspecialidade")]
-        public int IdEspecialidade { get; set; }
+        [Column("Email")]
+        public string Email { get; set; }
+        [Column("Aniversario")]
+        public string Aniversario { get; set; }
+        [Column("EnderecoRes")]
+        public string EnderecoRes { get; set; }
+        [Column("NumeroRes")]
+        public string NumeroRes { get; set; }
+        [Column("CepRes")]
+        public string CepRes { get; set; }
+        [Column("DDDRes")]
+        public string DDDRes { get; set; }
+        [Column("TelefoneRes")]
+        public string TelefoneRes { get; set; }
+        [Column("Proximidade")]
+        public string Proximidade { get; set; }
+        [Column("IdVisitador")]
+        public int IdVisitador { get; set; }
+        [Column("ObservacaoVenda")]
+        public string ObservacaoVenda { get; set; }
+        [Column("Cedh")]
+        public bool Cedh { get; set; }
     }
     public enum Genero
     {
+        Selecione,
         Masculino,
         Feminino
     }
