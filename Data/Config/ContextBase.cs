@@ -43,6 +43,7 @@ namespace Data.Config
         public DbSet<Especialidade> Especialidade { get; set; }
         public DbSet<TipoContato> TipoContato { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
+        public DbSet<Posologia> Posologia { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
