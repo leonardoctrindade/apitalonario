@@ -2,6 +2,7 @@
 using Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -26,7 +27,7 @@ namespace WebAPI.Controllers
         {
             if (String.IsNullOrEmpty(Banco.Nome))
                 return Json(BadRequest(ModelState));
-            if (Banco.CodigoBanco == 0 ) 
+            if (Banco.CodigoBanco.Count() == 0 || Banco.CodigoBanco.Count() > 3 ) 
                 return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.IBanco.Add(Banco)));
@@ -45,7 +46,7 @@ namespace WebAPI.Controllers
         {
             if (String.IsNullOrEmpty(Banco.Nome))
                 return Json(BadRequest(ModelState));
-            if (Banco.CodigoBanco == 0)
+            if (Banco.CodigoBanco.Count() == 0 || Banco.CodigoBanco.Count() > 3 )
                 return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.IBanco.Update(Banco)));

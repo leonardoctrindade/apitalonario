@@ -15,7 +15,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Nome = "Teste Mock 1",
-                CodigoBanco = 123,
+                CodigoBanco = "123",
                 Carteira = "Teste 1",
                 Modalidade = "Teste",
                 FormaCobranca = "B",
@@ -49,7 +49,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Nome = null,
-                CodigoBanco = 123,
+                CodigoBanco = "123",
                 Carteira = "Teste 1",
                 Modalidade = "Teste",
                 FormaCobranca = "B",
@@ -83,7 +83,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Nome = "Teste Mock 1",
-                CodigoBanco = 0,
+                CodigoBanco = "",
                 Carteira = "Teste 1",
                 Modalidade = "Teste",
                 FormaCobranca = "B",
@@ -120,7 +120,7 @@ namespace APITest.Mocks
                 {
                     Id = 1,
                     Nome = "Teste Mock 1",
-                    CodigoBanco = 123,
+                    CodigoBanco = "123",
                     Carteira = "Teste 1",
                     Modalidade = "Teste",
                     FormaCobranca = "B",
@@ -151,7 +151,7 @@ namespace APITest.Mocks
                 {
                     Id = 1,
                     Nome = "Teste Mock 2",
-                    CodigoBanco = 123,
+                    CodigoBanco = "123",
                     Carteira = "Teste 2",
                     Modalidade = "Teste",
                     FormaCobranca = "B",
@@ -182,7 +182,7 @@ namespace APITest.Mocks
                 {
                     Id = 1,
                     Nome = "Teste Mock 3",
-                    CodigoBanco = 123,
+                    CodigoBanco = "123",
                     Carteira = "Teste 3",
                     Modalidade = "Teste",
                     FormaCobranca = "B",
