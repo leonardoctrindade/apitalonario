@@ -44,6 +44,7 @@ namespace Data.Config
         public DbSet<TipoContato> TipoContato { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
         public DbSet<Posologia> Posologia { get; set; }
+        public DbSet<AdministradoraCartao> AdministradoraCartao { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
