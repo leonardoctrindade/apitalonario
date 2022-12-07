@@ -18,7 +18,7 @@ namespace APITest.Mocks
                 Sequencia = 12,
                 Obrigatoria = "Não",
                 Processo = "Teste",
-                TempoMaximo = TimeSpan.FromMinutes(1),
+                TempoMaximo = "12:00",
             };
             etapa.Tipo = "Teste Tipo";
             return etapa;
@@ -32,7 +32,7 @@ namespace APITest.Mocks
                 Sequencia = 12,
                 Obrigatoria = "Não",
                 Processo = "Teste",
-                TempoMaximo = TimeSpan.FromMinutes(1),
+                TempoMaximo = "12:00"
             };
             etapa.Tipo = "Teste Tipo";
             return etapa;
@@ -46,7 +46,7 @@ namespace APITest.Mocks
                 Sequencia = 0,
                 Obrigatoria = "Não",
                 Processo = "Teste",
-                TempoMaximo = TimeSpan.FromMinutes(1),
+                TempoMaximo = "12:00"
             };
             etapa.Tipo = "Teste Tipo";
             return etapa;
@@ -60,7 +60,7 @@ namespace APITest.Mocks
                 Sequencia = 2,
                 Obrigatoria = "Não",
                 Processo = "Teste",
-                TempoMaximo = TimeSpan.FromMinutes(1),
+                TempoMaximo = "12:00"
             };
             etapa.Tipo = "";
             return etapa;
@@ -76,7 +76,7 @@ namespace APITest.Mocks
                     Sequencia = 2,
                     Obrigatoria = "Não",
                     Processo = "Teste",
-                    TempoMaximo = TimeSpan.FromMinutes(1),
+                    TempoMaximo = "12:00"
                 },
                 new Etapa
                 {
@@ -85,7 +85,7 @@ namespace APITest.Mocks
                     Sequencia = 2,
                     Obrigatoria = "Não",
                     Processo = "Teste",
-                    TempoMaximo = TimeSpan.FromMinutes(2),
+                    TempoMaximo = "12:00"
                 },
                 new Etapa
                 {
@@ -94,7 +94,7 @@ namespace APITest.Mocks
                     Sequencia = 3,
                     Obrigatoria = "Não",
                     Processo = "Teste",
-                    TempoMaximo = TimeSpan.FromMinutes(3),
+                    TempoMaximo = "12:00"
                 },
             };
         }

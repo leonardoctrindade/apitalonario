@@ -67,6 +67,7 @@ namespace WebAPI
             services.AddSingleton<IEspecialidade, RepositoryEspecialidade>();
             services.AddSingleton<IEspecialidadePrescritor, RepositoryEspecialidadePrescritor>();
             services.AddSingleton<IVisitador, RepositoryVisitador>();
+            services.AddSingleton<IEtapa, RepositoryEtapa>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>
