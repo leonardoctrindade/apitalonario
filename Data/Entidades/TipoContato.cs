@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Entidades
 {
-    public class Especialidade
+    public class TipoContato
     {
         [Column("Id")]
         public int Id { get; set; }
@@ -16,6 +14,6 @@ namespace Data.Entidades
         [Column("Descricao")]
         [MaxLength(50)]
         [Required(ErrorMessage = "Campo de descrição não preenchido")]
-        public string Descricao { get; set; }
+        public string Descricao{ get; set; }
     }
 }

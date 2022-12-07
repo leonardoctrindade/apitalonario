@@ -41,6 +41,7 @@ namespace Data.Config
         public DbSet<PosAdquirente> PosAdquirente { get; set; }
         public DbSet<MaquinaPos> MaquinaPos { get; set; }
         public DbSet<Especialidade> Especialidade { get; set; }
+        public DbSet<TipoContato> TipoContato { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
