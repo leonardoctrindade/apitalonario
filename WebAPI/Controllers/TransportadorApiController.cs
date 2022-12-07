@@ -19,7 +19,16 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaTransportador")]
         public async Task<JsonResult> ListaTransportador()
         {
-            return Json(await this.ITransportador.List());
+            try
+            {
+
+                return Json(await this.ITransportador.List());
+            }
+            catch (Exception)
+            {
+
+                return Json(BadRequest(ModelState));
+            }
         }
 
         [HttpPost("/api/AdicionarTransportador")]
@@ -27,7 +36,7 @@ namespace WebAPI.Controllers
         {
             if (String.IsNullOrEmpty(Transportador.Nome))
                 return Json(BadRequest(ModelState));
-            if (String.IsNullOrEmpty(Transportador.CpfOuCnpj))
+            if (String.IsNullOrEmpty(Transportador.CpfCnpj))
                 return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.ITransportador.Add(Transportador)));
@@ -38,7 +47,16 @@ namespace WebAPI.Controllers
         [HttpGet("/api/RetornaTransportadorPorId/{id}")]
         public async Task<JsonResult> RetornaTransportadorPorId(int id)
         {
-            return Json(await this.ITransportador.GetEntityById(id));
+            try
+            {
+
+                return Json(await this.ITransportador.GetEntityById(id));
+            }
+            catch (Exception)
+            {
+
+                return Json(BadRequest(ModelState));
+            }
         }
 
         [HttpPost("/api/EditarTransportador")]
@@ -46,7 +64,7 @@ namespace WebAPI.Controllers
         {
             if(String.IsNullOrEmpty(Transportador.Nome))
                 return Json(BadRequest(ModelState));
-            if (String.IsNullOrEmpty(Transportador.CpfOuCnpj))
+            if (String.IsNullOrEmpty(Transportador.CpfCnpj))
                 return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.ITransportador.Update(Transportador)));

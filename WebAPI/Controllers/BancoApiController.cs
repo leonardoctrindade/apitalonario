@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaBanco")]
         public async Task<JsonResult> ListaBanco()
         {
-            return Json(await this.IBanco.List());
+             return Json(await this.IBanco.List());
         }
 
         [HttpPost("/api/AdicionarBanco")]
