@@ -11,8 +11,8 @@ namespace APITest.Mocks
     {
         public static Unidade MontaObjetoUnico()
         {
-            return new Unidade { Id = 1, Sigla = "UN", Descricao = "Unidade"
-            , Massa = true, Volume = false, Fator = 1.25};
+            return new Unidade { Id = 1, Sigla = "UN", Descricao = "Unidade",
+                Tipo = Tipo.Massa, Fator = 1.25};
         }
         public static Unidade MontaObjetoSiglaVazio()
         {
@@ -21,8 +21,7 @@ namespace APITest.Mocks
                 Id = 1,
                 Sigla = "",
                 Descricao = "Unidade",
-                Massa = true,
-                Volume = false,
+                Tipo = Tipo.Volume,
                 Fator = 1.25
             };
         }
@@ -33,8 +32,7 @@ namespace APITest.Mocks
                 Id = 1,
                 Sigla = "Un",
                 Descricao = "",
-                Massa = true,
-                Volume = false,
+                Tipo = Tipo.Volume,
                 Fator = 1.25
             };
         }
