@@ -21,7 +21,17 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaEtapa")]
         public async Task<JsonResult> ListaEtapa()
         {
-            return Json(await this.IEtapa.List());
+            try
+            {
+                return Json(await this.IEtapa.List());
+            }
+            catch (Exception e)
+            {
+
+                return Json(BadRequest(ModelState));
+            }
+
+            
         }
         [HttpPost("/api/AdicionarEtapa")]
         public async Task<JsonResult> AdicionarEtapa([FromBody] Etapa etapa)

@@ -27,6 +27,6 @@ namespace Data.Entidades
         [Column("Obrigatoria")]
         public string Obrigatoria { get; set; }
         [Column("TempoMaximo")]
-        public TimeSpan TempoMaximo { get; set; }
+        public string TempoMaximo { get; set; }
     }
 }
