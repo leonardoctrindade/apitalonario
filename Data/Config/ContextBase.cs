@@ -48,6 +48,7 @@ namespace Data.Config
         public DbSet<Metodo> Metodo { get; set; }
         public DbSet<MensagensPadrao> MensagensPadrao { get; set; }
         public DbSet<EspecificacaoCapsula> EspecificacaoCapsula { get; set; }
+        public DbSet<FuncionarioLaboratorio> FuncionarioLaboratorio { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
