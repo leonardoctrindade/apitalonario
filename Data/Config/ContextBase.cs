@@ -45,6 +45,7 @@ namespace Data.Config
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
         public DbSet<Posologia> Posologia { get; set; }
         public DbSet<AdministradoraCartao> AdministradoraCartao { get; set; }
+        public DbSet<Metodo> Metodo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

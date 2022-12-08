@@ -68,6 +68,7 @@ namespace WebAPI
             services.AddSingleton<IFormaPagamento, RepositoryFormaPagamento>();
             services.AddSingleton<IPosologia, RepositoryPosologia>();
             services.AddSingleton<IAdministradoraCartao, RepositoryAdministradoraCartao>();
+            services.AddSingleton<IMetodo, RepositoryMetodo>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>
