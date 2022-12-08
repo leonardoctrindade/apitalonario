@@ -49,6 +49,7 @@ namespace Data.Config
         public DbSet<MensagensPadrao> MensagensPadrao { get; set; }
         public DbSet<EspecificacaoCapsula> EspecificacaoCapsula { get; set; }
         public DbSet<FuncionarioLaboratorio> FuncionarioLaboratorio { get; set; }
+        public DbSet<ListaControlado> ListaControlado { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

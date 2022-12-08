@@ -72,6 +72,7 @@ namespace WebAPI
             services.AddSingleton<IMensagensPadrao, RepositoryMensagensPadrao>();
             services.AddSingleton<IEspecificacaoCapsula, RepositoryEspecificacaoCapsula>();
             services.AddSingleton<IFuncionarioLaboratorio, RepositoryFuncionarioLaboratorio>();
+            services.AddSingleton<IListaControlado, RepositoryListaControlado>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>
