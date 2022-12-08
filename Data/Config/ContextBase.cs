@@ -47,6 +47,7 @@ namespace Data.Config
         public DbSet<AdministradoraCartao> AdministradoraCartao { get; set; }
         public DbSet<Metodo> Metodo { get; set; }
         public DbSet<MensagensPadrao> MensagensPadrao { get; set; }
+        public DbSet<EspecificacaoCapsula> EspecificacaoCapsula { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
