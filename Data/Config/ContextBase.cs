@@ -43,6 +43,7 @@ namespace Data.Config
         public DbSet<EspecialidadePrescritor> EspecialidadePrescritor { get; set; }
         public DbSet<Visitador> Visitador { get; set; }
         public DbSet<Etapa> Etapa { get; set; }
+        public DbSet<PlanoDeContas> PlanoDeContas { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
