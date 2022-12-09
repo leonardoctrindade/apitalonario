@@ -7,13 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Cryptography.X509Certificates;
+using Data.Config;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI.Controllers
 {
     public class PlanoDeContasApiController : Controller
     {
         private readonly IPlanoDeContas IPlanoDeContas;
-
         public PlanoDeContasApiController(IPlanoDeContas iPlanoDeContas)
         {
             IPlanoDeContas = iPlanoDeContas;
@@ -23,17 +25,27 @@ namespace WebAPI.Controllers
         {
             var listaPlanoDeContas = await this.IPlanoDeContas.List();
 
+            //var listaView = new ViewPlanoDeContas();
+            //var teste = listaPlanoDeContas.GroupBy(x => x.NumeroContaPai).ToList();
+
+            //foreach (var i in teste)
+            //{
+            //    foreach (var j in i)
+            //    {
+            //        if (j.NivelConta == 1)
+            //            listaView.Nivel1.Add(j);
+            //        if (j.NivelConta == 2)
+            //            listaView.Nivel2.Add(j);
+            //        if (j.NivelConta == 3)
+            //            listaView.Nivel3.Add(j);
+            //    }
+            //}
+
             var listaView = new ViewPlanoDeContas();
-            
-            foreach (var planoDeconta in listaPlanoDeContas)
-            {
-                if(planoDeconta.NivelConta == 1)
-                    listaView.Nivel1.Add(planoDeconta);
-                if (planoDeconta.NivelConta == 2)
-                    listaView.Nivel2.Add(planoDeconta);
-                if (planoDeconta.NivelConta == 3)
-                    listaView.Nivel3.Add(planoDeconta);
-            }
+
+            listaView.Nivel1 = listaPlanoDeContas.Where(x => x.NivelConta == 1).ToList();
+            listaView.Nivel2 = listaPlanoDeContas.Where(x => x.NivelConta == 2).ToList();
+            listaView.Nivel3 = listaPlanoDeContas.Where(x => x.NivelConta == 3).ToList();
 
             return Json(listaView);
         }
