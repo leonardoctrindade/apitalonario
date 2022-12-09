@@ -50,7 +50,7 @@ namespace Data.Config
         public DbSet<EspecificacaoCapsula> EspecificacaoCapsula { get; set; }
         public DbSet<FuncionarioLaboratorio> FuncionarioLaboratorio { get; set; }
         public DbSet<ListaControlado> ListaControlado { get; set; }
-
+        public DbSet<NaturezaOperacao> NaturezaOperacao { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
