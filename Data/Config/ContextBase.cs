@@ -53,6 +53,7 @@ namespace Data.Config
         public DbSet<NaturezaOperacao> NaturezaOperacao { get; set; }
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<Turno> Turno { get; set; }
+        public DbSet<TabelaFloral> TabelaFloral { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

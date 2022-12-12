@@ -76,6 +76,7 @@ namespace WebAPI
             services.AddSingleton<INaturezaOperacao, RepositoryNaturezaOperacao>();
             services.AddSingleton<IFornecedor, RepositoryFornecedor>();
             services.AddSingleton<ITurno, RepositoryTurno>();
+            services.AddSingleton<ITabelaFloral, RepositoryTabelaFloral>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>
