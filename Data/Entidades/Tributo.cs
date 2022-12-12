@@ -25,9 +25,9 @@ namespace Data.Entidades
         [MaxLength(10)]
         public string Codigo { get; set; }
     }
-
-    public enum TipoTributo : int 
-    {
+    /*
+        Tipos de Tributo: 
+     
         CST = 0,
         CSOSN = 1,
         SituacaoDocumento = 2,
@@ -38,5 +38,5 @@ namespace Data.Entidades
         CEST = 7,
         CodigoBeneficioFiscal = 8,
         CstIpi = 9
-    }
+    */
 }

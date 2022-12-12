@@ -21,14 +21,7 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaEnsaio")]
         public async Task<JsonResult> ListaEnsaio()
         {
-            //return Json(await this.IEnsaio.List());
-
-            return Json(new List<Ensaio>() 
-            {
-                new Ensaio() { Id = 1, Nome = "Teste 1", IdFarmacopeia = 1},
-                new Ensaio() { Id = 2, Nome = "Teste 2", IdFarmacopeia = 2},
-                new Ensaio() { Id = 3, Nome = "Teste 3", IdFarmacopeia = 3},
-            });
+            return Json(await this.IEnsaio.List());
         }
 
         [HttpPost("/api/AdicionarEnsaio")]

@@ -3,20 +3,20 @@ using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Entidades
 {
-    public class Farmacopeia
+    public class FuncionarioLaboratorio
     {
         [Column("Id")]
         public int Id { get; set; }
 
         [Column("Nome")]
-        [Required(ErrorMessage = "Campo de nome não preenchido")]
+        [MaxLength(50)]
+        [Required]
         public string Nome { get; set; }
 
-        [Column("Observacao")]
-        public string Observacao { get; set; }
+        [Column("Ativo")]
+        public bool Ativo { get; set; }
     }
 }

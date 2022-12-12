@@ -22,13 +22,7 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaTributo")]
         public async Task<JsonResult> ListaTributo()
         {
-            //return Json(await this.ITributo.List());
-            return Json(new List<Tributo>()
-            {
-                new Tributo() { Id = 1, Codigo = "123", Descricao = "Teste 1", TipoTributo = 1},
-                new Tributo() { Id = 2, Codigo = "321", Descricao = "Teste 2", TipoTributo = 4},
-                new Tributo() { Id = 3, Codigo = "333", Descricao = "Teste 3", TipoTributo = 6}
-            });
+            return Json(await this.ITributo.List());
         }
 
         [HttpPost("/api/AdicionarTributo")]
@@ -38,8 +32,6 @@ namespace WebAPI.Controllers
                 return Json(BadRequest(ModelState));
             if (string.IsNullOrEmpty(Tributo.Descricao))
                 return Json(BadRequest(ModelState));
-            //if (Tributo.Equals(Tributo.Tipo, null))
-                //return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.ITributo.Add(Tributo)));
 
@@ -59,8 +51,6 @@ namespace WebAPI.Controllers
                 return Json(BadRequest(ModelState));
             if (string.IsNullOrEmpty(Tributo.Descricao))
                 return Json(BadRequest(ModelState));
-            //if (Tributo.Equals(Tributo.Tipo, null))
-                //return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.ITributo.Update(Tributo)));
             return Json(Ok());
