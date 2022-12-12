@@ -51,6 +51,8 @@ namespace Data.Config
         public DbSet<FuncionarioLaboratorio> FuncionarioLaboratorio { get; set; }
         public DbSet<ListaControlado> ListaControlado { get; set; }
         public DbSet<NaturezaOperacao> NaturezaOperacao { get; set; }
+        public DbSet<Fornecedor> Fornecedor { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
