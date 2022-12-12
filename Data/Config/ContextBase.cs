@@ -44,6 +44,11 @@ namespace Data.Config
         public DbSet<Visitador> Visitador { get; set; }
         public DbSet<Etapa> Etapa { get; set; }
         public DbSet<PlanoDeContas> PlanoDeContas { get; set; }
+        public DbSet<ListaControlado> ListaControlado { get; set; }
+        public DbSet<FormaPagamento> FormaPagamento { get; set; }
+        public DbSet<FuncionarioLaboratorio> FuncionarioLaboratorio { get; set; }
+        public DbSet<NaturezaOperacao> NaturezaOperacao { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

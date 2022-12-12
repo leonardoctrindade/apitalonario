@@ -18,7 +18,7 @@ namespace Data.Entidades
 
         [Column("TipoFormaPagamento")]
         [Required(ErrorMessage = "Campo de tipo de forma de pagamento não preenchido")]
-        public int TipoFormaPagamento { get; set; }
+        public TipoPagamento TipoPagamento { get; set; }
 
         [Column("AutorizarDescontos")]
         [Required(ErrorMessage = "Campo de autorização de descontos não preenchido")]
@@ -30,4 +30,20 @@ namespace Data.Entidades
         [Column("IdConta")]
         public int IdConta { get; set; }
      }
+    public enum TipoPagamento
+    {
+        Moeda,
+        Cheque,
+        Cartao,
+        PrazoFicha,
+        Convenio,
+        PrazoParcelamento,
+        ConvenioParcelamento,
+        Boleto,
+        Deposito,
+        Pix,
+        TransferenciaBancaria,
+        ProgramaDeFidelidade,
+        Cashback
+    }
 }

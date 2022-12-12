@@ -69,6 +69,10 @@ namespace WebAPI
             services.AddSingleton<IVisitador, RepositoryVisitador>();
             services.AddSingleton<IEtapa, RepositoryEtapa>();
             services.AddSingleton<IPlanoDeContas, RepositoryPlanoDeContas>();
+            services.AddSingleton<IListaControlado, RepositoryListaControlado>();
+            services.AddSingleton<IFuncionarioLaboratorio, RepositoryFuncionarioLaboratorio>();
+            services.AddSingleton<IFormaPagamento, RepositoryFormaPagamento>();
+            services.AddSingleton<INaturezaOperacao, RepositoryNaturezaOperacao>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>

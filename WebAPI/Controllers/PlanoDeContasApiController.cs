@@ -26,28 +26,12 @@ namespace WebAPI.Controllers
             var listaPlanoDeContas = await this.IPlanoDeContas.List();
 
             //var listaView = new ViewPlanoDeContas();
-            //var teste = listaPlanoDeContas.GroupBy(x => x.NumeroContaPai).ToList();
 
-            //foreach (var i in teste)
-            //{
-            //    foreach (var j in i)
-            //    {
-            //        if (j.NivelConta == 1)
-            //            listaView.Nivel1.Add(j);
-            //        if (j.NivelConta == 2)
-            //            listaView.Nivel2.Add(j);
-            //        if (j.NivelConta == 3)
-            //            listaView.Nivel3.Add(j);
-            //    }
-            //}
+            //listaView.Nivel1 = listaPlanoDeContas.Where(x => x.NivelConta == 1).ToList();
+            //listaView.Nivel2 = listaPlanoDeContas.Where(x => x.NivelConta == 2).ToList();
+            //listaView.Nivel3 = listaPlanoDeContas.Where(x => x.NivelConta == 3).ToList();
 
-            var listaView = new ViewPlanoDeContas();
-
-            listaView.Nivel1 = listaPlanoDeContas.Where(x => x.NivelConta == 1).ToList();
-            listaView.Nivel2 = listaPlanoDeContas.Where(x => x.NivelConta == 2).ToList();
-            listaView.Nivel3 = listaPlanoDeContas.Where(x => x.NivelConta == 3).ToList();
-
-            return Json(listaView);
+            return Json(listaPlanoDeContas);
         }
         [HttpPost("/api/AdicionarPlanoDeContas")]
         public async Task<JsonResult> AdicionarPlanoDeContas([FromBody] PlanoDeContas planoDeContas)

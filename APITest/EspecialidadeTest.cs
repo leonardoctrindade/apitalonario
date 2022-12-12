@@ -70,7 +70,7 @@ namespace APITest
         {
             mock.Setup(y => y.GetEntityById(MockEspecialidade.MontaObjetoUnico().Id)).ReturnsAsync(MockEspecialidade.MontaObjetoUnico());
             EspecialidadeApiController ret = new EspecialidadeApiController(mock.Object);
-            var result = await ret.RetornaEspecialidadePorId(1);
+            var result = await ret.RetornarEspecialidadePorId(1);
             Assert.Equal("Teste Mock 1", ((Data.Entidades.Especialidade)result.Value).Descricao);
         }
 
