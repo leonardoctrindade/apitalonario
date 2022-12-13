@@ -29,6 +29,8 @@ namespace WebAPI.Controllers
                 return Json(BadRequest(ModelState));
             if (NaturezaOperacao.Tipo != 1 && NaturezaOperacao.Tipo != 2)
                 return Json(BadRequest(ModelState));
+            if (NaturezaOperacao.Codigo <= 0)
+                return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.INaturezaOperacao.Add(NaturezaOperacao)));
 
@@ -47,6 +49,8 @@ namespace WebAPI.Controllers
             if (String.IsNullOrEmpty(NaturezaOperacao.Descricao))
                 return Json(BadRequest(ModelState));
             if (NaturezaOperacao.Tipo != 1 && NaturezaOperacao.Tipo != 2)
+                return Json(BadRequest(ModelState));
+            if (NaturezaOperacao.Codigo <= 0)
                 return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.INaturezaOperacao.Update(NaturezaOperacao)));
