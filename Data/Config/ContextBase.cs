@@ -55,6 +55,7 @@ namespace Data.Config
         public DbSet<Turno> Turno { get; set; }
         public DbSet<TabelaFloral> TabelaFloral { get; set; }
         public DbSet<Bula> Bula { get; set; }
+        public DbSet<Transacao> Transacao { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
