@@ -81,6 +81,7 @@ namespace WebAPI
             services.AddSingleton<ITransacao, RepositoryTransacao>();
             services.AddSingleton<ILocalEntrega, RepositoryLocalEntrega>();
             services.AddSingleton<IDiferimento, RepositoryDiferimento>();
+            services.AddSingleton<IGrupo, RepositoryGrupo>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>

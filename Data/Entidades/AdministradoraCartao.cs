@@ -24,7 +24,7 @@ namespace Data.Entidades
 
         [Column("Gerenciador")]
         [Required(ErrorMessage = "Campo de gerenciador não preenchido")]
-        public TipoGerenciador Gerenciador { get; set; }
+        public Gerenciador Gerenciador { get; set; }
 
         [Column("CieloPremia")]
         public CieloPremia CieloPremia { get; set; } = 0;
@@ -43,7 +43,7 @@ namespace Data.Entidades
         public int IdConta { get; set; }
     }
 
-    public enum TipoGerenciador
+    public enum Gerenciador
     {
         VisaMasterAmex,
         BanriCompras,

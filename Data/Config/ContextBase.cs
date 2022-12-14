@@ -58,6 +58,7 @@ namespace Data.Config
         public DbSet<Transacao> Transacao { get; set; }
         public DbSet<LocalEntrega> LocalEntrega { get; set; }
         public DbSet<Diferimento> Diferimento { get; set; }
+        public DbSet<Grupo> Grupo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
