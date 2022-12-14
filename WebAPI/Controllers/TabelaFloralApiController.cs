@@ -54,5 +54,31 @@ namespace WebAPI.Controllers
         {
             await Task.FromResult(this.ITabelaFloral.Delete(TabelaFloral));
         }
+
+        [HttpPost("/api/AdicionarListaTabelaFloral")]
+        public async Task<JsonResult> AdicionaListaTabelaFloral([FromBody] List<TabelaFloral> lista)
+        {
+            foreach (var tabela in lista)
+            {
+                if (tabela.Volume <= 0 || tabela.QuantidadeInicial <= 0 || tabela.QuantidadeFinal <= 0 || tabela.ValorVenda <= 0)
+                    return Json(BadRequest(ModelState));
+                Json(await Task.FromResult(this.ITabelaFloral.Add(tabela)));
+            }
+
+            return Json(Ok()); 
+        }
+
+        [HttpPost("/api/EditarListaTabelaFloral")]
+        public async Task<JsonResult> EditarListaTabelaFloral([FromBody] List<TabelaFloral> lista)
+        {
+            foreach (var tabela in lista)
+            {
+                if (tabela.Volume <= 0 || tabela.QuantidadeInicial <= 0 || tabela.QuantidadeFinal <= 0 || tabela.ValorVenda <= 0)
+                    return Json(BadRequest(ModelState));
+                Json(await Task.FromResult(this.ITabelaFloral.Update(tabela)));
+            }
+
+            return Json(Ok());
+        }
     }
 }
