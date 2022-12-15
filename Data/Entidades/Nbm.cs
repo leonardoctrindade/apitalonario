@@ -10,20 +10,26 @@ namespace Data.Entidades
     {
         [Column("Id")]
         public int Id { get; set; }
+
         [Column("CodigoNbm")]
-        [Required]
+        [Required(ErrorMessage = "Campo de codigo nbm não preenchido")]
         [MaxLength(10)]
         public string CodigoNbm { get; set; }
+
         [Column("Descricao")]
-        [Required]
+        [Required(ErrorMessage = "Campo de descrição não preenchido")]
         [MaxLength(50)]
         public string Descricao { get; set; }
+
         [Column("VlrAgregadoEst")]
         public double VlrAgregadoEst { get; set; }
+
         [Column("VlrAgregadoInt")]
         public double VlrAgregadoInt { get; set; }
+
         [Column("VlrComplementarEst")]
         public double VlrComplementarEst { get; set; }
+
         [Column("VlrComplementarInt")]
         public double VlrComplementarInt { get; set; }
     }
