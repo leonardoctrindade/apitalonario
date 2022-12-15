@@ -23,8 +23,17 @@ namespace Data.Repositorio
         {
             using (var data = new ContextBase(_OptionsBuilder))
             {
-                await data.Set<T>().AddAsync(Objeto);
-                await data.SaveChangesAsync();
+                try
+                {
+                    await data.Set<T>().AddAsync(Objeto);
+                    await data.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+
+                    throw;
+                }
+                
             }
         }
 
@@ -47,10 +56,19 @@ namespace Data.Repositorio
 
         public async Task<List<T>> List()
         {
-            using (var data = new ContextBase(_OptionsBuilder))
+            try
             {
-                return await data.Set<T>().AsNoTracking().ToListAsync();
+                using (var data = new ContextBase(_OptionsBuilder))
+                {
+                    return await data.Set<T>().AsNoTracking().ToListAsync();
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
         public async Task Update(T Objeto)

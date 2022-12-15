@@ -33,6 +33,8 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
             services.AddDbContext<ContextBase>(options =>
               options.UseNpgsql(
                   Configuration.GetConnectionString("DefaultConnection")));
@@ -57,23 +59,20 @@ namespace WebAPI
             services.AddSingleton<INbm, RepositoryNbm>();
             services.AddSingleton<IPrincipioAtivo, RepositoryPrincipioAtivo>();
             services.AddSingleton<IUnidade, RepositoryUnidade>();
+            services.AddSingleton<IUnidadeConversao, RepositoryUnidadeConversao>();
             services.AddSingleton<IMoeda, RepositoryMoeda>();
             services.AddSingleton<IPbm, RepositoryPbm>();
-            services.AddSingleton<IPortador, RepositoryPortador>();
-            services.AddSingleton<IBanco, RepositoryBanco>();
+            services.AddSingleton<IContabilista, RepositoryContabilista>();
             services.AddSingleton<ITransportador, RepositoryTransportador>();
-            services.AddSingleton<IPosAdquirente, RepositoryPosAdquirente>();
-            services.AddSingleton<IMaquinaPos, RepositoryMaquinaPos>();
+            services.AddSingleton<IPrescritor, RepositoryPrescritor>();
             services.AddSingleton<IEspecialidade, RepositoryEspecialidade>();
-            services.AddSingleton<ITipoContato, RepositoryTipoContato>();
-            services.AddSingleton<IFormaPagamento, RepositoryFormaPagamento>();
-            services.AddSingleton<IPosologia, RepositoryPosologia>();
-            services.AddSingleton<IAdministradoraCartao, RepositoryAdministradoraCartao>();
-            services.AddSingleton<IMetodo, RepositoryMetodo>();
-            services.AddSingleton<IMensagensPadrao, RepositoryMensagensPadrao>();
-            services.AddSingleton<IEspecificacaoCapsula, RepositoryEspecificacaoCapsula>();
-            services.AddSingleton<IFuncionarioLaboratorio, RepositoryFuncionarioLaboratorio>();
+            services.AddSingleton<IEspecialidadePrescritor, RepositoryEspecialidadePrescritor>();
+            services.AddSingleton<IVisitador, RepositoryVisitador>();
+            services.AddSingleton<IEtapa, RepositoryEtapa>();
+            services.AddSingleton<IPlanoDeContas, RepositoryPlanoDeContas>();
             services.AddSingleton<IListaControlado, RepositoryListaControlado>();
+            services.AddSingleton<IFuncionarioLaboratorio, RepositoryFuncionarioLaboratorio>();
+            services.AddSingleton<IFormaPagamento, RepositoryFormaPagamento>();
             services.AddSingleton<INaturezaOperacao, RepositoryNaturezaOperacao>();
             services.AddSingleton<IFornecedor, RepositoryFornecedor>();
             services.AddSingleton<ITurno, RepositoryTurno>();

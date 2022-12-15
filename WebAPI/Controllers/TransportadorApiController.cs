@@ -1,80 +1,60 @@
 ﻿using System;
+using System.Linq;
 using Data.Entidades;
 using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
     public class TransportadorApiController : Controller
     {
         private readonly ITransportador ITransportador;
-
-        public TransportadorApiController(ITransportador ITransportador)
+        
+        public TransportadorApiController(ITransportador transportador)
         {
-            this.ITransportador = ITransportador;
+            this.ITransportador = transportador;
         }
-
         [HttpGet("/api/ListaTransportador")]
         public async Task<JsonResult> ListaTransportador()
         {
-            try
-            {
-
-                return Json(await this.ITransportador.List());
-            }
-            catch (Exception)
-            {
-
-                return Json(BadRequest(ModelState));
-            }
+            return Json(await this.ITransportador.List());
         }
-
         [HttpPost("/api/AdicionarTransportador")]
-        public async Task<JsonResult> AdicionarTransportador([FromBody] Transportador Transportador)
+        public async Task<JsonResult> AdicionarTransportador([FromBody] Transportador transportador)
         {
-            if (String.IsNullOrEmpty(Transportador.Nome))
-                return Json(BadRequest(ModelState));
-            if (String.IsNullOrEmpty(Transportador.CpfCnpj))
+            if (string.IsNullOrEmpty(transportador.Nome) || string.IsNullOrEmpty(transportador.CpfCnpj))
                 return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITransportador.Add(Transportador)));
+            Json(await Task.FromResult(this.ITransportador.Add(transportador)));
 
             return Json(Ok());
         }
-
-        [HttpGet("/api/RetornaTransportadorPorId/{id}")]
-        public async Task<JsonResult> RetornaTransportadorPorId(int id)
+        [HttpGet("/api/RetornarTransportadorPorId/{id}")]
+        public async Task<JsonResult> RetornarTransportadorPorId(int id)
         {
-            try
-            {
-
-                return Json(await this.ITransportador.GetEntityById(id));
-            }
-            catch (Exception)
-            {
-
+            if(id <= 0)
                 return Json(BadRequest(ModelState));
-            }
-        }
 
+            return Json(await this.ITransportador.GetEntityById(id));
+        }
         [HttpPost("/api/EditarTransportador")]
-        public async Task<JsonResult> EditarTransportador([FromBody] Transportador Transportador)
+        public async Task<JsonResult> EditarTransportador([FromBody] Transportador transportador)
         {
-            if(String.IsNullOrEmpty(Transportador.Nome))
-                return Json(BadRequest(ModelState));
-            if (String.IsNullOrEmpty(Transportador.CpfCnpj))
+            if (string.IsNullOrEmpty(transportador.Nome) || string.IsNullOrEmpty(transportador.CpfCnpj))
                 return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITransportador.Update(Transportador)));
+            Json(await Task.FromResult(this.ITransportador.Update(transportador)));
+
             return Json(Ok());
         }
-
         [HttpPost("/api/ExcluirTransportador")]
-        public async Task ExcluirTransportador([FromBody] Transportador Transportador)
+        public async Task ExcluirTransportador([FromBody] Transportador transportador)
         {
-            await Task.FromResult(this.ITransportador.Delete(Transportador));
+            await Task.FromResult(this.ITransportador.Delete(transportador));
         }
     }
 }

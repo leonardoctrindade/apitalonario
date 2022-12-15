@@ -1,14 +1,13 @@
 ﻿using Data.Entidades;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
-    public interface IEspecialidade : IGeneric<Especialidade>
+    public interface IUnidadeConversao : IGeneric<UnidadeConversao>
     {
-        Task<List<Especialidade>> ListagemCustomizada();
+        Task<List<UnidadeConversao>> ListagemCustomizada();
     }
 }

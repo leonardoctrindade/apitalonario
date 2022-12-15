@@ -23,6 +23,12 @@ namespace WebAPI.Controllers
         public async Task<JsonResult> ListaEstado()
         {
             return Json(await this.IEstado.List());
+            //return Json(new List<Estado>()
+            //{
+            //    new Estado() { Id = 1, Nome = "Santa Catarina", AliquotaFcpEstado = 1, AliquotaIcmsEstado = 1, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, ChecagemContribuinteIsento = false, Sigla = "SC", IdPais = 1},
+            //    new Estado() { Id = 2, Nome = "Rio Grande do Sul", AliquotaFcpEstado = 1, AliquotaIcmsEstado = 1, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, ChecagemContribuinteIsento = true, Sigla = "RS", IdPais = 2},
+            //    new Estado() { Id = 3, Nome = "Parana", AliquotaFcpEstado = 1, AliquotaIcmsEstado = 1, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, ChecagemContribuinteIsento = true, Sigla = "PR", IdPais = 3}
+            //});
         }
 
         [HttpPost("/api/AdicionarEstado")]
@@ -32,8 +38,8 @@ namespace WebAPI.Controllers
                 return Json(BadRequest(ModelState));
             if (String.IsNullOrEmpty(Estado.Sigla))
                 return Json(BadRequest(ModelState));
-            if (Estado.Equals(Estado.Pais, null))
-                return Json(BadRequest(ModelState));
+            //if (Estado.Equals(Estado.Pais, null))
+            //    return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.IEstado.Add(Estado)));
 

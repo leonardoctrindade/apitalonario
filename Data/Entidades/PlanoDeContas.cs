@@ -8,13 +8,23 @@ using System.Threading.Tasks;
 
 namespace Data.Entidades
 {
-    public class Especialidade
+    public class PlanoDeContas
     {
         [Column("Id")]
         public int Id { get; set; }
+        [Column("NivelConta")]
+        [Required]
+        public int NivelConta { get; set; }
+        [Column("NumeroConta")]
+        [Required]
+        public string NumeroConta { get; set; }
+        [Column("NumeroContaPai")]
+        [Required]
+        public string NumeroContaPai { get; set; }
         [Column("Descricao")]
         [Required]
-        [MaxLength(50)]
         public string Descricao { get; set; }
+        [Column("Sequencia")]
+        public double Sequencia { get; set; }
     }
 }

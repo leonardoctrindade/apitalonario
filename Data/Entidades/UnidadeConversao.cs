@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Data.Entidades
 {
-    public class Unidade
+    public class UnidadeConversao
     {
         [Column("Id")]
         public int Id { get; set; }
@@ -18,13 +18,14 @@ namespace Data.Entidades
         [Required]
         [MaxLength(50)]
         public string Descricao { get; set; }
-        public Tipo Tipo { get; set; }
+        //[Column("SiglaConversao")]
+        //[Required]
+        //[MaxLength(2)]
+        //public string SiglaConversao { get; set; }
         [Column("Fator")]
-        public double Fator { get; set; }
-    }
-    public enum Tipo
-    {
-        Massa,
-        Volume
+        public double? Fator { get; set; }
+        [Column("IdUnidade")]
+        public int? IdUnidade { get; set; }
+        //public List<Unidade>? Unidade { get; set; }
     }
 }

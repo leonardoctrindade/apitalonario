@@ -23,6 +23,12 @@ namespace WebAPI.Controllers
         public async Task<JsonResult> ListaCidade()
         {
             return Json(await this.ICidade.List());
+            //return Json(new List<Cidade>()
+            //{
+            //    new Cidade { Id = 1, Nome = "Itajaí", CodigoIbge = 123, IdCodigoCfps = 1, CodigoSiafi = 1 },
+            //    new Cidade { Id = 2, Nome = "Brusque", CodigoIbge = 123, IdCodigoCfps = 1, CodigoSiafi = 1},
+            //    new Cidade { Id = 3, Nome = "Balneariu Camboriu", CodigoIbge = 123, IdCodigoCfps = 1, CodigoSiafi = 1},
+            //});
         }
 
         [HttpPost("/api/AdicionarCidade")]

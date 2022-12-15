@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Data.Repositorio
 {
-    public class RepositoryEspecialidade : RepositoryGenerics<Especialidade>, IEspecialidade
+    public class RepositoryTipoJustificativa : RepositoryGenerics<TipoJustificativa>, ITipoJustificativa
     {
-        public Task<List<Especialidade>> ListagemCustomizada()
+        public Task<List<TipoJustificativa>> ListagemCustomizada()
         {
             throw new NotImplementedException();
         }

@@ -15,7 +15,7 @@ namespace APITest.Mocks
             var pais = new Pais() { Id = 1, Nome = "Brasil", CodigoIbge = 123, CodigoTelefonico = 123};
             var listaPais = new List<Pais>();
             listaPais.Add(pais);
-            return new Estado { Id = 1, Nome = "Teste Mock 1", Sigla = "SC", Pais = listaPais, IdPais = pais.Id, ChecagemContribuinteIsento = false, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, AliquotaFcpEstado = 17, AliquotaIcmsEstado = 0};
+            return new Estado { Id = 1, Nome = "Teste Mock 1", Sigla = "SC", IdPais = pais.Id, ChecagemContribuinteIsento = false, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, AliquotaFcpEstado = 17, AliquotaIcmsEstado = 0};
         }
 
         public static Estado MontaObjetoNomeVazio()

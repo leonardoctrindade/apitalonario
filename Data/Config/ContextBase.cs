@@ -34,22 +34,19 @@ namespace Data.Config
         public DbSet<Nbm> Nbm { get; set; }
         public DbSet<PrincipioAtivo> PrincipioAtivo { get; set; }
         public DbSet<Unidade> Unidade { get; set; }
+        public DbSet<UnidadeConversao> UnidadeConversao { get; set; }
         public DbSet<Moeda> Moeda { get; set; }
-        public DbSet<Portador> Portador { get; set; }
-        public DbSet<Banco> Banco { get; set; }
+        public DbSet<Contabilista> Contabilista { get; set; }
         public DbSet<Transportador> Transportador { get; set; }
-        public DbSet<PosAdquirente> PosAdquirente { get; set; }
-        public DbSet<MaquinaPos> MaquinaPos { get; set; }
+        public DbSet<Prescritor> Prescritor { get; set; }
         public DbSet<Especialidade> Especialidade { get; set; }
-        public DbSet<TipoContato> TipoContato { get; set; }
-        public DbSet<FormaPagamento> FormaPagamento { get; set; }
-        public DbSet<Posologia> Posologia { get; set; }
-        public DbSet<AdministradoraCartao> AdministradoraCartao { get; set; }
-        public DbSet<Metodo> Metodo { get; set; }
-        public DbSet<MensagensPadrao> MensagensPadrao { get; set; }
-        public DbSet<EspecificacaoCapsula> EspecificacaoCapsula { get; set; }
-        public DbSet<FuncionarioLaboratorio> FuncionarioLaboratorio { get; set; }
+        public DbSet<EspecialidadePrescritor> EspecialidadePrescritor { get; set; }
+        public DbSet<Visitador> Visitador { get; set; }
+        public DbSet<Etapa> Etapa { get; set; }
+        public DbSet<PlanoDeContas> PlanoDeContas { get; set; }
         public DbSet<ListaControlado> ListaControlado { get; set; }
+        public DbSet<FormaPagamento> FormaPagamento { get; set; }
+        public DbSet<FuncionarioLaboratorio> FuncionarioLaboratorio { get; set; }
         public DbSet<NaturezaOperacao> NaturezaOperacao { get; set; }
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<Turno> Turno { get; set; }
@@ -68,8 +65,8 @@ namespace Data.Config
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql(GetStringConectionConfig()
-               ,options => options.SetPostgresVersion(new Version(9, 6)));
+                optionsBuilder.UseNpgsql(GetStringConectionConfig(),
+                options => options.SetPostgresVersion(new Version(9, 6)));
                 base.OnConfiguring(optionsBuilder);
             }
         }

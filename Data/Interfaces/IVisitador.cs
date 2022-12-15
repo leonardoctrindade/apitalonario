@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
-    public interface IEspecialidade : IGeneric<Especialidade>
+    public interface IVisitador : IGeneric<Visitador>
     {
-        Task<List<Especialidade>> ListagemCustomizada();
+        Task<List<Visitador>> ListagemCustomizada();
     }
 }
