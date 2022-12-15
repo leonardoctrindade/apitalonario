@@ -17,6 +17,7 @@ namespace Data.Config
         public DbSet<AdministradoraCartao> AdministradoraCartao { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Bairro> Bairro { get; set; }
+        public DbSet<Banco> Banco { get; set; }
         public DbSet<Bula> Bula { get; set; }
         public DbSet<Cidade> Cidade { get; set; }
         public DbSet<Classe> Classe { get; set; }
