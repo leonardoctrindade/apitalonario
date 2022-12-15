@@ -12,8 +12,9 @@ namespace Data.Entidades
     {
         [Column("Id")]
         public int Id { get; set; }
+
         [Column("Descricao")]
-        [Required]
+        [Required(ErrorMessage = "Campo de descrição não preenchido")]
         [MaxLength(50)]
         public string Descricao { get; set; }
     }
