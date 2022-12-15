@@ -10,12 +10,15 @@ namespace Data.Entidades
     {
         [Column("Id")]
         public int Id { get; set; }
-        [Required]
+
         [Column("CodigoDcb")]
+        [Required(ErrorMessage = "Campo de Código Dcb não preenchido")]
+        [MaxLength(10)]
         public string CodigoDcb { get; set; }
 
-        [Required]
         [Column("Descricao")]
+        [MaxLength(50)]
+        [Required(ErrorMessage = "Campo de descrição não preenchido")]
         public string Descricao { get; set; }
     }
 }
