@@ -53,6 +53,7 @@ namespace WebAPI
             services.AddSingleton<IClasse, RepositoryClasse>();
             services.AddSingleton<IContaCorrente, RepositoryContaCorrente>();
             services.AddSingleton<IDcb, RepositoryDcb>();
+            services.AddSingleton<IDci, RepositoryDci>();
             services.AddSingleton<INbm, RepositoryNbm>();
             services.AddSingleton<IPrincipioAtivo, RepositoryPrincipioAtivo>();
             services.AddSingleton<IUnidade, RepositoryUnidade>();
