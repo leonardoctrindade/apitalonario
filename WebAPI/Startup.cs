@@ -84,6 +84,8 @@ namespace WebAPI
             services.AddSingleton<IGrupo, RepositoryGrupo>();
             services.AddSingleton<IVendedor, RepositoryVendedor>();
             services.AddSingleton<IVendedorComissao, RepositoryVendedorComissao>();
+            services.AddSingleton<IGrupoUsuario, RepositoryGrupoUsuario>();
+            services.AddSingleton<IUsuario, RepositoryUsuario>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>

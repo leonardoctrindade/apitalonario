@@ -61,6 +61,8 @@ namespace Data.Config
         public DbSet<Grupo> Grupo { get; set; }
         public DbSet<Vendedor> Vendedor { get; set; }
         public DbSet<VendedorComissao> VendedorComissao { get; set; }
+        public DbSet<GrupoUsuario> GrupoUsuario { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
