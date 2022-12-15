@@ -14,52 +14,63 @@ namespace Data.Config
             Database.EnsureCreated();
         }
 
-        public DbSet<Produto> Produto { get; set; }
+        public DbSet<AdministradoraCartao> AdministradoraCartao { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
-        public DbSet<Pbm> Pbm { get; set; }
-        public DbSet<Farmacopeia> Farmacopeia { get; set; }
-        public DbSet<Ensaio> Ensaio { get; set; }
         public DbSet<Bairro> Bairro { get; set; }
+        public DbSet<Bula> Bula { get; set; }
         public DbSet<Cidade> Cidade { get; set; }
-        public DbSet<Estado> Estado { get; set; }
-        public DbSet<Pais> Pais { get; set; }
-        public DbSet<Tributo> Tributo { get; set; }
-        public DbSet<Ncm> Ncm { get; set; }
-        public DbSet<DOM_RegimeTributario> DOM_RegimeTributario { get; set; }
         public DbSet<Classe> Classe { get; set; }
+        public DbSet<Contabilista> Contabilista { get; set; }
         public DbSet<ContaCorrente> ContaCorrente { get; set; }
         public DbSet<Dcb> Dcb { get; set; }
         public DbSet<Dci> Dci { get; set; }
-        public DbSet<Laboratorio> Laboratorio { get; set; }
-        public DbSet<Nbm> Nbm { get; set; }
-        public DbSet<PrincipioAtivo> PrincipioAtivo { get; set; }
-        public DbSet<Unidade> Unidade { get; set; }
-        public DbSet<UnidadeConversao> UnidadeConversao { get; set; }
-        public DbSet<Moeda> Moeda { get; set; }
-        public DbSet<Contabilista> Contabilista { get; set; }
-        public DbSet<Transportador> Transportador { get; set; }
-        public DbSet<Prescritor> Prescritor { get; set; }
+        public DbSet<Diferimento> Diferimento { get; set; }
+        public DbSet<DOM_RegimeTributario> DOM_RegimeTributario { get; set; }
+        public DbSet<Ensaio> Ensaio { get; set; }
         public DbSet<Especialidade> Especialidade { get; set; }
         public DbSet<EspecialidadePrescritor> EspecialidadePrescritor { get; set; }
-        public DbSet<Visitador> Visitador { get; set; }
+        public DbSet<EspecificacaoCapsula> EspecificacaoCapsula { get; set; }
+        public DbSet<Estado> Estado { get; set; }
         public DbSet<Etapa> Etapa { get; set; }
-        public DbSet<PlanoDeContas> PlanoDeContas { get; set; }
-        public DbSet<ListaControlado> ListaControlado { get; set; }
+        public DbSet<Farmacopeia> Farmacopeia { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
-        public DbSet<FuncionarioLaboratorio> FuncionarioLaboratorio { get; set; }
-        public DbSet<NaturezaOperacao> NaturezaOperacao { get; set; }
         public DbSet<Fornecedor> Fornecedor { get; set; }
-        public DbSet<Turno> Turno { get; set; }
-        public DbSet<TabelaFloral> TabelaFloral { get; set; }
-        public DbSet<Bula> Bula { get; set; }
-        public DbSet<Transacao> Transacao { get; set; }
-        public DbSet<LocalEntrega> LocalEntrega { get; set; }
-        public DbSet<Diferimento> Diferimento { get; set; }
+        public DbSet<FuncionarioLaboratorio> FuncionarioLaboratorio { get; set; }
         public DbSet<Grupo> Grupo { get; set; }
+        public DbSet<GrupoUsuario> GrupoUsuario { get; set; }
+        public DbSet<Laboratorio> Laboratorio { get; set; }
+        public DbSet<ListaControlado> ListaControlado { get; set; }
+        public DbSet<LocalEntrega> LocalEntrega { get; set; }
+        public DbSet<MaquinaPos> MaquinaPos { get; set; }
+        public DbSet<MensagensPadrao> MensagensPadrao { get; set; }
+        public DbSet<Metodo> Metodo { get; set; }
+        public DbSet<Moeda> Moeda { get; set; }
+        public DbSet<Motivo> Motivo { get; set; }
+        public DbSet<NaturezaOperacao> NaturezaOperacao { get; set; }
+        public DbSet<Nbm> Nbm { get; set; }
+        public DbSet<Ncm> Ncm { get; set; }
+        public DbSet<Pais> Pais { get; set; }
+        public DbSet<Pbm> Pbm { get; set; }
+        public DbSet<PlanoDeContas> PlanoDeContas { get; set; }
+        public DbSet<Portador> Portador { get; set; }
+        public DbSet<PosAdquirente> PosAdquirente { get; set; }
+        public DbSet<Posologia> Posologia { get; set; }
+        public DbSet<Prescritor> Prescritor { get; set; }
+        public DbSet<PrincipioAtivo> PrincipioAtivo { get; set; }
+        public DbSet<Produto> Produto { get; set; }
+        public DbSet<TabelaFloral> TabelaFloral { get; set; }
+        public DbSet<TipoContato> TipoContato { get; set; }
+        public DbSet<TipoJustificativa> TipoJustificativa { get; set; }
+        public DbSet<Transacao> Transacao { get; set; }
+        public DbSet<Transportador> Transportador { get; set; }
+        public DbSet<Tributo> Tributo { get; set; }
+        public DbSet<Turno> Turno { get; set; }
+        public DbSet<Unidade> Unidade { get; set; }
+        public DbSet<UnidadeConversao> UnidadeConversao { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Vendedor> Vendedor { get; set; }
         public DbSet<VendedorComissao> VendedorComissao { get; set; }
-        public DbSet<GrupoUsuario> GrupoUsuario { get; set; }
-        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Visitador> Visitador { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
