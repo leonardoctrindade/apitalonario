@@ -60,6 +60,7 @@ namespace Data.Config
         public DbSet<Prescritor> Prescritor { get; set; }
         public DbSet<PrincipioAtivo> PrincipioAtivo { get; set; }
         public DbSet<Produto> Produto { get; set; }
+        public DbSet<Regiao> Regiao { get; set; }
         public DbSet<TabelaFloral> TabelaFloral { get; set; }
         public DbSet<TipoContato> TipoContato { get; set; }
         public DbSet<TipoJustificativa> TipoJustificativa { get; set; }

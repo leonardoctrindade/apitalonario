@@ -27,7 +27,7 @@ namespace Data.Entidades
         public Gerenciador Gerenciador { get; set; }
 
         [Column("CieloPremia")]
-        public CieloPremia CieloPremia { get; set; } = 0;
+        public CieloPremia? CieloPremia { get; set; }
 
         [Column("Modalidade")]
         [Required]
