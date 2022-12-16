@@ -14,7 +14,8 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("Nome")]
-        [Required]
+        [MaxLength(50)]
+        [Required(ErrorMessage = "Campo de nome não preenchido")]
         public string Nome { get; set; }
 
         [Column("Sigla")]
@@ -38,10 +39,7 @@ namespace Data.Entidades
         public bool ChecagemContribuinteIsento { get; set; }
 
         [Column("IdPais")]
-        [Required]
+        [Required(ErrorMessage = "Campo de pais não preenchido")]
         public int IdPais { get; set; }
-
-        //[NotMapped]
-        //public List<Pais> Pais { get; set; }
     }
 }

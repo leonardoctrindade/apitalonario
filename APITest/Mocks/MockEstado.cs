@@ -26,20 +26,17 @@ namespace APITest.Mocks
 
         public static Estado MontaObjetoSiglaVazia()
         {
-            var pais = new Pais() { Id = 1, Nome = "Brasil", CodigoIbge = 123, CodigoTelefonico = 123 };
-            return new Estado { Id = 1, Nome = "Teste Mock 1", IdPais = pais.Id, ChecagemContribuinteIsento = false, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, AliquotaFcpEstado = 17, AliquotaIcmsEstado = 0 };
+            return new Estado { Id = 1, Nome = "Teste Mock 1", IdPais = 1, ChecagemContribuinteIsento = false, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, AliquotaFcpEstado = 17, AliquotaIcmsEstado = 0 };
         }
 
         public static Estado MontaObjetoSiglaUmCaracter()
         {
-            var pais = new Pais() { Id = 1, Nome = "Brasil", CodigoIbge = 123, CodigoTelefonico = 123 };
-            return new Estado { Id = 1, Nome = "Teste Mock 1", Sigla = "S" , IdPais = pais.Id, ChecagemContribuinteIsento = false, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, AliquotaFcpEstado = 17, AliquotaIcmsEstado = 0 };
+            return new Estado { Id = 1, Nome = "Teste Mock 1", Sigla = "S" , IdPais = 1, ChecagemContribuinteIsento = false, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, AliquotaFcpEstado = 17, AliquotaIcmsEstado = 0 };
         }
 
         public static Estado MontaObjetoSiglaTresCaracter()
         {
-            var pais = new Pais() { Id = 1, Nome = "Brasil", CodigoIbge = 123, CodigoTelefonico = 123 };
-            return new Estado { Id = 1, Nome = "Teste Mock 1", Sigla = "SCC", IdPais = pais.Id, ChecagemContribuinteIsento = false, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, AliquotaFcpEstado = 17, AliquotaIcmsEstado = 0 };
+            return new Estado { Id = 1, Nome = "Teste Mock 1", Sigla = "SCC", IdPais = 1, ChecagemContribuinteIsento = false, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, AliquotaFcpEstado = 17, AliquotaIcmsEstado = 0 };
         }
 
         public static Estado MontaObjetoPaisVazio()
