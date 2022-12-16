@@ -50,6 +50,7 @@ namespace Data.Config
         public DbSet<NaturezaOperacao> NaturezaOperacao { get; set; }
         public DbSet<Nbm> Nbm { get; set; }
         public DbSet<Ncm> Ncm { get; set; }
+        public DbSet<OperadorCaixa> OperadorCaixa { get; set; }
         public DbSet<Pais> Pais { get; set; }
         public DbSet<Pbm> Pbm { get; set; }
         public DbSet<PlanoDeContas> PlanoDeContas { get; set; }

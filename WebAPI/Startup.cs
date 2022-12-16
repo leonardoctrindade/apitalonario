@@ -77,6 +77,7 @@ namespace WebAPI
             services.AddSingleton<INaturezaOperacao, RepositoryNaturezaOperacao>();
             services.AddSingleton<INbm, RepositoryNbm>();
             services.AddSingleton<INcm, RepositoryNcm>();
+            services.AddSingleton<IOperadorCaixa, RepositoryOperadorCaixa>();
             services.AddSingleton<IPais, RepositoryPais>();
             services.AddSingleton<IPbm, RepositoryPbm>();
             services.AddSingleton<IPlanoDeContas, RepositoryPlanoDeContas>();

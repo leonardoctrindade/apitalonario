@@ -23,12 +23,6 @@ namespace WebAPI.Controllers
         public async Task<JsonResult> ListaBairro()
         {
             return Json(await this.IBairro.List());
-            //return Json(new List<Bairro>()
-            //{
-            //    new Bairro() { Id = 1, Nome = "Teste 1"},
-            //    new Bairro() { Id = 2, Nome = "Teste 2"},
-            //    new Bairro() { Id = 3, Nome = "Teste 3"}
-            //});
         }
 
         [HttpPost("/api/AdicionarBairro")]
