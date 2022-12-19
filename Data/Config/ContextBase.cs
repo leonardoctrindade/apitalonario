@@ -24,6 +24,7 @@ namespace Data.Config
         public DbSet<Classe> Classe { get; set; }
         public DbSet<Contabilista> Contabilista { get; set; }
         public DbSet<ContaCorrente> ContaCorrente { get; set; }
+        public DbSet<Convenio> Convenio { get; set; }
         public DbSet<ConvenioGrupo> ConvenioGrupo { get; set; }
         public DbSet<Dcb> Dcb { get; set; }
         public DbSet<Dci> Dci { get; set; }
