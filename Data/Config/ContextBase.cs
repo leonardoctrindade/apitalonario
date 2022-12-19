@@ -19,6 +19,7 @@ namespace Data.Config
         public DbSet<Bairro> Bairro { get; set; }
         public DbSet<Banco> Banco { get; set; }
         public DbSet<Bula> Bula { get; set; }
+        public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Cidade> Cidade { get; set; }
         public DbSet<Classe> Classe { get; set; }
         public DbSet<Contabilista> Contabilista { get; set; }
@@ -28,6 +29,8 @@ namespace Data.Config
         public DbSet<Diferimento> Diferimento { get; set; }
         public DbSet<DOM_RegimeTributario> DOM_RegimeTributario { get; set; }
         public DbSet<Ensaio> Ensaio { get; set; }
+        public DbSet<Entregador> Entregador { get; set; }
+        public DbSet<EntregadorRegiao> EntregadorRegiao { get; set; }
         public DbSet<Especialidade> Especialidade { get; set; }
         public DbSet<EspecialidadePrescritor> EspecialidadePrescritor { get; set; }
         public DbSet<EspecificacaoCapsula> EspecificacaoCapsula { get; set; }

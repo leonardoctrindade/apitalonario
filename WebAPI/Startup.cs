@@ -46,6 +46,7 @@ namespace WebAPI
             services.AddSingleton<IBairro, RepositoryBairro>();
             services.AddSingleton<IBanco, RepositoryBanco>();
             services.AddSingleton<IBula, RepositoryBula>();
+            services.AddSingleton<ICategoria, RepositoryCategoria>();
             services.AddSingleton<ICidade, RepositoryCidade>();
             services.AddSingleton<IClasse, RepositoryClasse>();
             services.AddSingleton<IContabilista, RepositoryContabilista>();
@@ -55,6 +56,8 @@ namespace WebAPI
             services.AddSingleton<IDiferimento, RepositoryDiferimento>();
             services.AddSingleton<IDOM_RegimeTributario, RepositoryDOM_RegimeTributario>();
             services.AddSingleton<IEnsaio, RepositoryEnsaio>();
+            services.AddSingleton<IEntregador, RepositoryEntregador>();
+            services.AddSingleton<IEntregadorRegiao, RepositoryEntregadorRegiao>();
             services.AddSingleton<IEspecialidade, RepositoryEspecialidade>();
             services.AddSingleton<IEspecialidadePrescritor, RepositoryEspecialidadePrescritor>();
             services.AddSingleton<IEspecificacaoCapsula, RepositoryEspecificacaoCapsula>();

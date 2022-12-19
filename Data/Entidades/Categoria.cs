@@ -8,16 +8,30 @@ namespace Data.Entidades
 {
     public class Categoria
     {
-        //[Column("Id")]
-        //public int Id { get; set; }
-        //[Column("Descricao")]
-        //[Required]
-        //[MaxLength(50)]
-        //public string Descricao { get; set; }
-        //[ForeignKey("Id")]
-        //[Column("Id_Categoria_Pai")]
-        //public int Id_Categoria_Pai { get; set; }
-        //public Categoria Categoria_Fk { get; set; }
+        [Column("Id")]
+        public int Id { get; set; }
 
+        [Column("Nome")]
+        [MaxLength(50)]
+        [Required(ErrorMessage = "Campo de nome não preenchido")]
+        public string Nome { get; set; }
+
+        [Column("IdCategoriaPai")]
+        public int IdCategoriaPai { get; set; }
+
+        [Column("CategoriaAtiva")]
+        public bool CategoriaAtivo { get; set; }
+
+        [Column("IdCategoriaMagento")]
+        public int IdCategoriaMagento { get; set; }
+
+        [Column("Integrados")]
+        public bool Integrados { get; set; }
+
+        [Column("Excluidos")]
+        public bool Excluidos { get; set; }
+
+        [Column("AlteradoPais")]
+        public bool AlteradoPais { get; set; }
     }
 }
