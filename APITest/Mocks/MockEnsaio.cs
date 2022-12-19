@@ -13,20 +13,13 @@ namespace APITest.Mocks
     public static class MockEnsaio
     {
         public static Ensaio MontaObjetoUnico()
-        {
-            var farmacopeia = new List<Farmacopeia>();
-            farmacopeia.Add(new Farmacopeia() { Id = 1, Nome = "Teste 1", Observacao = "Teste Mock 1"});
-            return new Ensaio { Id = 1, Nome = "Teste Mock 1", IdFarmacopeia = 1, Farmacopeia = farmacopeia};
+        { 
+            return new Ensaio { Id = 1, Nome = "Teste Mock 1", IdFarmacopeia = 1};
         }
 
         public static Ensaio MontaObjetoNomeVazio()
         {
             return new Ensaio { Id = 1, Nome = null, IdFarmacopeia = 1};
-        }
-
-        public static Ensaio MontaObjetoFarmacopeiaVazio()
-        {
-            return new Ensaio { Id = 1, Nome = "Teste Mock 1"};
         }
 
         public static List<Ensaio> MontaListaItems()

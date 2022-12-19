@@ -17,8 +17,5 @@ namespace Data.Entidades
 
         [Column("IdFarmacopeia")]
         public int IdFarmacopeia { get; set; }
-
-        [NotMapped]
-        public List<Farmacopeia> Farmacopeia { get; set; }
     }
 }

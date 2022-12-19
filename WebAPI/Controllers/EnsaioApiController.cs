@@ -29,8 +29,6 @@ namespace WebAPI.Controllers
         {
             if (String.IsNullOrEmpty(Ensaio.Nome))
                 return Json(BadRequest(ModelState));
-            if (Ensaio.Equals(Ensaio.Farmacopeia, null))
-                return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.IEnsaio.Add(Ensaio)));
 
