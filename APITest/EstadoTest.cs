@@ -86,15 +86,6 @@ namespace APITest
         }
 
         [Fact]
-        public async Task Insere_Pais_Nao_Preenchido()
-        {
-            var modelo = MockEstado.MontaObjetoPaisVazio();
-            var apiController = new EstadoApiController(mock.Object);
-            var result = await apiController.AdicionarEstado(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
-        }
-
-        [Fact]
         public async Task Insere_Sigla_Nao_Preenchido()
         {
             var modelo = MockEstado.MontaObjetoSiglaVazia();

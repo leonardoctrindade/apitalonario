@@ -39,7 +39,6 @@ namespace Data.Entidades
         public bool ChecagemContribuinteIsento { get; set; }
 
         [Column("IdPais")]
-        [Required(ErrorMessage = "Campo de pais não preenchido")]
         public int IdPais { get; set; }
     }
 }

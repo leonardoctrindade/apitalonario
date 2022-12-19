@@ -32,8 +32,6 @@ namespace WebAPI.Controllers
                 return Json(BadRequest(ModelState));
             if (String.IsNullOrEmpty(Estado.Sigla) || Estado.Sigla.Count() != 2)
                 return Json(BadRequest(ModelState));
-            if (Estado.Equals(Estado.IdPais, 0))
-                return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.IEstado.Add(Estado)));
 
@@ -52,8 +50,6 @@ namespace WebAPI.Controllers
             if (String.IsNullOrEmpty(Estado.Nome))
                 return Json(BadRequest(ModelState));
             if (String.IsNullOrEmpty(Estado.Sigla) || Estado.Sigla.Count() != 2)
-                return Json(BadRequest(ModelState));
-            if (Estado.Equals(Estado.IdPais, 0))
                 return Json(BadRequest(ModelState));
 
             Json(await Task.FromResult(this.IEstado.Update(Estado)));

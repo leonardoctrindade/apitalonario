@@ -39,11 +39,6 @@ namespace APITest.Mocks
             return new Estado { Id = 1, Nome = "Teste Mock 1", Sigla = "SCC", IdPais = 1, ChecagemContribuinteIsento = false, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, AliquotaFcpEstado = 17, AliquotaIcmsEstado = 0 };
         }
 
-        public static Estado MontaObjetoPaisVazio()
-        {
-            return new Estado { Id = 1, Nome = "Teste Mock 1", Sigla = "SC", ChecagemContribuinteIsento = false, DifalComCalculoDeIsento = false, DifalComCalculoPorDentro = false, AliquotaFcpEstado = 17, AliquotaIcmsEstado = 0};
-        }
-
         public static List<Estado> MontaListaItems()
         {
             var pais = new Pais() { Id = 1, Nome = "Brasil", CodigoIbge = 123, CodigoTelefonico = 123 };

@@ -67,6 +67,7 @@ namespace Data.Config
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Regiao> Regiao { get; set; }
         public DbSet<TabelaFloral> TabelaFloral { get; set; }
+        public DbSet<TabelaHomeopatia> TabelaHomeopatia { get; set; }
         public DbSet<TipoContato> TipoContato { get; set; }
         public DbSet<TipoJustificativa> TipoJustificativa { get; set; }
         public DbSet<Transacao> Transacao { get; set; }
