@@ -15,6 +15,7 @@ namespace Data.Config
         }
 
         public DbSet<AdministradoraCartao> AdministradoraCartao { get; set; }
+        public DbSet<AliquotaEstado> AliquotaEstado { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Bairro> Bairro { get; set; }
         public DbSet<Banco> Banco { get; set; }
@@ -68,6 +69,7 @@ namespace Data.Config
         public DbSet<Regiao> Regiao { get; set; }
         public DbSet<TabelaFloral> TabelaFloral { get; set; }
         public DbSet<TabelaHomeopatia> TabelaHomeopatia { get; set; }
+        public DbSet<TabelaHomeopatiaQuantidade> TabelaHomeopatiaQuantidade { get; set; }
         public DbSet<TipoContato> TipoContato { get; set; }
         public DbSet<TipoJustificativa> TipoJustificativa { get; set; }
         public DbSet<Transacao> Transacao { get; set; }

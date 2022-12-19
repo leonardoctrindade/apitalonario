@@ -43,6 +43,7 @@ namespace WebAPI
 
             services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));  
             services.AddSingleton<IAdministradoraCartao, RepositoryAdministradoraCartao>();
+            services.AddSingleton<IAliquotaEstado, RepositoryAliquotaEstado>();
             services.AddSingleton<IBairro, RepositoryBairro>();
             services.AddSingleton<IBanco, RepositoryBanco>();
             services.AddSingleton<IBula, RepositoryBula>();
@@ -95,6 +96,7 @@ namespace WebAPI
             services.AddSingleton<IRegiao, RepositoryRegiao>();
             services.AddSingleton<ITabelaFloral, RepositoryTabelaFloral>();
             services.AddSingleton<ITabelaHomeopatia, RepositoryTabelaHomeopatia>();
+            services.AddSingleton<ITabelaHomeopatiaQuantidade, RepositoryTabelaHomeopatiaQuantidade>();
             services.AddSingleton<ITipoContato, RepositoryTipoContato>();
             services.AddSingleton<ITipoJustificativa, RepositoryTipoJustificativa>();
             services.AddSingleton<ITransacao, RepositoryTransacao>();
