@@ -40,6 +40,9 @@ namespace Data.Config
         public DbSet<Estado> Estado { get; set; }
         public DbSet<Etapa> Etapa { get; set; }
         public DbSet<Farmacopeia> Farmacopeia { get; set; }
+        public DbSet<Fidelidade> Fidelidade { get; set; }
+        public DbSet<FidelidadeFormaPagamento> FidelidadeFormaPagamento { get; set; }
+        public DbSet<FidelidadePremios> FidelidadePremios { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<FuncionarioLaboratorio> FuncionarioLaboratorio { get; set; }
