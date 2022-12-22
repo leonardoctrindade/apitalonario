@@ -49,6 +49,15 @@ namespace APITest
         }
 
         [Fact]
+        public async Task Insere_IdNcm_Invalido()
+        {
+            var modelo = MockNcmEstado.MontaObjetoIdNcmInvalido();
+            var apiController = new NcmEstadoApiController(mock.Object);
+            var result = await apiController.AdicionarNcmEstado(modelo);
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+        }
+
+        [Fact]
         public async Task Editar_Sucesso()
         {
             var modelo = MockNcmEstado.MontaObjetoUnico();

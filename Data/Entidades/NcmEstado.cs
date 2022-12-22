@@ -36,5 +36,9 @@ namespace Data.Entidades
 
         [Column("PercentualFcp")]
         public double PercentualFcp { get; set; }
+
+        [Column("IdNcm")]
+        [Required(ErrorMessage = "Campo de IdNcm não preenchido")]
+        public int IdNcm { get; set; }
     }
 }

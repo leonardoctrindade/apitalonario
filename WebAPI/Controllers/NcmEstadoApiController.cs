@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (NcmEstado.IdEstadoOrigem <= 0 || NcmEstado.IdEstadoDestino <= 0)
+                if (NcmEstado.IdEstadoOrigem <= 0 || NcmEstado.IdEstadoDestino <= 0 || NcmEstado.IdNcm <= 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.INcmEstado.Add(NcmEstado)));
@@ -66,7 +66,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (NcmEstado.IdEstadoOrigem <= 0 || NcmEstado.IdEstadoDestino <= 0)
+                if (NcmEstado.IdEstadoOrigem <= 0 || NcmEstado.IdEstadoDestino <= 0 || NcmEstado.IdNcm <= 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.INcmEstado.Update(NcmEstado)));
@@ -87,8 +87,6 @@ namespace WebAPI.Controllers
             {
                 return new JsonResult(new { message = "Error ao excluir o ncm de estado " + ex.Message }) { StatusCode = 400 };
             }
-            
-
         }
     }
 }

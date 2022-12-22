@@ -22,40 +22,70 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaBairro")]
         public async Task<JsonResult> ListaBairro()
         {
-            return Json(await this.IBairro.List());
+            try
+            {
+                return Json(await this.IBairro.List());
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os bairros " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarBairro")]
         public async Task<JsonResult> AdicionarBairro([FromBody] Bairro Bairro)
         {
-            if (String.IsNullOrEmpty(Bairro.Nome))
-                return Json(BadRequest(ModelState));
+            try 
+            {
+                if (String.IsNullOrEmpty(Bairro.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IBairro.Add(Bairro)));
+                Json(await Task.FromResult(this.IBairro.Add(Bairro)));
 
-            return Json(Ok());
+                return Json(Ok());
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o bairro " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaBairroPorId/{id}")]
         public async Task<JsonResult> RetornaBairroPorId(int id)
         {
-            return Json(await this.IBairro.GetEntityById(id));
+            try
+            {
+                return Json(await this.IBairro.GetEntityById(id));
+            } catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o bairro " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarBairro")]
         public async Task<JsonResult> EditarBairro([FromBody] Bairro Bairro)
         {
-            if (String.IsNullOrEmpty(Bairro.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Bairro.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IBairro.Update(Bairro)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IBairro.Update(Bairro)));
+                return Json(Ok());
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar o bairro " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirBairro")]
-        public async Task ExcluirBairro([FromBody] Bairro Bairro)
+        public async Task<JsonResult> ExcluirBairro([FromBody] Bairro Bairro)
         {
-            await Task.FromResult(this.IBairro.Delete(Bairro));
+            try
+            {
+                return Json(await Task.FromResult(this.IBairro.Delete(Bairro)));
+            } catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o bairro " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }
