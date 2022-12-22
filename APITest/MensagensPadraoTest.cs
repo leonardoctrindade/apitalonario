@@ -75,5 +75,23 @@ namespace APITest
 
             Assert.Equal(3, viewResult.Count);
         }
+
+        [Fact]
+        public async Task Insere_Mensagem_Nao_Preenchido()
+        {
+            var modelo = MockMensagensPadrao.MontaObjetoMensagemVazia();
+            var apiController = new MensagensPadraoApiController(mock.Object);
+            var result = await apiController.AdicionarMensagensPadrao(modelo);
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+        }
+
+        [Fact]
+        public async Task Insere_StatusDescricao_Nao_Preenchido()
+        {
+            var modelo = MockMensagensPadrao.MontaObjetoStatusDescricaoVazio();
+            var apiController = new MensagensPadraoApiController(mock.Object);
+            var result = await apiController.AdicionarMensagensPadrao(modelo);
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+        }
     }
 }

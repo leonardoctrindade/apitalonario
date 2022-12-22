@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
             return Json(await this.IMaquinaPos.List());
         }
 
-        [HttpGet("/api/AdicionarMaquinaPos")]
+        [HttpPost("/api/AdicionarMaquinaPos")]
         public async Task<JsonResult> AdicionarMaquinaPos([FromBody] MaquinaPos MaquinaPos)
         {
             if (String.IsNullOrEmpty(MaquinaPos.SerialPos))

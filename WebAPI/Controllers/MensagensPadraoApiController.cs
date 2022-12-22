@@ -25,6 +25,11 @@ namespace WebAPI.Controllers
         [HttpPost("/api/AdicionarMensagensPadrao")]
         public async Task<JsonResult> AdicionarMensagensPadrao([FromBody] MensagensPadrao MensagensPadrao)
         {
+            if (String.IsNullOrEmpty(MensagensPadrao.StatusDescricao))
+                return Json(BadRequest(ModelState));
+            if (String.IsNullOrEmpty(MensagensPadrao.Mensagem))
+                return Json(BadRequest(ModelState));
+
             Json(await Task.FromResult(this.IMensagensPadrao.Add(MensagensPadrao)));
             return Json(Ok());
         }
@@ -38,6 +43,11 @@ namespace WebAPI.Controllers
         [HttpPost("/api/EditarMensagensPadrao")]
         public async Task<JsonResult> EditarMensagensPadrao([FromBody] MensagensPadrao MensagensPadrao)
         {
+            if (String.IsNullOrEmpty(MensagensPadrao.StatusDescricao))
+                return Json(BadRequest(ModelState));
+            if (String.IsNullOrEmpty(MensagensPadrao.Mensagem))
+                return Json(BadRequest(ModelState));
+
             Json(await Task.FromResult(this.IMensagensPadrao.Update(MensagensPadrao)));
             return Json(Ok());
         }

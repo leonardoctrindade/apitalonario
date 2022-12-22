@@ -14,6 +14,16 @@ namespace APITest.Mocks
             return new MensagensPadrao { Id = 1, StatusDescricao = "Teste Mock 1", Mensagem = "Teste Mock 1", DescricaoRotulo = true, EnviarAutomatico = true };
         }
 
+        public static MensagensPadrao MontaObjetoMensagemVazia()
+        {
+            return new MensagensPadrao { Id = 1, StatusDescricao = "Teste Mock 1", Mensagem = null, DescricaoRotulo = true, EnviarAutomatico = true };
+        }
+
+        public static MensagensPadrao MontaObjetoStatusDescricaoVazio()
+        {
+            return new MensagensPadrao { Id = 1, StatusDescricao = null, Mensagem = "Teste Mock 1", DescricaoRotulo = true, EnviarAutomatico = true };
+        }
+
         public static List<MensagensPadrao> MontaListaItems()
         {
             return new List<MensagensPadrao>()

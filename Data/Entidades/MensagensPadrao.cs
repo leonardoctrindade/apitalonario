@@ -14,10 +14,12 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("StatusDescricao")]
+        [Required(ErrorMessage = "Campo de status não preechido")]
         [MaxLength(30)]
         public string StatusDescricao { get; set; }
 
         [Column("Mensagem")]
+        [Required(ErrorMessage = "Campo de mensage não preenchido")]
         public string Mensagem { get; set; }
 
         [Column("EnviarAutomatico")]
