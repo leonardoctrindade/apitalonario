@@ -10,6 +10,7 @@ using WebAPI.Controllers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Data.Config;
 
 namespace APITest
 {

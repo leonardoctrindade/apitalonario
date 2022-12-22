@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Data.Interfaces
 {
-    public interface IAdministradoraCartao : IGeneric<AdministradoraCartao>
+    public interface IAdministradoraCartao : IGeneric<AdministradoraCartao> 
     {
         Task<List<AdministradoraCartao>> ListagemCustomizada();
     }
