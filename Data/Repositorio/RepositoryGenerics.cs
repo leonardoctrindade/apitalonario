@@ -39,18 +39,30 @@ namespace Data.Repositorio
 
         public async Task Delete(T Objeto)
         {
-            using (var data = new ContextBase(_OptionsBuilder))
+            try
             {
-                data.Set<T>().Remove(Objeto);
-                await data.SaveChangesAsync();
+                using (var data = new ContextBase(_OptionsBuilder))
+                {
+                    data.Set<T>().Remove(Objeto);
+                    await data.SaveChangesAsync();
+                }
+            } catch (Exception e) 
+            {
+                throw;
             }
         }
 
         public async Task<T> GetEntityById(int Id)
         {
-            using (var data = new ContextBase(_OptionsBuilder))
+            try
             {
-                return await data.Set<T>().FindAsync(Id);
+                using (var data = new ContextBase(_OptionsBuilder))
+                {
+                    return await data.Set<T>().FindAsync(Id);
+                }
+            } catch (Exception e) 
+            {
+                throw;
             }
         }
 
@@ -73,10 +85,16 @@ namespace Data.Repositorio
 
         public async Task Update(T Objeto)
         {
-            using (var data = new ContextBase(_OptionsBuilder))
+            try
             {
-                data.Set<T>().Update(Objeto);
-                await data.SaveChangesAsync();
+                using (var data = new ContextBase(_OptionsBuilder))
+                {
+                    data.Set<T>().Update(Objeto);
+                    await data.SaveChangesAsync();
+                }
+            } catch (Exception e) 
+            {
+                throw;
             }
         }
 

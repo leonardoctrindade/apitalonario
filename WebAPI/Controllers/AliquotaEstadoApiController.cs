@@ -22,35 +22,66 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaAliquotaEstado")]
         public async Task<JsonResult> ListaAliquotaEstado()
         {
-            return Json(await this.IAliquotaEstado.List());
+            try
+            {
+                return Json(await this.IAliquotaEstado.List());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as aliquotas de estado " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarAliquotaEstado")]
         public async Task<JsonResult> AdicionarAliquotaEstado([FromBody] AliquotaEstado AliquotaEstado)
         {
-            Json(await Task.FromResult(this.IAliquotaEstado.Add(AliquotaEstado)));
+            try
+            {
+                Json(await Task.FromResult(this.IAliquotaEstado.Add(AliquotaEstado)));
 
-            return Json(Ok());
+                return Json(Ok());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a aliquota de estado " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaAliquotaEstadoPorId/{id}")]
         public async Task<JsonResult> RetornaAliquotaEstadoPorId(int id)
         {
-            return Json(await this.IAliquotaEstado.GetEntityById(id));
+            try 
+            {
+                return Json(await this.IAliquotaEstado.GetEntityById(id));
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao retornar a aliquota de estado " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarAliquotaEstado")]
         public async Task<JsonResult> EditarAliquotaEstado([FromBody] AliquotaEstado AliquotaEstado)
         {
-            Json(await Task.FromResult(this.IAliquotaEstado.Update(AliquotaEstado)));
+            try
+            {
+                Json(await Task.FromResult(this.IAliquotaEstado.Update(AliquotaEstado)));
 
-            return Json(Ok());
+                return Json(Ok());
+            } catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar a aliquota de estado " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirAliquotaEstado")]
-        public async Task ExcluirAliquotaEstado([FromBody] AliquotaEstado AliquotaEstado)
+        public async Task<JsonResult> ExcluirAliquotaEstado([FromBody] AliquotaEstado AliquotaEstado)
         {
-            await Task.FromResult(this.IAliquotaEstado.Delete(AliquotaEstado));
+            try
+            {
+                return Json(await Task.FromResult(this.IAliquotaEstado.Delete(AliquotaEstado)));
+            } catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a aliquota de estado " + ex.Message }) { StatusCode = 400 };
+            }
+            
         }
     }
 }

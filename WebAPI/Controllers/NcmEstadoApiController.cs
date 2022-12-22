@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
                 return Json(await this.INcmEstado.List());
             } catch (Exception ex)
             {
-                return new JsonResult(new { message = "Error ao listar os administradores de cartão " + ex.Message }) { StatusCode = 400 };
+                return new JsonResult(new { message = "Error ao listar os ncm de estado " + ex.Message }) { StatusCode = 400 };
             }
 
         }
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
                 return Json(Ok());
             } catch (Exception ex)
             {
-                return new JsonResult(new { message = "Error ao adicionar o administrador de cartão " + ex.Message }) { StatusCode = 400 };
+                return new JsonResult(new { message = "Error ao adicionar o ncm de estado " + ex.Message }) { StatusCode = 400 };
             }
         }
 
@@ -57,7 +57,7 @@ namespace WebAPI.Controllers
                 return Json(await this.INcmEstado.GetEntityById(id));
             } catch (Exception ex)
             {
-                return new JsonResult(new { message = "Error ao retornar o administrador de cartão " + ex.Message }) { StatusCode = 400 };
+                return new JsonResult(new { message = "Error ao retornar o ncm de estado " + ex.Message }) { StatusCode = 400 };
             }
         }
 
@@ -73,7 +73,7 @@ namespace WebAPI.Controllers
                 return Json(Ok());
             } catch (Exception ex) 
             {
-                return new JsonResult(new { message = "Error ao editar o administrador de cartão " + ex.Message }) { StatusCode = 400 };
+                return new JsonResult(new { message = "Error ao editar o ncm de estado " + ex.Message }) { StatusCode = 400 };
             }
         }
 
@@ -85,7 +85,7 @@ namespace WebAPI.Controllers
                 return Json(await Task.FromResult(this.INcmEstado.Delete(NcmEstado)));
             } catch (Exception ex) 
             {
-                return new JsonResult(new { message = "Error ao excluir o administrador de cartão " + ex.Message }) { StatusCode = 400 };
+                return new JsonResult(new { message = "Error ao excluir o ncm de estado " + ex.Message }) { StatusCode = 400 };
             }
             
 
