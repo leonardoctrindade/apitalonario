@@ -22,46 +22,71 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaCidade")]
         public async Task<JsonResult> ListaCidade()
         {
-            return Json(await this.ICidade.List());
-            //return Json(new List<Cidade>()
-            //{
-            //    new Cidade { Id = 1, Nome = "Itajaí", CodigoIbge = 123, IdCodigoCfps = 1, CodigoSiafi = 1 },
-            //    new Cidade { Id = 2, Nome = "Brusque", CodigoIbge = 123, IdCodigoCfps = 1, CodigoSiafi = 1},
-            //    new Cidade { Id = 3, Nome = "Balneariu Camboriu", CodigoIbge = 123, IdCodigoCfps = 1, CodigoSiafi = 1},
-            //});
+            try
+            {
+                return Json(await this.ICidade.List());
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as cidades " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarCidade")]
         public async Task<JsonResult> AdicionarCidade([FromBody] Cidade Cidade)
         {
-            if (String.IsNullOrEmpty(Cidade.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Cidade.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ICidade.Add(Cidade)));
+                Json(await Task.FromResult(this.ICidade.Add(Cidade)));
 
-            return Json(Ok());
+                return Json(Ok());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o bairro " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaCidadePorId/{id}")]
         public async Task<JsonResult> RetornaCidadePorId(int id)
         {
-            return Json(await this.ICidade.GetEntityById(id));
+            try
+            {
+                return Json(await this.ICidade.GetEntityById(id));
+            } catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o bairro " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarCidade")]
         public async Task<JsonResult> EditarCidade([FromBody] Cidade Cidade)
         {
-            if (String.IsNullOrEmpty(Cidade.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Cidade.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ICidade.Update(Cidade)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.ICidade.Update(Cidade)));
+                return Json(Ok());
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar o bairro " + ex.Message }) { StatusCode = 400 };
+            }
+            
         }
 
         [HttpPost("/api/ExcluirCidade")]
-        public async Task ExcluirCidade([FromBody] Cidade Cidade)
+        public async Task<JsonResult> ExcluirCidade([FromBody] Cidade Cidade)
         {
-            await Task.FromResult(this.ICidade.Delete(Cidade));
+            try
+            {
+                return Json(await Task.FromResult(this.ICidade.Delete(Cidade)));
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao excluir o bairro " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

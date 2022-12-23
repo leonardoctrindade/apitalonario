@@ -19,40 +19,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaPosologia")]
         public async Task<JsonResult> ListaPosologia()
         {
-            return Json(await this.IPosologia.List());
+            try
+            {
+                return Json(await this.IPosologia.List());
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as posologias " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarPosologia")]
         public async Task<JsonResult> AdicionarPosologia([FromBody] Posologia Posologia)
         {
-            if (String.IsNullOrEmpty(Posologia.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Posologia.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IPosologia.Add(Posologia)));
+                Json(await Task.FromResult(this.IPosologia.Add(Posologia)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a posologia " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaPosologiaPorId/{id}")]
         public async Task<JsonResult> RetornaPosologiaPorId(int id)
         {
-            return Json(await this.IPosologia.GetEntityById(id));
+            try
+            {
+                return Json(await this.IPosologia.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a posologia " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarPosologia")]
         public async Task<JsonResult> EditarPosologia([FromBody] Posologia Posologia)
         {
-            if (String.IsNullOrEmpty(Posologia.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Posologia.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IPosologia.Update(Posologia)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IPosologia.Update(Posologia)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar a posologia " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirPosologia")]
-        public async Task ExcluirPosologia([FromBody] Posologia Posologia)
+        public async Task<JsonResult> ExcluirPosologia([FromBody] Posologia Posologia)
         {
-            await Task.FromResult(this.IPosologia.Delete(Posologia));
+            try
+            {
+                return Json(await Task.FromResult(this.IPosologia.Delete(Posologia)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a posologia " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

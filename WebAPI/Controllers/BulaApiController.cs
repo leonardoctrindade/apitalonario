@@ -19,44 +19,74 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaBula")]
         public async Task<JsonResult> ListaBula()
         {
-            return Json(await this.IBula.List());
+            try
+            {
+                return Json(await this.IBula.List());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as bulas " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarBula")]
         public async Task<JsonResult> AdicionarBula([FromBody] Bula Bula)
         {
-            if (String.IsNullOrEmpty(Bula.Descricao))
-                return Json(BadRequest(ModelState));
-            if (Bula.Tipo != 1 && Bula.Tipo != 2)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Bula.Descricao))
+                    return Json(BadRequest(ModelState));
+                if (Bula.Tipo != 1 && Bula.Tipo != 2)
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IBula.Add(Bula)));
+                Json(await Task.FromResult(this.IBula.Add(Bula)));
 
-            return Json(Ok());
+                return Json(Ok());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a bula " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaBulaPorId/{id}")]
         public async Task<JsonResult> RetornaBulaPorId(int id)
         {
-            return Json(await this.IBula.GetEntityById(id));
+            try
+            {
+                return Json(await this.IBula.GetEntityById(id));
+            } catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a bula " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarBula")]
         public async Task<JsonResult> EditarBula([FromBody] Bula Bula)
         {
-            if (String.IsNullOrEmpty(Bula.Descricao))
-                return Json(BadRequest(ModelState));
-            if (Bula.Tipo != 1 && Bula.Tipo != 2)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Bula.Descricao))
+                    return Json(BadRequest(ModelState));
+                if (Bula.Tipo != 1 && Bula.Tipo != 2)
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IBula.Update(Bula)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IBula.Update(Bula)));
+                return Json(Ok());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar a bula " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirBula")]
-        public async Task ExcluirBula([FromBody] Bula Bula)
+        public async Task<JsonResult> ExcluirBula([FromBody] Bula Bula)
         {
-            await Task.FromResult(this.IBula.Delete(Bula));
+            try
+            {
+                return Json(await Task.FromResult(this.IBula.Delete(Bula)));
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao excluir a bula " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

@@ -21,40 +21,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaEnsaio")]
         public async Task<JsonResult> ListaEnsaio()
         {
-            return Json(await this.IEnsaio.List());
+            try
+            {
+                return Json(await this.IEnsaio.List());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os ensaios " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarEnsaio")]
         public async Task<JsonResult> AdicionarEnsaio([FromBody] Ensaio Ensaio)
         {
-            if (String.IsNullOrEmpty(Ensaio.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Ensaio.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IEnsaio.Add(Ensaio)));
+                Json(await Task.FromResult(this.IEnsaio.Add(Ensaio)));
 
-            return Json(Ok());
+                return Json(Ok());
+            } 
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o ensaio " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaEnsaioPorId/{id}")]
         public async Task<JsonResult> RetornaEnsaioPorId(int id)
         {
-            return Json(await this.IEnsaio.GetEntityById(id));
+            try
+            {
+                return Json(await this.IEnsaio.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o ensaio " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarEnsaio")]
         public async Task<JsonResult> EditarEnsaio([FromBody] Ensaio Ensaio)
         {
-            if (String.IsNullOrEmpty(Ensaio.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Ensaio.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IEnsaio.Update(Ensaio)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IEnsaio.Update(Ensaio)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o ensaio " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirEnsaio")]
-        public async Task ExcluirEnsaio([FromBody] Ensaio Ensaio)
+        public async Task<JsonResult> ExcluirEnsaio([FromBody] Ensaio Ensaio)
         {
-            await Task.FromResult(this.IEnsaio.Delete(Ensaio));
+            try 
+            {
+                return Json(await Task.FromResult(this.IEnsaio.Delete(Ensaio)));
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o ensaio " + ex.Message }) { StatusCode = 400 };
+            }  
         }
     }
 }

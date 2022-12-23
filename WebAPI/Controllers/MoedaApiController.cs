@@ -18,43 +18,83 @@ namespace WebAPI.Controllers
         {
             IMoeda = imoeda;
         }
+
         [HttpGet("/api/ListaMoeda")]
         public async Task<JsonResult> ListaMoeda()
         {
-            return Json(await this.IMoeda.List());
+            try
+            {
+                return Json(await this.IMoeda.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as moedas " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/AdicionarMoeda")]
         public async Task<JsonResult> AdicionarMoeda([FromBody] Moeda moeda)
         {
-            if (string.IsNullOrEmpty(moeda.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (string.IsNullOrEmpty(moeda.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IMoeda.Add(moeda)));
+                Json(await Task.FromResult(this.IMoeda.Add(moeda)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a moeda " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpGet("/api/RetornarMoedaProId/{id}")]
         public async Task<JsonResult> RetornarMoedaProId(int id)
         {
-            if (id == 0)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (id == 0)
+                    return Json(BadRequest(ModelState));
 
-            return Json(await this.IMoeda.GetEntityById(id));
+                return Json(await this.IMoeda.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a moeda " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/EditarMoeda")]
         public async Task<JsonResult> EditarMoeda([FromBody] Moeda moeda)
         {
-            if (string.IsNullOrEmpty(moeda.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (string.IsNullOrEmpty(moeda.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IMoeda.Update(moeda)));
+                Json(await Task.FromResult(this.IMoeda.Update(moeda)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar a moeda " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/ExcluirMoeda")]
-        public async Task ExcluirMoeda([FromBody] Moeda moeda)
+        public async Task<JsonResult> ExcluirMoeda([FromBody] Moeda moeda)
         {
-            await Task.FromResult(this.IMoeda.Delete(moeda));
+            try
+            {
+                return Json(await Task.FromResult(this.IMoeda.Delete(moeda)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a moeda " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

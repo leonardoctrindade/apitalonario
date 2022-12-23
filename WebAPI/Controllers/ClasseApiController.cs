@@ -1,7 +1,12 @@
-﻿using Data.Entidades;
+﻿using System;
+using System.Linq;
+using Data.Entidades;
 using Data.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
@@ -13,40 +18,76 @@ namespace WebAPI.Controllers
         {
             IClasse = iclasse;
         }
+
         [HttpGet("/api/ListaClasse")]
         public async Task<JsonResult> ListaClasse()
         {
-            return Json(await this.IClasse.List());
+            try
+            {
+                return Json(await this.IClasse.List());
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listas as classes " + ex.Message }) { StatusCode = 400 };
+            }
+            
         }
+
         [HttpPost("/api/AdicionarClasse")]
         public async Task<JsonResult> AdicionarClasse([FromBody] Classe classe)
         {
-            if (string.IsNullOrEmpty(classe.Descricao))
-                return Json(BadRequest(ModelState));
-            Json(await Task.FromResult(this.IClasse.Add(classe)));
+            try
+            {
+                if (string.IsNullOrEmpty(classe.Descricao))
+                    return Json(BadRequest(ModelState));
+                Json(await Task.FromResult(this.IClasse.Add(classe)));
 
-            return Json(Ok());
+                return Json(Ok());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a classe " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpGet("/api/RetornarClassePorId/{id}")]
         public async Task<JsonResult> RetornarClassePorId(int id)
         {
-            if (id == 0)
-                return Json(BadRequest(ModelState));
-            return Json(await this.IClasse.GetEntityById(id));
+            try
+            {
+                if (id == 0)
+                    return Json(BadRequest(ModelState));
+                return Json(await this.IClasse.GetEntityById(id));
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao retornar a classe " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/EditarClasse")]
         public async Task<JsonResult> EditarClasse([FromBody] Classe classe)
         {
-            if (string.IsNullOrEmpty(classe.Descricao))
-                return Json(BadRequest(ModelState));
-            Json(await Task.FromResult(this.IClasse.Update(classe)));
+            try
+            {
+                if (string.IsNullOrEmpty(classe.Descricao))
+                    return Json(BadRequest(ModelState));
+                Json(await Task.FromResult(this.IClasse.Update(classe)));
 
-            return Json(Ok());
+                return Json(Ok());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar a classe " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/ExcluirClasse")]
-        public async Task ExcluirClasse([FromBody] Classe classe)
+        public async Task<JsonResult> ExcluirClasse([FromBody] Classe classe)
         {
-            await Task.FromResult(this.IClasse.Delete(classe));
+            try
+            {
+                return Json(await Task.FromResult(this.IClasse.Delete(classe)));
+            } catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a classe " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

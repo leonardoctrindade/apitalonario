@@ -19,40 +19,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaGrupoUsuario")]
         public async Task<JsonResult> ListaGrupoUsuario()
         {
-            return Json(await this.IGrupoUsuario.List());
+            try
+            {
+                return Json(await this.IGrupoUsuario.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os grupos de usuario " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarGrupoUsuario")]
         public async Task<JsonResult> AdicionarGrupoUsuario([FromBody] GrupoUsuario GrupoUsuario)
         {
-            if (String.IsNullOrEmpty(GrupoUsuario.Descricao))
-                return Json(BadRequest(ModelState));
+            try 
+            {
+                if (String.IsNullOrEmpty(GrupoUsuario.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IGrupoUsuario.Add(GrupoUsuario)));
+                Json(await Task.FromResult(this.IGrupoUsuario.Add(GrupoUsuario)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o grupo de usuario " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaGrupoUsuarioPorId/{id}")]
         public async Task<JsonResult> RetornaGrupoUsuarioPorId(int id)
         {
-            return Json(await this.IGrupoUsuario.GetEntityById(id));
+            try
+            {
+                return Json(await this.IGrupoUsuario.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o grupo de usuario " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarGrupoUsuario")]
         public async Task<JsonResult> EditarGrupoUsuario([FromBody] GrupoUsuario GrupoUsuario)
         {
-            if (String.IsNullOrEmpty(GrupoUsuario.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(GrupoUsuario.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IGrupoUsuario.Update(GrupoUsuario)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IGrupoUsuario.Update(GrupoUsuario)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o grupo de usuario " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirGrupoUsuario")]
-        public async Task ExcluirGrupoUsuario([FromBody] GrupoUsuario GrupoUsuario)
+        public async Task<JsonResult> ExcluirGrupoUsuario([FromBody] GrupoUsuario GrupoUsuario)
         {
-            await Task.FromResult(this.IGrupoUsuario.Delete(GrupoUsuario));
+            try
+            {
+                return Json(await Task.FromResult(this.IGrupoUsuario.Delete(GrupoUsuario)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o grupo de usuario " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

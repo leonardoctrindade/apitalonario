@@ -22,40 +22,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaRegiao")]
         public async Task<JsonResult> ListaRegiao()
         {
-            return Json(await this.IRegiao.List());
+            try
+            {
+                return Json(await this.IRegiao.List());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as regiões " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarRegiao")]
         public async Task<JsonResult> AdicionarRegiao([FromBody] Regiao Regiao)
         {
-            if (String.IsNullOrEmpty(Regiao.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Regiao.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IRegiao.Add(Regiao)));
+                Json(await Task.FromResult(this.IRegiao.Add(Regiao)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao adicionar a região " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaRegiaoPorId/{id}")]
         public async Task<JsonResult> RetornaRegiaoPorId(int id)
         {
-            return Json(await this.IRegiao.GetEntityById(id));
+            try
+            {
+                return Json(await this.IRegiao.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a região " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarRegiao")]
         public async Task<JsonResult> EditarRegiao([FromBody] Regiao Regiao)
         {
-            if (String.IsNullOrEmpty(Regiao.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Regiao.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IRegiao.Update(Regiao)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IRegiao.Update(Regiao)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar a região " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirRegiao")]
-        public async Task ExcluirRegiao([FromBody] Regiao Regiao)
+        public async Task<JsonResult> ExcluirRegiao([FromBody] Regiao Regiao)
         {
-            await Task.FromResult(this.IRegiao.Delete(Regiao));
+            try
+            {
+                return Json(await Task.FromResult(this.IRegiao.Delete(Regiao)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a região " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

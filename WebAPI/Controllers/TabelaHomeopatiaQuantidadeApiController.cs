@@ -22,52 +22,87 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaTabelaHomeopatiaQuantidade")]
         public async Task<JsonResult> ListaTabelaHomeopatiaQuantidade()
         {
-            return Json(await this.ITabelaHomeopatiaQuantidade.List());
+            try
+            {
+                return Json(await this.ITabelaHomeopatiaQuantidade.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar tabelas de homeopatia quantidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarTabelaHomeopatiaQuantidade")]
         public async Task<JsonResult> AdicionarTabelaHomeopatiaQuantidade([FromBody] TabelaHomeopatiaQuantidade TabelaHomeopatiaQuantidade)
         {
-            if (String.IsNullOrEmpty(TabelaHomeopatiaQuantidade.Metodo))
-                return Json(BadRequest(ModelState));
-            if (TabelaHomeopatiaQuantidade.DinamizacaoInicial <= 0 || TabelaHomeopatiaQuantidade.DinamizacaoFinal <= 0)
-                return Json(BadRequest(ModelState));
-            if (TabelaHomeopatiaQuantidade.QuantidadeInicial < 0 || TabelaHomeopatiaQuantidade.QuantidadeFinal <= 0)
-                return Json(BadRequest(ModelState));
-            if (TabelaHomeopatiaQuantidade.ValorVenda < 0 || TabelaHomeopatiaQuantidade.ValorAdicional < 0)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(TabelaHomeopatiaQuantidade.Metodo))
+                    return Json(BadRequest(ModelState));
+                if (TabelaHomeopatiaQuantidade.DinamizacaoInicial <= 0 || TabelaHomeopatiaQuantidade.DinamizacaoFinal <= 0)
+                    return Json(BadRequest(ModelState));
+                if (TabelaHomeopatiaQuantidade.QuantidadeInicial < 0 || TabelaHomeopatiaQuantidade.QuantidadeFinal <= 0)
+                    return Json(BadRequest(ModelState));
+                if (TabelaHomeopatiaQuantidade.ValorVenda < 0 || TabelaHomeopatiaQuantidade.ValorAdicional < 0)
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITabelaHomeopatiaQuantidade.Add(TabelaHomeopatiaQuantidade)));
+                Json(await Task.FromResult(this.ITabelaHomeopatiaQuantidade.Add(TabelaHomeopatiaQuantidade)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex ) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar tabela de homeopatia quantidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaTabelaHomeopatiaQuantidadePorId/{id}")]
         public async Task<JsonResult> RetornaTabelaHomeopatiaQuantidadePorId(int id)
         {
-            return Json(await this.ITabelaHomeopatiaQuantidade.GetEntityById(id));
+            try
+            {
+                return Json(await this.ITabelaHomeopatiaQuantidade.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar tabela de homeopatia quantidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarTabelaHomeopatiaQuantidade")]
         public async Task<JsonResult> EditarTabelaHomeopatiaQuantidade([FromBody] TabelaHomeopatiaQuantidade TabelaHomeopatiaQuantidade)
         {
-            if (String.IsNullOrEmpty(TabelaHomeopatiaQuantidade.Metodo))
-                return Json(BadRequest(ModelState));
-            if (TabelaHomeopatiaQuantidade.DinamizacaoInicial <= 0 || TabelaHomeopatiaQuantidade.DinamizacaoFinal <= 0)
-                return Json(BadRequest(ModelState));
-            if (TabelaHomeopatiaQuantidade.QuantidadeInicial < 0 || TabelaHomeopatiaQuantidade.QuantidadeFinal <= 0)
-                return Json(BadRequest(ModelState));
-            if (TabelaHomeopatiaQuantidade.ValorVenda < 0 || TabelaHomeopatiaQuantidade.ValorAdicional < 0)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(TabelaHomeopatiaQuantidade.Metodo))
+                    return Json(BadRequest(ModelState));
+                if (TabelaHomeopatiaQuantidade.DinamizacaoInicial <= 0 || TabelaHomeopatiaQuantidade.DinamizacaoFinal <= 0)
+                    return Json(BadRequest(ModelState));
+                if (TabelaHomeopatiaQuantidade.QuantidadeInicial < 0 || TabelaHomeopatiaQuantidade.QuantidadeFinal <= 0)
+                    return Json(BadRequest(ModelState));
+                if (TabelaHomeopatiaQuantidade.ValorVenda < 0 || TabelaHomeopatiaQuantidade.ValorAdicional < 0)
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITabelaHomeopatiaQuantidade.Update(TabelaHomeopatiaQuantidade)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.ITabelaHomeopatiaQuantidade.Update(TabelaHomeopatiaQuantidade)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar tabela de homeopatia quantidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirTabelaHomeopatiaQuantidade")]
-        public async Task ExcluirTabelaHomeopatiaQuantidade([FromBody] TabelaHomeopatiaQuantidade TabelaHomeopatiaQuantidade)
+        public async Task<JsonResult> ExcluirTabelaHomeopatiaQuantidade([FromBody] TabelaHomeopatiaQuantidade TabelaHomeopatiaQuantidade)
         {
-            await Task.FromResult(this.ITabelaHomeopatiaQuantidade.Delete(TabelaHomeopatiaQuantidade));
+            try
+            {
+                return Json(await Task.FromResult(this.ITabelaHomeopatiaQuantidade.Delete(TabelaHomeopatiaQuantidade)));
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao excluir tabela de homeopatia quantidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

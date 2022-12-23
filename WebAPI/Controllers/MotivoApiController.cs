@@ -18,43 +18,83 @@ namespace WebAPI.Controllers
         {
             IMotivo = imotivo;
         }
+
         [HttpGet("/api/ListaMotivo")]
         public async Task<JsonResult> ListaMotivo()
         {
-            return Json(await this.IMotivo.List());
+            try
+            {
+                return Json(await this.IMotivo.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os motivos " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/AdicionarMotivo")]
         public async Task<JsonResult> AdicionarMotivo([FromBody] Motivo motivo)
         {
-            if (string.IsNullOrEmpty(motivo.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (string.IsNullOrEmpty(motivo.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IMotivo.Add(motivo)));
+                Json(await Task.FromResult(this.IMotivo.Add(motivo)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o motivo " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpGet("/api/RetornarMotivoPorId/{id}")]
         public async Task<JsonResult> RetornarMotivoPorId(int id)
         {
-            if (id == 0)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (id == 0)
+                    return Json(BadRequest(ModelState));
 
-            return Json(await this.IMotivo.GetEntityById(id));
+                return Json(await this.IMotivo.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o motivo " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/EditarMotivo")]
         public async Task<JsonResult> EditarMotivo([FromBody] Motivo motivo)
         {
-            if (string.IsNullOrEmpty(motivo.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (string.IsNullOrEmpty(motivo.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IMotivo.Update(motivo)));
+                Json(await Task.FromResult(this.IMotivo.Update(motivo)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o motivo " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/ExcluirMotivo")]
-        public async Task ExcluirMotivo([FromBody] Motivo motivo)
+        public async Task<JsonResult> ExcluirMotivo([FromBody] Motivo motivo)
         {
-            await Task.FromResult(this.IMotivo.Delete(motivo));
+            try
+            {
+                return Json(await Task.FromResult(this.IMotivo.Delete(motivo)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o motivo " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

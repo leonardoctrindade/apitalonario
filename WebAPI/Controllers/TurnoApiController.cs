@@ -19,44 +19,79 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaTurno")]
         public async Task<JsonResult> ListaTurno()
         {
-            return Json(await this.ITurno.List());
+            try
+            {
+                return Json(await this.ITurno.List());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os turnos " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarTurno")]
         public async Task<JsonResult> AdicionarTurno([FromBody] Turno Turno)
         {
-            if (String.IsNullOrEmpty(Turno.HoraFinal))
-                return Json(BadRequest(ModelState));
-            if (String.IsNullOrEmpty(Turno.HoraInicial))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Turno.HoraFinal))
+                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Turno.HoraInicial))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITurno.Add(Turno)));
+                Json(await Task.FromResult(this.ITurno.Add(Turno)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o turno " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaTurnoPorId/{id}")]
         public async Task<JsonResult> RetornaTurnoPorId(int id)
         {
-            return Json(await this.ITurno.GetEntityById(id));
+            try
+            {
+                return Json(await this.ITurno.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o turno " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarTurno")]
         public async Task<JsonResult> EditarTurno([FromBody] Turno Turno)
         {
-            if(String.IsNullOrEmpty(Turno.HoraFinal))
-                return Json(BadRequest(ModelState));
-            if (String.IsNullOrEmpty(Turno.HoraInicial))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Turno.HoraFinal))
+                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Turno.HoraInicial))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITurno.Update(Turno)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.ITurno.Update(Turno)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o turno " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirTurno")]
-        public async Task ExcluirTurno([FromBody] Turno Turno)
+        public async Task<JsonResult> ExcluirTurno([FromBody] Turno Turno)
         {
-            await Task.FromResult(this.ITurno.Delete(Turno));
+            try
+            {
+                return Json(await Task.FromResult(this.ITurno.Delete(Turno)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o turno " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

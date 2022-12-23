@@ -22,45 +22,79 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaTributo")]
         public async Task<JsonResult> ListaTributo()
         {
-            return Json(await this.ITributo.List());
+            try
+            {
+                return Json(await this.ITributo.List());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os tributos " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarTributo")]
         public async Task<JsonResult> AdicionarTributo([FromBody] Tributo Tributo)
         {
-            if (string.IsNullOrEmpty(Tributo.Codigo))
-                return Json(BadRequest(ModelState));
-            if (string.IsNullOrEmpty(Tributo.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (string.IsNullOrEmpty(Tributo.Codigo))
+                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Tributo.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITributo.Add(Tributo)));
+                Json(await Task.FromResult(this.ITributo.Add(Tributo)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o tributo " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaTributoPorId/{id}")]
         public async Task<JsonResult> RetornaTributoPorId(int id)
         {
-            return Json(await this.ITributo.GetEntityById(id));
+            try
+            {
+                return Json(await this.ITributo.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o tributo " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarTributo")]
         public async Task<JsonResult> EditarTributo([FromBody] Tributo Tributo)
         {
-            if (string.IsNullOrEmpty(Tributo.Codigo))
-                return Json(BadRequest(ModelState));
-            if (string.IsNullOrEmpty(Tributo.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (string.IsNullOrEmpty(Tributo.Codigo))
+                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Tributo.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITributo.Update(Tributo)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.ITributo.Update(Tributo)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o tributo " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirTributo")]
-        public async Task ExcluirTributo([FromBody] Tributo Tributo)
+        public async Task<JsonResult> ExcluirTributo([FromBody] Tributo Tributo)
         {
-            await Task.FromResult(this.ITributo.Delete(Tributo));
+            try
+            {
+                return Json(await Task.FromResult(this.ITributo.Delete(Tributo)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o tributo " + ex.Message }) { StatusCode = 400 };
+            }
         }
-
     }
 }

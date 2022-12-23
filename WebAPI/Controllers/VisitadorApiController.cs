@@ -22,8 +22,16 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaVisitador")]
         public async Task<JsonResult> ListaVisitador()
         {
-            return Json(await this.IVisitador.List());
+            try
+            {
+                return Json(await this.IVisitador.List());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os visitadores " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/AdicionarVisitador")]
         public async Task<JsonResult> AdicionarVisitador([FromBody] Visitador visitador)
         {
@@ -40,15 +48,22 @@ namespace WebAPI.Controllers
 
                 throw;
             }
-
-
             return Json(Ok());
         }
+
         [HttpGet("/api/RetornarVisitadorPorId/{id}")]
         public async Task<JsonResult> RetornarVisitadorPorId(int id)
         {
-            return Json(await this.IVisitador.GetEntityById(id));
+            try
+            {
+                return Json(await this.IVisitador.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar os visitadores " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/EditarVisitador")]
         public async Task<JsonResult> EditarVisitador([FromBody] Visitador visitador)
         {
@@ -65,14 +80,20 @@ namespace WebAPI.Controllers
 
                 throw;
             }
-
-
             return Json(Ok());
         }
+
         [HttpPost("/api/ExcluirVisitador")]
-        public async Task ExcluirVisitador([FromBody] Visitador visitador)
+        public async Task<JsonResult> ExcluirVisitador([FromBody] Visitador visitador)
         {
-            await Task.FromResult(this.IVisitador.Delete(visitador));
+            try
+            {
+                return Json(await Task.FromResult(this.IVisitador.Delete(visitador)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir os visitadores " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

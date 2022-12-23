@@ -22,40 +22,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaOperadorCaixa")]
         public async Task<JsonResult> ListaOperadorCaixa()
         {
-            return Json(await this.IOperadorCaixa.List());
+            try
+            {
+                return Json(await this.IOperadorCaixa.List());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os operadores de caixa" + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarOperadorCaixa")]
         public async Task<JsonResult> AdicionarOperadorCaixa([FromBody] OperadorCaixa OperadorCaixa)
         {
-            if (String.IsNullOrEmpty(OperadorCaixa.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(OperadorCaixa.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IOperadorCaixa.Add(OperadorCaixa)));
+                Json(await Task.FromResult(this.IOperadorCaixa.Add(OperadorCaixa)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o operador de caixa" + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaOperadorCaixaPorId/{id}")]
         public async Task<JsonResult> RetornaOperadorCaixaPorId(int id)
         {
-            return Json(await this.IOperadorCaixa.GetEntityById(id));
+            try
+            {
+                return Json(await this.IOperadorCaixa.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o operador de caixa" + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarOperadorCaixa")]
         public async Task<JsonResult> EditarOperadorCaixa([FromBody] OperadorCaixa OperadorCaixa)
         {
-            if (String.IsNullOrEmpty(OperadorCaixa.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(OperadorCaixa.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IOperadorCaixa.Update(OperadorCaixa)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IOperadorCaixa.Update(OperadorCaixa)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o operador de caixa" + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirOperadorCaixa")]
-        public async Task ExcluirOperadorCaixa([FromBody] OperadorCaixa OperadorCaixa)
+        public async Task<JsonResult> ExcluirOperadorCaixa([FromBody] OperadorCaixa OperadorCaixa)
         {
-            await Task.FromResult(this.IOperadorCaixa.Delete(OperadorCaixa));
+            try
+            {
+                return Json(await Task.FromResult(this.IOperadorCaixa.Delete(OperadorCaixa)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o operador de caixa" + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

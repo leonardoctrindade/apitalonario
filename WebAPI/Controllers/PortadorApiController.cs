@@ -20,40 +20,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaPortador")]
         public async Task<JsonResult> ListaPortador()
         {
-            return Json(await this.IPortador.List());
+            try
+            {
+                return Json(await this.IPortador.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os portadores " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarPortador")]
         public async Task<JsonResult> AdicionarPortador([FromBody] Portador Portador)
         {
-            if (String.IsNullOrEmpty(Portador.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Portador.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IPortador.Add(Portador)));
+                Json(await Task.FromResult(this.IPortador.Add(Portador)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o portador " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaPortadorPorId/{id}")]
         public async Task<JsonResult> RetornaPortadorPorId(int id)
         {
-            return Json(await this.IPortador.GetEntityById(id));
+            try
+            {
+                return Json(await this.IPortador.GetEntityById(id));
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o portador " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarPortador")]
         public async Task<JsonResult> EditarPortador([FromBody] Portador Portador)
         {
-            if (String.IsNullOrEmpty(Portador.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Portador.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IPortador.Update(Portador)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IPortador.Update(Portador)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o portador " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirPortador")]
-        public async Task ExcluirPortador([FromBody] Portador Portador)
+        public async Task<JsonResult> ExcluirPortador([FromBody] Portador Portador)
         {
-            await Task.FromResult(this.IPortador.Delete(Portador));
+            try
+            {
+                return Json(await Task.FromResult(this.IPortador.Delete(Portador)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o portador " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

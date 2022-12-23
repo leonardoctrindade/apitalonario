@@ -23,69 +23,116 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaUnidadeConversao")]
         public async Task<JsonResult> ListaUnidadeConversao()
         {
-            return Json(await this.IUnidadeConversao.List());
+            try
+            {
+                return Json(await this.IUnidadeConversao.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as unidades de conversão " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarUnidadeConversao")]
         public async Task<JsonResult> AdicionarUnidadeConversao([FromBody] UnidadeConversao unidadeConversao)
         {
-            if(string.IsNullOrEmpty(unidadeConversao.Sigla) || string.IsNullOrEmpty(unidadeConversao.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (string.IsNullOrEmpty(unidadeConversao.Sigla) || string.IsNullOrEmpty(unidadeConversao.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IUnidadeConversao.Add(unidadeConversao)));
+                Json(await Task.FromResult(this.IUnidadeConversao.Add(unidadeConversao)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a unidade de conversão " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornarUnidadeConversaoPorId/{id}")]
         public async Task<JsonResult> RetornarUnidadeConversaoPorId(int id)
         {
-            return Json(await this.IUnidadeConversao.GetEntityById(id));
+            try
+            {
+                return Json(await this.IUnidadeConversao.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a unidade de conversão " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarUnidadeConversao")]
         public async Task<JsonResult> EditarUnidadeConversao([FromBody] UnidadeConversao unidadeConversao)
         {
-            if (string.IsNullOrEmpty(unidadeConversao.Sigla) || string.IsNullOrEmpty(unidadeConversao.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (string.IsNullOrEmpty(unidadeConversao.Sigla) || string.IsNullOrEmpty(unidadeConversao.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IUnidadeConversao.Update(unidadeConversao)));
+                Json(await Task.FromResult(this.IUnidadeConversao.Update(unidadeConversao)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar a unidade de conversão " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirUnidadeConversao")]
-        public async Task ExcluirUnidadeConversao([FromBody] UnidadeConversao unidadeConversao)
+        public async Task<JsonResult> ExcluirUnidadeConversao([FromBody] UnidadeConversao unidadeConversao)
         {
-            await Task.FromResult(this.IUnidadeConversao.Delete(unidadeConversao));
+            try
+            {
+                return Json(await Task.FromResult(this.IUnidadeConversao.Delete(unidadeConversao)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a unidade de conversão " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpGet("/api/RetornarConversaoVinculada/{id}")]
         public async Task<JsonResult> RetornarConversaoVinculada(int id)
         {
-            var Unidades = new List<UnidadeConversao>();
-            var unidades = await this.IUnidadeConversao.List();
-
-            foreach (var x in unidades)
+            try
             {
-                if (x.IdUnidade == id)
-                    Unidades.Add(x);
+                var Unidades = new List<UnidadeConversao>();
+                var unidades = await this.IUnidadeConversao.List();
+
+                foreach (var x in unidades)
+                {
+                    if (x.IdUnidade == id)
+                        Unidades.Add(x);
+                }
+                return Json(Unidades);
             }
-            return Json(Unidades);
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao retornar conversão vinculada a unidade de conversão " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/AdicionarListaUnidades")]
         public async Task<JsonResult> AdicionarListaUnidades([FromBody] List<UnidadeConversao> unidadeConversaos)
         {
-            foreach (var x in unidadeConversaos)
+            try
             {
-                Json(await Task.FromResult(this.IUnidadeConversao.Add(x)));
-
-               
+                foreach (var x in unidadeConversaos)
+                {
+                    Json(await Task.FromResult(this.IUnidadeConversao.Add(x)));
+                }
+                return Json(Ok());
             }
-            return Json(Ok());
-        }
-        
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar lista de unidades de conversão " + ex.Message }) { StatusCode = 400 };
+            }
+        }  
     }
-
 }
 
 

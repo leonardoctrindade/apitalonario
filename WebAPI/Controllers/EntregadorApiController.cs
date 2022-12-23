@@ -22,48 +22,83 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaEntregador")]
         public async Task<JsonResult> ListaEntregador()
         {
-            return Json(await this.IEntregador.List());
+            try
+            {
+                return Json(await this.IEntregador.List());
+            } 
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os entregadores " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarEntregador")]
         public async Task<JsonResult> AdicionarEntregador([FromBody] Entregador Entregador)
         {
-            if (String.IsNullOrEmpty(Entregador.Nome))
-                return Json(BadRequest(ModelState));
-            if (String.IsNullOrEmpty(Entregador.Ddd))
-                return Json(BadRequest(ModelState));
-            if (String.IsNullOrEmpty(Entregador.Telefone))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Entregador.Nome))
+                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Entregador.Ddd))
+                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Entregador.Telefone))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IEntregador.Add(Entregador)));
+                Json(await Task.FromResult(this.IEntregador.Add(Entregador)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o entregador " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaEntregadorPorId/{id}")]
         public async Task<JsonResult> RetornaEntregadorPorId(int id)
         {
-            return Json(await this.IEntregador.GetEntityById(id));
+            try
+            {
+                return Json(await this.IEntregador.GetEntityById(id));
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o entregador " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarEntregador")]
         public async Task<JsonResult> EditarEntregador([FromBody] Entregador Entregador)
         {
-            if (String.IsNullOrEmpty(Entregador.Nome))
-                return Json(BadRequest(ModelState));
-            if (String.IsNullOrEmpty(Entregador.Ddd))
-                return Json(BadRequest(ModelState));
-            if (String.IsNullOrEmpty(Entregador.Telefone))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Entregador.Nome))
+                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Entregador.Ddd))
+                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Entregador.Telefone))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IEntregador.Update(Entregador)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IEntregador.Update(Entregador)));
+                return Json(Ok());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar o entregador " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirEntregador")]
-        public async Task ExcluirEntregador([FromBody] Entregador Entregador)
+        public async Task<JsonResult> ExcluirEntregador([FromBody] Entregador Entregador)
         {
-            await Task.FromResult(this.IEntregador.Delete(Entregador));
+            try
+            {
+                return Json(await Task.FromResult(this.IEntregador.Delete(Entregador)));
+            } 
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao excluir o entregador " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

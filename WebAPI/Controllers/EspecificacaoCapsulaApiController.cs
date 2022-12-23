@@ -21,40 +21,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaEspecificacaoCapsula")]
         public async Task<JsonResult> ListaEspecificacaoCapsula()
         {
-            return Json(await this.IEspecificacaoCapsula.List());
+            try
+            {
+                return Json(await this.IEspecificacaoCapsula.List());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as especificações da capsula " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarEspecificacaoCapsula")]
         public async Task<JsonResult> AdicionarEspecificacaoCapsula([FromBody] EspecificacaoCapsula EspecificacaoCapsula)
         {
-            if (String.IsNullOrEmpty(EspecificacaoCapsula.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(EspecificacaoCapsula.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IEspecificacaoCapsula.Add(EspecificacaoCapsula)));
+                Json(await Task.FromResult(this.IEspecificacaoCapsula.Add(EspecificacaoCapsula)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a especificação da capsula " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaEspecificacaoCapsulaPorId/{id}")]
         public async Task<JsonResult> RetornaEspecificacaoCapsulaPorId(int id)
         {
-            return Json(await this.IEspecificacaoCapsula.GetEntityById(id));
+            try
+            {
+                return Json(await this.IEspecificacaoCapsula.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a especificação da capsula " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarEspecificacaoCapsula")]
         public async Task<JsonResult> EditarEspecificacaoCapsula([FromBody] EspecificacaoCapsula EspecificacaoCapsula)
         {
-            if (String.IsNullOrEmpty(EspecificacaoCapsula.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(EspecificacaoCapsula.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IEspecificacaoCapsula.Update(EspecificacaoCapsula)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IEspecificacaoCapsula.Update(EspecificacaoCapsula)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar a especificação da capsula " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirEspecificacaoCapsula")]
-        public async Task ExcluirEspecificacaoCapsula([FromBody] EspecificacaoCapsula EspecificacaoCapsula)
+        public async Task<JsonResult> ExcluirEspecificacaoCapsula([FromBody] EspecificacaoCapsula EspecificacaoCapsula)
         {
-            await Task.FromResult(this.IEspecificacaoCapsula.Delete(EspecificacaoCapsula));
+            try
+            {
+                return Json(await Task.FromResult(this.IEspecificacaoCapsula.Delete(EspecificacaoCapsula)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a especificação da capsula " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

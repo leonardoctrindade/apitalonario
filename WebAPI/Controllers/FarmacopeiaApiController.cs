@@ -22,40 +22,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaFarmacopeia")]
         public async Task<JsonResult> ListaFarmacopeia()
         {
-            return Json(await this.IFarmacopeia.List());
+            try
+            {
+                return Json(await this.IFarmacopeia.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as farmacopeias " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarFarmacopeia")]
         public async Task<JsonResult> AdicionarFarmacopeia([FromBody] Farmacopeia Farmacopeia)
         {
-            if (String.IsNullOrEmpty(Farmacopeia.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Farmacopeia.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IFarmacopeia.Add(Farmacopeia)));
+                Json(await Task.FromResult(this.IFarmacopeia.Add(Farmacopeia)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a farmacopeia " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaFarmacopeiaPorId/{id}")]
         public async Task<JsonResult> RetornaFarmacopeiaPorId(int id)
         {
-            return Json(await this.IFarmacopeia.GetEntityById(id));
+            try
+            {
+                return Json(await this.IFarmacopeia.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a farmacopeia " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarFarmacopeia")]
         public async Task<JsonResult> EditarFarmacopeia([FromBody] Farmacopeia Farmacopeia)
         {
-            if (String.IsNullOrEmpty(Farmacopeia.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Farmacopeia.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IFarmacopeia.Update(Farmacopeia)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IFarmacopeia.Update(Farmacopeia)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar a farmacopeia " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirFarmacopeia")]
-        public async Task ExcluirFarmacopeia([FromBody] Farmacopeia Farmacopeia)
+        public async Task<JsonResult> ExcluirFarmacopeia([FromBody] Farmacopeia Farmacopeia)
         {
-            await Task.FromResult(this.IFarmacopeia.Delete(Farmacopeia));
+            try
+            {
+                return Json(await Task.FromResult(this.IFarmacopeia.Delete(Farmacopeia)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a farmacopeia " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

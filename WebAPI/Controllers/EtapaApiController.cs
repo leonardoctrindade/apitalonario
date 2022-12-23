@@ -18,6 +18,7 @@ namespace WebAPI.Controllers
         {
             IEtapa = iEtapa;
         }   
+
         [HttpGet("/api/ListaEtapa")]
         public async Task<JsonResult> ListaEtapa()
         {
@@ -30,40 +31,70 @@ namespace WebAPI.Controllers
 
                 return Json(BadRequest(ModelState));
             }
-
-            
         }
+
         [HttpPost("/api/AdicionarEtapa")]
         public async Task<JsonResult> AdicionarEtapa([FromBody] Etapa etapa)
         {
-            if (string.IsNullOrEmpty(etapa.Descricao) || etapa.Sequencia <= 0
+            try
+            {
+                if (string.IsNullOrEmpty(etapa.Descricao) || etapa.Sequencia <= 0
                 || string.IsNullOrEmpty(etapa.Tipo))
-                return Json(BadRequest(ModelState));
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IEtapa.Add(etapa)));
+                Json(await Task.FromResult(this.IEtapa.Add(etapa)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a etapa " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpGet("/api/RetornarEtapaPorId/{id}")]
         public async Task<JsonResult> RetornarEtapaPorId(int id)
         {
-            return Json(await this.IEtapa.GetEntityById(id));
+            try
+            {
+                return Json(await this.IEtapa.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a etapa " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/EditarEtapa")]
         public async Task<JsonResult> EditarEtapa([FromBody] Etapa etapa)
         {
-            if (string.IsNullOrEmpty(etapa.Descricao) || etapa.Sequencia <= 0
+            try
+            {
+                if (string.IsNullOrEmpty(etapa.Descricao) || etapa.Sequencia <= 0
                 || string.IsNullOrEmpty(etapa.Tipo))
-                return Json(BadRequest(ModelState));
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IEtapa.Update(etapa)));
+                Json(await Task.FromResult(this.IEtapa.Update(etapa)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar a etapa " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/ExcluirEtapa")]
-        public async Task ExcluirEtapa([FromBody] Etapa etapa)
+        public async Task<JsonResult> ExcluirEtapa([FromBody] Etapa etapa)
         {
-            await Task.FromResult(this.IEtapa.Delete(etapa));
+            try
+            {
+                return Json(await Task.FromResult(this.IEtapa.Delete(etapa)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a etapa " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

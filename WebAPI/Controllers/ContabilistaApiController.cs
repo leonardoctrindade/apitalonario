@@ -22,47 +22,78 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaContabilista")]
         public async Task<JsonResult> ListaContabilista()
         {
-            return Json(await this.IContabilista.List());
+            try
+            {
+                return Json(await this.IContabilista.List());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os contabilistas " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarContabilista")]
         public async Task<JsonResult> AdicionarContabilista([FromBody] Contabilista contabilista)
         {
-            if(string.IsNullOrEmpty(contabilista.Nome) || string.IsNullOrEmpty(contabilista.Cpf)
-               || string.IsNullOrEmpty(contabilista.Cnpj) || string.IsNullOrEmpty(contabilista.Crc))
+            try
             {
-                return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(contabilista.Nome) || string.IsNullOrEmpty(contabilista.Cpf)
+                || string.IsNullOrEmpty(contabilista.Cnpj) || string.IsNullOrEmpty(contabilista.Crc))
+                {
+                    return Json(BadRequest(ModelState));
+                }
+
+                Json(await Task.FromResult(this.IContabilista.Add(contabilista)));
+
+                return Json(Ok());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o contabilista " + ex.Message }) { StatusCode = 400 };
             }
-
-            Json(await Task.FromResult(this.IContabilista.Add(contabilista)));
-
-            return Json(Ok());
+            
         }
 
         [HttpGet("/api/RetornarContabilistaPorId/{id}")]
         public async Task<JsonResult> RetornarContabilistaPorId(int id)
         {
-            return Json(await this.IContabilista.GetEntityById(id));
+            try
+            {
+                return Json(await this.IContabilista.GetEntityById(id));
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao retornar o contabilista " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarContabilista")]
         public async Task<JsonResult> EditarContabilista([FromBody] Contabilista contabilista)
         {
-            if (string.IsNullOrEmpty(contabilista.Nome) || string.IsNullOrEmpty(contabilista.Cpf)
-               || string.IsNullOrEmpty(contabilista.Cnpj) || string.IsNullOrEmpty(contabilista.Crc))
+            try
             {
-                return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(contabilista.Nome) || string.IsNullOrEmpty(contabilista.Cpf)
+                || string.IsNullOrEmpty(contabilista.Cnpj) || string.IsNullOrEmpty(contabilista.Crc))
+                {
+                    return Json(BadRequest(ModelState));
+                }
+
+                Json(await Task.FromResult(this.IContabilista.Update(contabilista)));
+
+                return Json(Ok());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar o contabilista " + ex.Message }) { StatusCode = 400 };
             }
-
-            Json(await Task.FromResult(this.IContabilista.Update(contabilista)));
-
-            return Json(Ok());
         }
 
         [HttpPost("/api/ExcluirContabilista")]
-        public async Task ExcluirContabilista([FromBody] Contabilista contabilista)
+        public async Task<JsonResult> ExcluirContabilista([FromBody] Contabilista contabilista)
         {
-            await Task.FromResult(this.IContabilista.Delete(contabilista));
+            try
+            {
+                return Json(await Task.FromResult(this.IContabilista.Delete(contabilista)));
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao excluir o contabilista " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

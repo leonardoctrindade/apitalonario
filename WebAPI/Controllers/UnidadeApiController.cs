@@ -14,15 +14,25 @@ namespace WebAPI.Controllers
     public class UnidadeApiController : Controller
     {
         private readonly IUnidade IUnidade;
+
         public UnidadeApiController(IUnidade iunidade)
         {
             this.IUnidade = iunidade;
         }
+
         [HttpGet("/api/ListaUnidade")]
         public async Task<JsonResult> ListaUnidade()
         {
-            return Json(await this.IUnidade.List());
+            try
+            {
+                return Json(await this.IUnidade.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as unidades " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/AdicionarUnidade")]
         public async Task<JsonResult> AdicionarUnidade([FromBody] Unidade unidade)
         {
@@ -39,30 +49,53 @@ namespace WebAPI.Controllers
 
                 return Json(BadRequest(ModelState));
             }
-            
         }
+
         [HttpGet("/api/RetornarUnidadePorId/{id}")]
         public async Task<JsonResult> RetornarUnidadeProId(int id)
         {
-            if(id == 0)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (id == 0)
+                    return Json(BadRequest(ModelState));
 
-            return Json(await this.IUnidade.GetEntityById(id));
+                return Json(await this.IUnidade.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a unidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/EditarUnidade")]
         public async Task<JsonResult> EditarUnidade([FromBody] Unidade unidade)
         {
-            if (string.IsNullOrEmpty(unidade.Sigla) || string.IsNullOrEmpty(unidade.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (string.IsNullOrEmpty(unidade.Sigla) || string.IsNullOrEmpty(unidade.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IUnidade.Update(unidade)));
+                Json(await Task.FromResult(this.IUnidade.Update(unidade)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar a unidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/ExcluirUnidade")]
-        public async Task ExcluirUnidade([FromBody] Unidade unidade)
+        public async Task<JsonResult> ExcluirUnidade([FromBody] Unidade unidade)
         {
-            await Task.FromResult(this.IUnidade.Delete(unidade));
+            try
+            {
+                return Json(await Task.FromResult(this.IUnidade.Delete(unidade)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a unidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

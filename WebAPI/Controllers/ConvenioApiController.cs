@@ -22,40 +22,70 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaConvenio")]
         public async Task<JsonResult> ListaConvenio()
         {
-            return Json(await this.IConvenio.List());
+            try
+            {
+                return Json(await this.IConvenio.List());
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os convenios " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarConvenio")]
         public async Task<JsonResult> AdicionarConvenio([FromBody] Convenio Convenio)
         {
-            if (String.IsNullOrEmpty(Convenio.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Convenio.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IConvenio.Add(Convenio)));
+                Json(await Task.FromResult(this.IConvenio.Add(Convenio)));
 
-            return Json(Ok());
+                return Json(Ok());
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o convenio " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaConvenioPorId/{id}")]
         public async Task<JsonResult> RetornaConvenioPorId(int id)
         {
-            return Json(await this.IConvenio.GetEntityById(id));
+            try
+            {
+                return Json(await this.IConvenio.GetEntityById(id));
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao retornar o convenio " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarConvenio")]
         public async Task<JsonResult> EditarConvenio([FromBody] Convenio Convenio)
         {
-            if (String.IsNullOrEmpty(Convenio.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Convenio.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IConvenio.Update(Convenio)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IConvenio.Update(Convenio)));
+                return Json(Ok());
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar o convenio " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirConvenio")]
-        public async Task ExcluirConvenio([FromBody] Convenio Convenio)
+        public async Task<JsonResult> ExcluirConvenio([FromBody] Convenio Convenio)
         {
-            await Task.FromResult(this.IConvenio.Delete(Convenio));
+            try
+            {
+                return Json(await Task.FromResult(this.IConvenio.Delete(Convenio)));
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao excluir o convenio " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

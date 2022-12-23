@@ -18,43 +18,83 @@ namespace WebAPI.Controllers
         {
             this.ITransportador = transportador;
         }
+
         [HttpGet("/api/ListaTransportador")]
         public async Task<JsonResult> ListaTransportador()
         {
-            return Json(await this.ITransportador.List());
+            try
+            {
+                return Json(await this.ITransportador.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os transportadores " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/AdicionarTransportador")]
         public async Task<JsonResult> AdicionarTransportador([FromBody] Transportador transportador)
         {
-            if (string.IsNullOrEmpty(transportador.Nome) || string.IsNullOrEmpty(transportador.CpfCnpj))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (string.IsNullOrEmpty(transportador.Nome) || string.IsNullOrEmpty(transportador.CpfCnpj))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITransportador.Add(transportador)));
+                Json(await Task.FromResult(this.ITransportador.Add(transportador)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o transportador " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpGet("/api/RetornarTransportadorPorId/{id}")]
         public async Task<JsonResult> RetornarTransportadorPorId(int id)
         {
-            if(id <= 0)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (id <= 0)
+                    return Json(BadRequest(ModelState));
 
-            return Json(await this.ITransportador.GetEntityById(id));
+                return Json(await this.ITransportador.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o transportador " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/EditarTransportador")]
         public async Task<JsonResult> EditarTransportador([FromBody] Transportador transportador)
         {
-            if (string.IsNullOrEmpty(transportador.Nome) || string.IsNullOrEmpty(transportador.CpfCnpj))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (string.IsNullOrEmpty(transportador.Nome) || string.IsNullOrEmpty(transportador.CpfCnpj))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITransportador.Update(transportador)));
+                Json(await Task.FromResult(this.ITransportador.Update(transportador)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o transportador " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/ExcluirTransportador")]
-        public async Task ExcluirTransportador([FromBody] Transportador transportador)
+        public async Task<JsonResult> ExcluirTransportador([FromBody] Transportador transportador)
         {
-            await Task.FromResult(this.ITransportador.Delete(transportador));
+            try
+            {
+                return Json(await Task.FromResult(this.ITransportador.Delete(transportador)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o transportador " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

@@ -22,40 +22,70 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaCategoria")]
         public async Task<JsonResult> ListaCategoria()
         {
-            return Json(await this.ICategoria.List());
+            try
+            {
+                return Json(await this.ICategoria.List());
+            } catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as categorias " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarCategoria")]
         public async Task<JsonResult> AdicionarCategoria([FromBody] Categoria Categoria)
         {
-            if (String.IsNullOrEmpty(Categoria.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Categoria.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ICategoria.Add(Categoria)));
+                Json(await Task.FromResult(this.ICategoria.Add(Categoria)));
 
-            return Json(Ok());
+                return Json(Ok());
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a categoria " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaCategoriaPorId/{id}")]
         public async Task<JsonResult> RetornaCategoriaPorId(int id)
         {
-            return Json(await this.ICategoria.GetEntityById(id));
+            try
+            {
+                return Json(await this.ICategoria.GetEntityById(id));
+            } catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retorna a categoria " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarCategoria")]
         public async Task<JsonResult> EditarCategoria([FromBody] Categoria Categoria)
         {
-            if (String.IsNullOrEmpty(Categoria.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Categoria.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ICategoria.Update(Categoria)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.ICategoria.Update(Categoria)));
+                return Json(Ok());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar a categoria " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirCategoria")]
-        public async Task ExcluirCategoria([FromBody] Categoria Categoria)
+        public async Task<JsonResult> ExcluirCategoria([FromBody] Categoria Categoria)
         {
-            await Task.FromResult(this.ICategoria.Delete(Categoria));
+            try
+            {
+                return Json(await Task.FromResult(this.ICategoria.Delete(Categoria)));
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao excluir a categoria " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

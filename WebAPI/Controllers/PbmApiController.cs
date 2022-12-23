@@ -22,44 +22,77 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaPbm")]
         public async Task<JsonResult> ListaPbm()
         {
-
-            return Json(await this.IPbm.List());
+            try
+            {
+                return Json(await this.IPbm.List());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os pbms " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
 
         [HttpPost("/api/AdicionarPbm")]
         public async Task<JsonResult> AdicionarPbm([FromBody] Pbm Pbm)
         {
-            if (String.IsNullOrEmpty(Pbm.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Pbm.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IPbm.Add(Pbm)));
+                Json(await Task.FromResult(this.IPbm.Add(Pbm)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao adicionar o pbm " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
 
         [HttpGet("/api/RetornaPbmPorId/{id}")]
         public async Task<JsonResult> RetornaPbmPorId(int id)
         {
-            return Json(await this.IPbm.GetEntityById(id));
+            try
+            {
+                return Json(await this.IPbm.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o pbm " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarPbm")]
         public async Task<JsonResult> EditarPbm([FromBody] Pbm Pbm)
         {
-            if (String.IsNullOrEmpty(Pbm.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Pbm.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IPbm.Update(Pbm)));
-            return Json(Ok());
-
+                Json(await Task.FromResult(this.IPbm.Update(Pbm)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o pbm " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirPbm")]
-        public async Task ExcluirBpm([FromBody] Pbm Pbm)
+        public async Task<JsonResult> ExcluirBpm([FromBody] Pbm Pbm)
         {
-            await Task.FromResult(this.IPbm.Delete(Pbm));
+            try
+            {
+                return Json(await Task.FromResult(this.IPbm.Delete(Pbm)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o pbm " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
     }

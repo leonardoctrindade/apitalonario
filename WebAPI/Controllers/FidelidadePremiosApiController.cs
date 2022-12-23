@@ -22,40 +22,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaFidelidadePremios")]
         public async Task<JsonResult> ListaFidelidadePremios()
         {
-            return Json(await this.IFidelidadePremios.List());
+            try
+            {
+                return Json(await this.IFidelidadePremios.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os premios de fidelidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarFidelidadePremios")]
         public async Task<JsonResult> AdicionarFidelidadePremios([FromBody] FidelidadePremios FidelidadePremios)
         {
-            if (FidelidadePremios.IdFidelidade == 0 || FidelidadePremios.IdGrupo == 0 || FidelidadePremios.IdProduto == 0 || FidelidadePremios.Pontos < 0)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (FidelidadePremios.IdFidelidade == 0 || FidelidadePremios.IdGrupo == 0 || FidelidadePremios.IdProduto == 0 || FidelidadePremios.Pontos < 0)
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IFidelidadePremios.Add(FidelidadePremios)));
+                Json(await Task.FromResult(this.IFidelidadePremios.Add(FidelidadePremios)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o premio de fidelidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaFidelidadePremiosPorId/{id}")]
         public async Task<JsonResult> RetornaFidelidadePremiosPorId(int id)
         {
-            return Json(await this.IFidelidadePremios.GetEntityById(id));
+            try
+            {
+                return Json(await this.IFidelidadePremios.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o premio de fidelidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarFidelidadePremios")]
         public async Task<JsonResult> EditarFidelidadePremios([FromBody] FidelidadePremios FidelidadePremios)
         {
-            if (FidelidadePremios.IdFidelidade == 0 || FidelidadePremios.IdGrupo == 0 || FidelidadePremios.IdProduto == 0 || FidelidadePremios.Pontos < 0)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (FidelidadePremios.IdFidelidade == 0 || FidelidadePremios.IdGrupo == 0 || FidelidadePremios.IdProduto == 0 || FidelidadePremios.Pontos < 0)
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IFidelidadePremios.Update(FidelidadePremios)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IFidelidadePremios.Update(FidelidadePremios)));
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar o premio de fidelidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirFidelidadePremios")]
-        public async Task ExcluirFidelidadePremios([FromBody] FidelidadePremios FidelidadePremios)
+        public async Task<JsonResult> ExcluirFidelidadePremios([FromBody] FidelidadePremios FidelidadePremios)
         {
-            await Task.FromResult(this.IFidelidadePremios.Delete(FidelidadePremios));
+            try
+            {
+                return Json(await Task.FromResult(this.IFidelidadePremios.Delete(FidelidadePremios)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o premio de fidelidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

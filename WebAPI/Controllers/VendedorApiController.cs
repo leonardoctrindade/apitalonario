@@ -19,40 +19,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaVendedor")]
         public async Task<JsonResult> ListaVendedor()
         {
-            return Json(await this.IVendedor.List());
+            try
+            {
+                return Json(await this.IVendedor.List());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os vendedores " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarVendedor")]
         public async Task<JsonResult> AdicionarVendedor([FromBody] Vendedor Vendedor)
         {
-            if (String.IsNullOrEmpty(Vendedor.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Vendedor.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IVendedor.Add(Vendedor)));
+                Json(await Task.FromResult(this.IVendedor.Add(Vendedor)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o vendedor " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaVendedorPorId/{id}")]
         public async Task<JsonResult> RetornaVendedorPorId(int id)
         {
-            return Json(await this.IVendedor.GetEntityById(id));
+            try
+            {
+                return Json(await this.IVendedor.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o vendedor " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarVendedor")]
         public async Task<JsonResult> EditarVendedor([FromBody] Vendedor Vendedor)
         {
-            if (String.IsNullOrEmpty(Vendedor.Nome))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Vendedor.Nome))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IVendedor.Update(Vendedor)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IVendedor.Update(Vendedor)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o vendedor " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirVendedor")]
-        public async Task ExcluirVendedor([FromBody] Vendedor Vendedor)
+        public async Task<JsonResult> ExcluirVendedor([FromBody] Vendedor Vendedor)
         {
-            await Task.FromResult(this.IVendedor.Delete(Vendedor));
+            try
+            {
+                return Json(await Task.FromResult(this.IVendedor.Delete(Vendedor)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o vendedor " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

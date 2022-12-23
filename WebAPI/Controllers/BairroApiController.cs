@@ -25,7 +25,8 @@ namespace WebAPI.Controllers
             try
             {
                 return Json(await this.IBairro.List());
-            } catch(Exception ex) 
+            } 
+            catch(Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao listar os bairros " + ex.Message }) { StatusCode = 400 };
             }
@@ -42,7 +43,8 @@ namespace WebAPI.Controllers
                 Json(await Task.FromResult(this.IBairro.Add(Bairro)));
 
                 return Json(Ok());
-            } catch(Exception ex) 
+            } 
+            catch(Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao adicionar o bairro " + ex.Message }) { StatusCode = 400 };
             }
@@ -54,7 +56,8 @@ namespace WebAPI.Controllers
             try
             {
                 return Json(await this.IBairro.GetEntityById(id));
-            } catch(Exception ex)
+            } 
+            catch(Exception ex)
             {
                 return new JsonResult(new { message = "Error ao retornar o bairro " + ex.Message }) { StatusCode = 400 };
             }
@@ -70,7 +73,8 @@ namespace WebAPI.Controllers
 
                 Json(await Task.FromResult(this.IBairro.Update(Bairro)));
                 return Json(Ok());
-            } catch(Exception ex) 
+            } 
+            catch(Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao editar o bairro " + ex.Message }) { StatusCode = 400 };
             }
@@ -82,7 +86,8 @@ namespace WebAPI.Controllers
             try
             {
                 return Json(await Task.FromResult(this.IBairro.Delete(Bairro)));
-            } catch(Exception ex)
+            } 
+            catch(Exception ex)
             {
                 return new JsonResult(new { message = "Error ao excluir o bairro " + ex.Message }) { StatusCode = 400 };
             }

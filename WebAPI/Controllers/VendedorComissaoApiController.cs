@@ -19,33 +19,69 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaVendedorComissao")]
         public async Task<JsonResult> ListaVendedorComissao()
         {
-            return Json(await this.IVendedorComissao.List());
+            try
+            {
+                return Json(await this.IVendedorComissao.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as comissões do vendedor " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarVendedorComissao")]
         public async Task<JsonResult> AdicionarVendedorComissao([FromBody] VendedorComissao VendedorComissao)
         {
-            Json(await Task.FromResult(this.IVendedorComissao.Add(VendedorComissao)));
-            return Json(Ok());
+            try
+            {
+                Json(await Task.FromResult(this.IVendedorComissao.Add(VendedorComissao)));
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a comissão do vendedor " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaVendedorComissaoPorId/{id}")]
         public async Task<JsonResult> RetornaVendedorComissaoPorId(int id)
         {
-            return Json(await this.IVendedorComissao.GetEntityById(id));
+            try
+            {
+                return Json(await this.IVendedorComissao.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a comissão do vendedor " + ex.Message }) { StatusCode = 400 };
+            }
+            
         }
 
         [HttpPost("/api/EditarVendedorComissao")]
         public async Task<JsonResult> EditarVendedorComissao([FromBody] VendedorComissao VendedorComissao)
         {
-            Json(await Task.FromResult(this.IVendedorComissao.Update(VendedorComissao)));
-            return Json(Ok());
+            try
+            {
+                Json(await Task.FromResult(this.IVendedorComissao.Update(VendedorComissao)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar a comissão do vendedor " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirVendedorComissao")]
-        public async Task ExcluirVendedorComissao([FromBody] VendedorComissao VendedorComissao)
+        public async Task<JsonResult> ExcluirVendedorComissao([FromBody] VendedorComissao VendedorComissao)
         {
-            await Task.FromResult(this.IVendedorComissao.Delete(VendedorComissao));
+            try
+            {
+                return Json(await Task.FromResult(this.IVendedorComissao.Delete(VendedorComissao)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a comissão do vendedor " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

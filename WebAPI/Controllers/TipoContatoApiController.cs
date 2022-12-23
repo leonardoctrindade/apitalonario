@@ -19,40 +19,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaTipoContato")]
         public async Task<JsonResult> ListaTipoContato()
         {
-            return Json(await this.ITipoContato.List());
+            try
+            {
+                return Json(await this.ITipoContato.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os tipos de contatos " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarTipoContato")]
         public async Task<JsonResult> AdicionarTipoContato([FromBody] TipoContato TipoContato)
         {
-            if (String.IsNullOrEmpty(TipoContato.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(TipoContato.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITipoContato.Add(TipoContato)));
+                Json(await Task.FromResult(this.ITipoContato.Add(TipoContato)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o tipo de contato " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaTipoContatoPorId/{id}")]
         public async Task<JsonResult> RetornaTipoContatoPorId(int id)
         {
-            return Json(await this.ITipoContato.GetEntityById(id));
+            try
+            {
+                return Json(await this.ITipoContato.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o tipo de contato " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarTipoContato")]
         public async Task<JsonResult> EditarTipoContato([FromBody] TipoContato TipoContato)
         {
-            if (String.IsNullOrEmpty(TipoContato.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(TipoContato.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITipoContato.Update(TipoContato)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.ITipoContato.Update(TipoContato)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o tipo de contato " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirTipoContato")]
-        public async Task ExcluirTipoContato([FromBody] TipoContato TipoContato)
+        public async Task<JsonResult> ExcluirTipoContato([FromBody] TipoContato TipoContato)
         {
-            await Task.FromResult(this.ITipoContato.Delete(TipoContato));
+            try
+            {
+                return Json(await Task.FromResult(this.ITipoContato.Delete(TipoContato)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o tipo de contato " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

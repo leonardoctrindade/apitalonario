@@ -22,40 +22,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaEntregadorRegiao")]
         public async Task<JsonResult> ListaEntregadorRegiao()
         {
-            return Json(await this.IEntregadorRegiao.List());
+            try
+            {
+                return Json(await this.IEntregadorRegiao.List());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os entregadores da região " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarEntregadorRegiao")]
         public async Task<JsonResult> AdicionarEntregadorRegiao([FromBody] EntregadorRegiao EntregadorRegiao)
         {
-            if (EntregadorRegiao.IdEntregador == 0 || EntregadorRegiao.IdRegiao == 0)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (EntregadorRegiao.IdEntregador == 0 || EntregadorRegiao.IdRegiao == 0)
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IEntregadorRegiao.Add(EntregadorRegiao)));
+                Json(await Task.FromResult(this.IEntregadorRegiao.Add(EntregadorRegiao)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o entregador da região " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaEntregadorRegiaoPorId/{id}")]
         public async Task<JsonResult> RetornaEntregadorRegiaoPorId(int id)
         {
-            return Json(await this.IEntregadorRegiao.GetEntityById(id));
+            try
+            {
+                return Json(await this.IEntregadorRegiao.GetEntityById(id));
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao retornar o entregador da região " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarEntregadorRegiao")]
         public async Task<JsonResult> EditarEntregadorRegiao([FromBody] EntregadorRegiao EntregadorRegiao)
         {
-            if (EntregadorRegiao.IdEntregador == 0 || EntregadorRegiao.IdRegiao == 0)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (EntregadorRegiao.IdEntregador == 0 || EntregadorRegiao.IdRegiao == 0)
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IEntregadorRegiao.Update(EntregadorRegiao)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IEntregadorRegiao.Update(EntregadorRegiao)));
+                return Json(Ok());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar o entregador da região " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirEntregadorRegiao")]
-        public async Task ExcluirEntregadorRegiao([FromBody] EntregadorRegiao EntregadorRegiao)
+        public async Task<JsonResult> ExcluirEntregadorRegiao([FromBody] EntregadorRegiao EntregadorRegiao)
         {
-            await Task.FromResult(this.IEntregadorRegiao.Delete(EntregadorRegiao));
+            try
+            {
+                return Json(await Task.FromResult(this.IEntregadorRegiao.Delete(EntregadorRegiao)));
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o entregador da região " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

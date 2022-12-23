@@ -22,16 +22,28 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaProdutos")]
         public async Task<JsonResult> ListaProdutos()
         {
-            return Json(await this.IProduto.List());
+            try
+            {
+                return Json(await this.IProduto.List());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os produtos " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
 
         [HttpPost("/api/AdicionarProduto")]
-        public async Task AdicionarProduto([FromBody] Produto produto)
+        public async Task<JsonResult> AdicionarProduto([FromBody] Produto produto)
         {
-            await Task.FromResult(this.IProduto.Add(produto));
+            try
+            {
+                return Json(await Task.FromResult(this.IProduto.Add(produto)));
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o produto " + ex.Message }) { StatusCode = 400 };
+            }
         }
-
-
     }
 }

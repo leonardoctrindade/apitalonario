@@ -23,49 +23,81 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaPlanoDeContas")]
         public async Task<JsonResult> ListaPlanoDeContas()
         {
-            var listaPlanoDeContas = await this.IPlanoDeContas.List();
-
-            //var listaView = new ViewPlanoDeContas();
-
-            //listaView.Nivel1 = listaPlanoDeContas.Where(x => x.NivelConta == 1).ToList();
-            //listaView.Nivel2 = listaPlanoDeContas.Where(x => x.NivelConta == 2).ToList();
-            //listaView.Nivel3 = listaPlanoDeContas.Where(x => x.NivelConta == 3).ToList();
-
-            return Json(listaPlanoDeContas);
+            try
+            {
+                var listaPlanoDeContas = await this.IPlanoDeContas.List();
+                return Json(listaPlanoDeContas);
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os planos de contas " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/AdicionarPlanoDeContas")]
         public async Task<JsonResult> AdicionarPlanoDeContas([FromBody] PlanoDeContas planoDeContas)
         {
-            if (string.IsNullOrEmpty(planoDeContas.NumeroContaPai) ||
+            try
+            {
+                if (string.IsNullOrEmpty(planoDeContas.NumeroContaPai) ||
                 planoDeContas.NivelConta <= 0 ||
                 string.IsNullOrEmpty(planoDeContas.Descricao))
-                return Json(BadRequest(ModelState));
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IPlanoDeContas.Add(planoDeContas)));
+                Json(await Task.FromResult(this.IPlanoDeContas.Add(planoDeContas)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o plano de contas " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpGet("/api/RetornarPlanoDeContasPorId/{id}")]
         public async Task<JsonResult> RetornarPlanoDeContasPorId(int id)
         {
-            return Json(await this.IPlanoDeContas.GetEntityById(id));
+            try
+            {
+                return Json(await this.IPlanoDeContas.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o plano de contas " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/EditarPlanoDeContas")]
         public async Task<JsonResult> EditarPlanoDeContas([FromBody] PlanoDeContas planoDeContas)
         {
-            if (string.IsNullOrEmpty(planoDeContas.NumeroContaPai) ||
+            try
+            {
+                if (string.IsNullOrEmpty(planoDeContas.NumeroContaPai) ||
                 planoDeContas.NivelConta <= 0 ||
                 string.IsNullOrEmpty(planoDeContas.Descricao))
-                return Json(BadRequest(ModelState));
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IPlanoDeContas.Update(planoDeContas)));
+                Json(await Task.FromResult(this.IPlanoDeContas.Update(planoDeContas)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao editar o plano de contas " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/ExcluirPlanoDeContas")]
-        public async Task ExcluirPlanoDeContas([FromBody] PlanoDeContas planoDeContas)
+        public async Task<JsonResult> ExcluirPlanoDeContas([FromBody] PlanoDeContas planoDeContas)
         {
-            await Task.FromResult(this.IPlanoDeContas.Delete(planoDeContas));
+            try
+            {
+                return Json(await Task.FromResult(this.IPlanoDeContas.Delete(planoDeContas)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir o plano de contas " + ex.Message }) { StatusCode = 400 };
+            }
         } 
     }
 }

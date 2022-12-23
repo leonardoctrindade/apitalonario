@@ -19,40 +19,75 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaFormaPagamento")]
         public async Task<JsonResult> ListaFormaPagamento()
         {
-            return Json(await this.IFormaPagamento.List());
+            try
+            {
+                return Json(await this.IFormaPagamento.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as formas de pagamento " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarFormaPagamento")]
         public async Task<JsonResult> AdicionarFormaPagamento([FromBody] FormaPagamento FormaPagamento)
         {
-            if (String.IsNullOrEmpty(FormaPagamento.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(FormaPagamento.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IFormaPagamento.Add(FormaPagamento)));
+                Json(await Task.FromResult(this.IFormaPagamento.Add(FormaPagamento)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a forma de pagamento " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaFormaPagamentoPorId/{id}")]
         public async Task<JsonResult> RetornaFormaPagamentoPorId(int id)
         {
-            return Json(await this.IFormaPagamento.GetEntityById(id));
+            try
+            {
+                return Json(await this.IFormaPagamento.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retorna a forma de pagamento " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarFormaPagamento")]
         public async Task<JsonResult> EditarFormaPagamento([FromBody] FormaPagamento FormaPagamento)
         {
-            if (String.IsNullOrEmpty(FormaPagamento.Descricao))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(FormaPagamento.Descricao))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IFormaPagamento.Update(FormaPagamento)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.IFormaPagamento.Update(FormaPagamento)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar a forma de pagamento " + ex.Message }) { StatusCode = 400 };
+            }   
         }
 
         [HttpPost("/api/ExcluirFormaPagamento")]
-        public async Task ExcluirFormaPagamento([FromBody] FormaPagamento FormaPagamento)
+        public async Task<JsonResult> ExcluirFormaPagamento([FromBody] FormaPagamento FormaPagamento)
         {
-            await Task.FromResult(this.IFormaPagamento.Delete(FormaPagamento));
+            try
+            {
+                return Json(await Task.FromResult(this.IFormaPagamento.Delete(FormaPagamento)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a forma de pagamento " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

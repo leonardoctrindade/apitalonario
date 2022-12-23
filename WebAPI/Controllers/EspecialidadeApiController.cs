@@ -18,6 +18,7 @@ namespace WebAPI.Controllers
         {
             IEspecialidade = iEspecialidade;
         }
+
         [HttpGet("/api/ListaEspecialidade")]
         public async Task<JsonResult> ListaEspecialidade()
         {
@@ -29,8 +30,8 @@ namespace WebAPI.Controllers
             {
                 return Json(BadRequest(ModelState));
             }
-            
         }
+
         [HttpPost("/api/AdicionarEspecialidade")]
         public async Task<JsonResult> AdicionarEspecialidade([FromBody] Especialidade especialidade)
         {
@@ -47,11 +48,20 @@ namespace WebAPI.Controllers
                 return Json(BadRequest(ModelState));
             }
         }
+
         [HttpGet("/api/RetornarEspecialidadePorId/{id}")]
         public async Task<JsonResult> RetornarEspecialidadePorId(int id)
         {
-            return Json(await this.IEspecialidade.GetEntityById(id));
+            try
+            {
+                return Json(await this.IEspecialidade.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a especialidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/EditarEspecialidade")]
         public async Task<JsonResult> EditarEspecialidade([FromBody] Especialidade especialidade)
         {
@@ -68,10 +78,18 @@ namespace WebAPI.Controllers
                 return Json(BadRequest(ModelState));
             }
         }
+
         [HttpPost("/api/ExcluirEspecialidade")]
-        public async Task ExcluirEspecialidade([FromBody] Especialidade especialidade)
+        public async Task<JsonResult> ExcluirEspecialidade([FromBody] Especialidade especialidade)
         {
-            await Task.FromResult(this.IEspecialidade.Delete(especialidade));
+            try
+            {
+                return Json(await Task.FromResult(this.IEspecialidade.Delete(especialidade)));
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a especialidade " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

@@ -55,23 +55,46 @@ namespace WebAPI.Controllers
         [HttpGet("/api/RetornarPrescritorPorId/{id}")]
         public async Task<JsonResult> RetornarPrescritorPorId(int id)
         {
-            return Json(await this.IPrescritor.GetEntityById(id));
+            try
+            {
+                return Json(await this.IPrescritor.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar o prescritor " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/EditarPrescritor")]
         public async Task<JsonResult> EditarPrescritor([FromBody] Prescritor prescritor)
         {
-            if (string.IsNullOrEmpty(prescritor.Nome) || string.IsNullOrEmpty(prescritor.CrmEstado)
+            try
+            {
+                if (string.IsNullOrEmpty(prescritor.Nome) || string.IsNullOrEmpty(prescritor.CrmEstado)
                 || string.IsNullOrEmpty(prescritor.CrmNumero))
-                return Json(BadRequest(ModelState));
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IPrescritor.Update(prescritor)));
+                Json(await Task.FromResult(this.IPrescritor.Update(prescritor)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar o prescritor " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/ExcluirPrescritor")]
-        public async Task ExcluirPrescritor([FromBody] Prescritor prescritor)
+        public async Task<JsonResult> ExcluirPrescritor([FromBody] Prescritor prescritor)
         {
-            await Task.FromResult(this.IPrescritor.Delete(prescritor));
+            try
+            {
+                return Json(await Task.FromResult(this.IPrescritor.Delete(prescritor)));
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao excluir o prescritor " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

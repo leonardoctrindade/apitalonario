@@ -18,30 +18,62 @@ namespace WebAPI.Controllers
         {
             this.IEspecialidadePrescritor = especialidadePrescritor;
         }
+
         [HttpGet("/api/ListaEspecialidadePrescritor")]
         public async Task<JsonResult> ListaEspecialidadePrescritor()
         {
-            return Json(await this.IEspecialidadePrescritor.List()); 
+            try
+            {
+                return Json(await this.IEspecialidadePrescritor.List());
+            }
+            catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as especialidades do prescritor " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/AdicionarEspecialidadePrescritor")]
         public async Task<JsonResult> AdicionarEspecialidadePrescritor([FromBody] EspecialidadePrescritor especialidadePrescritor)
         {
-            if (especialidadePrescritor.IdEspecialidade == 0 || especialidadePrescritor.IdPrescritor == 0)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (especialidadePrescritor.IdEspecialidade == 0 || especialidadePrescritor.IdPrescritor == 0)
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IEspecialidadePrescritor.Add(especialidadePrescritor)));
+                Json(await Task.FromResult(this.IEspecialidadePrescritor.Add(especialidadePrescritor)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a especialidade do prescritor " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpGet("/api/RetornarEspecialidadePrescritorPorId/{id}")]
         public async Task<JsonResult> RetornarEspecialidadePrescritorPorId(int id)
         {
-            return Json(await this.IEspecialidadePrescritor.GetEntityById(id));
+            try
+            {
+                return Json(await this.IEspecialidadePrescritor.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a especialidade do prescritor " + ex.Message }) { StatusCode = 400 };
+            }
         }
+
         [HttpPost("/api/ExcluirEspecialidadePrescritor")]
-        public async Task ExcluirEspecialidadePrescritor([FromBody] EspecialidadePrescritor especialidadePrescritor)
+        public async Task<JsonResult> ExcluirEspecialidadePrescritor([FromBody] EspecialidadePrescritor especialidadePrescritor)
         {
-            await Task.FromResult(this.IEspecialidadePrescritor.Delete(especialidadePrescritor));
+            try
+            {
+                return Json(await Task.FromResult(this.IEspecialidadePrescritor.Delete(especialidadePrescritor)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a especialidade do prescritor " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

@@ -19,44 +19,79 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaTransacao")]
         public async Task<JsonResult> ListaTransacao()
         {
-            return Json(await this.ITransacao.List());
+            try
+            {
+                return Json(await this.ITransacao.List());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar as transações " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/AdicionarTransacao")]
         public async Task<JsonResult> AdicionarTransacao([FromBody] Transacao Transacao)
         {
-            if (String.IsNullOrEmpty(Transacao.Descricao))
-                return Json(BadRequest(ModelState));
-            if (Transacao.Tipo != 1 && Transacao.Tipo != 2)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Transacao.Descricao))
+                    return Json(BadRequest(ModelState));
+                if (Transacao.Tipo != 1 && Transacao.Tipo != 2)
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITransacao.Add(Transacao)));
+                Json(await Task.FromResult(this.ITransacao.Add(Transacao)));
 
-            return Json(Ok());
+                return Json(Ok());
+            }
+            catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar a transação " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaTransacaoPorId/{id}")]
         public async Task<JsonResult> RetornaTransacaoPorId(int id)
         {
-            return Json(await this.ITransacao.GetEntityById(id));
+            try
+            {
+                return Json(await this.ITransacao.GetEntityById(id));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao retornar a transação " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/EditarTransacao")]
         public async Task<JsonResult> EditarTransacao([FromBody] Transacao Transacao)
         {
-            if (String.IsNullOrEmpty(Transacao.Descricao))
-                return Json(BadRequest(ModelState));
-            if (Transacao.Tipo != 1 && Transacao.Tipo != 2)
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(Transacao.Descricao))
+                    return Json(BadRequest(ModelState));
+                if (Transacao.Tipo != 1 && Transacao.Tipo != 2)
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.ITransacao.Update(Transacao)));
-            return Json(Ok());
+                Json(await Task.FromResult(this.ITransacao.Update(Transacao)));
+                return Json(Ok());
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao editar a transação " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpPost("/api/ExcluirTransacao")]
-        public async Task ExcluirTransacao([FromBody] Transacao Transacao)
+        public async Task<JsonResult> ExcluirTransacao([FromBody] Transacao Transacao)
         {
-            await Task.FromResult(this.ITransacao.Delete(Transacao));
+            try
+            {
+                return Json(await Task.FromResult(this.ITransacao.Delete(Transacao)));
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao excluir a transação " + ex.Message }) { StatusCode = 400 };
+            }
         }
     }
 }

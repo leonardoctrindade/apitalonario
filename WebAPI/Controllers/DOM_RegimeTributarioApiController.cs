@@ -22,13 +22,25 @@ namespace WebAPI.Controllers
         [HttpGet("/api/ListaRegimeTributario")]
         public async Task<JsonResult> ListaRegimeTributario()
         {
-            return Json(await this.IDOM_RegimeTributario.List());
+            try
+            {
+                return Json(await this.IDOM_RegimeTributario.List());
+            } catch (Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao listar os regimes tributarios " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/RetornaRegimeTributarioPorID/{id}")]
         public async Task<JsonResult> RetornaRegimeTributarioPorID(int id)
         {
-            return Json(await this.IDOM_RegimeTributario.RetornaRegimeTributarioPorID(id));
+            try
+            {
+                return Json(await this.IDOM_RegimeTributario.RetornaRegimeTributarioPorID(id));
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao retorna o regime tributario " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
 
@@ -43,12 +55,18 @@ namespace WebAPI.Controllers
         [HttpPost("/api/AdicionarRegimeTributario")]
         public async Task<JsonResult> AdicionarRegimeTributario([FromBody] DOM_RegimeTributario dOM_RegimeTributario)
         {
-            if (String.IsNullOrEmpty(dOM_RegimeTributario.RegimeTributario))
-                return Json(BadRequest(ModelState));
+            try
+            {
+                if (String.IsNullOrEmpty(dOM_RegimeTributario.RegimeTributario))
+                    return Json(BadRequest(ModelState));
 
-            Json(await Task.FromResult(this.IDOM_RegimeTributario.Add(dOM_RegimeTributario)));
+                Json(await Task.FromResult(this.IDOM_RegimeTributario.Add(dOM_RegimeTributario)));
 
-            return Json(Ok());
+                return Json(Ok());
+            } catch(Exception ex) 
+            {
+                return new JsonResult(new { message = "Error ao adicionar o regime tributario " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
     }
