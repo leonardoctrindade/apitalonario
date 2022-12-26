@@ -41,6 +41,9 @@ namespace Data.Entidades
 
         [Column("IdConta")]
         public int IdConta { get; set; }
+
+        public Fornecedor Fornecedor { get; set; }
+
     }
 
     public enum Gerenciador

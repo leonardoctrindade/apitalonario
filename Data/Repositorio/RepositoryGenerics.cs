@@ -12,7 +12,7 @@ namespace Data.Repositorio
 {
     public class RepositoryGenerics<T> : IGeneric<T>, IDisposable where T : class
     {
-        private readonly DbContextOptions<ContextBase> _OptionsBuilder;
+        public readonly DbContextOptions<ContextBase> _OptionsBuilder;
 
         public RepositoryGenerics()
         {

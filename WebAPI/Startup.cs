@@ -1,23 +1,23 @@
+using System;
+using System.Linq;
 using Data.Config;
+using WebAPI.Token;
 using Data.Entidades;
 using Data.Interfaces;
 using Data.Repositorio;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebAPI.Token;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace WebAPI
 {
