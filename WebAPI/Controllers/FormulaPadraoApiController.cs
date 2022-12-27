@@ -56,7 +56,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IFormulaPadrao.GetEntityById(id));
+                return Json(await this.IFormulaPadrao.GetFormulaPadrao(id));
             }
             catch(Exception ex)
             {

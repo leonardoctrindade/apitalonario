@@ -61,5 +61,8 @@ namespace Data.Entidades
         [Column("CsosnId")]
         public int CsosnId { get; set; }
 
+        public PlanoDeContas Conta { get; set; }
+        public Tributo Cst { get; set; }
+        public Tributo Csosn { get; set; }
     }
 }

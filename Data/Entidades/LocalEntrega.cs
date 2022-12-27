@@ -50,5 +50,12 @@ namespace Data.Entidades
 
         [Column("CodigoNatureza")]
         public double CodigoNatureza { get; set; }
+
+        public Ncm Ncm { get; set; }
+        public NaturezaOperacao Cfop { get; set; }
+        public Entregador Entregador { get; set; }
+        public Tributo Cst { get; set; }
+        public Tributo Csosn { get; set; }
+        public Tributo CodigoBeneficioFiscal { get; set; }
     }
 }

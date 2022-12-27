@@ -10,5 +10,6 @@ namespace Data.Interfaces
     public interface IMaquinaPos : IGeneric<MaquinaPos>
     {
         Task<List<MaquinaPos>> ListagemCustomizada();
+        Task<MaquinaPos> GetMaquinaPos(int id);
     }
 }

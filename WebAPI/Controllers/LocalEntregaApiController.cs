@@ -54,7 +54,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.ILocalEntrega.GetEntityById(id));
+                return Json(await this.ILocalEntrega.GetLocalEntrega(id));
             }
             catch(Exception ex)
             {

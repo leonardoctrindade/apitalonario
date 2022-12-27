@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IMaquinaPos.GetEntityById(id));
+                return Json(await this.IMaquinaPos.GetMaquinaPos(id));
             }
             catch(Exception ex)
             {

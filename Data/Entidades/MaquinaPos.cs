@@ -25,5 +25,7 @@ namespace Data.Entidades
 
         [Column("AdquirentePosId")]
         public int AdquirentePosId { get; set; }
+
+        public PosAdquirente AdquirentePos { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace Data.Interfaces
     public interface INaturezaOperacao: IGeneric<NaturezaOperacao>
     {
         Task<List<NaturezaOperacao>> ListagemCustomizada();
+        Task<NaturezaOperacao> GetNaturezaOperacao(int id);
     }
 }

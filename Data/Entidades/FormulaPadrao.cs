@@ -121,6 +121,8 @@ namespace Data.Entidades
         public Unidade UnidadeDosePadrao { get; set; }
         public Produto Produto { get; set; }
         public Posologia Posologia { get; set; }
+        public Unidade UnidadeDose { get; set; }
+        public Grupo Grupo { get; set; }
     }
 
     public enum TipoFormulaPadrao

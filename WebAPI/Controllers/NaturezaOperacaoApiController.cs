@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.INaturezaOperacao.GetEntityById(id));
+                return Json(await this.INaturezaOperacao.GetNaturezaOperacao(id));
             }
             catch(Exception ex)
             {

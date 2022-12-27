@@ -63,7 +63,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IFornecedor.GetEntityById(id));
+                return Json(await this.IFornecedor.GetFornecedor(id));
             }
             catch(Exception ex) 
             {

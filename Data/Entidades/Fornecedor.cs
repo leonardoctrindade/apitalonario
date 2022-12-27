@@ -157,5 +157,11 @@ namespace Data.Entidades
         [Column("HostFornecedor")]
         [MaxLength(50)]
         public string HostFornecedor { get; set; }
+
+        public Bairro Bairro { get; set; }
+        public Cidade Cidade { get; set; }
+        public Estado Estado { get; set; }
+        public Banco Banco { get; set; }
+        public PlanoDeContas Conta { get; set; }
     }
 }

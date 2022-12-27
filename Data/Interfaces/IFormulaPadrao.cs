@@ -9,5 +9,6 @@ namespace Data.Interfaces
     public interface IFormulaPadrao : IGeneric<FormulaPadrao>
     {
         Task<List<FormulaPadrao>> ListagemCustomizada();
+        Task<FormulaPadrao> GetFormulaPadrao(int id);
     }
 }
