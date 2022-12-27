@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
                 if (id <= 0)
                     return Json(BadRequest(ModelState));
 
-                return Json(await this.ITransportador.GetEntityById(id));
+                return Json(await this.ITransportador.GetTransportador(id));
             }
             catch(Exception ex)
             {

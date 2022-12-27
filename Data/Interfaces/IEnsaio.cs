@@ -9,5 +9,6 @@ namespace Data.Interfaces
     public interface IEnsaio : IGeneric<Ensaio>
     {
         Task<List<Ensaio>> ListagemCustomizada();
+        Task<Ensaio> GetEnsaio(int id);
     }
 }

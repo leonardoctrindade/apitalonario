@@ -9,6 +9,7 @@ namespace Data.Interfaces
     public interface IConvenio : IGeneric<Convenio>
     {
         Task<List<Convenio>> ListagemCustomizada();
+        Task<Convenio> GetConvenio(int id);
     }
 }
 

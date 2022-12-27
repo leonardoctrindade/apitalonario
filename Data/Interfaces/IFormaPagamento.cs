@@ -9,5 +9,6 @@ namespace Data.Interfaces
     public interface IFormaPagamento: IGeneric<FormaPagamento>
     {
         Task<List<FormaPagamento>> ListagemCustomizada();
+        Task<FormaPagamento> GetFormaPagamento(int id);
     }
 }

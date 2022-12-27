@@ -17,13 +17,13 @@ namespace Data.Entidades
         public string Nome { get; set; }
 
         [Column("IdCategoriaPai")]
-        public int IdCategoriaPai { get; set; }
+        public int? IdCategoriaPai { get; set; }
 
         [Column("CategoriaAtiva")]
         public bool CategoriaAtivo { get; set; }
 
         [Column("IdCategoriaMagento")]
-        public int IdCategoriaMagento { get; set; }
+        public int? IdCategoriaMagento { get; set; }
 
         [Column("Integrados")]
         public bool Integrados { get; set; }

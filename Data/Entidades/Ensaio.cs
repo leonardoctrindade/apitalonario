@@ -16,6 +16,8 @@ namespace Data.Entidades
         public string Nome { get; set; }
 
         [Column("IdFarmacopeia")]
-        public int IdFarmacopeia { get; set; }
+        public int? IdFarmacopeia { get; set; }
+
+        public Farmacopeia Farmacopeia { get; set; }
     }
 }

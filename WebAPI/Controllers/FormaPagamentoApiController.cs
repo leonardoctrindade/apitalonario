@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IFormaPagamento.GetEntityById(id));
+                return Json(await this.IFormaPagamento.GetFormaPagamento(id));
             }
             catch(Exception ex)
             {

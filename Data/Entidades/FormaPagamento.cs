@@ -28,7 +28,9 @@ namespace Data.Entidades
         public bool Conciliacao { get; set; }
 
         [Column("IdConta")]
-        public int IdConta { get; set; }
+        public int? IdConta { get; set; }
+
+        public PlanoDeContas Conta { get; set; }
      }
     public enum TipoPagamento
     {

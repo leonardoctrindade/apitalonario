@@ -26,5 +26,9 @@ namespace Data.Entidades
         [Column("IdFidelidade")]
         [Required(ErrorMessage = "Campo de fidelidade não preenchido")]
         public int IdFidelidade { get; set; }
+
+        public Grupo Grupo { get; set; }
+        public Produto Produto { get; set; }
+        public Fidelidade Fidelidade { get; set; }
     }
 }

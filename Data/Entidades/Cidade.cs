@@ -18,13 +18,13 @@ namespace Data.Entidades
         public string Nome { get; set; }
 
         [Column("CodigoIbge")]
-        public int CodigoIbge { get; set; }
+        public int? CodigoIbge { get; set; }
 
         [Column("CodigoCfpsId")]
-        public int CodigoCfpsId { get; set; }
+        public int? CodigoCfpsId { get; set; }
 
         [Column("CodigoSiafi")]
-        public int CodigoSiafi { get; set; }
+        public int? CodigoSiafi { get; set; }
 
         public Tributo CodigoCfps { get; set; }
     }

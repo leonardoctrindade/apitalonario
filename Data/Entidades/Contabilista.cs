@@ -14,13 +14,13 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("BairroId")]
-        public int BairroId { get; set; }
+        public int? BairroId { get; set; }
 
         [Column("CidadeId")]
-        public int CidadeId { get; set; }
+        public int? CidadeId { get; set; }
 
         [Column("EstadoId")]
-        public int EstadoId { get; set; }
+        public int? EstadoId { get; set; }
 
         [Column("Nome")]
         [Required]

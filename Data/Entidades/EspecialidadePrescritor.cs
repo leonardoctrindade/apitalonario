@@ -13,9 +13,12 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("PrescritorId")]
-        public int PrescritorId { get; set; }
+        public int? PrescritorId { get; set; }
 
         [Column("EspecialidadeId")]
-        public int EspecialidadeId { get; set; }
+        public int? EspecialidadeId { get; set; }
+
+        public Prescritor Prescritor { get; set; }
+        public Especialidade Especialidade { get; set; }
     }
 }

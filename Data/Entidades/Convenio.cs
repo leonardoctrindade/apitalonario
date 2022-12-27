@@ -17,16 +17,16 @@ namespace Data.Entidades
         public string Nome { get; set; }
 
         [Column("Desconto")]
-        public double Desconto { get; set; }
+        public double? Desconto { get; set; }
 
         [Column("Acrescimo")]
-        public double Acrescimo { get; set; }
+        public double? Acrescimo { get; set; }
 
         [Column("Manifesto")]
-        public double Manifesto { get; set; }
+        public double? Manifesto { get; set; }
 
         [Column("DiaRecebimento")]
-        public int DiaRecebimento { get; set; }
+        public int? DiaRecebimento { get; set; }
 
         [Column("Endereco")]
         [MaxLength(50)]
@@ -45,13 +45,13 @@ namespace Data.Entidades
         public string NumeroEndereco { get; set; }
 
         [Column("BairroId")]
-        public int BairroId { get; set; }
+        public int? BairroId { get; set; }
 
         [Column("CidadeId")]
-        public int CidadeId { get; set; }
+        public int? CidadeId { get; set; }
 
         [Column("EstadoId")]
-        public int EstadoId { get; set; }
+        public int? EstadoId { get; set; }
 
         [Column("IdentificaodrConvenio")]
         public IdentificadorConvenio IdentificadorConvenio { get; set; }
@@ -77,7 +77,7 @@ namespace Data.Entidades
         public string Cnpj { get; set; }
 
         [Column("DiasPrimeiroVencimento")]
-        public int DiasPrimeiroVencimento { get; set; } = 30;
+        public int? DiasPrimeiroVencimento { get; set; } = 30;
 
         [Column("Ie")]
         [MaxLength(20)]
@@ -96,13 +96,18 @@ namespace Data.Entidades
         public bool PermitirRateio { get; set; }
 
         [Column("VisitadorId")]
-        public int VisitadorId { get; set; }
+        public int? VisitadorId { get; set; }
 
         [Column("EtiquetaId")]
-        public int EtiquetaId { get; set; }
+        public int? EtiquetaId { get; set; }
 
         [Column("EnderecoComprovanteVenda")]
         public bool EnderecoComprovanteVenda { get; set; }
+
+        public Bairro Bairro { get; set; }
+        public Cidade Cidade { get; set; }
+        public Estado Estado { get; set; }
+        public Visitador Visitador { get; set; }
     }
 
     public enum IdentificadorConvenio

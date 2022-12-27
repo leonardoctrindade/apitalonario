@@ -17,6 +17,6 @@ namespace Data.Entidades
         public string Descricao { get; set; }
 
         [Column("Prioridade")]
-        public int Prioridade { get; set; }
+        public int? Prioridade { get; set; }
     }
 }

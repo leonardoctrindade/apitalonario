@@ -17,15 +17,15 @@ namespace Data.Entidades
         public string Descricao { get; set; }
 
         [Column("PontosIniciais")]
-        public int PontosIniciais { get; set; }
+        public int? PontosIniciais { get; set; }
 
         [Column("ValidadePontos")]
-        public int ValidadePontos { get; set; }
+        public int? ValidadePontos { get; set; }
 
         [Column("PontosPrimeiraCompra")]
-        public int PontosPrimeiraCompra { get; set; }
+        public int? PontosPrimeiraCompra { get; set; }
 
         [Column("AvisoCliente")]
-        public int AvisoCliente { get; set; }
+        public int? AvisoCliente { get; set; }
     }
 }

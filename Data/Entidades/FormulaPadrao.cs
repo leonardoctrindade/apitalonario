@@ -28,28 +28,28 @@ namespace Data.Entidades
         public int IdFormaFarmaceutica { get; set; }
 
         [Column("Validade")]
-        public int Validade { get; set; }
+        public int? Validade { get; set; }
 
         [Column("Volume")]
-        public double Volume { get; set; }
+        public double? Volume { get; set; }
 
         [Column("IdUnidade")]
-        public int IdUnidade { get; set; }
+        public int? IdUnidade { get; set; }
 
         [Column("QuantidadeFormulaPadrao")]
-        public int QuantidadeFormulaPadrao { get; set; }
+        public int? QuantidadeFormulaPadrao { get; set; }
 
         [Column("QuantidadeEmbalagens")]
-        public int QuantidadeEmbalagens { get; set; }
+        public int? QuantidadeEmbalagens { get; set; }
 
         [Column("DosePadrao")]
-        public double DosePadrao { get; set; }
+        public double? DosePadrao { get; set; }
 
         [Column("IdUnidadeDosePadrao")]
-        public int IdUnidadeDosePadrao { get; set; }
+        public int? IdUnidadeDosePadrao { get; set; }
 
         [Column("IdProduto")]
-        public int IdProduto { get; set; }
+        public int? IdProduto { get; set; }
 
         [Column("DesmembrarFormula")]
         public bool DesmembrarFormula { get; set; }
@@ -58,19 +58,19 @@ namespace Data.Entidades
         public double ValorFormula { get; set; }
 
         [Column("IdEmbalagem")]
-        public int IdEmbalagem { get; set; }
+        public int? IdEmbalagem { get; set; }
 
         [Column("IdCapsula")]
-        public int IdCapsula { get; set; }
+        public int? IdCapsula { get; set; }
 
         [Column("DoseCapsula")]
-        public double DoseCapsula { get; set; }
+        public double? DoseCapsula { get; set; }
 
         [Column("IdPosologia")]
-        public int IdPosologia { get; set; }
+        public int? IdPosologia { get; set; }
 
         [Column("IdProdutoVeiculo")]
-        public int IdProdutoVeiculo { get; set; }
+        public int? IdProdutoVeiculo { get; set; }
 
         [Column("ExibirRotuloCompleto")]
         public bool ExibirRotuloCompleto { get; set; }
@@ -79,7 +79,7 @@ namespace Data.Entidades
         public bool InativarFormula { get; set; }
 
         [Column("IdEtiqueta")]
-        public int IdEtiqueta { get; set; }
+        public int? IdEtiqueta { get; set; }
 
         [Column("MantemQuantidadeOrdem")]
         public bool MantemQuantidadeOrdem { get; set; }
@@ -97,25 +97,25 @@ namespace Data.Entidades
         public string VolumePadrao2 { get; set; }
 
         [Column("IdUnidadeDose")]
-        public int IdUnidadeDose { get; set; }
+        public int? IdUnidadeDose { get; set; }
 
         [Column("DoseFormula")]
         public double DoseFormula { get; set; }
 
         [Column("IdGrupoProdutoVeiculo")]
-        public int IdGrupoProdutoVeiculo { get; set; }
+        public int? IdGrupoProdutoVeiculo { get; set; }
 
         [Column("IdGrupoEmbalagem")]
-        public int IdGrupoEmbalagem { get; set; }
+        public int? IdGrupoEmbalagem { get; set; }
 
         [Column("IdGrupoCapsula")]
-        public int IdGrupoCapsula { get; set; }
+        public int? IdGrupoCapsula { get; set; }
 
         [Column("IdGrupo")]
-        public int IdGrupo { get; set; }
+        public int? IdGrupo { get; set; }
 
         [Column("QuantidadeCapsulas")]
-        public int QuantidadeCapsulas { get; set; }
+        public int? QuantidadeCapsulas { get; set; }
 
     }
 

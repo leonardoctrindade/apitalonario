@@ -40,7 +40,7 @@ namespace Data.Entidades
         public string Layout { get; set; }
 
         [Column("SequenciaRemessa")]
-        public int SequenciaRemessa { get; set; }
+        public int? SequenciaRemessa { get; set; }
 
         [Column("NomeCedente")]
         [MaxLength(70)]
@@ -71,7 +71,7 @@ namespace Data.Entidades
         public string AgenciaDigito { get; set; }
 
         [Column("DiasProtesto")]
-        public int DiasProtesto { get; set; }
+        public int? DiasProtesto { get; set; }
 
         [Column("Juros")]
         public decimal Juros { get; set; }

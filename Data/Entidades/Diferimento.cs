@@ -29,6 +29,6 @@ namespace Data.Entidades
         public string SiglaEstado { get; set; }
 
         [Column("IdFilial")]
-        public int IdFilial { get; set; }
+        public int? IdFilial { get; set; }
     }
 }

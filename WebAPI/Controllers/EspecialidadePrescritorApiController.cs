@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IEspecialidadePrescritor.GetEntityById(id));
+                return Json(await this.IEspecialidadePrescritor.GetEspecialidadePrescritor(id));
             }
             catch(Exception ex)
             {

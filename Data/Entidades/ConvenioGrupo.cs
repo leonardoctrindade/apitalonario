@@ -28,5 +28,8 @@ namespace Data.Entidades
         [Column("ConvenioId")]
         [Required(ErrorMessage = "Campo de IdConvenio não preenchido")]
         public int ConvenioId { get; set; }
+
+        public Convenio Convenio { get; set; }
+        public Grupo Grupo { get; set; }
     }
 }

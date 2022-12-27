@@ -9,5 +9,6 @@ namespace Data.Interfaces
     public interface IEstado : IGeneric<Estado>
     {
         Task<List<Estado>> ListagemCustomizada();
+        Task<Estado> GetEstado(int id);
     }
 }

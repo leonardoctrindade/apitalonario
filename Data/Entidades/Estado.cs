@@ -24,10 +24,10 @@ namespace Data.Entidades
         public string Sigla { get; set; }
 
         [Column("AliquotaIcmsEstado")]
-        public decimal AliquotaIcmsEstado { get; set; }
+        public decimal? AliquotaIcmsEstado { get; set; }
 
         [Column("AliquotaFcpEstado")]
-        public decimal AliquotaFcpEstado { get; set; }
+        public decimal? AliquotaFcpEstado { get; set; }
 
         [Column("DifalComCalculoPorDentro")]
         public bool DifalComCalculoPorDentro { get; set; }
@@ -39,6 +39,8 @@ namespace Data.Entidades
         public bool ChecagemContribuinteIsento { get; set; }
 
         [Column("PaisId")]
-        public int PaisId { get; set; }
+        public int? PaisId { get; set; }
+
+        public Pais Pais { get; set; }
     }
 }

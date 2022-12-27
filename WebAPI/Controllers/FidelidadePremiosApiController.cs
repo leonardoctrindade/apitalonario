@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IFidelidadePremios.GetEntityById(id));
+                return Json(await this.IFidelidadePremios.GetFidelidadePremios(id));
             }
             catch(Exception ex)
             {
