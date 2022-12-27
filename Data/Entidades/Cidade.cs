@@ -25,5 +25,7 @@ namespace Data.Entidades
 
         [Column("CodigoSiafi")]
         public int CodigoSiafi { get; set; }
+
+        public Tributo CodigoCfps { get; set; }
     }
 }

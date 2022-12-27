@@ -22,7 +22,11 @@ namespace Data.Repositorio
             var result = new AdministradoraCartao();
             using (var context = new ContextBase(this._OptionsBuilder))
             {
-                result = await context.AdministradoraCartao.Include(c => c.Fornecedor).Include(c => c.Conta).Where(x => x.Id == id).SingleOrDefaultAsync();
+                result = await context.AdministradoraCartao
+                    .Include(c => c.Fornecedor)
+                    .Include(c => c.Conta)
+                    .Where(x => x.Id == id)
+                    .SingleOrDefaultAsync();
             }
 
             return result;

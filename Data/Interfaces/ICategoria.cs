@@ -9,5 +9,6 @@ namespace Data.Interfaces
     public interface ICategoria : IGeneric<Categoria>
     {
         Task<List<Categoria>> ListagemCustomizada();
+        Task<Categoria> GetCategoria(int id);
     }
 }

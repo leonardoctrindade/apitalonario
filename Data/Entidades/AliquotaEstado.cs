@@ -19,5 +19,9 @@ namespace Data.Entidades
 
         [Column("AliquotaIcms")]
         public double AliquotaIcms { get; set; }
+
+        public Estado EstadoOrigem { get; set; }
+
+        public Estado EstadoDestino { get; set; }
     }
 }

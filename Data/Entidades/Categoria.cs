@@ -33,5 +33,7 @@ namespace Data.Entidades
 
         [Column("AlteradoPais")]
         public bool AlteradoPais { get; set; }
+
+        public Categoria CategoriaPai { get; set; }
     }
 }

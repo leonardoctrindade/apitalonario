@@ -50,7 +50,7 @@ namespace WebAPI.Controllers
         {
             try 
             {
-                return Json(await this.IAliquotaEstado.GetEntityById(id));
+                return Json(await this.IAliquotaEstado.GetAliquotaEstado(id));
             } catch (Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao retornar a aliquota de estado " + ex.Message }) { StatusCode = 400 };

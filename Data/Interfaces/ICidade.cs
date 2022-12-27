@@ -10,5 +10,6 @@ namespace Data.Interfaces
     public interface ICidade : IGeneric<Cidade>
     {
         Task<List<Cidade>> ListagemCustomizada();
+        Task<Cidade> GetCidade(int id);
     }
 }
