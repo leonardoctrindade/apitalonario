@@ -11,11 +11,11 @@ namespace Data.Entidades
         [Column("Id")]
         public int Id { get; set; }
 
-        [Column("IdEstadoOrigem")]
-        public int IdEstadoOrigem { get; set; }
+        [Column("EstadoOrigemId")]
+        public int EstadoOrigemId { get; set; }
 
-        [Column("IdEstadoDestino")]
-        public int IdEstadoDestino { get; set; }
+        [Column("EstadoDestinoId")]
+        public int EstadoDestinoId { get; set; }
 
         [Column("AliquotaIcms")]
         public double AliquotaIcms { get; set; }

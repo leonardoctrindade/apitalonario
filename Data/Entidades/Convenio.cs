@@ -44,14 +44,14 @@ namespace Data.Entidades
         [MaxLength(7)]
         public string NumeroEndereco { get; set; }
 
-        [Column("IdBairro")]
-        public int IdBairro { get; set; }
+        [Column("BairroId")]
+        public int BairroId { get; set; }
 
-        [Column("IdCidade")]
-        public int IdCidade { get; set; }
+        [Column("CidadeId")]
+        public int CidadeId { get; set; }
 
-        [Column("IdEstado")]
-        public int IdEstado { get; set; }
+        [Column("EstadoId")]
+        public int EstadoId { get; set; }
 
         [Column("IdentificaodrConvenio")]
         public IdentificadorConvenio IdentificadorConvenio { get; set; }
@@ -95,11 +95,11 @@ namespace Data.Entidades
         [Column("PermitirRateio")]
         public bool PermitirRateio { get; set; }
 
-        [Column("IdVisitador")]
-        public int IdVisitador { get; set; }
+        [Column("VisitadorId")]
+        public int VisitadorId { get; set; }
 
-        [Column("IdEtiqueta")]
-        public int IdEtiqueta { get; set; }
+        [Column("EtiquetaId")]
+        public int EtiquetaId { get; set; }
 
         [Column("EnderecoComprovanteVenda")]
         public bool EnderecoComprovanteVenda { get; set; }

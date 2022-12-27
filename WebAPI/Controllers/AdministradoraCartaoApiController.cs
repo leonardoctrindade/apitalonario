@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IAdministradoraCartao.PegarTudo(id));
+                return Json(await this.IAdministradoraCartao.GetAdministradoraCartao(id));
             } catch(Exception ex)
             {
                 return new JsonResult(new { message = "Error ao retornar o adiministrador de cartão " + ex.Message }) { StatusCode = 400 };

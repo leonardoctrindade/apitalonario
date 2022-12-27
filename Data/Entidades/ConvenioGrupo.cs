@@ -11,9 +11,9 @@ namespace Data.Entidades
         [Column("Id")]
         public int Id { get; set; }
 
-        [Column("IdGrupo")]
+        [Column("GrupoId")]
         [Required(ErrorMessage = "Campo de grupo não preenchido")]
-        public int IdGrupo { get; set; }
+        public int GrupoId { get; set; }
 
         [Column("Desconto")]
         [Required(ErrorMessage = "Campo de desconto não preenchido")]
@@ -25,8 +25,8 @@ namespace Data.Entidades
         [Column("AplicaCustoReferencia")]
         public bool AplicaCustoReferencia { get; set; }
 
-        [Column("IdConvenio")]
+        [Column("ConvenioId")]
         [Required(ErrorMessage = "Campo de IdConvenio não preenchido")]
-        public int IdConvenio { get; set; }
+        public int ConvenioId { get; set; }
     }
 }

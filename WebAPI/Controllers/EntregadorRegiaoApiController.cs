@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (EntregadorRegiao.IdEntregador == 0 || EntregadorRegiao.IdRegiao == 0)
+                if (EntregadorRegiao.EntregadorId == 0 || EntregadorRegiao.RegiaoId == 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IEntregadorRegiao.Add(EntregadorRegiao)));
@@ -68,7 +68,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (EntregadorRegiao.IdEntregador == 0 || EntregadorRegiao.IdRegiao == 0)
+                if (EntregadorRegiao.EntregadorId == 0 || EntregadorRegiao.RegiaoId == 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IEntregadorRegiao.Update(EntregadorRegiao)));

@@ -11,12 +11,12 @@ namespace Data.Entidades
         [Column("Id")]
         public int Id { get; set; }
 
-        [Column("IdEntregador")]
-        [Required(ErrorMessage = "Campo de IdEntregador não preenchido")]
-        public int IdEntregador { get; set; }
+        [Column("EntregadorId")]
+        [Required(ErrorMessage = "Campo de EntregadorId não preenchido")]
+        public int EntregadorId { get; set; }
 
-        [Column("IdRegiao")]
-        [Required(ErrorMessage = "Campo de IdRegiao não preenchido")]
-        public int IdRegiao { get; set; }
+        [Column("RegiaoId")]
+        [Required(ErrorMessage = "Campo de RegiaoId não preenchido")]
+        public int RegiaoId { get; set; }
     }
 }

@@ -11,26 +11,26 @@ namespace APITest.Mocks
     {
         public static EntregadorRegiao MontaObjetoUnico()
         {
-            return new EntregadorRegiao { Id = 1, IdEntregador = 1, IdRegiao = 1 };
+            return new EntregadorRegiao { Id = 1, EntregadorId = 1, RegiaoId = 1 };
         }
 
         public static EntregadorRegiao MontaObjetoIdEntregadorInvalido()
         {
-            return new EntregadorRegiao { Id = 1, IdEntregador = 0, IdRegiao = 1 };
+            return new EntregadorRegiao { Id = 1, EntregadorId = 0, RegiaoId = 1 };
         }
 
         public static EntregadorRegiao MontaObjetoIdRegiaoInvalido()
         {
-            return new EntregadorRegiao { Id = 1, IdEntregador = 1, IdRegiao = 0 };
+            return new EntregadorRegiao { Id = 1, EntregadorId = 1, RegiaoId = 0 };
         }
 
         public static List<EntregadorRegiao> MontaListaItems()
         {
             return new List<EntregadorRegiao>()
             {
-                new EntregadorRegiao() { Id = 1, IdEntregador = 1, IdRegiao = 1 },
-                new EntregadorRegiao() { Id = 2, IdEntregador = 2, IdRegiao = 2 },
-                new EntregadorRegiao() { Id = 3, IdEntregador = 3, IdRegiao = 3 }
+                new EntregadorRegiao() { Id = 1, EntregadorId = 1, RegiaoId = 1 },
+                new EntregadorRegiao() { Id = 2, EntregadorId = 2, RegiaoId = 2 },
+                new EntregadorRegiao() { Id = 3, EntregadorId = 3, RegiaoId = 3 }
             };
         }
     }

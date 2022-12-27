@@ -81,7 +81,7 @@ namespace APITest
             mock.Setup(y => y.GetEntityById(MockEntregadorRegiao.MontaObjetoUnico().Id)).ReturnsAsync(MockEntregadorRegiao.MontaObjetoUnico());
             EntregadorRegiaoApiController ret = new EntregadorRegiaoApiController(mock.Object);
             var result = await ret.RetornaEntregadorRegiaoPorId(1);
-            Assert.Equal(1, ((Data.Entidades.EntregadorRegiao)result.Value).IdEntregador);
+            Assert.Equal(1, ((Data.Entidades.EntregadorRegiao)result.Value).EntregadorId);
         }
 
         [Fact]

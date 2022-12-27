@@ -17,12 +17,12 @@ namespace Data.Repositorio
             throw new NotImplementedException();
         }
 
-        public async Task<AdministradoraCartao> PegarTudo(int id)
+        public async Task<AdministradoraCartao> GetAdministradoraCartao(int id)
         {
             var result = new AdministradoraCartao();
             using (var context = new ContextBase(this._OptionsBuilder))
             {
-                result = await context.AdministradoraCartao.Include(c => c.Fornecedor).Where(x => x.Id == id).SingleOrDefaultAsync();
+                result = await context.AdministradoraCartao.Include(c => c.Fornecedor).Include(c => c.Conta).Where(x => x.Id == id).SingleOrDefaultAsync();
             }
 
             return result;

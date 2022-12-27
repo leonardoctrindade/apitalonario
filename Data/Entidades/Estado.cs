@@ -38,7 +38,7 @@ namespace Data.Entidades
         [Column("ChecagemContribuinteIsento")]
         public bool ChecagemContribuinteIsento { get; set; }
 
-        [Column("IdPais")]
-        public int IdPais { get; set; }
+        [Column("PaisId")]
+        public int PaisId { get; set; }
     }
 }

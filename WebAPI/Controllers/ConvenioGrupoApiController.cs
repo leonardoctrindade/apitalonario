@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (ConvenioGrupo.IdGrupo == 0 || ConvenioGrupo.IdConvenio == 0 || ConvenioGrupo.Desconto <= 0)
+                if (ConvenioGrupo.GrupoId == 0 || ConvenioGrupo.ConvenioId == 0 || ConvenioGrupo.Desconto <= 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IConvenioGrupo.Add(ConvenioGrupo)));
@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (ConvenioGrupo.IdGrupo == 0 || ConvenioGrupo.IdConvenio == 0 || ConvenioGrupo.Desconto <= 0)
+                if (ConvenioGrupo.GrupoId == 0 || ConvenioGrupo.ConvenioId == 0 || ConvenioGrupo.Desconto <= 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IConvenioGrupo.Update(ConvenioGrupo)));

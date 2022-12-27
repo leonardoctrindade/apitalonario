@@ -20,6 +20,7 @@ namespace WebAPI.Controllers
         {
             IPlanoDeContas = iPlanoDeContas;
         }
+
         [HttpGet("/api/ListaPlanoDeContas")]
         public async Task<JsonResult> ListaPlanoDeContas()
         {
@@ -92,7 +93,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IPlanoDeContas.Delete(planoDeContas)));
+                Json(await Task.FromResult(this.IPlanoDeContas.Delete(planoDeContas)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

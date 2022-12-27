@@ -11,9 +11,11 @@ namespace Data.Entidades
     {
         [Column("Id")]
         public int Id { get; set; }
-        [Column("IdPrescritor")]
-        public int IdPrescritor { get; set; }
-        [Column("IdEspecialidade")]
-        public int IdEspecialidade { get; set; }
+
+        [Column("PrescritorId")]
+        public int PrescritorId { get; set; }
+
+        [Column("EspecialidadeId")]
+        public int EspecialidadeId { get; set; }
     }
 }

@@ -36,14 +36,15 @@ namespace Data.Entidades
         [Column("Ativo")]
         public bool Ativo { get; set; } = true;
 
-        [Column("IdFornecedor")]
-        public int IdFornecedor { get; set; }
+        [Column("FornecedorId")]
+        public int FornecedorId { get; set; }
 
-        [Column("IdConta")]
-        public int IdConta { get; set; }
+        [Column("ContaId")]
+        public int ContaId { get; set; }
 
         public Fornecedor Fornecedor { get; set; }
 
+        public PlanoDeContas Conta { get; set; }
     }
 
     public enum Gerenciador

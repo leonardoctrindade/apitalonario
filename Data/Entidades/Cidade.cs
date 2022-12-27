@@ -20,8 +20,8 @@ namespace Data.Entidades
         [Column("CodigoIbge")]
         public int CodigoIbge { get; set; }
 
-        [Column("IdCodigoCfps")]
-        public int IdCodigoCfps { get; set; }
+        [Column("CodigoCfpsId")]
+        public int CodigoCfpsId { get; set; }
 
         [Column("CodigoSiafi")]
         public int CodigoSiafi { get; set; }

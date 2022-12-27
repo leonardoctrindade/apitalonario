@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (especialidadePrescritor.IdEspecialidade == 0 || especialidadePrescritor.IdPrescritor == 0)
+                if (especialidadePrescritor.EspecialidadeId == 0 || especialidadePrescritor.PrescritorId == 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IEspecialidadePrescritor.Add(especialidadePrescritor)));
