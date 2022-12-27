@@ -53,7 +53,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.ICidade.GetEntityById(id));
+                return Json(await this.ICidade.GetCidade(id));
             } catch(Exception ex)
             {
                 return new JsonResult(new { message = "Error ao retornar o bairro " + ex.Message }) { StatusCode = 400 };

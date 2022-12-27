@@ -57,7 +57,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IContabilista.GetEntityById(id));
+                return Json(await this.IContabilista.GetContabilista(id));
             } catch (Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao retornar o contabilista " + ex.Message }) { StatusCode = 400 };

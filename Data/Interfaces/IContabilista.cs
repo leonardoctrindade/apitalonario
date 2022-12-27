@@ -10,5 +10,6 @@ namespace Data.Interfaces
     public interface IContabilista : IGeneric<Contabilista>
     {
         Task<List<Contabilista>> ListagemCustomizada();
+        Task<Contabilista> GetContabilista(int id);
     }
 }

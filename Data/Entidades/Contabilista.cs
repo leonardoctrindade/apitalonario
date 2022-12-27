@@ -62,5 +62,9 @@ namespace Data.Entidades
 
         [Column("Email")]
         public string Email { get; set; }
+
+        public Bairro Bairro { get; set; }
+        public Cidade Cidade { get; set; }
+        public Estado Estado { get; set; }
     }
 }
