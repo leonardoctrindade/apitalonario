@@ -21,14 +21,14 @@ namespace APITest.Mocks
                 Cep = "88308390",
                 Endereco = "Rua José Simplicio de Oliveira",
                 Numero = "127 Fundos",
-                IdBairro = 1,
-                IdCidade = 1,
-                IdEstado = 1,
+                BairroId = 1,
+                CidadeId = 1,
+                EstadoId = 1,
                 DDD = "047",
                 Telefone = "988498793",
                 CodigoAntt = "AAA23t52",
                 Placa = "MIA8565",
-                IdEstadoPlaca = 2
+                EstadoPlacaId = 2
             };
         }
 
@@ -43,14 +43,14 @@ namespace APITest.Mocks
                 Cep = "88308390",
                 Endereco = "Rua José Simplicio de Oliveira",
                 Numero = "127 Fundos",
-                IdBairro = 1,
-                IdCidade = 1,
-                IdEstado = 1,
+                BairroId = 1,
+                CidadeId = 1,
+                EstadoId = 1,
                 DDD = "047",
                 Telefone = "988498793",
                 CodigoAntt = "AAA23t52",
                 Placa = "MIA8565",
-                IdEstadoPlaca = 2
+                EstadoPlacaId = 2
             };
         }
 
@@ -65,14 +65,14 @@ namespace APITest.Mocks
                 Cep = "88308390",
                 Endereco = "Rua José Simplicio de Oliveira",
                 Numero = "127 Fundos",
-                IdBairro = 1,
-                IdCidade = 1,
-                IdEstado = 1,
+                BairroId = 1,
+                CidadeId = 1,
+                EstadoId = 1,
                 DDD = "047",
                 Telefone = "988498793",
                 CodigoAntt = "AAA23t52",
                 Placa = "MIA8565",
-                IdEstadoPlaca = 2
+                EstadoPlacaId = 2
             };
         }
 
@@ -88,14 +88,14 @@ namespace APITest.Mocks
                     Cep = "Teste Mock 1",
                     Endereco = "Rua José Simplicio de Oliveira",
                     Numero = "127 Fundos",
-                    IdBairro = 1,
-                    IdCidade = 1,
-                    IdEstado = 1,
+                    BairroId = 1,
+                    CidadeId = 1,
+                    EstadoId = 1,
                     DDD = "047",
                     Telefone = "988498793",
                     CodigoAntt = "AAA23t52",
                     Placa = "MIA8565",
-                    IdEstadoPlaca = 1
+                    EstadoPlacaId = 1
                 },
                 new Transportador {
                     Id = 1,
@@ -105,14 +105,14 @@ namespace APITest.Mocks
                     Cep = "Teste Mock 2",
                     Endereco = "Rua José Simplicio de Oliveira",
                     Numero = "127 Fundos",
-                    IdBairro = 2,
-                    IdCidade = 2,
-                    IdEstado = 2,
+                    BairroId = 2,
+                    CidadeId = 2,
+                    EstadoId = 2,
                     DDD = "047",
                     Telefone = "988498793",
                     CodigoAntt = "AAA23t52",
                     Placa = "MIA8565",
-                    IdEstadoPlaca = 2
+                    EstadoPlacaId = 2
                 },
                 new Transportador {
                     Id = 3,
@@ -122,14 +122,14 @@ namespace APITest.Mocks
                     Cep = "Teste Mock 3",
                     Endereco = "Rua José Simplicio de Oliveira",
                     Numero = "127 Fundos",
-                    IdBairro = 3,
-                    IdCidade = 3,
-                    IdEstado = 3,
+                    BairroId = 3,
+                    CidadeId = 3,
+                    EstadoId = 3,
                     DDD = "047",
                     Telefone = "988498793",
                     CodigoAntt = "AAA23t52",
                     Placa = "MIA8565",
-                    IdEstadoPlaca = 3
+                    EstadoPlacaId = 3
                 }
             };
         }

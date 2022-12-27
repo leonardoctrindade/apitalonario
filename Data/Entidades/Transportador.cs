@@ -13,17 +13,17 @@ namespace Data.Entidades
         [Column("Id")]
         public int Id { get; set; }
 
-        [Column("IdBairro")]
-        public int? IdBairro { get; set; }
+        [Column("BairroId")]
+        public int? BairroId { get; set; }
 
-        [Column("IdCidade")]
-        public int? IdCidade { get; set; }
+        [Column("CidadeId")]
+        public int? CidadeId { get; set; }
 
-        [Column("IdEstado")]
-        public int? IdEstado { get; set; }
+        [Column("EstadoId")]
+        public int? EstadoId { get; set; }
 
-        [Column("IdEstadoPlaca")]
-        public int? IdEstadoPlaca { get; set; }
+        [Column("EstadoPlacaId")]
+        public int? EstadoPlacaId { get; set; }
 
         [Column("Nome")]
         [Required]

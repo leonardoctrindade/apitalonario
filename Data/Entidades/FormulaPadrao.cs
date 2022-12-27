@@ -117,6 +117,10 @@ namespace Data.Entidades
         [Column("QuantidadeCapsulas")]
         public int? QuantidadeCapsulas { get; set; }
 
+        public Unidade Unidade { get; set; }
+        public Unidade UnidadeDosePadrao { get; set; }
+        public Produto Produto { get; set; }
+        public Posologia Posologia { get; set; }
     }
 
     public enum TipoFormulaPadrao
