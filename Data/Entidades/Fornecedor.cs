@@ -52,15 +52,15 @@ namespace Data.Entidades
         [MaxLength(20)]
         public string Complemento { get; set; }
 
-        [Column("IdBairro")]
-        public int IdBairro { get; set; }
+        [Column("BairroId")]
+        public int BairroId { get; set; }
 
-        [Column("IdCidade")]
-        public int IdCidade { get; set; }
+        [Column("CidadeId")]
+        public int CidadeId { get; set; }
 
-        [Column("IdEstado")]
+        [Column("EstadoId")]
         [Required(ErrorMessage = "Campo de estado não preenchido")]
-        public int IdEstado { get; set; } = 0;
+        public int EstadoId { get; set; } = 0;
 
         [Column("Ddd")]
         [MaxLength(4)]
@@ -90,8 +90,8 @@ namespace Data.Entidades
         [MaxLength(20)]
         public string TelefoneContato { get; set; }
 
-        [Column("IdBanco")]
-        public int IdBanco { get; set; }
+        [Column("BancoId")]
+        public int BancoId { get; set; }
 
         [Column("Agencia")]
         [MaxLength(6)]
@@ -125,8 +125,8 @@ namespace Data.Entidades
         [MaxLength(10)]
         public string CadastroFarmacia { get; set; }
 
-        [Column("IdConta")]
-        public int IdConta { get; set; }
+        [Column("ContaId")]
+        public int ContaId { get; set; }
 
         [Column("ValorMinimoPedido")]
         public decimal ValorMinimoPedido { get; set; }

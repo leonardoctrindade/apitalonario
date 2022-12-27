@@ -26,13 +26,13 @@ namespace Data.Entidades
         [Column("Conciliar")]
         public bool Conciliar { get; set; }
 
-        [Column("IdFornecedor")]
-        public int IdFornecedor { get; set; }
+        [Column("FornecedorId")]
+        public int FornecedorId { get; set; }
 
-        [Column("IdCliente")]
-        public int IdCliente { get; set; }
+        [Column("ClienteId")]
+        public int ClienteId { get; set; }
 
-        [Column("IdConta")]
-        public int IdConta { get; set; }
+        [Column("ContaId")]
+        public int ContaId { get; set; }
     }
 }

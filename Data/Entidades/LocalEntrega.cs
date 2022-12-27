@@ -27,26 +27,26 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de taxa de entrega não preenchido")]
         public double TaxaEntrega { get; set; }
 
-        [Column("IdNcm")]
-        public int IdNcm { get; set; }
+        [Column("NcmId")]
+        public int NcmId { get; set; }
 
         [Column("AliquotaIss")]
         public double AliquotaIss { get; set; }
 
-        [Column("IdCfop")]
-        public int IdCfop { get; set; }
+        [Column("CfopId")]
+        public int CfopId { get; set; }
 
-        [Column("IdEntregador")]
-        public int IdEntregador { get; set; }
+        [Column("EntregadorId")]
+        public int EntregadorId { get; set; }
 
-        [Column("IdCst")]
-        public int IdCst { get; set; }
+        [Column("CstId")]
+        public int CstId { get; set; }
 
-        [Column("IdCsosn")]
-        public int IdCsosn { get; set; }
+        [Column("CsosnId")]
+        public int CsosnId { get; set; }
 
-        [Column("IdCodigoBeneficioFiscal")]
-        public int IdCodigoBeneficioFiscal { get; set; }
+        [Column("CodigoBeneficioFiscalId")]
+        public int CodigoBeneficioFiscalId { get; set; }
 
         [Column("CodigoNatureza")]
         public double CodigoNatureza { get; set; }

@@ -15,7 +15,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 NomeAbreviado = "Teste Mock 1",
-                IdGrupoUsuario = 1,
+                GrupoUsuarioId = 1,
                 Nome = "Teste Mock 1",
                 Senha = "prixpto",
                 Nivel = 1,
@@ -26,8 +26,8 @@ namespace APITest.Mocks
                 HoraUltimoAcesso = DateTime.Now,
                 DataUltimoAcesso = DateTime.Now,
                 DataTrocaSenha = DateTime.Now,
-                IdFilialUsuario = 1,
-                IdFilialProducao = 1
+                FilialUsuarioId = 1,
+                FilialProducaoId = 1
             };
         }
 
@@ -37,7 +37,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 NomeAbreviado = null,
-                IdGrupoUsuario = 1,
+                GrupoUsuarioId = 1,
                 Nome = "Teste Mock 1",
                 Senha = "prixpto",
                 Nivel = 1,
@@ -48,8 +48,8 @@ namespace APITest.Mocks
                 HoraUltimoAcesso = DateTime.Now,
                 DataUltimoAcesso = DateTime.Now,
                 DataTrocaSenha = DateTime.Now,
-                IdFilialUsuario = 1,
-                IdFilialProducao = 1
+                FilialUsuarioId = 1,
+                FilialProducaoId = 1
             };
         }
 
@@ -59,7 +59,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 NomeAbreviado = "Teste Mock 1",
-                IdGrupoUsuario = 1,
+                GrupoUsuarioId = 1,
                 Nome = null,
                 Senha = "prixpto",
                 Nivel = 1,
@@ -70,8 +70,8 @@ namespace APITest.Mocks
                 HoraUltimoAcesso = DateTime.Now,
                 DataUltimoAcesso = DateTime.Now,
                 DataTrocaSenha = DateTime.Now,
-                IdFilialUsuario = 1,
-                IdFilialProducao = 1
+                FilialUsuarioId = 1,
+                FilialProducaoId = 1
             };
         }
 
@@ -81,7 +81,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 NomeAbreviado = "Teste Mock 1",
-                IdGrupoUsuario = 1,
+                GrupoUsuarioId = 1,
                 Nome = "Teste Mock 1",
                 Senha = null,
                 Nivel = 1,
@@ -92,8 +92,8 @@ namespace APITest.Mocks
                 HoraUltimoAcesso = DateTime.Now,
                 DataUltimoAcesso = DateTime.Now,
                 DataTrocaSenha = DateTime.Now,
-                IdFilialUsuario = 1,
-                IdFilialProducao = 1
+                FilialUsuarioId = 1,
+                FilialProducaoId = 1
             };
         }
 
@@ -103,7 +103,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 NomeAbreviado = "Teste Mock 1",
-                IdGrupoUsuario = 0,
+                GrupoUsuarioId = 0,
                 Nome = "Teste Mock 1",
                 Senha = "prixpto",
                 Nivel = 1,
@@ -114,8 +114,8 @@ namespace APITest.Mocks
                 HoraUltimoAcesso = DateTime.Now,
                 DataUltimoAcesso = DateTime.Now,
                 DataTrocaSenha = DateTime.Now,
-                IdFilialUsuario = 1,
-                IdFilialProducao = 1
+                FilialUsuarioId = 1,
+                FilialProducaoId = 1
             };
         }
 
@@ -127,7 +127,7 @@ namespace APITest.Mocks
                 {
                     Id = 1,
                     NomeAbreviado = "Teste Mock 1",
-                    IdGrupoUsuario = 1,
+                    GrupoUsuarioId = 1,
                     Nome = "Teste Mock 1",
                     Senha = "prixpto",
                     Nivel = 1,
@@ -138,14 +138,14 @@ namespace APITest.Mocks
                     HoraUltimoAcesso = DateTime.Now,
                     DataUltimoAcesso = DateTime.Now,
                     DataTrocaSenha = DateTime.Now,
-                    IdFilialUsuario = 1,
-                    IdFilialProducao = 1
+                    FilialUsuarioId = 1,
+                    FilialProducaoId = 1
                 },
                 new Usuario ()
                 {
                     Id = 2,
                     NomeAbreviado = "Teste Mock 2",
-                    IdGrupoUsuario = 2,
+                    GrupoUsuarioId = 2,
                     Nome = "Teste Mock 2",
                     Senha = "prixpto",
                     Nivel = 2,
@@ -156,14 +156,14 @@ namespace APITest.Mocks
                     HoraUltimoAcesso = DateTime.Now,
                     DataUltimoAcesso = DateTime.Now,
                     DataTrocaSenha = DateTime.Now,
-                    IdFilialUsuario = 2,
-                    IdFilialProducao = 2
+                    FilialUsuarioId = 2,
+                    FilialProducaoId = 2
                 },
                 new Usuario ()
                 {
                     Id = 3,
                     NomeAbreviado = "Teste Mock 3",
-                    IdGrupoUsuario = 3,
+                    GrupoUsuarioId = 3,
                     Nome = "Teste Mock 3",
                     Senha = "prixpto",
                     Nivel = 3,
@@ -174,8 +174,8 @@ namespace APITest.Mocks
                     HoraUltimoAcesso = DateTime.Now,
                     DataUltimoAcesso = DateTime.Now,
                     DataTrocaSenha = DateTime.Now,
-                    IdFilialUsuario = 3,
-                    IdFilialProducao = 3
+                    FilialUsuarioId = 3,
+                    FilialProducaoId = 3
                 }
             };
         }

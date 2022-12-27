@@ -24,10 +24,10 @@ namespace APITest.Mocks
                 AliquotaCofins = 1.1,
                 AliquotaIcmsProduto = 1.1,
                 AliquotaPis = 1.1,
-                IdTributoCstCofinsEntrada = 1,
-                IdTributoCstPisEntrada = 1,
-                IdTributoCstCofinsSaida = 1,
-                IdTributoCstPisSaida = 1
+                TributoCstCofinsEntradaId = 1,
+                TributoCstPisEntradaId = 1,
+                TributoCstCofinsSaidaId = 1,
+                TributoCstPisSaidaId = 1
             };
         }
 
@@ -46,10 +46,10 @@ namespace APITest.Mocks
                 AliquotaCofins = 1.1,
                 AliquotaIcmsProduto = 1.1,
                 AliquotaPis = 1.1,
-                IdTributoCstCofinsEntrada = 1,
-                IdTributoCstPisEntrada = 1,
-                IdTributoCstCofinsSaida = 1,
-                IdTributoCstPisSaida = 1
+                TributoCstCofinsEntradaId = 1,
+                TributoCstPisEntradaId = 1,
+                TributoCstCofinsSaidaId = 1,
+                TributoCstPisSaidaId = 1
             };
         }
 
@@ -68,10 +68,10 @@ namespace APITest.Mocks
                 AliquotaCofins = 1.1,
                 AliquotaIcmsProduto = 1.1,
                 AliquotaPis = 1.1,
-                IdTributoCstCofinsEntrada = 1,
-                IdTributoCstPisEntrada = 1,
-                IdTributoCstCofinsSaida = 1,
-                IdTributoCstPisSaida = 1
+                TributoCstCofinsEntradaId = 1,
+                TributoCstPisEntradaId = 1,
+                TributoCstCofinsSaidaId = 1,
+                TributoCstPisSaidaId = 1
             };
         }
 
@@ -82,12 +82,12 @@ namespace APITest.Mocks
                 MontaObjetoUnico(),
                 new Ncm() {Id = 2,ProdutoServico = false,Descricao = "Teste 2",CodigoNcm = "Teste Mock 2",
                     CodigoNcmEx = 1,PercentualMva = 1.1,AliquotaNacional = 1.1,AliquotaImportacao = 1.1,
-                    AliquotaCofins = 1.1,AliquotaIcmsProduto = 1.1,AliquotaPis = 1.1,IdTributoCstCofinsEntrada = 1,
-                    IdTributoCstPisEntrada = 1,IdTributoCstCofinsSaida = 1,IdTributoCstPisSaida = 1 },
+                    AliquotaCofins = 1.1,AliquotaIcmsProduto = 1.1,AliquotaPis = 1.1,TributoCstCofinsEntradaId = 1,
+                    TributoCstPisEntradaId = 1,TributoCstCofinsSaidaId = 1,TributoCstPisSaidaId = 1 },
                 new Ncm() {Id = 3,ProdutoServico = false,Descricao = "Teste 3",CodigoNcm = "Teste Mock 3",
                     CodigoNcmEx = 1,PercentualMva = 1.1,AliquotaNacional = 1.1,AliquotaImportacao = 1.1,
-                    AliquotaCofins = 1.1,AliquotaIcmsProduto = 1.1,AliquotaPis = 1.1,IdTributoCstCofinsEntrada = 1,
-                    IdTributoCstPisEntrada = 1,IdTributoCstCofinsSaida = 1,IdTributoCstPisSaida = 1 }
+                    AliquotaCofins = 1.1,AliquotaIcmsProduto = 1.1,AliquotaPis = 1.1,TributoCstCofinsEntradaId = 1,
+                    TributoCstPisEntradaId = 1,TributoCstCofinsSaidaId = 1,TributoCstPisSaidaId = 1 }
             };
         }
     }

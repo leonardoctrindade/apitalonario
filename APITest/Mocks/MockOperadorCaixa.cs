@@ -11,7 +11,7 @@ namespace APITest.Mocks
     {
         public static OperadorCaixa MontaObjetoUnico()
         {
-            return new OperadorCaixa { Id = 1, Nome = "Teste Mock 1", NomeAbreviado = "Teste Mock 1", IdFilial = 1 };
+            return new OperadorCaixa { Id = 1, Nome = "Teste Mock 1", NomeAbreviado = "Teste Mock 1", FilialId = 1 };
         }
 
         public static OperadorCaixa MontaObjetoNomeVazio()
@@ -23,9 +23,9 @@ namespace APITest.Mocks
         {
             return new List<OperadorCaixa>()
             { 
-                new OperadorCaixa() { Id = 1, Nome = "Teste Mock 1", NomeAbreviado = "Teste Mock 1", IdFilial = 1},
-                new OperadorCaixa() { Id = 2, Nome = "Teste Mock 2", NomeAbreviado = "Teste Mock 2", IdFilial = 2},
-                new OperadorCaixa() { Id = 3, Nome = "Teste Mock 3", NomeAbreviado = "Teste Mock 3", IdFilial = 3}
+                new OperadorCaixa() { Id = 1, Nome = "Teste Mock 1", NomeAbreviado = "Teste Mock 1", FilialId = 1},
+                new OperadorCaixa() { Id = 2, Nome = "Teste Mock 2", NomeAbreviado = "Teste Mock 2", FilialId = 2},
+                new OperadorCaixa() { Id = 3, Nome = "Teste Mock 3", NomeAbreviado = "Teste Mock 3", FilialId = 3}
             };
         }
     }

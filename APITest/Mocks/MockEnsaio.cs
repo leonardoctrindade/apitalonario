@@ -14,21 +14,21 @@ namespace APITest.Mocks
     {
         public static Ensaio MontaObjetoUnico()
         { 
-            return new Ensaio { Id = 1, Nome = "Teste Mock 1", IdFarmacopeia = 1};
+            return new Ensaio { Id = 1, Nome = "Teste Mock 1", FarmacopeiaId = 1};
         }
 
         public static Ensaio MontaObjetoNomeVazio()
         {
-            return new Ensaio { Id = 1, Nome = null, IdFarmacopeia = 1};
+            return new Ensaio { Id = 1, Nome = null, FarmacopeiaId = 1};
         }
 
         public static List<Ensaio> MontaListaItems()
         {
             return new List<Ensaio>()
             {
-                new Ensaio { Id = 1, Nome = "Teste Mock 1", IdFarmacopeia = 1 },
-                new Ensaio { Id = 2, Nome = "Teste Mock 2", IdFarmacopeia = 1 },
-                new Ensaio { Id = 3, Nome = "Teste Mock 3", IdFarmacopeia = 1 }
+                new Ensaio { Id = 1, Nome = "Teste Mock 1", FarmacopeiaId = 1 },
+                new Ensaio { Id = 2, Nome = "Teste Mock 2", FarmacopeiaId = 1 },
+                new Ensaio { Id = 3, Nome = "Teste Mock 3", FarmacopeiaId = 1 }
             };
         }
     }

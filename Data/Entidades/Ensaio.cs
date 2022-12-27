@@ -15,8 +15,8 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de nome não preenchido")]
         public string Nome { get; set; }
 
-        [Column("IdFarmacopeia")]
-        public int? IdFarmacopeia { get; set; }
+        [Column("FarmacopeiaId")]
+        public int? FarmacopeiaId { get; set; }
 
         public Farmacopeia Farmacopeia { get; set; }
     }

@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (FidelidadePremios.IdFidelidade == 0 || FidelidadePremios.IdGrupo == 0 || FidelidadePremios.IdProduto == 0 || FidelidadePremios.Pontos < 0)
+                if (FidelidadePremios.FidelidadeId == 0 || FidelidadePremios.GrupoId == 0 || FidelidadePremios.ProdutoId == 0 || FidelidadePremios.Pontos < 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IFidelidadePremios.Add(FidelidadePremios)));
@@ -68,7 +68,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (FidelidadePremios.IdFidelidade == 0 || FidelidadePremios.IdGrupo == 0 || FidelidadePremios.IdProduto == 0 || FidelidadePremios.Pontos < 0)
+                if (FidelidadePremios.FidelidadeId == 0 || FidelidadePremios.GrupoId == 0 || FidelidadePremios.ProdutoId == 0 || FidelidadePremios.Pontos < 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IFidelidadePremios.Update(FidelidadePremios)));

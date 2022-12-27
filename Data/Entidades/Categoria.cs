@@ -16,14 +16,14 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de nome não preenchido")]
         public string Nome { get; set; }
 
-        [Column("IdCategoriaPai")]
-        public int? IdCategoriaPai { get; set; }
+        [Column("CategoriaPaiId")]
+        public int? CategoriaPaiId { get; set; }
 
         [Column("CategoriaAtiva")]
         public bool CategoriaAtivo { get; set; }
 
-        [Column("IdCategoriaMagento")]
-        public int? IdCategoriaMagento { get; set; }
+        [Column("CategoriaMagentoId")]
+        public int? CategoriaMagentoId { get; set; }
 
         [Column("Integrados")]
         public bool Integrados { get; set; }

@@ -11,19 +11,19 @@ namespace Data.Entidades
         [Column("Id")]
         public int Id { get; set; }
 
-        [Column("IdEstadoOrigem")]
+        [Column("EstadoOrigemId")]
         [Required(ErrorMessage = "Campo de estado origem não preenchido")]
-        public int IdEstadoOrigem { get; set; }
+        public int EstadoOrigemId { get; set; }
 
-        [Column("IdEstadoDestino")]
+        [Column("EstadoDestinoId")]
         [Required(ErrorMessage = "Campo de estado destino não preenchido")]
-        public int IdEstadoDestino { get; set; }
+        public int EstadoDestinoId { get; set; }
 
-        [Column("IdTributoCst")]
-        public int IdTributoCst { get; set; }
+        [Column("TributoCstId")]
+        public int TributoCstId { get; set; }
 
-        [Column("IdTributoCsosn")]
-        public int IdTributoCsosn { get; set; }
+        [Column("TributoCsosnId")]
+        public int TributoCsosnId { get; set; }
 
         [Column("AliquotaIcms")]
         public double AliquotaIcms { get; set; }
@@ -37,8 +37,8 @@ namespace Data.Entidades
         [Column("PercentualFcp")]
         public double PercentualFcp { get; set; }
 
-        [Column("IdNcm")]
-        [Required(ErrorMessage = "Campo de IdNcm não preenchido")]
-        public int IdNcm { get; set; }
+        [Column("NcmId")]
+        [Required(ErrorMessage = "Campo de NcmId não preenchido")]
+        public int NcmId { get; set; }
     }
 }

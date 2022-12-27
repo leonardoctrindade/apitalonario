@@ -17,8 +17,8 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de metodo náo preenchido")]
         public string Metodo { get; set; }
 
-        [Column("IdFormaFarmaceutica")]
-        public int IdFormaFarmaceutica { get; set; }
+        [Column("FormaFarmaceuticaId")]
+        public int FormaFarmaceuticaId { get; set; }
 
         [Column("DinamizacaoInicial")]
         [Required(ErrorMessage = "Campo de dinamizacao inicial")]

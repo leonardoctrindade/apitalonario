@@ -16,9 +16,9 @@ namespace Data.Entidades
         [MaxLength(20)]
         public string NomeAbreviado { get; set; }
 
-        [Column("IdGrupoUsuario")]
+        [Column("GrupoUsuarioId")]
         [Required(ErrorMessage = "Campo de Grupo não preenchido")]
-        public int IdGrupoUsuario { get; set; }
+        public int GrupoUsuarioId { get; set; }
 
         [Column("Nome")]
         [Required(ErrorMessage = "Campo de nome não preenchido")]
@@ -55,10 +55,10 @@ namespace Data.Entidades
         [Column("DataTrocaSenha")]
         public DateTime? DataTrocaSenha { get; set; }
 
-        [Column("IdFilialUsuario")]
-        public int IdFilialUsuario { get; set; }
+        [Column("FilialUsuarioId")]
+        public int FilialUsuarioId { get; set; }
 
-        [Column("IdFilialProducao")]
-        public int IdFilialProducao { get; set; }
+        [Column("FilialProducaoId")]
+        public int FilialProducaoId { get; set; }
     }
 }

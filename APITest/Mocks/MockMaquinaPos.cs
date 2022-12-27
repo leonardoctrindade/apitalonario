@@ -11,21 +11,21 @@ namespace APITest.Mocks
     {
         public static MaquinaPos MontaObjetoUnico()
         {
-            return new MaquinaPos { Id = 1, Descricao = "Teste Mock 1", SerialPos = "Teste 1", IdAdquirentePos = 1};
+            return new MaquinaPos { Id = 1, Descricao = "Teste Mock 1", SerialPos = "Teste 1", AdquirentePosId = 1};
         }
 
         public static MaquinaPos MontaObjetoSerialPosVazio()
         {
-            return new MaquinaPos { Id = 1, Descricao = "Teste Mock 1", SerialPos = null, IdAdquirentePos = 1 };
+            return new MaquinaPos { Id = 1, Descricao = "Teste Mock 1", SerialPos = null, AdquirentePosId = 1 };
         }
 
         public static List<MaquinaPos> MontaListaItems()
         {
             return new List<MaquinaPos>()
             {
-                new MaquinaPos() { Id = 1, Descricao = "Teste Mock 1", SerialPos = "Teste 1", IdAdquirentePos = 1 },
-                new MaquinaPos() { Id = 2, Descricao = "Teste Mock 2", SerialPos = "Teste 2", IdAdquirentePos = 2 },
-                new MaquinaPos() { Id = 3, Descricao = "Teste Mock 3", SerialPos = "Teste 3", IdAdquirentePos = 3 }
+                new MaquinaPos() { Id = 1, Descricao = "Teste Mock 1", SerialPos = "Teste 1", AdquirentePosId = 1 },
+                new MaquinaPos() { Id = 2, Descricao = "Teste Mock 2", SerialPos = "Teste 2", AdquirentePosId = 2 },
+                new MaquinaPos() { Id = 3, Descricao = "Teste Mock 3", SerialPos = "Teste 3", AdquirentePosId = 3 }
             };
         }
     }

@@ -27,8 +27,8 @@ namespace Data.Entidades
         [Column("Conciliacao")]
         public bool Conciliacao { get; set; }
 
-        [Column("IdConta")]
-        public int? IdConta { get; set; }
+        [Column("ContaId")]
+        public int? ContaId { get; set; }
 
         public PlanoDeContas Conta { get; set; }
      }

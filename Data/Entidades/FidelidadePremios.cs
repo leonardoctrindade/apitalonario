@@ -11,21 +11,21 @@ namespace Data.Entidades
         [Column("id")]
         public int Id { get; set; }
 
-        [Column("IdGrupo")]
+        [Column("GrupoId")]
         [Required(ErrorMessage = "Campo de grupo não preenchido")]
-        public int IdGrupo { get; set; }
+        public int GrupoId { get; set; }
 
-        [Column("IdProduto")]
+        [Column("ProdutoId")]
         [Required(ErrorMessage = "Campo de produto não preenchido")]
-        public int IdProduto { get; set; }
+        public int ProdutoId { get; set; }
 
         [Column("Pontos")]
         [Required(ErrorMessage = "Campo de pontos não preenchido")]
         public int Pontos { get; set; }
 
-        [Column("IdFidelidade")]
+        [Column("FidelidadeId")]
         [Required(ErrorMessage = "Campo de fidelidade não preenchido")]
-        public int IdFidelidade { get; set; }
+        public int FidelidadeId { get; set; }
 
         public Grupo Grupo { get; set; }
         public Produto Produto { get; set; }

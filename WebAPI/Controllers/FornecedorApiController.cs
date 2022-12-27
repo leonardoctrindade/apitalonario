@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
                     return Json(BadRequest(ModelState));
                 if (String.IsNullOrEmpty(Fornecedor.InscricaoEstadual))
                     return Json(BadRequest(ModelState));
-                if (Fornecedor.IdEstado == 0)
+                if (Fornecedor.EstadoId == 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IFornecedor.Add(Fornecedor)));
@@ -86,7 +86,7 @@ namespace WebAPI.Controllers
                     return Json(BadRequest(ModelState));
                 if (String.IsNullOrEmpty(Fornecedor.InscricaoEstadual))
                     return Json(BadRequest(ModelState));
-                if (Fornecedor.IdEstado == 0)
+                if (Fornecedor.EstadoId == 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IFornecedor.Update(Fornecedor)));

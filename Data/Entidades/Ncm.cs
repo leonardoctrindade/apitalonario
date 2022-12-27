@@ -45,16 +45,16 @@ namespace Data.Entidades
         [Column("AliquotaPis")]
         public double AliquotaPis { get; set; }
 
-        [Column("IdTributoCstCofinsEntrada")]
-        public int IdTributoCstCofinsEntrada { get; set; }
+        [Column("TributoCstCofinsEntradaId")]
+        public int TributoCstCofinsEntradaId { get; set; }
 
-        [Column("IdTributoCstCofinsSaida")]
-        public int IdTributoCstCofinsSaida { get; set; }
+        [Column("TributoCstCofinsSaidaId")]
+        public int TributoCstCofinsSaidaId { get; set; }
 
-        [Column("IdTributoCstPisEntrada")]
-        public int IdTributoCstPisEntrada { get; set; }
+        [Column("TributoCstPisEntradaId")]
+        public int TributoCstPisEntradaId { get; set; }
 
-        [Column("IdTributoCstPisSaida")]
-        public int IdTributoCstPisSaida { get; set; }
+        [Column("TributoCstPisSaidaId")]
+        public int TributoCstPisSaidaId { get; set; }
     }
 }

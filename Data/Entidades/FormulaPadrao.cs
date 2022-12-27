@@ -23,9 +23,9 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de tipo não preenchido")]
         public TipoFormulaPadrao Tipo { get; set; }
 
-        [Column("IdFormaFarmaceutica")]
-        [Required(ErrorMessage = "Campo IdFormaFarmaceutica não preenchido")]
-        public int IdFormaFarmaceutica { get; set; }
+        [Column("FormaFarmaceuticaId")]
+        [Required(ErrorMessage = "Campo FormaFarmaceuticaId não preenchido")]
+        public int FormaFarmaceuticaId { get; set; }
 
         [Column("Validade")]
         public int? Validade { get; set; }
@@ -33,8 +33,8 @@ namespace Data.Entidades
         [Column("Volume")]
         public double? Volume { get; set; }
 
-        [Column("IdUnidade")]
-        public int? IdUnidade { get; set; }
+        [Column("UnidadeId")]
+        public int? UnidadeId { get; set; }
 
         [Column("QuantidadeFormulaPadrao")]
         public int? QuantidadeFormulaPadrao { get; set; }
@@ -45,11 +45,11 @@ namespace Data.Entidades
         [Column("DosePadrao")]
         public double? DosePadrao { get; set; }
 
-        [Column("IdUnidadeDosePadrao")]
-        public int? IdUnidadeDosePadrao { get; set; }
+        [Column("UnidadeDosePadraoId")]
+        public int? UnidadeDosePadraoId { get; set; }
 
-        [Column("IdProduto")]
-        public int? IdProduto { get; set; }
+        [Column("ProdutoId")]
+        public int? ProdutoId { get; set; }
 
         [Column("DesmembrarFormula")]
         public bool DesmembrarFormula { get; set; }
@@ -57,20 +57,20 @@ namespace Data.Entidades
         [Column("ValorFormula")]
         public double ValorFormula { get; set; }
 
-        [Column("IdEmbalagem")]
-        public int? IdEmbalagem { get; set; }
+        [Column("EmbalagemId")]
+        public int? EmbalagemId { get; set; }
 
-        [Column("IdCapsula")]
-        public int? IdCapsula { get; set; }
+        [Column("CapsulaId")]
+        public int? CapsulaId { get; set; }
 
         [Column("DoseCapsula")]
         public double? DoseCapsula { get; set; }
 
-        [Column("IdPosologia")]
-        public int? IdPosologia { get; set; }
+        [Column("PosologiaId")]
+        public int? PosologiaId { get; set; }
 
-        [Column("IdProdutoVeiculo")]
-        public int? IdProdutoVeiculo { get; set; }
+        [Column("ProdutoVeiculoId")]
+        public int? ProdutoVeiculoId { get; set; }
 
         [Column("ExibirRotuloCompleto")]
         public bool ExibirRotuloCompleto { get; set; }
@@ -78,8 +78,8 @@ namespace Data.Entidades
         [Column("InativarFormula")]
         public bool InativarFormula { get; set; }
 
-        [Column("IdEtiqueta")]
-        public int? IdEtiqueta { get; set; }
+        [Column("EtiquetaId")]
+        public int? EtiquetaId { get; set; }
 
         [Column("MantemQuantidadeOrdem")]
         public bool MantemQuantidadeOrdem { get; set; }
@@ -96,23 +96,23 @@ namespace Data.Entidades
         [MaxLength(20)]
         public string VolumePadrao2 { get; set; }
 
-        [Column("IdUnidadeDose")]
-        public int? IdUnidadeDose { get; set; }
+        [Column("UnidadeDoseId")]
+        public int? UnidadeDoseId { get; set; }
 
         [Column("DoseFormula")]
         public double DoseFormula { get; set; }
 
-        [Column("IdGrupoProdutoVeiculo")]
-        public int? IdGrupoProdutoVeiculo { get; set; }
+        [Column("GrupoProdutoVeiculoId")]
+        public int? GrupoProdutoVeiculoId { get; set; }
 
-        [Column("IdGrupoEmbalagem")]
-        public int? IdGrupoEmbalagem { get; set; }
+        [Column("GrupoEmbalagemId")]
+        public int? GrupoEmbalagemId { get; set; }
 
-        [Column("IdGrupoCapsula")]
-        public int? IdGrupoCapsula { get; set; }
+        [Column("GrupoCapsulaId")]
+        public int? GrupoCapsulaId { get; set; }
 
-        [Column("IdGrupo")]
-        public int? IdGrupo { get; set; }
+        [Column("GrupoId")]
+        public int? GrupoId { get; set; }
 
         [Column("QuantidadeCapsulas")]
         public int? QuantidadeCapsulas { get; set; }

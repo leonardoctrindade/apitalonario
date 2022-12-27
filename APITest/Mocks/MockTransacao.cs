@@ -11,26 +11,26 @@ namespace APITest.Mocks
     {
         public static Transacao MontaObjetoUnico()
         {
-            return new Transacao { Id = 1, Codigo = 1, Tipo = 1, Descricao = "Teste Mock 1", Conciliar = true, IdFornecedor = 1, IdConta = 1, IdCliente = 1 };
+            return new Transacao { Id = 1, Codigo = 1, Tipo = 1, Descricao = "Teste Mock 1", Conciliar = true, FornecedorId = 1, ContaId = 1, ClienteId = 1 };
         }
 
         public static Transacao MontaObjetoDescricaoVazia()
         {
-            return new Transacao { Id = 1, Codigo = 1, Tipo = 1, Descricao = null, Conciliar = true, IdFornecedor = 1, IdConta = 1, IdCliente = 1 };
+            return new Transacao { Id = 1, Codigo = 1, Tipo = 1, Descricao = null, Conciliar = true, FornecedorId = 1, ContaId = 1, ClienteId = 1 };
         }
 
         public static Transacao MontaObjetoTipoInvalido()
         {
-            return new Transacao { Id = 1, Codigo = 1, Tipo = 0, Descricao = "Teste Mock 1", Conciliar = true, IdFornecedor = 1, IdConta = 1, IdCliente = 1 };
+            return new Transacao { Id = 1, Codigo = 1, Tipo = 0, Descricao = "Teste Mock 1", Conciliar = true, FornecedorId = 1, ContaId = 1, ClienteId = 1 };
         }
 
         public static List<Transacao> MontaListaItems()
         {
             return new List<Transacao>()
             {
-                new Transacao() { Id = 1, Codigo = 1, Tipo = 1, Descricao = "Teste Mock 1", Conciliar = true, IdFornecedor = 1, IdConta = 1, IdCliente = 1 },
-                new Transacao() { Id = 2, Codigo = 2, Tipo = 2, Descricao = "Teste Mock 1", Conciliar = false, IdFornecedor = 1, IdConta = 1, IdCliente = 1 },
-                new Transacao() { Id = 3, Codigo = 3, Tipo = 1, Descricao = "Teste Mock 1", Conciliar = true, IdFornecedor = 1, IdConta = 1, IdCliente = 1 }
+                new Transacao() { Id = 1, Codigo = 1, Tipo = 1, Descricao = "Teste Mock 1", Conciliar = true, FornecedorId = 1, ContaId = 1, ClienteId = 1 },
+                new Transacao() { Id = 2, Codigo = 2, Tipo = 2, Descricao = "Teste Mock 1", Conciliar = false, FornecedorId = 1, ContaId = 1, ClienteId = 1 },
+                new Transacao() { Id = 3, Codigo = 3, Tipo = 1, Descricao = "Teste Mock 1", Conciliar = true, FornecedorId = 1, ContaId = 1, ClienteId = 1 }
             };
         }
     }

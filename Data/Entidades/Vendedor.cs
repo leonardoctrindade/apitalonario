@@ -36,14 +36,14 @@ namespace Data.Entidades
         [MaxLength(20)]
         public string Complemento { get; set; }
 
-        [Column("IdBairro")]
-        public int IdBairro { get; set; }
+        [Column("BairroId")]
+        public int BairroId { get; set; }
 
-        [Column("IdCidade")]
-        public int IdCidade { get; set; }
+        [Column("CidadeId")]
+        public int CidadeId { get; set; }
 
-        [Column("IdEstado")]
-        public int IdEstado { get; set; }
+        [Column("EstadoId")]
+        public int EstadoId { get; set; }
 
         [Column("Ddd")]
         [MaxLength(4)]
@@ -74,9 +74,9 @@ namespace Data.Entidades
         [MaxLength(255)]
         public string Email { get; set; }
 
-        [Column("IdUsuario")]
+        [Column("UsuarioId")]
         [Required(ErrorMessage = "Campo de Usuario não preenchido")]
-        public int IdUsuario { get; set; }
+        public int UsuarioId { get; set; }
 
         [Column("Ativo")]
         public bool Ativo { get; set; }

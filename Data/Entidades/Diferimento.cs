@@ -28,7 +28,7 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de estado não preenchido")]
         public string SiglaEstado { get; set; }
 
-        [Column("IdFilial")]
-        public int? IdFilial { get; set; }
+        [Column("FilialId")]
+        public int? FilialId { get; set; }
     }
 }

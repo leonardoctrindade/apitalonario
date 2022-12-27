@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(FormulaPadrao.Descricao))
                     return Json(BadRequest(ModelState));
-                if (FormulaPadrao.IdFormaFarmaceutica <= 0)
+                if (FormulaPadrao.FormaFarmaceuticaId <= 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IFormulaPadrao.Add(FormulaPadrao)));
@@ -71,7 +71,7 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(FormulaPadrao.Descricao))
                     return Json(BadRequest(ModelState));
-                if (FormulaPadrao.IdFormaFarmaceutica <= 0)
+                if (FormulaPadrao.FormaFarmaceuticaId <= 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IFormulaPadrao.Update(FormulaPadrao)));

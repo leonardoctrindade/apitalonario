@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
                     return Json(BadRequest(ModelState));
                 if (String.IsNullOrEmpty(Usuario.Senha))
                     return Json(BadRequest(ModelState));
-                if (Usuario.IdGrupoUsuario <= 0)
+                if (Usuario.GrupoUsuarioId <= 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IUsuario.Add(Usuario)));
@@ -77,7 +77,7 @@ namespace WebAPI.Controllers
                     return Json(BadRequest(ModelState));
                 if (String.IsNullOrEmpty(Usuario.Senha))
                     return Json(BadRequest(ModelState));
-                if (Usuario.IdGrupoUsuario <= 0)
+                if (Usuario.GrupoUsuarioId <= 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IUsuario.Update(Usuario)));

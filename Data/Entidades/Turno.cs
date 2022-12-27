@@ -22,7 +22,7 @@ namespace Data.Entidades
         [MaxLength(5)]
         public string HoraFinal { get; set; }
 
-        [Column("IdFilial")]
-        public int IdFilial { get; set; }
+        [Column("FilialId")]
+        public int FilialId { get; set; }
     }
 }

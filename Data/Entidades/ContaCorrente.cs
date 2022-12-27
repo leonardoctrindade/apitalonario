@@ -25,7 +25,7 @@ namespace Data.Entidades
         [MinLength(0)]
         public double Limite { get; set; }
 
-        [Column("IdFilial")]
-        public int? IdFilial { get; set; }
+        [Column("FilialId")]
+        public int? FilialId { get; set; }
     }
 }

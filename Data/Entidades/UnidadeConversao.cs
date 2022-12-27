@@ -10,10 +10,12 @@ namespace Data.Entidades
     {
         [Column("Id")]
         public int Id { get; set; }
+
         [Column("Sigla")]
         [Required]
         [MaxLength(2)]
         public string Sigla { get; set; }
+
         [Column("Descricao")]
         [Required]
         [MaxLength(50)]
@@ -24,8 +26,9 @@ namespace Data.Entidades
         //public string SiglaConversao { get; set; }
         [Column("Fator")]
         public double? Fator { get; set; }
-        [Column("IdUnidade")]
-        public int? IdUnidade { get; set; }
+
+        [Column("UnidadeId")]
+        public int? UnidadeId { get; set; }
         //public List<Unidade>? Unidade { get; set; }
     }
 }

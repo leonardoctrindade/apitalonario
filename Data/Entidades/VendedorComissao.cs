@@ -11,10 +11,10 @@ namespace Data.Entidades
         [Column("Id")]
         public int Id { get; set; }
 
-        [Column("IdVendedor")]
-        public int IdVendedor { get; set; }
+        [Column("VendedorId")]
+        public int VendedorId { get; set; }
 
-        [Column("IdGrupo")]
+        [Column("GrupoId")]
         public int CodigoGrupo { get; set; }
 
         [Column("Comissao")]

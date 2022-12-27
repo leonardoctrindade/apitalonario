@@ -16,7 +16,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Metodo = "Teste 1",
-                IdFormaFarmaceutica = 1,
+                FormaFarmaceuticaId = 1,
                 DinamizacaoInicial = 1,
                 DinamizacaoFinal = 30,
                 QuantidadeInicial = 1,
@@ -32,7 +32,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Metodo = null,
-                IdFormaFarmaceutica = 1,
+                FormaFarmaceuticaId = 1,
                 DinamizacaoInicial = 1,
                 DinamizacaoFinal = 30,
                 QuantidadeInicial = 1,
@@ -48,7 +48,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Metodo = "Teste",
-                IdFormaFarmaceutica = 1,
+                FormaFarmaceuticaId = 1,
                 DinamizacaoInicial = 0,
                 DinamizacaoFinal = 30,
                 QuantidadeInicial = 1,
@@ -64,7 +64,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Metodo = "Teste",
-                IdFormaFarmaceutica = 1,
+                FormaFarmaceuticaId = 1,
                 DinamizacaoInicial = 1,
                 DinamizacaoFinal = 0,
                 QuantidadeInicial = 1,
@@ -80,7 +80,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Metodo = "Teste",
-                IdFormaFarmaceutica = 1,
+                FormaFarmaceuticaId = 1,
                 DinamizacaoInicial = 1,
                 DinamizacaoFinal = 30,
                 QuantidadeInicial = -1,
@@ -96,7 +96,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Metodo = "Teste",
-                IdFormaFarmaceutica = 1,
+                FormaFarmaceuticaId = 1,
                 DinamizacaoInicial = 1,
                 DinamizacaoFinal = 30,
                 QuantidadeInicial = 1,
@@ -112,7 +112,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Metodo = "Teste",
-                IdFormaFarmaceutica = 1,
+                FormaFarmaceuticaId = 1,
                 DinamizacaoInicial = 1,
                 DinamizacaoFinal = 30,
                 QuantidadeInicial = 1,
@@ -128,7 +128,7 @@ namespace APITest.Mocks
             {
                 Id = 1,
                 Metodo = "Teste",
-                IdFormaFarmaceutica = 1,
+                FormaFarmaceuticaId = 1,
                 DinamizacaoInicial = 1,
                 DinamizacaoFinal = 30,
                 QuantidadeInicial = 1,
@@ -146,7 +146,7 @@ namespace APITest.Mocks
                 {
                      Id = 1,
                     Metodo = "Teste 1",
-                    IdFormaFarmaceutica = 1,
+                    FormaFarmaceuticaId = 1,
                     DinamizacaoInicial = 1,
                     DinamizacaoFinal = 30,
                     QuantidadeInicial = 1,
@@ -158,7 +158,7 @@ namespace APITest.Mocks
                 {
                      Id = 2,
                     Metodo = "Teste 2",
-                    IdFormaFarmaceutica = 1,
+                    FormaFarmaceuticaId = 1,
                     DinamizacaoInicial = 1,
                     DinamizacaoFinal = 30,
                     QuantidadeInicial = 1,
@@ -170,7 +170,7 @@ namespace APITest.Mocks
                 {
                      Id = 3,
                     Metodo = "Teste 3",
-                    IdFormaFarmaceutica = 1,
+                    FormaFarmaceuticaId = 1,
                     DinamizacaoInicial = 1,
                     DinamizacaoFinal = 30,
                     QuantidadeInicial = 1,
