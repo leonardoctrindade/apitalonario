@@ -54,7 +54,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.INcmEstado.GetEntityById(id));
+                return Json(await this.INcmEstado.GetNcmEstado(id));
             } catch (Exception ex)
             {
                 return new JsonResult(new { message = "Error ao retornar o ncm de estado " + ex.Message }) { StatusCode = 400 };

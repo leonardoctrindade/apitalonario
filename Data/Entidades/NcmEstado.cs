@@ -40,5 +40,11 @@ namespace Data.Entidades
         [Column("NcmId")]
         [Required(ErrorMessage = "Campo de NcmId não preenchido")]
         public int NcmId { get; set; }
+
+        public Estado EstadoOrigem { get; set; }
+        public Estado EstadoDestino { get; set; }
+        public Tributo TributoCst { get; set; }
+        public Tributo TributoCsosn { get; set; }
+        public Ncm Ncm { get; set; }
     }
 }

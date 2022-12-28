@@ -56,7 +56,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IUnidadeConversao.GetEntityById(id));
+                return Json(await this.IUnidadeConversao.GetUnidadeConversao(id));
             }
             catch(Exception ex)
             {
@@ -105,7 +105,7 @@ namespace WebAPI.Controllers
 
                 foreach (var x in unidades)
                 {
-                    if (x.IdUnidade == id)
+                    if (x.UnidadeId == id)
                         Unidades.Add(x);
                 }
                 return Json(Unidades);

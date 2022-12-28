@@ -9,5 +9,6 @@ namespace Data.Interfaces
     public interface IUnidade : IGeneric<Unidade>
     {
         Task<List<Unidade>> ListagemCustomizada();
+        Task<Unidade> GetUnidade(int id);
     }
 }

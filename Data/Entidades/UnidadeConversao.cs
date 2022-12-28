@@ -20,15 +20,18 @@ namespace Data.Entidades
         [Required]
         [MaxLength(50)]
         public string Descricao { get; set; }
+
         //[Column("SiglaConversao")]
         //[Required]
         //[MaxLength(2)]
         //public string SiglaConversao { get; set; }
+
         [Column("Fator")]
         public double? Fator { get; set; }
 
         [Column("UnidadeId")]
         public int? UnidadeId { get; set; }
-        //public List<Unidade>? Unidade { get; set; }
+        
+        public Unidade Unidade { get; set; }
     }
 }

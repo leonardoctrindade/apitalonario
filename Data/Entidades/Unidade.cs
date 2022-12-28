@@ -26,6 +26,8 @@ namespace Data.Entidades
         [Column("Fator")]
         public double Fator { get; set; }
 
+        public List<UnidadeConversao> UnidadesConversao { get; set; } = new List<UnidadeConversao>();
+
     }
     public enum Tipo
     {
