@@ -122,6 +122,11 @@ namespace Data.Entidades
 
         [Column("Cedh")]
         public bool Cedh { get; set; }
+
+        [Column("RegistroMapa")]
+        public string RegistroMapa { get; set; }
+
+        public List<EspecialidadePrescritor> EspecialidadePrescritores { get; set; }
     }
     public enum Genero
     {
