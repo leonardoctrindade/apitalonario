@@ -19,6 +19,8 @@ namespace Data.Entidades
         [Column("CategoriaPaiId")]
         public int? CategoriaPaiId { get; set; }
 
+        public Categoria CategoriaPai { get; set; }
+
         [Column("CategoriaAtiva")]
         public bool CategoriaAtivo { get; set; }
 
@@ -34,6 +36,6 @@ namespace Data.Entidades
         [Column("AlteradoPais")]
         public bool AlteradoPais { get; set; }
 
-        public Categoria CategoriaPai { get; set; }
+        
     }
 }

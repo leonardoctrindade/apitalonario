@@ -47,11 +47,17 @@ namespace Data.Entidades
         [Column("BairroId")]
         public int? BairroId { get; set; }
 
+        public Bairro Bairro { get; set; }
+
         [Column("CidadeId")]
         public int? CidadeId { get; set; }
 
+        public Cidade Cidade { get; set; }
+
         [Column("EstadoId")]
         public int? EstadoId { get; set; }
+
+        public Estado Estado { get; set; }
 
         [Column("IdentificaodrConvenio")]
         public IdentificadorConvenio IdentificadorConvenio { get; set; }
@@ -98,16 +104,13 @@ namespace Data.Entidades
         [Column("VisitadorId")]
         public int? VisitadorId { get; set; }
 
+        public Visitador Visitador { get; set; }
+
         [Column("EtiquetaId")]
         public int? EtiquetaId { get; set; }
 
         [Column("EnderecoComprovanteVenda")]
         public bool EnderecoComprovanteVenda { get; set; }
-
-        public Bairro Bairro { get; set; }
-        public Cidade Cidade { get; set; }
-        public Estado Estado { get; set; }
-        public Visitador Visitador { get; set; }
     }
 
     public enum IdentificadorConvenio

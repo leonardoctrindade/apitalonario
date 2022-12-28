@@ -14,14 +14,14 @@ namespace Data.Entidades
         [Column("EstadoOrigemId")]
         public int? EstadoOrigemId { get; set; }
 
+        public Estado EstadoOrigem { get; set; }
+
         [Column("EstadoDestinoId")]
         public int? EstadoDestinoId { get; set; }
 
+        public Estado EstadoDestino { get; set; }
+
         [Column("AliquotaIcms")]
         public double AliquotaIcms { get; set; }
-
-        public Estado EstadoOrigem { get; set; }
-
-        public Estado EstadoDestino { get; set; }
     }
 }

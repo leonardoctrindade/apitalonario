@@ -13,11 +13,15 @@ namespace Data.Entidades
 
         [Column("GrupoId")]
         [Required(ErrorMessage = "Campo de grupo não preenchido")]
-        public int GrupoId { get; set; }
+        public int? GrupoId { get; set; }
+
+        public Grupo Grupo { get; set; }
 
         [Column("ProdutoId")]
         [Required(ErrorMessage = "Campo de produto não preenchido")]
-        public int ProdutoId { get; set; }
+        public int? ProdutoId { get; set; }
+
+        public Produto Produto { get; set; }
 
         [Column("Pontos")]
         [Required(ErrorMessage = "Campo de pontos não preenchido")]
@@ -27,8 +31,6 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de fidelidade não preenchido")]
         public int FidelidadeId { get; set; }
 
-        public Grupo Grupo { get; set; }
-        public Produto Produto { get; set; }
         public Fidelidade Fidelidade { get; set; }
     }
 }

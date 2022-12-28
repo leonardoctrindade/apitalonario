@@ -16,14 +16,22 @@ namespace Data.Entidades
         [Column("BairroId")]
         public int? BairroId { get; set; }
 
+        public Bairro Bairro { get; set; }
+
         [Column("CidadeId")]
         public int? CidadeId { get; set; }
+
+        public Cidade Cidade { get; set; }
 
         [Column("EstadoId")]
         public int? EstadoId { get; set; }
 
+        public Estado Estado { get; set; }
+
         [Column("EstadoPlacaId")]
         public int? EstadoPlacaId { get; set; }
+
+        public Estado EstadoPlaca { get; set; }
 
         [Column("Nome")]
         [Required]
@@ -57,10 +65,5 @@ namespace Data.Entidades
 
         [Column("Placa")]
         public string Placa { get; set; }
-
-        public Bairro Bairro { get; set; }
-        public Cidade Cidade { get; set; }
-        public Estado Estado { get; set; }
-        public Estado EstadoPlaca { get; set; }
     }
 }

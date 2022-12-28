@@ -12,15 +12,16 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("VendedorId")]
-        public int VendedorId { get; set; }
+        public int? VendedorId { get; set; }
+
+        public Vendedor Vendedor { get; set; }
 
         [Column("GrupoId")]
-        public int CodigoGrupo { get; set; }
+        public int? CodigoGrupo { get; set; }
+
+        public Grupo Grupo { get; set; }
 
         [Column("Comissao")]
         public double Comissao { get; set; }
-
-        public Vendedor Vendedor { get; set; }
-        public Grupo Grupo { get; set; }
     }
 }

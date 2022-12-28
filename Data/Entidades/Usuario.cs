@@ -18,7 +18,9 @@ namespace Data.Entidades
 
         [Column("GrupoUsuarioId")]
         [Required(ErrorMessage = "Campo de Grupo não preenchido")]
-        public int GrupoUsuarioId { get; set; }
+        public int? GrupoUsuarioId { get; set; }
+
+        public GrupoUsuario GrupoUsuario { get; set; }
 
         [Column("Nome")]
         [Required(ErrorMessage = "Campo de nome não preenchido")]
@@ -56,11 +58,9 @@ namespace Data.Entidades
         public DateTime? DataTrocaSenha { get; set; }
 
         [Column("FilialUsuarioId")]
-        public int FilialUsuarioId { get; set; }
+        public int? FilialUsuarioId { get; set; }
 
         [Column("FilialProducaoId")]
-        public int FilialProducaoId { get; set; }
-
-        public GrupoUsuario GrupoUsuario { get; set; }
+        public int? FilialProducaoId { get; set; }
     }
 }

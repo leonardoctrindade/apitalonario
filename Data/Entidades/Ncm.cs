@@ -48,18 +48,21 @@ namespace Data.Entidades
         [Column("TributoCstCofinsEntradaId")]
         public int TributoCstCofinsEntradaId { get; set; }
 
+        public Tributo TributoCstCofinsEntrada { get; set; }
+
         [Column("TributoCstCofinsSaidaId")]
         public int TributoCstCofinsSaidaId { get; set; }
+
+        public Tributo TributoCstCofinsSaida { get; set; }
 
         [Column("TributoCstPisEntradaId")]
         public int TributoCstPisEntradaId { get; set; }
 
+        public Tributo TributoCstPisEntrada { get; set; }
+
         [Column("TributoCstPisSaidaId")]
         public int TributoCstPisSaidaId { get; set; }
 
-        public Tributo TributoCstCofinsEntrada { get; set; }
-        public Tributo TributoCstCofinsSaida { get; set; }
-        public Tributo TributoCstPisEntrada { get; set; }
         public Tributo TributoCstPisSaida { get; set; }
     }
 }

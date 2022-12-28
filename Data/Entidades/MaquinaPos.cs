@@ -24,7 +24,7 @@ namespace Data.Entidades
         public string SerialPos { get; set; }
 
         [Column("AdquirentePosId")]
-        public int AdquirentePosId { get; set; }
+        public int? AdquirentePosId { get; set; }
 
         public PosAdquirente AdquirentePos { get; set; }
     }

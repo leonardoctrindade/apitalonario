@@ -28,34 +28,46 @@ namespace Data.Entidades
         public double TaxaEntrega { get; set; }
 
         [Column("NcmId")]
-        public int NcmId { get; set; }
+        public int? NcmId { get; set; }
+
+        public Ncm Ncm { get; set; }
 
         [Column("AliquotaIss")]
         public double AliquotaIss { get; set; }
 
         [Column("CfopId")]
-        public int CfopId { get; set; }
+        public int? CfopId { get; set; }
+
+        public NaturezaOperacao Cfop { get; set; }
 
         [Column("EntregadorId")]
-        public int EntregadorId { get; set; }
+        public int? EntregadorId { get; set; }
+
+        public Entregador Entregador { get; set; }
 
         [Column("CstId")]
-        public int CstId { get; set; }
+        public int? CstId { get; set; }
+
+        public Tributo Cst { get; set; }
 
         [Column("CsosnId")]
-        public int CsosnId { get; set; }
+        public int? CsosnId { get; set; }
+
+        public Tributo Csosn { get; set; }
 
         [Column("CodigoBeneficioFiscalId")]
-        public int CodigoBeneficioFiscalId { get; set; }
+        public int? CodigoBeneficioFiscalId { get; set; }
+
+        public Tributo CodigoBeneficioFiscal { get; set; }
 
         [Column("CodigoNatureza")]
         public double CodigoNatureza { get; set; }
 
-        public Ncm Ncm { get; set; }
-        public NaturezaOperacao Cfop { get; set; }
-        public Entregador Entregador { get; set; }
-        public Tributo Cst { get; set; }
-        public Tributo Csosn { get; set; }
-        public Tributo CodigoBeneficioFiscal { get; set; }
+        
+        
+        
+        
+        
+        
     }
 }

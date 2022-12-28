@@ -12,20 +12,26 @@ namespace Data.Entidades
     {
         [Column("Id")]
         public int Id { get; set; }
+
         [Column("Descricao")]
         [Required]
         [MaxLength(50)]
         public string Descricao { get; set; }
+
         [Column("Sequencia")]
         [Required]
         public int Sequencia { get; set; }
+
         [Column("Tipo")]
         [Required]
         public string Tipo { get; set; }
+
         [Column("Processo")]
         public string Processo { get; set; }
+
         [Column("Obrigatoria")]
         public string Obrigatoria { get; set; }
+
         [Column("TempoMaximo")]
         public string TempoMaximo { get; set; }
     }

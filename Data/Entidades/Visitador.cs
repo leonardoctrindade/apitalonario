@@ -30,13 +30,19 @@ namespace Data.Entidades
         public string Complemento { get; set; }
 
         [Column("BairroId")]
-        public int BairroId { get; set; }
+        public int? BairroId { get; set; }
+
+        public Bairro Bairro { get; set; }
 
         [Column("CidadeId")]
-        public int CidadeId { get; set; }
+        public int? CidadeId { get; set; }
+
+        public Cidade Cidade { get; set; }
 
         [Column("EstadoId")]
-        public int EstadoId { get; set; }
+        public int? EstadoId { get; set; }
+
+        public Estado Estado { get; set; }
 
         [Column("DDD")]
         public string DDD { get; set; }
@@ -49,9 +55,5 @@ namespace Data.Entidades
 
         [Column("Comissao")]
         public double Comissao { get; set; }
-
-        public Bairro Bairro { get; set; }
-        public Cidade Cidade { get; set; }
-        public Estado Estado { get; set; }
     }
 }

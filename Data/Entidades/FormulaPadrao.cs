@@ -25,7 +25,7 @@ namespace Data.Entidades
 
         [Column("FormaFarmaceuticaId")]
         [Required(ErrorMessage = "Campo FormaFarmaceuticaId não preenchido")]
-        public int FormaFarmaceuticaId { get; set; }
+        public int? FormaFarmaceuticaId { get; set; }
 
         [Column("Validade")]
         public int? Validade { get; set; }
@@ -35,6 +35,8 @@ namespace Data.Entidades
 
         [Column("UnidadeId")]
         public int? UnidadeId { get; set; }
+
+        public Unidade Unidade { get; set; }
 
         [Column("QuantidadeFormulaPadrao")]
         public int? QuantidadeFormulaPadrao { get; set; }
@@ -48,8 +50,12 @@ namespace Data.Entidades
         [Column("UnidadeDosePadraoId")]
         public int? UnidadeDosePadraoId { get; set; }
 
+        public Unidade UnidadeDosePadrao { get; set; }
+
         [Column("ProdutoId")]
         public int? ProdutoId { get; set; }
+
+        public Produto Produto { get; set; }
 
         [Column("DesmembrarFormula")]
         public bool DesmembrarFormula { get; set; }
@@ -68,6 +74,8 @@ namespace Data.Entidades
 
         [Column("PosologiaId")]
         public int? PosologiaId { get; set; }
+
+        public Posologia Posologia { get; set; }
 
         [Column("ProdutoVeiculoId")]
         public int? ProdutoVeiculoId { get; set; }
@@ -99,6 +107,8 @@ namespace Data.Entidades
         [Column("UnidadeDoseId")]
         public int? UnidadeDoseId { get; set; }
 
+        public Unidade UnidadeDose { get; set; }
+
         [Column("DoseFormula")]
         public double DoseFormula { get; set; }
 
@@ -114,15 +124,10 @@ namespace Data.Entidades
         [Column("GrupoId")]
         public int? GrupoId { get; set; }
 
+        public Grupo Grupo { get; set; }
+
         [Column("QuantidadeCapsulas")]
         public int? QuantidadeCapsulas { get; set; }
-
-        public Unidade Unidade { get; set; }
-        public Unidade UnidadeDosePadrao { get; set; }
-        public Produto Produto { get; set; }
-        public Posologia Posologia { get; set; }
-        public Unidade UnidadeDose { get; set; }
-        public Grupo Grupo { get; set; }
     }
 
     public enum TipoFormulaPadrao

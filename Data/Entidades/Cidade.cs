@@ -23,9 +23,11 @@ namespace Data.Entidades
         [Column("CodigoCfpsId")]
         public int? CodigoCfpsId { get; set; }
 
+        public Tributo CodigoCfps { get; set; }
+
         [Column("CodigoSiafi")]
         public int? CodigoSiafi { get; set; }
 
-        public Tributo CodigoCfps { get; set; }
+        
     }
 }

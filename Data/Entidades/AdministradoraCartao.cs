@@ -37,12 +37,12 @@ namespace Data.Entidades
         public bool Ativo { get; set; } = true;
 
         [Column("FornecedorId")]
-        public int FornecedorId { get; set; }
-
-        [Column("ContaId")]
-        public int ContaId { get; set; }
+        public int? FornecedorId { get; set; }
 
         public Fornecedor Fornecedor { get; set; }
+
+        [Column("ContaId")]
+        public int? ContaId { get; set; }
 
         public PlanoDeContas Conta { get; set; }
     }

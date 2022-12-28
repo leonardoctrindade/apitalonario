@@ -14,13 +14,19 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("BairroId")]
-        public int BairroId { get; set; }
+        public int? BairroId { get; set; }
+
+        public Bairro Bairro { get; set; }
 
         [Column("CidadeId")]
-        public int CidadeId { get; set; }
+        public int? CidadeId { get; set; }
+
+        public Cidade Cidade { get; set; }
 
         [Column("EstadoId")]
-        public int EstadoId { get; set; }
+        public int? EstadoId { get; set; }
+
+        public Estado Estado { get; set; }
 
         [Column("Nome")]
         [Required]
@@ -107,19 +113,15 @@ namespace Data.Entidades
         public string Proximidade { get; set; }
 
         [Column("VisitadorId")]
-        public int VisitadorId { get; set; }
+        public int? VisitadorId { get; set; }
+
+        public Visitador Visitador { get; set; }
 
         [Column("ObservacaoVenda")]
         public string ObservacaoVenda { get; set; }
 
         [Column("Cedh")]
         public bool Cedh { get; set; }
-
-        public Bairro Bairro { get; set; }
-        public Cidade Cidade { get; set; }
-        public Estado Estado { get; set; }
-        public Visitador Visitador { get; set; }
-
     }
     public enum Genero
     {
