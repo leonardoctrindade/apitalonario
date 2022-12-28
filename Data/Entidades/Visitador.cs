@@ -49,5 +49,9 @@ namespace Data.Entidades
 
         [Column("Comissao")]
         public double Comissao { get; set; }
+
+        public Bairro Bairro { get; set; }
+        public Cidade Cidade { get; set; }
+        public Estado Estado { get; set; }
     }
 }

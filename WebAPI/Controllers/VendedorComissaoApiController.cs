@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IVendedorComissao.GetEntityById(id));
+                return Json(await this.IVendedorComissao.GetVendedorComissao(id));
             }
             catch(Exception ex)
             {

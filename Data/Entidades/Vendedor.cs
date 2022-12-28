@@ -92,5 +92,10 @@ namespace Data.Entidades
         [Column("SenhaVendedorFarmaciaPopular")]
         [MaxLength(15)]
         public string SenhaVendedorFarmaciaPopular { get; set; }
+
+        public Bairro Bairro { get; set; }
+        public Cidade Cidade { get; set; }
+        public Estado Estado { get; set; }
+        public Usuario Usuario { get; set; }
     }
 }

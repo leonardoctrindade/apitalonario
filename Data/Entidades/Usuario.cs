@@ -60,5 +60,7 @@ namespace Data.Entidades
 
         [Column("FilialProducaoId")]
         public int FilialProducaoId { get; set; }
+
+        public GrupoUsuario GrupoUsuario { get; set; }
     }
 }

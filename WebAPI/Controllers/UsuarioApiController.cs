@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IUsuario.GetEntityById(id));
+                return Json(await this.IUsuario.GetUsuario(id));
             }
             catch(Exception ex)
             {

@@ -34,5 +34,8 @@ namespace Data.Entidades
 
         [Column("ContaId")]
         public int ContaId { get; set; }
+
+        public Fornecedor Fornecedor { get; set; }
+        public PlanoDeContas Conta { get; set; }
     }
 }

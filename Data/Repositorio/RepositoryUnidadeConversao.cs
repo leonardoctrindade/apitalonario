@@ -16,19 +16,5 @@ namespace Data.Repositorio
         {
             throw new NotImplementedException();
         }
-
-        public async Task<UnidadeConversao> GetUnidadeConversao(int id)
-        {
-            var result = new UnidadeConversao();
-            using (var context = new ContextBase(this._OptionsBuilder)) 
-            {
-                result = await context.UnidadeConversao
-                    .Include(c => c.Unidade)
-                    .Where(x => x.Id == id)
-                    .SingleOrDefaultAsync();
-            }
-
-            return result;
-        }
     }
 }

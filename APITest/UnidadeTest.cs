@@ -59,19 +59,6 @@ namespace APITest
         }
 
         [Fact]
-        public async Task Excluir_Sucesso()
-        {
-            var unidade = MockUnidade.MontaObjetoUnico();
-
-            mock.Setup(y => y.Delete(It.IsAny<Unidade>())).Returns(Task.CompletedTask);
-
-            var service = new UnidadeApiController(mock.Object);
-            await service.ExcluirUnidade(unidade);
-
-            mock.Verify(y => y.Delete(unidade));
-        }
-
-        [Fact]
         public async Task RetornarProId()
         {
             mock.Setup(y => y.GetEntityById(MockUnidade.MontaObjetoUnico().Id)).ReturnsAsync(MockUnidade.MontaObjetoUnico);

@@ -19,5 +19,8 @@ namespace Data.Entidades
 
         [Column("Comissao")]
         public double Comissao { get; set; }
+
+        public Vendedor Vendedor { get; set; }
+        public Grupo Grupo { get; set; }
     }
 }

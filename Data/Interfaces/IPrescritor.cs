@@ -10,5 +10,6 @@ namespace Data.Interfaces
     public interface IPrescritor : IGeneric<Prescritor>
     {
         Task<List<Prescritor>> ListagemCustomizada();
+        Task<Prescritor> GetPrescritor(int id);
     }
 }

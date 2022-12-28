@@ -32,6 +32,5 @@ namespace Data.Entidades
         [Column("UnidadeId")]
         public int? UnidadeId { get; set; }
         
-        public Unidade Unidade { get; set; }
     }
 }

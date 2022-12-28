@@ -114,6 +114,12 @@ namespace Data.Entidades
 
         [Column("Cedh")]
         public bool Cedh { get; set; }
+
+        public Bairro Bairro { get; set; }
+        public Cidade Cidade { get; set; }
+        public Estado Estado { get; set; }
+        public Visitador Visitador { get; set; }
+
     }
     public enum Genero
     {

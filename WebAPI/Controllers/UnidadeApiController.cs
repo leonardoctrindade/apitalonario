@@ -90,7 +90,9 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IUnidade.Delete(unidade)));
+                var teste = await this.IUnidade.GetUnidade(unidade.Id);
+                await Task.FromResult(this.IUnidade.Delete(teste));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

@@ -9,5 +9,6 @@ namespace Data.Interfaces
     public interface IVendedor: IGeneric<Vendedor>
     {
         Task<List<Vendedor>> ListagemCustomizada();
+        Task<Vendedor> GetVendedor(int id);
     }
 }
