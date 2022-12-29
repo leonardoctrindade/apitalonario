@@ -15,8 +15,6 @@ namespace Data.Entidades
         [Column("PrescritorId")]
         public int? PrescritorId { get; set; }
 
-        public Prescritor Prescritor { get; set; }
-
         [Column("EspecialidadeId")]
         public int? EspecialidadeId { get; set; }
     }
