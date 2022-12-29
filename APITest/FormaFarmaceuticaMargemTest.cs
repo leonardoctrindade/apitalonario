@@ -40,6 +40,15 @@ namespace APITest
         }
 
         [Fact]
+        public async Task Insere_Margem_Invalida()
+        {
+            var modelo = MockFormaFarmaceuticaMargem.MontaObjetoMargemInvalida();
+            var apiController = new FormaFarmaceuticaMargemApiController(mock.Object);
+            var result = await apiController.AdicionarFormaFarmaceuticaMargem(modelo);
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+        }
+
+        [Fact]
         public async Task Editar_Sucesso()
         {
             var modelo = MockFormaFarmaceuticaMargem.MontaObjetoUnico();

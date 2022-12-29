@@ -133,10 +133,10 @@ namespace Data.Entidades
         [MaxLength(10)]
         public string CadastroFarmacia { get; set; }
 
-        [Column("ContaId")]
-        public int? ContaId { get; set; }
+        [Column("PlanoDeContaId")]
+        public int? PlanoDeContaId { get; set; }
 
-        public PlanoDeContas Conta { get; set; }
+        public PlanoDeContas PlanoDeConta { get; set; }
 
         [Column("ValorMinimoPedido")]
         public decimal ValorMinimoPedido { get; set; }

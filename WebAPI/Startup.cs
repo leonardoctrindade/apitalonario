@@ -72,6 +72,7 @@ namespace WebAPI
             services.AddSingleton<IFidelidadePremios, RepositoryFidelidadePremios>();
             services.AddSingleton<IFormaFarmaceutica, RepositoryFormaFarmaceutica>();
             services.AddSingleton<IFormaFarmaceuticaFaixa, RepositoryFormaFarmaceuticaFaixa>();
+            servives.AddSingleton<IFormaFarmaceuticaMargem, RepositoryFormaFarmaceuticaMargem>();
             services.AddSingleton<IFormaPagamento, RepositoryFormaPagamento>();
             services.AddSingleton<IFormulaPadrao, RepositoryFormulaPadrao>();
             services.AddSingleton<IFornecedor, RepositoryFornecedor>();

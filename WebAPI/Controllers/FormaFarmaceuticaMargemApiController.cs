@@ -40,6 +40,8 @@ namespace WebAPI.Controllers
             {
                 if (FormaFarmaceuticaMargem.FormaFarmaceuticaId == 0)
                     return Json(BadRequest(ModelState));
+                if (FormaFarmaceuticaMargem.Margem <= 0)
+                    return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IFormaFarmaceuticaMargem.Add(FormaFarmaceuticaMargem)));
 
@@ -69,6 +71,11 @@ namespace WebAPI.Controllers
         {
             try
             {
+                if (FormaFarmaceuticaMargem.FormaFarmaceuticaId == 0)
+                    return Json(BadRequest(ModelState));
+                if (FormaFarmaceuticaMargem.Margem <= 0)
+                    return Json(BadRequest(ModelState));
+
                 Json(await Task.FromResult(this.IFormaFarmaceuticaMargem.Update(FormaFarmaceuticaMargem)));
                 return Json(Ok());
             }

@@ -19,6 +19,11 @@ namespace APITest.Mocks
             return new FormaFarmaceuticaMargem { Id = 1, ValorInicial = 1, ValorFinal = 1, Margem = 1, FormaFarmaceuticaId = 0 };
         }
 
+        public static FormaFarmaceuticaMargem MontaObjetoMargemInvalida()
+        {
+            return new FormaFarmaceuticaMargem { Id = 1, ValorInicial = 1, ValorFinal = 1, Margem = -1, FormaFarmaceuticaId = 1 };
+        }
+
         public static List<FormaFarmaceuticaMargem> MontaListaItems()
         {
             return new List<FormaFarmaceuticaMargem>()

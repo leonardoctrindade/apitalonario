@@ -18,6 +18,7 @@ namespace Data.Entidades
         public double ValorFinal { get; set; }
 
         [Column("Margem")]
+        [Required(ErrorMessage = "Campo de margem não preenchido")]
         public double Margem { get; set; }
 
         [Column("FormaFarmaceuticaId")]

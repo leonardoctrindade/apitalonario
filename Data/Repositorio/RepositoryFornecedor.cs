@@ -27,7 +27,7 @@ namespace Data.Repositorio
                     .Include(c => c.Cidade)
                     .Include(c => c.Estado)
                     .Include(c => c.Banco)
-                    .Include(c => c.Conta)
+                    .Include(c => c.PlanoDeConta)
                     .Where(x => x.Id == id)
                     .SingleOrDefaultAsync();
             }
