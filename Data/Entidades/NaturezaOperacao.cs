@@ -52,7 +52,7 @@ namespace Data.Entidades
         [Column("CfopSubstituicaoTributaria")]
         public bool CfopSubstituicaoTributaria { get; set; } = false;
 
-        [Column("ContaId")]
+        [Column("PlanoDeContaId")]
         public int? PlanoDeContaId { get; set; }
 
         public PlanoDeContas PlanoDeConta { get; set; }
