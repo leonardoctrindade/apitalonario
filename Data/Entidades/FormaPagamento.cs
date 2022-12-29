@@ -27,10 +27,10 @@ namespace Data.Entidades
         [Column("Conciliacao")]
         public bool Conciliacao { get; set; }
 
-        [Column("ContaId")]
-        public int? ContaId { get; set; }
+        [Column("PlanoDeContaId")]
+        public int? PlanoDeContaId { get; set; }
 
-        public PlanoDeContas Conta { get; set; }
+        public PlanoDeContas PlanoDeConta { get; set; }
      }
     public enum TipoPagamento
     {

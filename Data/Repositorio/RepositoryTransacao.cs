@@ -25,7 +25,7 @@ namespace Data.Repositorio
             {
                 result = await context.Transacao
                     .Include(c => c.Fornecedor)
-                    .Include(c => c.Conta)
+                    .Include(c => c.PlanoDeConta)
                     .Where(x => x.Id == id)
                     .SingleOrDefaultAsync();
             }

@@ -24,7 +24,7 @@ namespace Data.Entidades
         public Cidade Cidade { get; set; }
 
         [Column("EstadoId")]
-        public int? EstadoId { get; set; }
+        public int EstadoId { get; set; }
 
         public Estado Estado { get; set; }
 

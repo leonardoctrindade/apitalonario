@@ -43,6 +43,8 @@ namespace Data.Config
         public DbSet<Fidelidade> Fidelidade { get; set; }
         public DbSet<FidelidadeFormaPagamento> FidelidadeFormaPagamento { get; set; }
         public DbSet<FidelidadePremios> FidelidadePremios { get; set; }
+        public DbSet<FormaFarmaceutica> FormaFarmaceutica { get; set; }
+        public DbSet<FormaFarmaceuticaFaixa> FormaFarmaceuticaFaixa { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
         public DbSet<FormulaPadrao> FormulaPadrao { get; set; }
         public DbSet<Fornecedor> Fornecedor { get; set; }

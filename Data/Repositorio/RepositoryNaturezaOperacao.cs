@@ -23,7 +23,7 @@ namespace Data.Repositorio
             using (var context = new ContextBase(this._OptionsBuilder))
             {
                 result = await context.NaturezaOperacao
-                    .Include(c => c.Conta)
+                    .Include(c => c.PlanoDeConta)
                     .Include(c => c.Cst)
                     .Include(c => c.Csosn)
                     .Where(x => x.Id == id)

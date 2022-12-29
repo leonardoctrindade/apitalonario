@@ -47,7 +47,7 @@ namespace Data.Entidades
         public string Uso { get; set; }
 
         [Column("TipoUso")]
-        public bool TipoUso { get; set; }
+        public int TipoUso { get; set; }
 
         [Column("POPForma")]
         [MaxLength(15)]
@@ -85,6 +85,52 @@ namespace Data.Entidades
         [Column("DescricaoRotulo")]
         [MaxLength(50)]
         public string DescricaoRotulo { get; set; }
+
+        [Column("QuantidadeQspMinimo")]
+        public double QuantidadeQspMinimo { get; set; }
+
+        [Column("ProdutoVeiculoId")]
+        public int? ProdutoVeiculoId { get; set; }
+
+        public Produto ProdutoVeiculo { get; set; }
+
+        [Column("GrupoVeiculoId")]
+        public int? GrupoVeiculoId { get; set; }
+
+        public Produto GrupoVeiculo { get; set; }
+
+        [Column("AtivaPesagemMonitorada")]
+        public bool AtivaPesagemMonitorada { get; set; }
+
+        [Column("CalcularDensidade")]
+        public bool CalcularDensidade { get; set; }
+
+        [Column("ValorMinimo")]
+        public double ValorMinimo { get; set; }
+
+        [Column("CustoAdicional")]
+        public double CustoAdicional { get; set; }
+
+        [Column("NcmId")]
+        public int? NcmId { get; set; }
+
+        public Ncm Ncm { get; set; }
+
+        [Column("CodigoLaboratorioLp")]
+        [MaxLength(2)]
+        public string CodigoLaboratorioLp { get; set; }
+
+        [Column("CodigoFuncionarioManipulacao")]
+        public int? CodigoFuncionarioManipulacao { get; set; }
+
+        [Column("CodigoFormaReceituario")]
+        public int? CodigoFormaReceituario { get; set; }
+
+        [Column("CodigoFilialProducao")]
+        public int? CodigoFilialProducao { get; set; }
+
+        [Column("AliquotaIva")]
+        public double AliquotaIva { get; set; }
     }
 
     public enum TipoFormaFarmaceutica

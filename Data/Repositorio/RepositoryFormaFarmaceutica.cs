@@ -10,20 +10,23 @@ using System.Linq;
 
 namespace Data.Repositorio
 {
-    public class RepositoryFormaPagamento: RepositoryGenerics<FormaPagamento>, IFormaPagamento
+    public class RepositoryFormaFarmaceutica: RepositoryGenerics<FormaFarmaceutica>, IFormaFarmaceutica
     {
-        public Task<List<FormaPagamento>> ListagemCustomizada()
+        public Task<List<FormaFarmaceutica>> ListagemCustomizada()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<FormaPagamento> GetFormaPagamento(int id)
+        public async Task<FormaFarmaceutica> GetFormaFarmaceutica(int id)
         {
-            var result = new FormaPagamento();
+            var result = new FormaFarmaceutica();
             using (var context = new ContextBase(this._OptionsBuilder)) 
             {
-                result = await context.FormaPagamento
-                    .Include(c => c.PlanoDeConta)
+                result = await context.FormaFarmaceutica
+                    .Include(c => c.Manipulador)
+                    .Include(c => c.Ncm)
+                    .Include(c => c.ProdutoVeiculo)
+                    .Include(c => c.GrupoVeiculo)
                     .Where(x => x.Id == id)
                     .SingleOrDefaultAsync();
             }

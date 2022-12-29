@@ -16,20 +16,5 @@ namespace Data.Repositorio
         {
             throw new NotImplementedException();
         }
-
-        public async Task<AliquotaEstado> GetAliquotaEstado(int id) 
-        {
-            var result = new AliquotaEstado();
-            using (var context = new ContextBase(this._OptionsBuilder))
-            {
-                result = await context.AliquotaEstado
-                    .Include(c => c.EstadoDestino)
-                    .Include(c => c.EstadoOrigem)
-                    .Where(x => x.Id == id)
-                    .SingleOrDefaultAsync();
-            }
-
-            return result;
-        }
     }
 }

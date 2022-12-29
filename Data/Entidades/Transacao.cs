@@ -35,8 +35,8 @@ namespace Data.Entidades
         public int? ClienteId { get; set; }
 
         [Column("ContaId")]
-        public int? ContaId { get; set; }
+        public int? PlanoDeContaId { get; set; }
 
-        public PlanoDeContas Conta { get; set; }
+        public PlanoDeContas PlanoDeConta { get; set; }
     }
 }

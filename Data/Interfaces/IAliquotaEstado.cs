@@ -9,6 +9,5 @@ namespace Data.Interfaces
     public interface IAliquotaEstado : IGeneric<AliquotaEstado>
     {
         Task<List<AliquotaEstado>> ListagemCustomizada();
-        Task<AliquotaEstado> GetAliquotaEstado(int id);
     }
 }

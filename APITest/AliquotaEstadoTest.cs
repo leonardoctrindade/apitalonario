@@ -62,7 +62,7 @@ namespace APITest
             mock.Setup(y => y.GetEntityById(MockAliquotaEstado.MontaObjetoUnico().Id)).ReturnsAsync(MockAliquotaEstado.MontaObjetoUnico());
             AliquotaEstadoApiController ret = new AliquotaEstadoApiController(mock.Object);
             var result = await ret.RetornaAliquotaEstadoPorId(1);
-            //Assert.Equal(1, ((Data.Entidades.AliquotaEstado)result.Value).EstadoOrigemId);
+            Assert.Equal(1, ((Data.Entidades.AliquotaEstado)result.Value).EstadoOrigemId);
         }
 
         [Fact]
