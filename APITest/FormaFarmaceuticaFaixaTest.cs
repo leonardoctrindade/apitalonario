@@ -71,7 +71,7 @@ namespace APITest
             mock.Setup(y => y.GetEntityById(MockFormaFarmaceuticaFaixa.MontaObjetoUnico().Id)).ReturnsAsync(MockFormaFarmaceuticaFaixa.MontaObjetoUnico());
             FormaFarmaceuticaFaixaApiController ret = new FormaFarmaceuticaFaixaApiController(mock.Object);
             var result = await ret.RetornaFormaFarmaceuticaFaixaPorId(1);
-            //Assert.Equal("Teste Mock 1", ((Data.Entidades.FormaFarmaceuticaFaixa)result.Value).Nome);
+            Assert.Equal(1, ((Data.Entidades.FormaFarmaceuticaFaixa)result.Value).Id);
         }
 
         [Fact]

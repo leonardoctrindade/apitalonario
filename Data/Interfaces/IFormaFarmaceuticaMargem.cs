@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 namespace Data.Interfaces
 {
-    public interface IFormaFarmaceuticaFaixa : IGeneric<FormaFarmaceuticaFaixa>
+    public interface IFormaFarmaceuticaMargem: IGeneric<FormaFarmaceuticaMargem>
     {
-        Task<List<FormaFarmaceuticaFaixa>> ListagemCustomizada();
+       Task<List<FormaFarmaceuticaMargem>> ListagemCustomizada();
     }
 }

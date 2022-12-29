@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (FormaFarmaceuticaFaixa.FormaFarmaceuticaId == null || FormaFarmaceuticaFaixa.FormaFarmaceuticaId == 0)
+                if (FormaFarmaceuticaFaixa.FormaFarmaceuticaId == 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IFormaFarmaceuticaFaixa.Add(FormaFarmaceuticaFaixa)));
@@ -57,7 +57,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IFormaFarmaceuticaFaixa.GetFormaFarmaceuticaFaixa(id));
+                return Json(await this.IFormaFarmaceuticaFaixa.GetEntityById(id));
             }
             catch (Exception ex)
             {
@@ -70,7 +70,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (FormaFarmaceuticaFaixa.FormaFarmaceuticaId == null || FormaFarmaceuticaFaixa.FormaFarmaceuticaId == 0)
+                if (FormaFarmaceuticaFaixa.FormaFarmaceuticaId == 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IFormaFarmaceuticaFaixa.Update(FormaFarmaceuticaFaixa)));

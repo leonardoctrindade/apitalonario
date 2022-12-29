@@ -16,19 +16,5 @@ namespace Data.Repositorio
         { 
             throw new NotFiniteNumberException();
         }
-
-        public async Task<FormaFarmaceuticaFaixa> GetFormaFarmaceuticaFaixa(int id)
-        {
-            var result = new FormaFarmaceuticaFaixa();
-            using (var context = new ContextBase(this._OptionsBuilder))
-            {
-                result = await context.FormaFarmaceuticaFaixa
-                    .Include(c => c.FormaFarmaceutica)
-                    .Where(x => x.Id == id)
-                    .SingleOrDefaultAsync();
-            }
-
-            return result;
-        }
     }
 }

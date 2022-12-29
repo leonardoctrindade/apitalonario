@@ -6,22 +6,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entidades
 {
-    public class FormaFarmaceuticaFaixa
+    public class FormaFarmaceuticaMargem
     {
         [Column("Id")]
         public int Id { get; set; }
 
-        [Column("QuantidadeInicial")]
-        public double QuantidadeInicial { get; set; }
+        [Column("ValorInicial")]
+        public double ValorInicial { get; set; }
 
-        [Column("QuantidadeFinal")]
-        public double QuantidadeFinal { get; set; }
+        [Column("ValorFinal")]
+        public double ValorFinal { get; set; }
 
-        [Column("ValorMinimo")]
-        public double ValorMinimo { get; set; }
-
-        [Column("SiglaUnidadeFaixa")]
-        public string SiglaUnidadeFaixa { get; set; }
+        [Column("Margem")]
+        public double Margem { get; set; }
 
         [Column("FormaFarmaceuticaId")]
         [Required(ErrorMessage = "Campo de FormaFarmaceuticaId não preenchido")]
