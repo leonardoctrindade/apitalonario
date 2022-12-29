@@ -19,7 +19,5 @@ namespace Data.Entidades
 
         [Column("EspecialidadeId")]
         public int? EspecialidadeId { get; set; }
-
-        public Especialidade Especialidade { get; set; }
     }
 }

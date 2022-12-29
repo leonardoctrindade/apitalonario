@@ -10,6 +10,5 @@ namespace Data.Interfaces
     public interface IEspecialidadePrescritor : IGeneric<EspecialidadePrescritor>
     {
         Task<List<EspecialidadePrescritor>> ListagemCustomizada();
-        Task<EspecialidadePrescritor> GetEspecialidadePrescritor(int id);
     }
 }
