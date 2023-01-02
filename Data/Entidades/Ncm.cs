@@ -25,44 +25,46 @@ namespace Data.Entidades
         public string CodigoNcm { get; set; }
 
         [Column("CodigoNcmEx")]
-        public int CodigoNcmEx { get; set; }
+        public int? CodigoNcmEx { get; set; }
 
         [Column("PercentualMva")]
-        public double PercentualMva { get; set; }
+        public double? PercentualMva { get; set; }
 
         [Column("AliquotaNacional")]
-        public double AliquotaNacional { get; set; }
+        public double? AliquotaNacional { get; set; }
 
         [Column("AliquotaImportacao")]
-        public double AliquotaImportacao { get; set; }
+        public double? AliquotaImportacao { get; set; }
 
         [Column("AliquotaCofins")]
-        public double AliquotaCofins { get; set; }
+        public double? AliquotaCofins { get; set; }
 
         [Column("AliquotaIcmsProduto")]
-        public double AliquotaIcmsProduto { get; set; }
+        public double? AliquotaIcmsProduto { get; set; }
 
         [Column("AliquotaPis")]
-        public double AliquotaPis { get; set; }
+        public double? AliquotaPis { get; set; }
 
         [Column("TributoCstCofinsEntradaId")]
-        public int TributoCstCofinsEntradaId { get; set; }
+        public int? TributoCstCofinsEntradaId { get; set; }
 
         public Tributo TributoCstCofinsEntrada { get; set; }
 
         [Column("TributoCstCofinsSaidaId")]
-        public int TributoCstCofinsSaidaId { get; set; }
+        public int? TributoCstCofinsSaidaId { get; set; }
 
         public Tributo TributoCstCofinsSaida { get; set; }
 
         [Column("TributoCstPisEntradaId")]
-        public int TributoCstPisEntradaId { get; set; }
+        public int? TributoCstPisEntradaId { get; set; }
 
         public Tributo TributoCstPisEntrada { get; set; }
 
         [Column("TributoCstPisSaidaId")]
-        public int TributoCstPisSaidaId { get; set; }
+        public int? TributoCstPisSaidaId { get; set; }
 
         public Tributo TributoCstPisSaida { get; set; }
+
+        public List<NcmEstado> NcmEstados { get; set; }
     }
 }

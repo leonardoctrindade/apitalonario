@@ -27,6 +27,7 @@ namespace Data.Repositorio
                     .Include(c => c.TributoCstCofinsSaida)
                     .Include(c => c.TributoCstPisEntrada)
                     .Include(c => c.TributoCstPisSaida)
+                    .Include(c => c.NcmEstados)
                     .Where(x => x.Id == id)
                     .SingleOrDefaultAsync();
             }

@@ -15,23 +15,15 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de estado origem não preenchido")]
         public int? EstadoOrigemId { get; set; }
 
-        public Estado EstadoOrigem { get; set; }
-
         [Column("EstadoDestinoId")]
         [Required(ErrorMessage = "Campo de estado destino não preenchido")]
         public int? EstadoDestinoId { get; set; }
 
-        public Estado EstadoDestino { get; set; }
-
         [Column("TributoCstId")]
         public int? TributoCstId { get; set; }
 
-        public Tributo TributoCst { get; set; }
-
         [Column("TributoCsosnId")]
         public int? TributoCsosnId { get; set; }
-
-        public Tributo TributoCsosn { get; set; }
 
         [Column("AliquotaIcms")]
         public double AliquotaIcms { get; set; }
@@ -48,7 +40,6 @@ namespace Data.Entidades
         [Column("NcmId")]
         [Required(ErrorMessage = "Campo de NcmId não preenchido")]
         public int? NcmId { get; set; }
-
-        public Ncm Ncm { get; set; }
+        
     }
 }
