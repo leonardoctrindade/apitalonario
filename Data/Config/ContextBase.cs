@@ -80,6 +80,7 @@ namespace Data.Config
         public DbSet<TabelaFloral> TabelaFloral { get; set; }
         public DbSet<TabelaHomeopatia> TabelaHomeopatia { get; set; }
         public DbSet<TabelaHomeopatiaQuantidade> TabelaHomeopatiaQuantidade { get; set; }
+        public DbSet<TipoCapsula> TipoCapsula { get; set; }
         public DbSet<TipoContato> TipoContato { get; set; }
         public DbSet<TipoJustificativa> TipoJustificativa { get; set; }
         public DbSet<Transacao> Transacao { get; set; }

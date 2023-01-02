@@ -107,6 +107,7 @@ namespace WebAPI
             services.AddSingleton<ITabelaFloral, RepositoryTabelaFloral>();
             services.AddSingleton<ITabelaHomeopatia, RepositoryTabelaHomeopatia>();
             services.AddSingleton<ITabelaHomeopatiaQuantidade, RepositoryTabelaHomeopatiaQuantidade>();
+            services.AddSingleton<ITipoCapsula, RepositoryTipoCapsula>();
             services.AddSingleton<ITipoContato, RepositoryTipoContato>();
             services.AddSingleton<ITipoJustificativa, RepositoryTipoJustificativa>();
             services.AddSingleton<ITransacao, RepositoryTransacao>();
