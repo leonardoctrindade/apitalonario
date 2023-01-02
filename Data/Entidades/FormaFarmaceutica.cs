@@ -131,6 +131,8 @@ namespace Data.Entidades
 
         [Column("AliquotaIva")]
         public double AliquotaIva { get; set; }
+
+        public List<FormaFarmaceuticaEnsaio> FormaFarmaceuticaEnsaios { get; set; }
     }
 
     public enum TipoFormaFarmaceutica
