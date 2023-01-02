@@ -46,6 +46,7 @@ namespace WebAPI
             services.AddSingleton<IAliquotaEstado, RepositoryAliquotaEstado>();
             services.AddSingleton<IBairro, RepositoryBairro>();
             services.AddSingleton<IBanco, RepositoryBanco>();
+            services.AddSingleton<IBanner, RepositoryBanner>();
             services.AddSingleton<IBula, RepositoryBula>();
             services.AddSingleton<ICategoria, RepositoryCategoria>();
             services.AddSingleton<ICidade, RepositoryCidade>();
@@ -72,7 +73,7 @@ namespace WebAPI
             services.AddSingleton<IFidelidadePremios, RepositoryFidelidadePremios>();
             services.AddSingleton<IFormaFarmaceutica, RepositoryFormaFarmaceutica>();
             services.AddSingleton<IFormaFarmaceuticaFaixa, RepositoryFormaFarmaceuticaFaixa>();
-            servives.AddSingleton<IFormaFarmaceuticaMargem, RepositoryFormaFarmaceuticaMargem>();
+            services.AddSingleton<IFormaFarmaceuticaMargem, RepositoryFormaFarmaceuticaMargem>();
             services.AddSingleton<IFormaPagamento, RepositoryFormaPagamento>();
             services.AddSingleton<IFormulaPadrao, RepositoryFormulaPadrao>();
             services.AddSingleton<IFornecedor, RepositoryFornecedor>();
