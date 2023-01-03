@@ -85,7 +85,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.ITipoCapsula.Delete(TipoCapsula)));
+                Json(await Task.FromResult(this.ITipoCapsula.Delete(TipoCapsula)));
+                return Json(Ok());
             }
             catch (Exception ex)
             {

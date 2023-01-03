@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.ITipoJustificativa.Delete(tipoJustificativa)));
+                Json(await Task.FromResult(this.ITipoJustificativa.Delete(tipoJustificativa)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

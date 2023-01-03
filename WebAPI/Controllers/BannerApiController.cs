@@ -63,7 +63,8 @@ namespace WebAPI.Controllers
             {
                 var banner = await this.IBanner.GetEntityById(id);
 
-                banner.Imagem = Convert.ToBase64String(banner.ImagemBanner);
+                if (banner.ImagemBanner != null)
+                    banner.Imagem = Convert.ToBase64String(banner.ImagemBanner);
 
                 return Json(banner);
             }
@@ -102,7 +103,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IBanner.Delete(Banner)));
+                Json(await Task.FromResult(this.IBanner.Delete(Banner)));
+                return Json(Ok());
             }
             catch (Exception ex)
             {

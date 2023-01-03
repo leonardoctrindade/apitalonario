@@ -42,6 +42,7 @@ namespace Data.Config
         public DbSet<EspecificacaoCapsula> EspecificacaoCapsula { get; set; }
         public DbSet<Estado> Estado { get; set; }
         public DbSet<Etapa> Etapa { get; set; }
+        public DbSet<Etiqueta> Etiqueta { get; set; }
         public DbSet<Farmacopeia> Farmacopeia { get; set; }
         public DbSet<Fidelidade> Fidelidade { get; set; }
         public DbSet<FidelidadeFormaPagamento> FidelidadeFormaPagamento { get; set; }

@@ -89,7 +89,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IContabilista.Delete(contabilista)));
+                Json(await Task.FromResult(this.IContabilista.Delete(contabilista)));
+                return Json(Ok());
             } catch(Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao excluir o contabilista " + ex.Message }) { StatusCode = 400 };

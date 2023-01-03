@@ -85,7 +85,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IFidelidadeFormaPagamento.Delete(FidelidadeFormaPagamento)));
+                Json(await Task.FromResult(this.IFidelidadeFormaPagamento.Delete(FidelidadeFormaPagamento)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

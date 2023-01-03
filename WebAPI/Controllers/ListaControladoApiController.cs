@@ -86,7 +86,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IListaControlado.Delete(ListaControlado)));
+                Json(await Task.FromResult(this.IListaControlado.Delete(ListaControlado)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

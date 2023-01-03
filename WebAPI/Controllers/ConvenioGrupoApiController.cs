@@ -81,7 +81,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IConvenioGrupo.Delete(ConvenioGrupo)));
+                Json(await Task.FromResult(this.IConvenioGrupo.Delete(ConvenioGrupo)));
+                return Json(Ok());
             } catch(Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao excluir o grupo de convenio " + ex.Message }) { StatusCode = 400 };

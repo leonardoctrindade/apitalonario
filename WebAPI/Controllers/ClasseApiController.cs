@@ -83,7 +83,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IClasse.Delete(classe)));
+                Json(await Task.FromResult(this.IClasse.Delete(classe)));
+                return Json(Ok());
             } catch (Exception ex)
             {
                 return new JsonResult(new { message = "Error ao excluir a classe " + ex.Message }) { StatusCode = 400 };

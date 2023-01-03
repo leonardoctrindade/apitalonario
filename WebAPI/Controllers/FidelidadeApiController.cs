@@ -85,7 +85,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IFidelidade.Delete(Fidelidade)));
+                Json(await Task.FromResult(this.IFidelidade.Delete(Fidelidade)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

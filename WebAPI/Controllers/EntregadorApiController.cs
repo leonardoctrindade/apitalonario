@@ -93,7 +93,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IEntregador.Delete(Entregador)));
+                Json(await Task.FromResult(this.IEntregador.Delete(Entregador)));
+                return Json(Ok());
             } 
             catch (Exception ex) 
             {

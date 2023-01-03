@@ -33,6 +33,7 @@ namespace Data.Entidades
         [Column("ImagemBanner")]
         public byte[] ImagemBanner { get; set; }
 
+        [NotMapped]
         public string Imagem { get; set; }
 
         [Column("Ativo")]

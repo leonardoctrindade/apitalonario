@@ -85,7 +85,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IFarmacopeia.Delete(Farmacopeia)));
+                Json(await Task.FromResult(this.IFarmacopeia.Delete(Farmacopeia)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

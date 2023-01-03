@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IFormaPagamento.Delete(FormaPagamento)));
+                Json(await Task.FromResult(this.IFormaPagamento.Delete(FormaPagamento)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

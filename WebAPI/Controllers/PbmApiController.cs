@@ -87,7 +87,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IPbm.Delete(Pbm)));
+                Json(await Task.FromResult(this.IPbm.Delete(Pbm)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

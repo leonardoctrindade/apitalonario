@@ -88,7 +88,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IPrincipioAtivo.Delete(principioAtivo)));
+                Json(await Task.FromResult(this.IPrincipioAtivo.Delete(principioAtivo)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

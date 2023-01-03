@@ -86,7 +86,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IDiferimento.Delete(Diferimento)));
+                Json(await Task.FromResult(this.IDiferimento.Delete(Diferimento)));
+                return Json(Ok());
             } catch(Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao excluir o diferimento " + ex.Message }) { StatusCode = 400 };

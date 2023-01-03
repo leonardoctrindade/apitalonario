@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IBula.Delete(Bula)));
+                Json(await Task.FromResult(this.IBula.Delete(Bula)));
+                return Json(Ok());
             } catch(Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao excluir a bula " + ex.Message }) { StatusCode = 400 };

@@ -63,7 +63,8 @@ namespace WebAPI.Controllers
             {
                 var forma = await this.IFormaFarmaceutica.GetFormaFarmaceutica(id);
 
-                forma.Imagem = Convert.ToBase64String(forma.ImagemByte);
+                if (forma.ImagemByte != null)
+                    forma.Imagem = Convert.ToBase64String(forma.ImagemByte);
 
                 return Json(forma);
             }

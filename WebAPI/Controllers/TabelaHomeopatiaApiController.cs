@@ -89,7 +89,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.ITabelaHomeopatia.Delete(TabelaHomeopatia)));
+                Json(await Task.FromResult(this.ITabelaHomeopatia.Delete(TabelaHomeopatia)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

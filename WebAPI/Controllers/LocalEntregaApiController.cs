@@ -86,7 +86,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.ILocalEntrega.Delete(LocalEntrega)));
+                Json(await Task.FromResult(this.ILocalEntrega.Delete(LocalEntrega)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

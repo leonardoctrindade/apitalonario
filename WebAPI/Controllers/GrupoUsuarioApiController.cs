@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IGrupoUsuario.Delete(GrupoUsuario)));
+                Json(await Task.FromResult(this.IGrupoUsuario.Delete(GrupoUsuario)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

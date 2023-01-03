@@ -81,7 +81,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.iContaCorrente.Delete(contaCorrente)));
+                Json(await Task.FromResult(this.iContaCorrente.Delete(contaCorrente)));
+                return Json(Ok());
             } catch (Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao excluir a conta corrente " + ex.Message }) { StatusCode = 400 };

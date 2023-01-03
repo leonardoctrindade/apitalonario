@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.ITabelaFloral.Delete(TabelaFloral)));
+                Json(await Task.FromResult(this.ITabelaFloral.Delete(TabelaFloral)));
+                return Json(Ok());
             }
             catch(Exception ex) 
             {

@@ -88,7 +88,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IFormulaPadrao.Delete(FormulaPadrao)));
+                Json(await Task.FromResult(this.IFormulaPadrao.Delete(FormulaPadrao)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

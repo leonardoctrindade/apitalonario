@@ -85,7 +85,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.ISetorForma.Delete(SetorForma)));
+                Json(await Task.FromResult(this.ISetorForma.Delete(SetorForma)));
+                return Json(Ok());
             }
             catch (Exception ex)
             {

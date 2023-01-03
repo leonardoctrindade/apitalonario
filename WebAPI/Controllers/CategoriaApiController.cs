@@ -81,7 +81,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.ICategoria.Delete(Categoria)));
+                Json(await Task.FromResult(this.ICategoria.Delete(Categoria)));
+                return Json(Ok());
             } catch (Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao excluir a categoria " + ex.Message }) { StatusCode = 400 };

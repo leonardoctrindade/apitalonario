@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IMaquinaPos.Delete(MaquinaPos)));
+                Json(await Task.FromResult(this.IMaquinaPos.Delete(MaquinaPos)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

@@ -86,7 +86,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.INcm.Delete(Ncm)));
+                Json(await Task.FromResult(this.INcm.Delete(Ncm)));
+                return Json(Ok());
             }
             catch(Exception ex) 
             {

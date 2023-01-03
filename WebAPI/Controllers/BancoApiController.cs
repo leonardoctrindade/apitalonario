@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IBanco.Delete(Banco)));
+                Json(await Task.FromResult(this.IBanco.Delete(Banco)));
+                return Json(Ok());
             } catch (Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao excluir o banco " + ex.Message }) { StatusCode = 400 };

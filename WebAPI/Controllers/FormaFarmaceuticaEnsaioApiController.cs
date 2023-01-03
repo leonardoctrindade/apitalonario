@@ -90,7 +90,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IFormaFarmaceuticaEnsaio.Delete(FormaFarmaceuticaEnsaio)));
+                Json(await Task.FromResult(this.IFormaFarmaceuticaEnsaio.Delete(FormaFarmaceuticaEnsaio)));
+                return Json(Ok());
             }
             catch (Exception ex)
             {

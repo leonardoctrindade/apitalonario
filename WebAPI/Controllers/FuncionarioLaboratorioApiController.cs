@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IFuncionarioLaboratorio.Delete(FuncionarioLaboratorio)));
+                Json(await Task.FromResult(this.IFuncionarioLaboratorio.Delete(FuncionarioLaboratorio)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

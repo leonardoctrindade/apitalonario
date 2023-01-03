@@ -76,7 +76,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IVendedorComissao.Delete(VendedorComissao)));
+                Json(await Task.FromResult(this.IVendedorComissao.Delete(VendedorComissao)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

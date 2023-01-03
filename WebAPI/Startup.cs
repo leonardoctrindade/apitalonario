@@ -69,6 +69,7 @@ namespace WebAPI
             services.AddSingleton<IEspecificacaoCapsula, RepositoryEspecificacaoCapsula>();
             services.AddSingleton<IEstado, RepositoryEstado>();
             services.AddSingleton<IEtapa, RepositoryEtapa>();
+            services.AddSingleton<IEtiqueta, RepositoryEtiqueta>();
             services.AddSingleton<IFarmacopeia, RepositoryFarmacopeia>();
             services.AddSingleton<IFidelidade, RepositoryFidelidade>();
             services.AddSingleton<IFidelidadeFormaPagamento, RepositoryFidelidadeFormaPagamento>();

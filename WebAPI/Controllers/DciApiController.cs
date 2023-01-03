@@ -83,7 +83,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IDci.Delete(dci)));
+                Json(await Task.FromResult(this.IDci.Delete(dci)));
+                return Json(Ok());
             }
             catch (Exception ex)
             {

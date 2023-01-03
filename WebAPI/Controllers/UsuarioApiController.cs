@@ -94,7 +94,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IUsuario.Delete(Usuario)));
+                Json(await Task.FromResult(this.IUsuario.Delete(Usuario)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.ICidade.Delete(Cidade)));
+                Json(await Task.FromResult(this.ICidade.Delete(Cidade)));
+                return Json(Ok());
             } catch (Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao excluir o bairro " + ex.Message }) { StatusCode = 400 };

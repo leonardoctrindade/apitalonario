@@ -85,7 +85,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IDiasHoras.Delete(DiasHoras)));
+                Json(await Task.FromResult(this.IDiasHoras.Delete(DiasHoras)));
+                return Json(Ok());
             }
             catch (Exception ex)
             {

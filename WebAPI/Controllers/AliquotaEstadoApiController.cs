@@ -76,7 +76,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IAliquotaEstado.Delete(AliquotaEstado)));
+                Json(await Task.FromResult(this.IAliquotaEstado.Delete(AliquotaEstado)));
+                return Json(Ok());
             } catch (Exception ex)
             {
                 return new JsonResult(new { message = "Error ao excluir a aliquota de estado " + ex.Message }) { StatusCode = 400 };

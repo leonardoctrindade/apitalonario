@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.iDcb.Delete(dcb)));
+                Json(await Task.FromResult(this.iDcb.Delete(dcb)));
+                return Json(Ok());
             } catch(Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao excluir o dcb " + ex.Message }) { StatusCode = 400 };

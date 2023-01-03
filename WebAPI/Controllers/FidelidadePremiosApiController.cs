@@ -85,7 +85,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IFidelidadePremios.Delete(FidelidadePremios)));
+                Json(await Task.FromResult(this.IFidelidadePremios.Delete(FidelidadePremios)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

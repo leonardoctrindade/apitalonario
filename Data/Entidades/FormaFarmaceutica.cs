@@ -133,6 +133,7 @@ namespace Data.Entidades
         [Column("AliquotaIva")]
         public double AliquotaIva { get; set; }
 
+        [NotMapped]
         public string Imagem { get; set; }
 
         [Column("ImagemByte")]

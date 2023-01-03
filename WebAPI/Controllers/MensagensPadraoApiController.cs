@@ -85,7 +85,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IMensagensPadrao.Delete(MensagensPadrao)));
+                Json(await Task.FromResult(this.IMensagensPadrao.Delete(MensagensPadrao)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.INcmEstado.Delete(NcmEstado)));
+                Json(await Task.FromResult(this.INcmEstado.Delete(NcmEstado)));
+                return Json(Ok());
             } catch (Exception ex) 
             {
                 return new JsonResult(new { message = "Error ao excluir o ncm de estado " + ex.Message }) { StatusCode = 400 };

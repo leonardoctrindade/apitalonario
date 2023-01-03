@@ -85,7 +85,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IRegiao.Delete(Regiao)));
+                Json(await Task.FromResult(this.IRegiao.Delete(Regiao)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

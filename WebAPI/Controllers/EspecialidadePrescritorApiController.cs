@@ -68,7 +68,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IEspecialidadePrescritor.Delete(especialidadePrescritor)));
+                Json(await Task.FromResult(this.IEspecialidadePrescritor.Delete(especialidadePrescritor)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

@@ -89,7 +89,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.IMoeda.Delete(moeda)));
+                Json(await Task.FromResult(this.IMoeda.Delete(moeda)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {

@@ -89,7 +89,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await Task.FromResult(this.ITributo.Delete(Tributo)));
+                Json(await Task.FromResult(this.ITributo.Delete(Tributo)));
+                return Json(Ok());
             }
             catch(Exception ex)
             {
