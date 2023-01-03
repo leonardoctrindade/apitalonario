@@ -31,7 +31,9 @@ namespace Data.Entidades
         public DateTime? DataFim { get; set; }
 
         [Column("ImagemBanner")]
-        public byte ImagemBanner { get; set; }
+        public byte[] ImagemBanner { get; set; }
+
+        public string Imagem { get; set; }
 
         [Column("Ativo")]
         public bool Ativo { get; set; }

@@ -40,6 +40,12 @@ namespace WebAPI.Controllers
                 if (Banner.Posicao < 0)
                     return Json(BadRequest(ModelState));
 
+                if (!string.IsNullOrEmpty(Banner.Imagem))
+                {
+                    Banner.ImagemBanner = Convert.FromBase64String(Banner.Imagem);
+                    Banner.Imagem = string.Empty;
+                }
+
                 Json(await Task.FromResult(this.IBanner.Add(Banner)));
 
                 return Json(Ok());
@@ -55,7 +61,11 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IBanner.GetEntityById(id));
+                var banner = await this.IBanner.GetEntityById(id);
+
+                banner.Imagem = Convert.ToBase64String(banner.ImagemBanner);
+
+                return Json(banner);
             }
             catch (Exception ex)
             {
@@ -70,6 +80,12 @@ namespace WebAPI.Controllers
             {
                 if (Banner.Posicao < 0)
                     return Json(BadRequest(ModelState));
+
+                if (!string.IsNullOrEmpty(Banner.Imagem))
+                {
+                    Banner.ImagemBanner = Convert.FromBase64String(Banner.Imagem);
+                    Banner.Imagem = string.Empty;
+                }
 
                 Json(await Task.FromResult(this.IBanner.Update(Banner)));
 
