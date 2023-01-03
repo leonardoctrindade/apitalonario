@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
+using System.Buffers.Text;
 
 namespace Data.Entidades
 {
@@ -132,6 +133,11 @@ namespace Data.Entidades
         [Column("AliquotaIva")]
         public double AliquotaIva { get; set; }
 
+        [Column("Imagem")]
+        public string Imagem { get; set; }
+        [Column("ImagemByte")]
+        public byte[] ImagemByte { get; set; }
+        public List<FormaFarmaceuticaMargem> FormaFarmaceuticaMargens { get; set; }
         public List<FormaFarmaceuticaEnsaio> FormaFarmaceuticaEnsaios { get; set; }
     }
 

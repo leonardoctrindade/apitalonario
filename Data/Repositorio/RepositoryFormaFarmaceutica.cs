@@ -27,6 +27,8 @@ namespace Data.Repositorio
                     .Include(c => c.Ncm)
                     .Include(c => c.ProdutoVeiculo)
                     .Include(c => c.GrupoVeiculo)
+                    .Include(c => c.FormaFarmaceuticaEnsaios)
+                    .Include(c => c.FormaFarmaceuticaMargens)
                     .Where(x => x.Id == id)
                     .SingleOrDefaultAsync();
             }

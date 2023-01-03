@@ -40,6 +40,12 @@ namespace WebAPI.Controllers
                 if (String.IsNullOrEmpty(FormaFarmaceutica.Descricao))
                     return Json(BadRequest(ModelState));
 
+                if (!string.IsNullOrEmpty(FormaFarmaceutica.Imagem))
+                {
+                    FormaFarmaceutica.ImagemByte = Convert.FromBase64String(FormaFarmaceutica.Imagem);
+                    FormaFarmaceutica.Imagem = string.Empty;
+                }
+
                 Json(await Task.FromResult(this.IFormaFarmaceutica.Add(FormaFarmaceutica)));
 
                 return Json(Ok());
@@ -55,7 +61,11 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IFormaFarmaceutica.GetFormaFarmaceutica(id));
+                var forma = await this.IFormaFarmaceutica.GetFormaFarmaceutica(id);
+
+                forma.Imagem = Convert.ToBase64String(forma.ImagemByte);
+
+                return Json(forma);
             }
             catch (Exception ex)
             {
@@ -70,6 +80,12 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(FormaFarmaceutica.Descricao))
                     return Json(BadRequest(ModelState));
+
+                if (!string.IsNullOrEmpty(FormaFarmaceutica.Imagem))
+                {
+                    FormaFarmaceutica.ImagemByte = Convert.FromBase64String(FormaFarmaceutica.Imagem);
+                    FormaFarmaceutica.Imagem = string.Empty;
+                }
 
                 Json(await Task.FromResult(this.IFormaFarmaceutica.Update(FormaFarmaceutica)));
                 return Json(Ok());
