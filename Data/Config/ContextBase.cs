@@ -18,6 +18,7 @@ namespace Data.Config
         public DbSet<AliquotaEstado> AliquotaEstado { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Bairro> Bairro { get; set; }
+        public DbSet<Balanca> Balanca { get; set; }
         public DbSet<Banco> Banco { get; set; }
         public DbSet<Banner> Banner { get; set; }
         public DbSet<Bula> Bula { get; set; }
@@ -30,6 +31,7 @@ namespace Data.Config
         public DbSet<ConvenioGrupo> ConvenioGrupo { get; set; }
         public DbSet<Dcb> Dcb { get; set; }
         public DbSet<Dci> Dci { get; set; }
+        public DbSet<DiasHoras> DiasHoras { get; set; }
         public DbSet<Diferimento> Diferimento { get; set; }
         public DbSet<DOM_RegimeTributario> DOM_RegimeTributario { get; set; }
         public DbSet<Ensaio> Ensaio { get; set; }
@@ -77,6 +79,9 @@ namespace Data.Config
         public DbSet<PrincipioAtivo> PrincipioAtivo { get; set; }
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Regiao> Regiao { get; set; }
+        public DbSet<Setor> Setor { get; set; }
+        public DbSet<SetorDiasHoras> SetorDiasHoras { get; set; }
+        public DbSet<SetorForma> SetorForma { get; set; }
         public DbSet<TabelaFloral> TabelaFloral { get; set; }
         public DbSet<TabelaHomeopatia> TabelaHomeopatia { get; set; }
         public DbSet<TabelaHomeopatiaQuantidade> TabelaHomeopatiaQuantidade { get; set; }

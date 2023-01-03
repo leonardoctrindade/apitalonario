@@ -45,6 +45,7 @@ namespace WebAPI
             services.AddSingleton<IAdministradoraCartao, RepositoryAdministradoraCartao>();
             services.AddSingleton<IAliquotaEstado, RepositoryAliquotaEstado>();
             services.AddSingleton<IBairro, RepositoryBairro>();
+            services.AddSingleton<IBalanca, RepositoryBalanca>();
             services.AddSingleton<IBanco, RepositoryBanco>();
             services.AddSingleton<IBanner, RepositoryBanner>();
             services.AddSingleton<IBula, RepositoryBula>();
@@ -57,6 +58,7 @@ namespace WebAPI
             services.AddSingleton<IConvenioGrupo, RepositoryConvenioGrupo>();
             services.AddSingleton<IDcb, RepositoryDcb>();
             services.AddSingleton<IDci, RepositoryDci>();
+            services.AddSingleton<IDiasHoras, RepositoryDiasHoras>();
             services.AddSingleton<IDiferimento, RepositoryDiferimento>();
             services.AddSingleton<IDOM_RegimeTributario, RepositoryDOM_RegimeTributario>();
             services.AddSingleton<IEnsaio, RepositoryEnsaio>();
@@ -104,6 +106,9 @@ namespace WebAPI
             services.AddSingleton<IPrincipioAtivo, RepositoryPrincipioAtivo>();
             services.AddSingleton<IProduto, RepositoryProduto>();
             services.AddSingleton<IRegiao, RepositoryRegiao>();
+            services.AddSingleton<ISetor, RepositorySetor>();
+            services.AddSingleton<ISetorDiasHoras, RepositorySetorDiasHoras>();
+            services.AddSingleton<ISetorForma, RepositorySetorForma>();
             services.AddSingleton<ITabelaFloral, RepositoryTabelaFloral>();
             services.AddSingleton<ITabelaHomeopatia, RepositoryTabelaHomeopatia>();
             services.AddSingleton<ITabelaHomeopatiaQuantidade, RepositoryTabelaHomeopatiaQuantidade>();
