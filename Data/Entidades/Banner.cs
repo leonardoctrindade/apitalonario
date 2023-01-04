@@ -17,9 +17,12 @@ namespace Data.Entidades
         public string Descricao { get; set; }
 
         [Column("Link")]
+        [MaxLength(100)]
+        [Required(ErrorMessage = "Campo de link não preenchido")]
         public string Link { get; set; }
 
         [Column("AcaoLink")]
+        [Required(ErrorMessage = "Campo de AcaoLink não preenchido")]
         public int AcaoLink { get; set; }
 
         [Column("Posicao")]
@@ -27,12 +30,15 @@ namespace Data.Entidades
         public int Posicao { get; set; }
 
         [Column("DataInicio")]
+        [Required(ErrorMessage = "Campo de DataInicio não preenchido")]
         public DateTime? DataInicio { get; set; }
 
         [Column("DataFim")]
+        [Required(ErrorMessage = "Campo de DataFim não preenchido")]
         public DateTime? DataFim { get; set; }
 
         [Column("ImagemBanner")]
+        [Required(ErrorMessage = "Campo de ImagemBanner não preenchido")]
         public byte[] ImagemBanner { get; set; }
 
         [NotMapped]
@@ -42,9 +48,11 @@ namespace Data.Entidades
         public bool Ativo { get; set; }
 
         [Column("TipoDadoImagem")]
+        [MaxLength(5)]
         public string TipoDadoImagem { get; set; }
 
         [Column("Integrados")]
+        [MaxLength(1)]
         public string Integrados { get; set; }
 
         [Column("BannerMagentoId")]

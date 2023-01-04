@@ -31,9 +31,54 @@ namespace APITest
         }
 
         [Fact]
-        public async Task Insere_Nome_Nao_Preenchido()
+        public async Task Insere_Posicao_Invalida()
         {
             var modelo = MockBanner.MontaObjetoPosicaoInvalida();
+            var apiController = new BannerApiController(mock.Object);
+            var result = await apiController.AdicionarBanner(modelo);
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+        }
+
+        [Fact]
+        public async Task Insere_Descrcao_Nao_Preenchido()
+        {
+            var modelo = MockBanner.MontaObjetoDescricaoVazia();
+            var apiController = new BannerApiController(mock.Object);
+            var result = await apiController.AdicionarBanner(modelo);
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+        }
+
+        [Fact]
+        public async Task Insere_Link_Nao_Preenchido()
+        {
+            var modelo = MockBanner.MontaObjetoLinkVazio();
+            var apiController = new BannerApiController(mock.Object);
+            var result = await apiController.AdicionarBanner(modelo);
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+        }
+
+        [Fact]
+        public async Task Insere_AcaoLink_Invalida()
+        {
+            var modelo = MockBanner.MontaObjetoAcaoLinkInvalida();
+            var apiController = new BannerApiController(mock.Object);
+            var result = await apiController.AdicionarBanner(modelo);
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+        }
+
+        [Fact]
+        public async Task Insere_DataInicio_Nao_Preenchido()
+        {
+            var modelo = MockBanner.MontaObjetoDataInicioVazia();
+            var apiController = new BannerApiController(mock.Object);
+            var result = await apiController.AdicionarBanner(modelo);
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+        }
+
+        [Fact]
+        public async Task Insere_DataFim_Nao_Preenchido()
+        {
+            var modelo = MockBanner.MontaObjetoDataFimVazia();
             var apiController = new BannerApiController(mock.Object);
             var result = await apiController.AdicionarBanner(modelo);
             Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());

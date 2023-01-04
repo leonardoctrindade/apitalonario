@@ -37,8 +37,16 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (Banner.Posicao < 0)
+                if (Banner.Posicao < 0 ||
+                    string.IsNullOrEmpty(Banner.Descricao) ||
+                    string.IsNullOrEmpty(Banner.Link) ||
+                    Banner.AcaoLink < 0 ||
+                    !Banner.DataInicio.HasValue ||
+                    !Banner.DataFim.HasValue
+                    )
+                {
                     return Json(BadRequest(ModelState));
+                }
 
                 if (!string.IsNullOrEmpty(Banner.Imagem))
                 {
@@ -79,8 +87,16 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (Banner.Posicao < 0)
+                if (Banner.Posicao < 0 ||
+                    string.IsNullOrEmpty(Banner.Descricao) ||
+                    string.IsNullOrEmpty(Banner.Link) ||
+                    Banner.AcaoLink < 0 ||
+                    !Banner.DataInicio.HasValue ||
+                    !Banner.DataFim.HasValue
+                    )
+                {
                     return Json(BadRequest(ModelState));
+                }
 
                 if (!string.IsNullOrEmpty(Banner.Imagem))
                 {
