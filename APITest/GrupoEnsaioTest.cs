@@ -80,7 +80,7 @@ namespace APITest
             mock.Setup(y => y.GetEntityById(MockGrupoEnsaio.MontaObjetoUnico().Id)).ReturnsAsync(MockGrupoEnsaio.MontaObjetoUnico());
             GrupoEnsaioApiController ret = new GrupoEnsaioApiController(mock.Object);
             var result = await ret.RetornaGrupoEnsaioPorId(1);
-            //Assert.Equal("Teste Mock 1", ((Data.Entidades.GrupoEnsaio)result.Value).Descricao);
+            Assert.Equal("Teste Mock 1", ((Data.Entidades.GrupoEnsaio)result.Value).Descricao);
         }
 
         [Fact]

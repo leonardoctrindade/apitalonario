@@ -10,6 +10,5 @@ namespace Data.Interfaces
     public interface IGrupoEnsaio : IGeneric<GrupoEnsaio>
     {
         Task<List<GrupoEnsaio>> ListagemCustomizada();
-        Task<GrupoEnsaio> GetGrupoEnsaio(int Id);
     }
 }

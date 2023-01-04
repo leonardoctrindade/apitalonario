@@ -19,12 +19,9 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de GrupoId não preenchido")]
         public int GrupoId { get; set; }
 
-        public Grupo Grupo { get; set; }
-
         [Column("EnsaioId")]
         [Required(ErrorMessage = "Campo de EnsaioId não preenchido")]
         public int EnsaioId { get; set; }
 
-        public Ensaio Ensaio { get; set; }
     }
 }

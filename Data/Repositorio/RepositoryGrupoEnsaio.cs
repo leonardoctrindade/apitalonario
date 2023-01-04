@@ -16,20 +16,5 @@ namespace Data.Repositorio
         {
             throw new NotImplementedException();
         }
-
-        public async Task<GrupoEnsaio> GetGrupoEnsaio(int Id)
-        {
-            var result = new GrupoEnsaio();
-            using (var context = new ContextBase(this._OptionsBuilder)) 
-            {
-                result = await context.GrupoEnsaio
-                    .Include(c => c.Ensaio)
-                    .Include(c => c.Grupo)
-                    .Where(x => x.Id == Id)
-                    .SingleOrDefaultAsync();
-            }
-
-            return result;
-        }
     }
 }
