@@ -38,7 +38,7 @@ namespace Data.Entidades
         public bool DeduzirQuantidadeVeiculo { get; set; }
 
         [Column("CalculoEmbalagemForma")]
-        public int CalculoEmbalagemForma { get; set; }
+        public int? CalculoEmbalagemForma { get; set; }
 
         [Column("ConverteVolumeEmbalagem")]
         public bool ConverteVolumeEmbalagem { get; set; }
@@ -61,16 +61,16 @@ namespace Data.Entidades
         public bool SelecionarVolumeAutomático { get; set; }
 
         [Column("Validade")]
-        public int Validade { get; set; }
+        public int? Validade { get; set; }
 
         [Column("MlGotas")]
-        public double MlGotas { get; set; }
+        public double? MlGotas { get; set; }
 
         [Column("ImprimirUnidadeMedidaNoRotulo")]
         public bool ImprimirUnidadeMedidaNoRotulo { get; set; }
 
         [Column("FatorPerdaProduto")]
-        public double FatorPerdaProduto { get; set; }
+        public double? FatorPerdaProduto { get; set; }
 
         [Column("AtivaFatorPerdaQsp")]
         public bool AtivaFatorPerdaQsp { get; set; }
@@ -81,14 +81,14 @@ namespace Data.Entidades
         public FuncionarioLaboratorio Manipulador { get; set; }
 
         [Column("QuantidadeFormulasHora")]
-        public int QuantidadeFormulasHora { get; set; }
+        public int? QuantidadeFormulasHora { get; set; }
 
         [Column("DescricaoRotulo")]
         [MaxLength(50)]
         public string DescricaoRotulo { get; set; }
 
         [Column("QuantidadeQspMinimo")]
-        public double QuantidadeQspMinimo { get; set; }
+        public double? QuantidadeQspMinimo { get; set; }
 
         [Column("ProdutoVeiculoId")]
         public int? ProdutoVeiculoId { get; set; }
@@ -107,10 +107,10 @@ namespace Data.Entidades
         public bool CalcularDensidade { get; set; }
 
         [Column("ValorMinimo")]
-        public double ValorMinimo { get; set; }
+        public double? ValorMinimo { get; set; }
 
         [Column("CustoAdicional")]
-        public double CustoAdicional { get; set; }
+        public double? CustoAdicional { get; set; }
 
         [Column("NcmId")]
         public int? NcmId { get; set; }
@@ -131,7 +131,7 @@ namespace Data.Entidades
         public int? CodigoFilialProducao { get; set; }
 
         [Column("AliquotaIva")]
-        public double AliquotaIva { get; set; }
+        public double? AliquotaIva { get; set; }
 
         [NotMapped]
         public string Imagem { get; set; }
