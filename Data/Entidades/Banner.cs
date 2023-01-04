@@ -12,6 +12,8 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("Descricao")]
+        [MaxLength(100)]
+        [Required(ErrorMessage = "Campo de descricao não preenchido")]
         public string Descricao { get; set; }
 
         [Column("Link")]
@@ -21,7 +23,7 @@ namespace Data.Entidades
         public int AcaoLink { get; set; }
 
         [Column("Posicao")]
-        [Required(ErrorMessage = "Campo de descricao não preenchido")]
+        [Required(ErrorMessage = "Campo de posicao não preenchido")]
         public int Posicao { get; set; }
 
         [Column("DataInicio")]
