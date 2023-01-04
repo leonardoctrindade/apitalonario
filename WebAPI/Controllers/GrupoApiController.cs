@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(Grupo.Descricao))
                     return Json(BadRequest(ModelState));
-                if (Grupo.Comissao <= 0 || Grupo.PercentualDesconto <= 0)
+                if (Grupo.PercentualDesconto <= 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IGrupo.Add(Grupo)));
@@ -69,7 +69,7 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(Grupo.Descricao))
                     return Json(BadRequest(ModelState));
-                if (Grupo.Comissao <= 0 || Grupo.PercentualDesconto <= 0)
+                if (Grupo.PercentualDesconto <= 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.IGrupo.Update(Grupo)));
