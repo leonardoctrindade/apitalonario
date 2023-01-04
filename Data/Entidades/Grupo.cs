@@ -21,7 +21,7 @@ namespace Data.Entidades
 
         [Column("Comissao")]
         [Required(ErrorMessage = "Campo de comissão não preenchido")]
-        public double Comissao { get; set; }
+        public double Comissao { get; set; } = 0.00000;
 
         [Column("PercentualDesconto")]
         [Required(ErrorMessage = "Campo percentual de desconto não preenchido")]
@@ -35,13 +35,13 @@ namespace Data.Entidades
         public bool AtivaPesagemGrupo { get; set; }
 
         [Column("DescontoMaximo")]
-        public double DescontoMaximo { get; set; }
+        public double? DescontoMaximo { get; set; }
 
         [Column("AtivaControleDeLotesAcabados")]
         public bool AtivaControleDeLotesAcabados { get; set; }
 
         [Column("FatorReferenciaGrupo")]
-        public double FatorReferenciaGrupo { get; set; }
+        public double? FatorReferenciaGrupo { get; set; }
 
         [Column("AtivaControleLotesDrogaria")]
         public bool AtivaControleLotesDrogaria { get; set; }
@@ -49,6 +49,8 @@ namespace Data.Entidades
         [Column("CodigoGrupoLp")]
         [MaxLength(2)]
         public string CodigoGrupoLp { get; set; }
+
+        public List<GrupoEnsaio> GrupoEnsaios { get; set; }
     }
 
     public enum TipoGrupo

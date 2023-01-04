@@ -56,6 +56,6 @@ namespace Data.Entidades
         public string Integrados { get; set; }
 
         [Column("BannerMagentoId")]
-        public int BannerMagentoId { get; set; }
+        public int? BannerMagentoId { get; set; }
     }
 }

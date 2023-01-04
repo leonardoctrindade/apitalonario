@@ -6,9 +6,8 @@ using System.Collections.Generic;
 
 namespace Data.Interfaces
 {
-    public interface IGrupo : IGeneric<Grupo>
+    public interface IEcf : IGeneric<Ecf>
     {
-        Task<List<Grupo>> ListagemCustomizada();
-        Task<Grupo> GetGrupo(int Id);
+        Task<List<Ecf>> ListagemCustomizada();
     }
 }

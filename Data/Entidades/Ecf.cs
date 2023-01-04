@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Numerics;
 
 namespace Data.Entidades
 {
@@ -63,6 +64,34 @@ namespace Data.Entidades
         [Column("VersaoDll")]
         [MaxLength(10)]
         public string VersaoDll { get; set; }
+
+        [Column("AcentoFormaPagamento")]
+        public bool AcentoFormaPagamento { get; set; }
+
+        [Column("MaiusculoFormaPagamento")]
+        public bool MaisculoFormaPagamento { get; set; }
+
+        [Column("SaltoFinalCupom")]
+        public int? SaltoFinalCupom { get; set; } = 200;
+
+        [Column("PafNumeroFabricacao")]
+        [MaxLength(96)]
+        public string PafNumeroFabricacao { get; set; } = "0";
+
+        [Column("PafEcf")]
+        [MaxLength(96)]
+        public string PafEcf { get; set; }
+
+        [Column("NumeroFabricacaoCripto")]
+        [MaxLength(30)]
+        public string NumeroFabricacaoCripto { get; set; }
+
+        [Column("GrandeTotalCripto")]
+        [MaxLength(30)]
+        public string GrandeTotalCripto { get; set; }
+
+        [Column("FilialId")]
+        public int FilialId { get; set; }
     }
 
     public enum MarcaEcf

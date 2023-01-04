@@ -61,6 +61,7 @@ namespace WebAPI
             services.AddSingleton<IDiasHoras, RepositoryDiasHoras>();
             services.AddSingleton<IDiferimento, RepositoryDiferimento>();
             services.AddSingleton<IDOM_RegimeTributario, RepositoryDOM_RegimeTributario>();
+            services.AddSingleton<IEcf, RepositoryEcf>();
             services.AddSingleton<IEnsaio, RepositoryEnsaio>();
             services.AddSingleton<IEntregador, RepositoryEntregador>();
             services.AddSingleton<IEntregadorRegiao, RepositoryEntregadorRegiao>();
@@ -83,6 +84,7 @@ namespace WebAPI
             services.AddSingleton<IFornecedor, RepositoryFornecedor>();
             services.AddSingleton<IFuncionarioLaboratorio, RepositoryFuncionarioLaboratorio>();
             services.AddSingleton<IGrupo, RepositoryGrupo>();
+            services.AddSingleton<IGrupoEnsaio, RepositoryGrupoEnsaio>();
             services.AddSingleton<IGrupoUsuario, RepositoryGrupoUsuario>();
             services.AddSingleton<ILaboratorio, RepositoryLaboratorio>();
             services.AddSingleton<IListaControlado, RepositoryListaControlado>();

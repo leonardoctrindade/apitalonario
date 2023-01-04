@@ -54,7 +54,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IGrupo.GetEntityById(id));
+                return Json(await this.IGrupo.GetGrupo(id));
             }
             catch(Exception ex)
             {

@@ -34,6 +34,7 @@ namespace Data.Config
         public DbSet<DiasHoras> DiasHoras { get; set; }
         public DbSet<Diferimento> Diferimento { get; set; }
         public DbSet<DOM_RegimeTributario> DOM_RegimeTributario { get; set; }
+        public DbSet<Ecf> Ecf { get; set; }
         public DbSet<Ensaio> Ensaio { get; set; }
         public DbSet<Entregador> Entregador { get; set; }
         public DbSet<EntregadorRegiao> EntregadorRegiao { get; set; }
@@ -56,6 +57,7 @@ namespace Data.Config
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<FuncionarioLaboratorio> FuncionarioLaboratorio { get; set; }
         public DbSet<Grupo> Grupo { get; set; }
+        public DbSet<GrupoEnsaio> GrupoEnsaio { get; set; }
         public DbSet<GrupoUsuario> GrupoUsuario { get; set; }
         public DbSet<Laboratorio> Laboratorio { get; set; }
         public DbSet<ListaControlado> ListaControlado { get; set; }
