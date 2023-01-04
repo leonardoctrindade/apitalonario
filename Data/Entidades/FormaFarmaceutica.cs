@@ -48,7 +48,7 @@ namespace Data.Entidades
         public string Uso { get; set; }
 
         [Column("TipoUso")]
-        public int TipoUso { get; set; }
+        public int? TipoUso { get; set; }
 
         [Column("POPForma")]
         [MaxLength(15)]

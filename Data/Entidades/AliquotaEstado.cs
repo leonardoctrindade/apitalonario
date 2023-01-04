@@ -18,6 +18,6 @@ namespace Data.Entidades
         public int? EstadoDestinoId { get; set; }
 
         [Column("AliquotaIcms")]
-        public double AliquotaIcms { get; set; }
+        public double? AliquotaIcms { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Data.Entidades
         public string Descricao { get; set; }
 
         [Column("Taxa")]
-        public double Taxa { get; set; }
+        public double? Taxa { get; set; }
 
         [Column("IeSegunda")]
         public bool IeSegunda { get; set; }

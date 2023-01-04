@@ -17,9 +17,9 @@ namespace Data.Entidades
         public string Descricao { get; set; }
 
         [Column("QuantidadeCapsulasOuDoses")]
-        public int QuantidadeCapsulasOuDoses { get; set; }
+        public int? QuantidadeCapsulasOuDoses { get; set; }
 
         [Column("Periodo")]
-        public int Periodo { get; set; } = 0;
+        public int? Periodo { get; set; } = 0;
     }
 }

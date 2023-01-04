@@ -17,6 +17,6 @@ namespace Data.Entidades
         public int SetorId { get; set; }
 
         [Column("FormaId")]
-        public int FormaId { get; set; }
+        public int? FormaId { get; set; }
     }
 }

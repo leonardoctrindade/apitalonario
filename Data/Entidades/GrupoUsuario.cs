@@ -17,6 +17,6 @@ namespace Data.Entidades
         public string Descricao { get; set; }
 
         [Column("NivelGrupo")]
-        public int NivelGrupo { get; set; } = 0;
+        public int? NivelGrupo { get; set; } = 0;
     }
 }

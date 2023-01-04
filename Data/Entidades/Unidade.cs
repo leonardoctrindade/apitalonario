@@ -24,7 +24,7 @@ namespace Data.Entidades
         public Tipo Tipo { get; set; }
 
         [Column("Fator")]
-        public double Fator { get; set; }
+        public double? Fator { get; set; }
 
         public List<UnidadeConversao> UnidadesConversao { get; set; } = new List<UnidadeConversao>();
 

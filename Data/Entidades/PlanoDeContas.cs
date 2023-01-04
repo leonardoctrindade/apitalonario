@@ -30,6 +30,6 @@ namespace Data.Entidades
         public string Descricao { get; set; }
 
         [Column("Sequencia")]
-        public double Sequencia { get; set; }
+        public double? Sequencia { get; set; }
     }
 }

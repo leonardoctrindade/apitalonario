@@ -22,7 +22,7 @@ namespace Data.Entidades
         public DateTime HoraFinal { get; set; }
 
         [Column("Quantidade")]
-        public int Quantidade { get; set; }
+        public int? Quantidade { get; set; }
 
         [Column("Hash")]
         public string Hash { get; set; }

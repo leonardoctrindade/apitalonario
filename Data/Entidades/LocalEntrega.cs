@@ -33,7 +33,7 @@ namespace Data.Entidades
         public Ncm Ncm { get; set; }
 
         [Column("AliquotaIss")]
-        public double AliquotaIss { get; set; }
+        public double? AliquotaIss { get; set; }
 
         [Column("CfopId")]
         public int? CfopId { get; set; }
@@ -61,7 +61,7 @@ namespace Data.Entidades
         public Tributo CodigoBeneficioFiscal { get; set; }
 
         [Column("CodigoNatureza")]
-        public double CodigoNatureza { get; set; }
+        public double? CodigoNatureza { get; set; }
 
         
         

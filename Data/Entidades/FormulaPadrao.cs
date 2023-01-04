@@ -61,7 +61,7 @@ namespace Data.Entidades
         public bool DesmembrarFormula { get; set; }
 
         [Column("ValorFormula")]
-        public double ValorFormula { get; set; }
+        public double? ValorFormula { get; set; }
 
         [Column("EmbalagemId")]
         public int? EmbalagemId { get; set; }
@@ -110,7 +110,7 @@ namespace Data.Entidades
         public Unidade UnidadeDose { get; set; }
 
         [Column("DoseFormula")]
-        public double DoseFormula { get; set; }
+        public double? DoseFormula { get; set; }
 
         [Column("GrupoProdutoVeiculoId")]
         public int? GrupoProdutoVeiculoId { get; set; }

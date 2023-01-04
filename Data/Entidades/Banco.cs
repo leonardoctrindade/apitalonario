@@ -74,10 +74,10 @@ namespace Data.Entidades
         public int? DiasProtesto { get; set; }
 
         [Column("Juros")]
-        public decimal Juros { get; set; }
+        public decimal? Juros { get; set; }
 
         [Column("Multa")]
-        public decimal Multa { get; set; }
+        public decimal? Multa { get; set; }
 
         [Column("ContaCorrente")]
         [MaxLength(20)]

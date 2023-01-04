@@ -139,14 +139,14 @@ namespace Data.Entidades
         public PlanoDeContas PlanoDeConta { get; set; }
 
         [Column("ValorMinimoPedido")]
-        public decimal ValorMinimoPedido { get; set; }
+        public decimal? ValorMinimoPedido { get; set; }
 
         [Column("FormaPagamento")]
         [MaxLength(100)]
         public string FormaPagamento { get; set; }
 
         [Column("PrevisaoEntrega")]
-        public int PrevisaoEntrega { get; set; }
+        public int? PrevisaoEntrega { get; set; }
 
         [Column("Frete")]
         [MaxLength(100)]

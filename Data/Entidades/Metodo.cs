@@ -17,9 +17,9 @@ namespace Data.Entidades
         public string Descricao { get; set; }
 
         [Column("QuantidadeGotas")]
-        public int QuantidadeGotas { get; set; }
+        public int? QuantidadeGotas { get; set; }
 
         [Column("Percentual")]
-        public decimal Percentual { get; set; }
+        public decimal? Percentual { get; set; }
     }
 }

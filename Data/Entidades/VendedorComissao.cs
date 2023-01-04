@@ -22,6 +22,6 @@ namespace Data.Entidades
         public Grupo Grupo { get; set; }
 
         [Column("Comissao")]
-        public double Comissao { get; set; }
+        public double? Comissao { get; set; }
     }
 }

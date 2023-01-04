@@ -20,6 +20,6 @@ namespace Data.Entidades
         public int CodigoIbge { get; set; }
 
         [Column("CodigoTelefonico")]
-        public int CodigoTelefonico { get; set; }
+        public int? CodigoTelefonico { get; set; }
     }
 }

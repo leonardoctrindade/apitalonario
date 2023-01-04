@@ -12,10 +12,10 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("ValorInicial")]
-        public double ValorInicial { get; set; }
+        public double? ValorInicial { get; set; }
 
         [Column("ValorFinal")]
-        public double ValorFinal { get; set; }
+        public double? ValorFinal { get; set; }
 
         [Column("Margem")]
         [Required(ErrorMessage = "Campo de margem não preenchido")]

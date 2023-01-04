@@ -26,16 +26,16 @@ namespace Data.Entidades
         public int? TributoCsosnId { get; set; }
 
         [Column("AliquotaIcms")]
-        public double AliquotaIcms { get; set; }
+        public double? AliquotaIcms { get; set; }
 
         [Column("AliquotaIcmsInterna")]
-        public double AliquotaIcmsInterna { get; set; }
+        public double? AliquotaIcmsInterna { get; set; }
 
         [Column("PercentualMva")]
-        public double PercentualMva { get; set; }
+        public double? PercentualMva { get; set; }
 
         [Column("PercentualFcp")]
-        public double PercentualFcp { get; set; }
+        public double? PercentualFcp { get; set; }
 
         [Column("NcmId")]
         [Required(ErrorMessage = "Campo de NcmId não preenchido")]

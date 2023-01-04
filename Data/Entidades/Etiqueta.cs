@@ -86,10 +86,10 @@ namespace Data.Entidades
         public bool RetirarEspacoEntreUnidEQtd { get; set; }
 
         [Column("LayoutWeleda")]
-        public int LayoutWeleda { get; set; }
+        public int? LayoutWeleda { get; set; }
 
         [Column("TipoModeloEtiqueta")]
-        public int TipoModeloEtiquta { get; set; }
+        public int? TipoModeloEtiquta { get; set; }
 
         [Column("ModeloImagem")]
         public byte[] ModeloImagem { get; set; }
@@ -98,7 +98,7 @@ namespace Data.Entidades
         public string Imagem { get; set; }
 
         [Column("FilialId")]
-        public int FilialId { get; set; }
+        public int? FilialId { get; set; }
 
         [Column("TipoLayoutEtiquetaPersonalizado")]
         public bool TipoLayoutEtiquetaPersonalizado { get; set; }

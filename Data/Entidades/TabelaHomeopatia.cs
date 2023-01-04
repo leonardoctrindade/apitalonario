@@ -18,7 +18,7 @@ namespace Data.Entidades
         public string Metodo { get; set; }
 
         [Column("FormaFarmaceuticaId")]
-        public int FormaFarmaceuticaId { get; set; }
+        public int? FormaFarmaceuticaId { get; set; }
 
         [Column("DinamizacaoInicial")]
         [Required(ErrorMessage = "Campo de dinamizacao inicial")]
@@ -33,9 +33,9 @@ namespace Data.Entidades
         public int Volume { get; set; }
 
         [Column("ValorVenda")]
-        public double ValorVenda { get; set; }
+        public double? ValorVenda { get; set; }
 
         [Column("ValorAdicional")]
-        public double ValorAdicional { get; set; }
+        public double? ValorAdicional { get; set; }
     }
 }

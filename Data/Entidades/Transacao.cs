@@ -12,7 +12,7 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("Codigo")]
-        public int Codigo { get; set; }
+        public int? Codigo { get; set; }
 
         [Column("Descricao")]
         [Required(ErrorMessage = "Campo de descrição não preenchido")]

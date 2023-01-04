@@ -33,7 +33,7 @@ namespace Data.Entidades
         public string Senha { get; set; }
 
         [Column("Nivel")]
-        public int Nivel { get; set; }
+        public int? Nivel { get; set; }
 
         [Column("Logon")]
         public bool Logon { get; set; }

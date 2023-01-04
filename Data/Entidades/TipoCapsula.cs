@@ -21,16 +21,16 @@ namespace Data.Entidades
         public string Numero { get; set; }
 
         [Column("VolumeInterno")]
-        public double VolumeInterno { get; set; }
+        public double? VolumeInterno { get; set; }
 
         [Column("VolumeTotal")]
-        public double VolumeTotal { get; set; }
+        public double? VolumeTotal { get; set; }
 
         [Column("Peso")]
-        public double Peso { get; set; }
+        public double? Peso { get; set; }
 
         [Column("CapsulaPadraoId")]
-        public int CapsulaPadraoId { get; set; }
+        public int? CapsulaPadraoId { get; set; }
 
         public Produto CapsulaPadrao { get; set; }
 
@@ -38,7 +38,7 @@ namespace Data.Entidades
         public bool Inativo { get; set; }
 
         [Column("GrupoCapsulasId")]
-        public int GrupoCapsulasId { get; set; }
+        public int? GrupoCapsulasId { get; set; }
 
         public Produto GrupoCapsulas { get; set; }
     }

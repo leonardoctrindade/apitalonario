@@ -64,7 +64,7 @@ namespace Data.Entidades
         public string Celular { get; set; }
 
         [Column("Comissao")]
-        public double Comissao { get; set; }
+        public double? Comissao { get; set; }
 
         [Column("CpfOuCnpj")]
         [MaxLength(18)]
@@ -74,7 +74,7 @@ namespace Data.Entidades
         public DateTime DataNascimento { get; set; }
 
         [Column("LimiteDesconto")]
-        public double LimiteDesconto { get; set; }
+        public double? LimiteDesconto { get; set; }
 
         [Column("Email")]
         [MaxLength(255)]

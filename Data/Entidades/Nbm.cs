@@ -22,15 +22,15 @@ namespace Data.Entidades
         public string Descricao { get; set; }
 
         [Column("VlrAgregadoEst")]
-        public double VlrAgregadoEst { get; set; }
+        public double? VlrAgregadoEst { get; set; }
 
         [Column("VlrAgregadoInt")]
-        public double VlrAgregadoInt { get; set; }
+        public double? VlrAgregadoInt { get; set; }
 
         [Column("VlrComplementarEst")]
-        public double VlrComplementarEst { get; set; }
+        public double? VlrComplementarEst { get; set; }
 
         [Column("VlrComplementarInt")]
-        public double VlrComplementarInt { get; set; }
+        public double? VlrComplementarInt { get; set; }
     }
 }

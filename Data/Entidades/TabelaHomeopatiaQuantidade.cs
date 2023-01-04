@@ -17,7 +17,7 @@ namespace Data.Entidades
         public string Metodo { get; set; }
 
         [Column("FormaFarmaceuticaId")]
-        public int FormaFarmaceuticaId { get; set; }
+        public int? FormaFarmaceuticaId { get; set; }
 
         [Column("DinamizacaoInicial")]
         [Required(ErrorMessage = "Campo de dinamizacao inicial não preenchido")]

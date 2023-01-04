@@ -12,13 +12,13 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("QuantidadeInicial")]
-        public double QuantidadeInicial { get; set; }
+        public double? QuantidadeInicial { get; set; }
 
         [Column("QuantidadeFinal")]
-        public double QuantidadeFinal { get; set; }
+        public double? QuantidadeFinal { get; set; }
 
         [Column("ValorMinimo")]
-        public double ValorMinimo { get; set; }
+        public double? ValorMinimo { get; set; }
 
         [Column("SiglaUnidadeFaixa")]
         public string SiglaUnidadeFaixa { get; set; }

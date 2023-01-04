@@ -17,7 +17,7 @@ namespace Data.Entidades
         public string Nome { get; set; }
 
         [Column("PrazoRecebimento")]
-        public int PrazoRecebimento { get; set; }
+        public int? PrazoRecebimento { get; set; }
 
         [Column("Desconto")]
         public decimal Desconto { get; set; }

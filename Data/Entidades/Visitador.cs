@@ -54,6 +54,6 @@ namespace Data.Entidades
         public string Celular { get; set; }
 
         [Column("Comissao")]
-        public double Comissao { get; set; }
+        public double? Comissao { get; set; }
     }
 }

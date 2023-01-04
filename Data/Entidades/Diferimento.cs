@@ -12,7 +12,7 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("Icms")]
-        public double Icms { get; set; }
+        public double? Icms { get; set; }
 
         [Column("AliquotaDiferimento")]
         [Required(ErrorMessage = "Campo de aliquota diferimnto não preenchido")]

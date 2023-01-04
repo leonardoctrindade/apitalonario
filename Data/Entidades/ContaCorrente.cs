@@ -23,7 +23,7 @@ namespace Data.Entidades
 
         [Column("Limite")]
         [MinLength(0)]
-        public double Limite { get; set; }
+        public double? Limite { get; set; }
 
         [Column("FilialId")]
         public int? FilialId { get; set; }

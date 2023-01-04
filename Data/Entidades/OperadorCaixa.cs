@@ -23,6 +23,6 @@ namespace Data.Entidades
         public string NomeAbreviado { get; set; }
 
         [Column("FilialId")]
-        public int FilialId { get; set; }   
+        public int? FilialId { get; set; }   
     }
 }
