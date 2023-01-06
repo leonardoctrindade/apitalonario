@@ -14,6 +14,7 @@ namespace Data.Config
             Database.EnsureCreated();
         }
 
+        public DbSet<AcompanhamentoPessoal> AcompanhamentoPessoal { get; set; }
         public DbSet<AdministradoraCartao> AdministradoraCartao { get; set; }
         public DbSet<AliquotaEstado> AliquotaEstado { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }

@@ -37,15 +37,7 @@ namespace APITest
 
             Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(),((ObjectResult)result.Value).StatusCode.Value.ToString());
         }
-        [Fact]
-        public async Task Insere_Limite_Menor_Zero()
-        {
-            var contaCorrente = MockContaCorente.MontaObjetoComLimiteMenorQueZero();
-            var service = new ContaCorrenteApiController(mock.Object);
-            var result = await service.AdicionarContaCorrente(contaCorrente);
 
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
-        }
         [Fact]
         public async Task Insere_NumeroConta_Nao_Preenchido()
         {

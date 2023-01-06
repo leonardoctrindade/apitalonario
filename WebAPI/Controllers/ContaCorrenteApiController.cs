@@ -35,7 +35,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(contaCorrente.Nome) || contaCorrente.Limite <= 0 || string.IsNullOrEmpty(contaCorrente.NumeroConta))
+                if (string.IsNullOrEmpty(contaCorrente.Nome) || string.IsNullOrEmpty(contaCorrente.NumeroConta))
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.iContaCorrente.Add(contaCorrente)));
@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(contaCorrente.Nome) || contaCorrente.Limite < 0 || string.IsNullOrEmpty(contaCorrente.NumeroConta))
+                if (string.IsNullOrEmpty(contaCorrente.Nome) || string.IsNullOrEmpty(contaCorrente.NumeroConta))
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.iContaCorrente.Update(contaCorrente)));

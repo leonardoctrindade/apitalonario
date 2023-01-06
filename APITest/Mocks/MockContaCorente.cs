@@ -17,10 +17,7 @@ namespace APITest.Mocks
         {
             return new ContaCorrente { Id = 1, NumeroConta = "123", Nome = "", Limite = 100.30 };
         }
-        public static ContaCorrente MontaObjetoComLimiteMenorQueZero()
-        {
-            return new ContaCorrente { Id = 1, NumeroConta = "123", Nome = "Teste 1", Limite = -100 };
-        }
+
         public static ContaCorrente MontaObjetoComNumeroContaInvalido()
         {
             return new ContaCorrente { Id = 1,NumeroConta = "",Nome = "Teste 1",Limite = 1100.10 };

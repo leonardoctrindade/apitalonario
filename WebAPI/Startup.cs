@@ -41,7 +41,8 @@ namespace WebAPI
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ContextBase>();
 
-            services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));  
+            services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));
+            services.AddSingleton<IAcompanhamentoPessoal, RepositoryAcompanhamentoPessoal>();
             services.AddSingleton<IAdministradoraCartao, RepositoryAdministradoraCartao>();
             services.AddSingleton<IAliquotaEstado, RepositoryAliquotaEstado>();
             services.AddSingleton<IBairro, RepositoryBairro>();

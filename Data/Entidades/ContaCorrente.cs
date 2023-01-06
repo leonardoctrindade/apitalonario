@@ -22,7 +22,6 @@ namespace Data.Entidades
         public string Nome { get; set; }
 
         [Column("Limite")]
-        [MinLength(0)]
         public double? Limite { get; set; }
 
         [Column("FilialId")]
