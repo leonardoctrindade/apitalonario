@@ -23,8 +23,7 @@ namespace Data.Repositorio
             using (var context = new ContextBase(this._OptionsBuilder))
             {
                 result = await context.ConvenioGrupo
-                    .Include(c => c.Convenio)
-                    .Include(c => c.Grupo)
+                    .Include(c => c.ConvenioGrupos)
                     .Where(x => x.Id == id)
                     .SingleOrDefaultAsync();
             }
