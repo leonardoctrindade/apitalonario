@@ -81,6 +81,7 @@ namespace Data.Config
         public DbSet<Prescritor> Prescritor { get; set; }
         public DbSet<PrincipioAtivo> PrincipioAtivo { get; set; }
         public DbSet<Produto> Produto { get; set; }
+        public DbSet<ReacoesAdversas> ReacoesAdversas { get; set; }
         public DbSet<Regiao> Regiao { get; set; }
         public DbSet<Setor> Setor { get; set; }
         public DbSet<SetorDiasHoras> SetorDiasHoras { get; set; }

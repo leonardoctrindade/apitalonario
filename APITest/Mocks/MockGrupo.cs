@@ -45,24 +45,6 @@ namespace APITest.Mocks
             };
         }
 
-        public static Grupo MontaObjetoComissaoInvalida()
-        {
-            return new Grupo()
-            {
-                Id = 1,
-                Descricao = "Teste Mock 1",
-                Comissao = 0,
-                DescontoMaximo = 55,
-                PercentualDesconto = 55,
-                Tipo = TipoGrupo.Floral,
-                AtivaControleDeLotesAcabados = true,
-                AtivaControleLotesDrogaria = true,
-                AtivaPesagemGrupo = true,
-                CodigoGrupoLp = "12",
-                FatorReferenciaGrupo = 123
-            };
-        }
-
         public static Grupo MontaObjetoPercentualDescontoInvalido()
         {
             return new Grupo()

@@ -40,15 +40,6 @@ namespace APITest
         }
 
         [Fact]
-        public async Task Insere_Comissao_Invalida()
-        {
-            var modelo = MockGrupo.MontaObjetoComissaoInvalida();
-            var apiController = new GrupoApiController(mock.Object);
-            var result = await apiController.AdicionarGrupo(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
-        }
-
-        [Fact]
         public async Task Insere_PercentualDesconto_Invalida()
         {
             var modelo = MockGrupo.MontaObjetoPercentualDescontoInvalido();

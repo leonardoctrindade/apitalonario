@@ -108,6 +108,7 @@ namespace WebAPI
             services.AddSingleton<IPrescritor, RepositoryPrescritor>();
             services.AddSingleton<IPrincipioAtivo, RepositoryPrincipioAtivo>();
             services.AddSingleton<IProduto, RepositoryProduto>();
+            services.AddSingleton<IReacoesAdversas, RepositoryReacoesAdversas>();
             services.AddSingleton<IRegiao, RepositoryRegiao>();
             services.AddSingleton<ISetor, RepositorySetor>();
             services.AddSingleton<ISetorDiasHoras, RepositorySetorDiasHoras>();
