@@ -15,8 +15,6 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de grupo não preenchido")]
         public int? GrupoId { get; set; }
 
-        public Grupo Grupo { get; set; }
-
         [Column("Desconto")]
         [Required(ErrorMessage = "Campo de desconto não preenchido")]
         public double Desconto { get; set; }
@@ -31,7 +29,6 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de IdConvenio não preenchido")]
         public int? ConvenioId { get; set; }
 
-        public Convenio Convenio { get; set; }
-        
+        public List<ConvenioGrupo> ConvenioGrupos { get; set; }
     }
 }
