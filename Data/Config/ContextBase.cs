@@ -106,8 +106,7 @@ namespace Data.Config
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql(GetStringConectionConfig(),
-                options => options.SetPostgresVersion(new Version(9, 6)));
+                optionsBuilder.UseNpgsql(GetStringConectionConfig());
                 base.OnConfiguring(optionsBuilder);
             }
         }
