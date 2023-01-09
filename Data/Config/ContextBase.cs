@@ -130,7 +130,7 @@ namespace Data.Config
         private string GetStringConectionConfig()
 
         {
-            string strCon = "User ID=mastersoftbr; Password=legiao22; Host=pgsql.mastersoftbr.com.br; Port=5432; Database=mastersoftbr; Pooling=true;";
+            string strCon = "User ID=postgres; Password=prixpto; Host=zeus.prismafive.com.br; Port=49282; Database=farmafacil-web; Pooling=true;";
 
             return strCon;
         }
