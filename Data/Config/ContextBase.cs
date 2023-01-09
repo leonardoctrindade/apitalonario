@@ -60,7 +60,9 @@ namespace Data.Config
         public DbSet<Grupo> Grupo { get; set; }
         public DbSet<GrupoEnsaio> GrupoEnsaio { get; set; }
         public DbSet<GrupoUsuario> GrupoUsuario { get; set; }
+        public DbSet<HabitosCliente> HabitosCliente { get; set; }
         public DbSet<Laboratorio> Laboratorio { get; set; }
+        public DbSet<LimiteDeCompraCliente> LimiteDeCompraCliente { get; set; }
         public DbSet<ListaControlado> ListaControlado { get; set; }
         public DbSet<LocalEntrega> LocalEntrega { get; set; }
         public DbSet<MaquinaPos> MaquinaPos { get; set; }
@@ -72,6 +74,7 @@ namespace Data.Config
         public DbSet<Nbm> Nbm { get; set; }
         public DbSet<Ncm> Ncm { get; set; }
         public DbSet<NcmEstado> NcmEstado { get; set; }
+        public DbSet<ObservacoesCliente> ObservacoesCliente { get; set; }
         public DbSet<OperadorCaixa> OperadorCaixa { get; set; }
         public DbSet<Pais> Pais { get; set; }
         public DbSet<Pbm> Pbm { get; set; }
@@ -84,6 +87,7 @@ namespace Data.Config
         public DbSet<Produto> Produto { get; set; }
         public DbSet<ReacoesAdversas> ReacoesAdversas { get; set; }
         public DbSet<Regiao> Regiao { get; set; }
+        public DbSet<RestricaoDeUso> RestricaoDeUso { get; set; } 
         public DbSet<Setor> Setor { get; set; }
         public DbSet<SetorDiasHoras> SetorDiasHoras { get; set; }
         public DbSet<SetorForma> SetorForma { get; set; }

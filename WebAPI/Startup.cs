@@ -87,7 +87,9 @@ namespace WebAPI
             services.AddSingleton<IGrupo, RepositoryGrupo>();
             services.AddSingleton<IGrupoEnsaio, RepositoryGrupoEnsaio>();
             services.AddSingleton<IGrupoUsuario, RepositoryGrupoUsuario>();
+            services.AddSingleton<IHabitosCliente, RepositoryHabitosCliente>();
             services.AddSingleton<ILaboratorio, RepositoryLaboratorio>();
+            services.AddSingleton<ILimiteDeCompraCliente, RepositoryLimiteDeCompraCliente>();
             services.AddSingleton<IListaControlado, RepositoryListaControlado>();
             services.AddSingleton<ILocalEntrega, RepositoryLocalEntrega>();
             services.AddSingleton<IMaquinaPos, RepositoryMaquinaPos>();
@@ -99,6 +101,7 @@ namespace WebAPI
             services.AddSingleton<INbm, RepositoryNbm>();
             services.AddSingleton<INcm, RepositoryNcm>();
             services.AddSingleton<INcmEstado, RepositoryNcmEstado>();
+            services.AddSingleton<IObservacoesCliente, RepositoryObservacoesCliente>();
             services.AddSingleton<IOperadorCaixa, RepositoryOperadorCaixa>();
             services.AddSingleton<IPais, RepositoryPais>();
             services.AddSingleton<IPbm, RepositoryPbm>();
@@ -111,6 +114,7 @@ namespace WebAPI
             services.AddSingleton<IProduto, RepositoryProduto>();
             services.AddSingleton<IReacoesAdversas, RepositoryReacoesAdversas>();
             services.AddSingleton<IRegiao, RepositoryRegiao>();
+            services.AddSingleton<IRestricaoDeUso, RepositoryRestricaoDeUso>();
             services.AddSingleton<ISetor, RepositorySetor>();
             services.AddSingleton<ISetorDiasHoras, RepositorySetorDiasHoras>();
             services.AddSingleton<ISetorForma, RepositorySetorForma>();

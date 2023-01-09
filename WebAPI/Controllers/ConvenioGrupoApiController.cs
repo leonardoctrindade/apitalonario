@@ -53,7 +53,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IConvenioGrupo.GetConvenioGrupo(id));
+                return Json(await this.IConvenioGrupo.GetEntityById(id));
             } catch(Exception ex)
             {
                 return new JsonResult(new { message = "Error ao retornar o grupo de convenio " + ex.Message }) { StatusCode = 400 };

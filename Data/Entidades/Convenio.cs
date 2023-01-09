@@ -59,7 +59,7 @@ namespace Data.Entidades
 
         public Estado Estado { get; set; }
 
-        [Column("IdentificaodrConvenio")]
+        [Column("IdentificadorConvenio")]
         public IdentificadorConvenio IdentificadorConvenio { get; set; }
 
         [Column("Ddd")]
@@ -111,6 +111,8 @@ namespace Data.Entidades
 
         [Column("EnderecoComprovanteVenda")]
         public bool EnderecoComprovanteVenda { get; set; }
+
+        public List<ConvenioGrupo> ConvenioGrupos { get; set; }
     }
 
     public enum IdentificadorConvenio

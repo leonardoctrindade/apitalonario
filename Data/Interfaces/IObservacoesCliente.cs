@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 namespace Data.Interfaces
 {
-    public interface IConvenioGrupo : IGeneric<ConvenioGrupo>
+    public interface IObservacoesCliente : IGeneric<ObservacoesCliente>
     {
-        Task<List<ConvenioGrupo>> ListagemCustomizada();
+        Task<List<ObservacoesCliente>> ListagemCustomizada();
     }
 }

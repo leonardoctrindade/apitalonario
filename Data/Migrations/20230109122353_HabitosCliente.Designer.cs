@@ -3,6 +3,7 @@ using System;
 using Data.Config;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    partial class ContextBaseModelSnapshot : ModelSnapshot
+    [Migration("20230109122353_HabitosCliente")]
+    partial class HabitosCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -856,7 +859,7 @@ namespace Data.Migrations
 
                     b.Property<int>("IdentificadorConvenio")
                         .HasColumnType("integer")
-                        .HasColumnName("IdentificadorConvenio");
+                        .HasColumnName("IdentificaodrConvenio");
 
                     b.Property<string>("Ie")
                         .HasMaxLength(20)
@@ -925,6 +928,9 @@ namespace Data.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("AplicaDescontoProduto");
 
+                    b.Property<int?>("ConvenioGrupoId")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("ConvenioId")
                         .IsRequired()
                         .HasColumnType("integer")
@@ -941,7 +947,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConvenioId");
+                    b.HasIndex("ConvenioGrupoId");
 
                     b.ToTable("ConvenioGrupo");
                 });
@@ -2615,44 +2621,6 @@ namespace Data.Migrations
                     b.ToTable("Laboratorio");
                 });
 
-            modelBuilder.Entity("Data.Entidades.LimiteDeCompraCliente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("BloqueioLimiteExcedido")
-                        .HasColumnType("boolean")
-                        .HasColumnName("BloqueioLimiteExcedido");
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("integer")
-                        .HasColumnName("ClienteId");
-
-                    b.Property<int>("DiaPagamento")
-                        .HasColumnType("integer")
-                        .HasColumnName("DiaPagamento");
-
-                    b.Property<int>("FormaPagamento")
-                        .HasColumnType("integer")
-                        .HasColumnName("FormaPagamento");
-
-                    b.Property<double>("LimiteDeCompra")
-                        .HasColumnType("double precision")
-                        .HasColumnName("LimiteDeCompra");
-
-                    b.Property<int>("PrazoDias")
-                        .HasColumnType("integer")
-                        .HasColumnName("PrazoDias");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LimiteDeCompraCliente");
-                });
-
             modelBuilder.Entity("Data.Entidades.ListaControlado", b =>
                 {
                     b.Property<int>("Id")
@@ -3155,38 +3123,6 @@ namespace Data.Migrations
                     b.HasIndex("NcmId");
 
                     b.ToTable("NcmEstado");
-                });
-
-            modelBuilder.Entity("Data.Entidades.ObservacoesCliente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("integer")
-                        .HasColumnName("ClienteId");
-
-                    b.Property<string>("MensagemVenda")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("MensagemVenda");
-
-                    b.Property<string>("ObservacaoGeral")
-                        .HasColumnType("text")
-                        .HasColumnName("ObservacaoGeral");
-
-                    b.Property<string>("ObservacaoOp")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("ObservacaoOp");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ObservacoesCliente");
                 });
 
             modelBuilder.Entity("Data.Entidades.OperadorCaixa", b =>
@@ -3745,37 +3681,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Regiao");
-                });
-
-            modelBuilder.Entity("Data.Entidades.RestricaoDeUso", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("integer")
-                        .HasColumnName("ClienteId");
-
-                    b.Property<int>("GrupoId")
-                        .HasColumnType("integer")
-                        .HasColumnName("GrupoId");
-
-                    b.Property<string>("Observacao")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("Observacao");
-
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("integer")
-                        .HasColumnName("ProdutoId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RestricaoDeUso");
                 });
 
             modelBuilder.Entity("Data.Entidades.Setor", b =>
@@ -4848,11 +4753,9 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Entidades.ConvenioGrupo", b =>
                 {
-                    b.HasOne("Data.Entidades.Convenio", null)
+                    b.HasOne("Data.Entidades.ConvenioGrupo", null)
                         .WithMany("ConvenioGrupos")
-                        .HasForeignKey("ConvenioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ConvenioGrupoId");
                 });
 
             modelBuilder.Entity("Data.Entidades.Ensaio", b =>
@@ -5386,7 +5289,7 @@ namespace Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Data.Entidades.Convenio", b =>
+            modelBuilder.Entity("Data.Entidades.ConvenioGrupo", b =>
                 {
                     b.Navigation("ConvenioGrupos");
                 });

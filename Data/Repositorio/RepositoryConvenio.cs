@@ -28,6 +28,7 @@ namespace Data.Repositorio
                     .Include(c => c.Cidade)
                     .Include(c => c.Estado)
                     .Include(c => c.Visitador)
+                    .Include(c => c.ConvenioGrupos)
                     .Where(x => x.Id == id)
                     .SingleOrDefaultAsync();
             }
