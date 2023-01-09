@@ -101,8 +101,10 @@ namespace WebAPI
             services.AddSingleton<INbm, RepositoryNbm>();
             services.AddSingleton<INcm, RepositoryNcm>();
             services.AddSingleton<INcmEstado, RepositoryNcmEstado>();
+            services.AddSingleton<INfeExpedicaoCliente, RepositoryNfeExpedicaoCliente>();
             services.AddSingleton<IObservacoesCliente, RepositoryObservacoesCliente>();
             services.AddSingleton<IOperadorCaixa, RepositoryOperadorCaixa>();
+            services.AddSingleton<IPaciente, RepositoryPaciente>();
             services.AddSingleton<IPais, RepositoryPais>();
             services.AddSingleton<IPbm, RepositoryPbm>();
             services.AddSingleton<IPlanoDeContas, RepositoryPlanoDeContas>();

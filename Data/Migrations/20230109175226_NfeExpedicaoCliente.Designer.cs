@@ -3,6 +3,7 @@ using System;
 using Data.Config;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    partial class ContextBaseModelSnapshot : ModelSnapshot
+    [Migration("20230109175226_NfeExpedicaoCliente")]
+    partial class NfeExpedicaoCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3247,92 +3250,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OperadorCaixa");
-                });
-
-            modelBuilder.Entity("Data.Entidades.Paciente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Acao")
-                        .HasColumnType("integer")
-                        .HasColumnName("Acao");
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("integer")
-                        .HasColumnName("ClienteId");
-
-                    b.Property<string>("CpfCnpj")
-                        .HasMaxLength(18)
-                        .HasColumnType("character varying(18)")
-                        .HasColumnName("CpfCnpj");
-
-                    b.Property<DateTime>("DataExpedicao")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("DataExpedicao");
-
-                    b.Property<DateTime?>("DataNascimento")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("DataNascimento");
-
-                    b.Property<int>("EspecieId")
-                        .HasColumnType("integer")
-                        .HasColumnName("EspecieId");
-
-                    b.Property<int>("EstadoExpedidorId")
-                        .HasColumnType("integer")
-                        .HasColumnName("EstadoExpedidorId");
-
-                    b.Property<int>("Genero")
-                        .HasColumnType("integer")
-                        .HasColumnName("Genero");
-
-                    b.Property<bool>("NaoAvisarUsoContinuo")
-                        .HasColumnType("boolean")
-                        .HasColumnName("NaoAvisarUsoContinuo");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("character varying(60)")
-                        .HasColumnName("Nome");
-
-                    b.Property<string>("NomeRotulo")
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
-                        .HasColumnName("NomeRotulo");
-
-                    b.Property<string>("NumeroDocumento")
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("NumeroDocumento");
-
-                    b.Property<string>("Observacoes")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("Observacoes");
-
-                    b.Property<string>("OrgaoExpedidor")
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("OrgaoExpedidor");
-
-                    b.Property<double>("PesoPaciente")
-                        .HasColumnType("double precision")
-                        .HasColumnName("PesoPaciente");
-
-                    b.Property<string>("Rg")
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("Rg");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Paciente");
                 });
 
             modelBuilder.Entity("Data.Entidades.Pais", b =>

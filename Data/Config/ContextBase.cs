@@ -74,8 +74,10 @@ namespace Data.Config
         public DbSet<Nbm> Nbm { get; set; }
         public DbSet<Ncm> Ncm { get; set; }
         public DbSet<NcmEstado> NcmEstado { get; set; }
+        public DbSet<NfeExpedicaoCliente> NfeExpedicaoCliente { get; set; }
         public DbSet<ObservacoesCliente> ObservacoesCliente { get; set; }
         public DbSet<OperadorCaixa> OperadorCaixa { get; set; }
+        public DbSet<Paciente> Paciente { get; set; }
         public DbSet<Pais> Pais { get; set; }
         public DbSet<Pbm> Pbm { get; set; }
         public DbSet<PlanoDeContas> PlanoDeContas { get; set; }
