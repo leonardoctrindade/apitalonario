@@ -12,5 +12,6 @@ namespace Data.Entidades
     {
         public Farmacia Farmacia { get; set; }
         public Impressao Impressao { get; set; }
+        public CupomFiscal CupomFiscal { get; set; }
     }
 }

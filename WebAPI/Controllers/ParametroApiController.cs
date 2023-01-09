@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                Json(await Task.FromResult(this.IParametro.AdicionarParametro(parametro.Farmacia, parametro.Farmacia.Endereco, parametro.Farmacia.Contato, parametro.Farmacia.Farmaceutico, parametro.Impressao)));
+                Json(await Task.FromResult(this.IParametro.AdicionarParametro(parametro.Farmacia, parametro.Farmacia.Endereco, parametro.Farmacia.Contato, parametro.Farmacia.Farmaceutico, parametro.Impressao, parametro.CupomFiscal)));
 
                 return Json(Ok());
             }
