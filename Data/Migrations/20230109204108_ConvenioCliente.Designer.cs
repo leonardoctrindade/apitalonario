@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    [Migration("20230109193632_Paciente")]
-    partial class Paciente
+    [Migration("20230109204108_ConvenioCliente")]
+    partial class ConvenioCliente
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -909,6 +909,44 @@ namespace Data.Migrations
                     b.HasIndex("VisitadorId");
 
                     b.ToTable("Convenio");
+                });
+
+            modelBuilder.Entity("Data.Entidades.ConvenioCliente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean")
+                        .HasColumnName("Ativo");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("integer")
+                        .HasColumnName("ClienteId");
+
+                    b.Property<int>("ConvenioId")
+                        .HasColumnType("integer")
+                        .HasColumnName("ConvenioId");
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DataCadastro");
+
+                    b.Property<bool>("EmUso")
+                        .HasColumnType("boolean")
+                        .HasColumnName("EmUso");
+
+                    b.Property<string>("Numero")
+                        .HasColumnType("text")
+                        .HasColumnName("Numero");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ConvenioCliente");
                 });
 
             modelBuilder.Entity("Data.Entidades.ConvenioGrupo", b =>

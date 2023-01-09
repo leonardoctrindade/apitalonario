@@ -56,6 +56,7 @@ namespace WebAPI
             services.AddSingleton<IContabilista, RepositoryContabilista>();
             services.AddSingleton<IContaCorrente, RepositoryContaCorrente>();
             services.AddSingleton<IConvenio, RepositoryConvenio>();
+            services.AddSingleton<IConvenioCliente, RepositoryConvenioCliente>();
             services.AddSingleton<IConvenioGrupo, RepositoryConvenioGrupo>();
             services.AddSingleton<IDcb, RepositoryDcb>();
             services.AddSingleton<IDci, RepositoryDci>();
