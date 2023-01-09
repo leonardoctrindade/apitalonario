@@ -94,6 +94,15 @@ namespace Data.Config
         public DbSet<VendedorComissao> VendedorComissao { get; set; }
         public DbSet<Visitador> Visitador { get; set; }
 
+        public DbSet<Endereco> Endereco { get; set; }
+        public DbSet<Contato> Contato { get; set; }
+
+        public DbSet<Farmaceutico> Farmaceutico { get; set; }
+
+        public DbSet<Farmacia> Farmacia { get; set; }
+
+        public DbSet<Impressao> Impressao { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

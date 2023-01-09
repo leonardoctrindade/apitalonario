@@ -37,6 +37,9 @@ namespace Data.Repositorio
             }
         }
 
+
+      
+
         public async Task Delete(T Objeto)
         {
             try
