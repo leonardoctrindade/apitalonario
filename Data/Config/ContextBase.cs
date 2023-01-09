@@ -103,6 +103,8 @@ namespace Data.Config
 
         public DbSet<Impressao> Impressao { get; set; }
 
+        public DbSet<CupomFiscal> CupomFiscal { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

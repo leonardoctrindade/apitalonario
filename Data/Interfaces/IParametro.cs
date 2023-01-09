@@ -9,6 +9,6 @@ namespace Data.Interfaces
     public interface IParametro : IGeneric<Parametro>
     {
         Task<List<Parametro>> ListagemCustomizada();
-        Task AdicionarParametro(Farmacia farmacia, Endereco endereco, Contato contato, Farmaceutico farmaceutico, Impressao impressao);
+        Task AdicionarParametro(Farmacia farmacia, Endereco endereco, Contato contato, Farmaceutico farmaceutico, Impressao impressao, CupomFiscal cupomFiscal);
     }
 }

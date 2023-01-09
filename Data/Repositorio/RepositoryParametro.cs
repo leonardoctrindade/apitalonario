@@ -15,7 +15,7 @@ namespace Data.Repositorio
             throw new NotImplementedException();
         }
 
-        public async Task AdicionarParametro(Farmacia farmacia, Endereco endereco, Contato contato, Farmaceutico farmaceutico, Impressao impressao)
+        public async Task AdicionarParametro(Farmacia farmacia, Endereco endereco, Contato contato, Farmaceutico farmaceutico, Impressao impressao, CupomFiscal cupomFiscal)
         {
             using (var data = new ContextBase(_OptionsBuilder))
             {
@@ -55,10 +55,15 @@ namespace Data.Repositorio
                             await data.Set<Impressao>().AddAsync(impressao);
                             await data.SaveChangesAsync();
 
+                            //Cupom Fiscal
+                            await data.Set<CupomFiscal>().AddAsync(cupomFiscal);
+                            await data.SaveChangesAsync();
+
                             //Nao esquecer de criar e inserir na tabela parametro todos os ids
                             //IDs Para Parametro
                             //var idFarmacia = farmacia.Id;
                             //var idImpressao = impressao.Id;
+                            //var idCupomFiscal = cupomFiscal.Id;
 
                             await transaction.CommitAsync();
 
