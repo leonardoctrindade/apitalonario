@@ -130,7 +130,6 @@ namespace Data.Entidades
     }
     public enum Genero
     {
-        Selecione,
         Masculino,
         Feminino
     }

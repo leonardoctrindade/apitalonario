@@ -26,6 +26,8 @@ namespace Data.Config
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Cidade> Cidade { get; set; }
         public DbSet<Classe> Classe { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<ConfiguracoesPrismafive> ConfiguracoesPrismafive { get; set; }
         public DbSet<Contabilista> Contabilista { get; set; }
         public DbSet<ContaCorrente> ContaCorrente { get; set; }
         public DbSet<Convenio> Convenio { get; set; }
@@ -37,6 +39,7 @@ namespace Data.Config
         public DbSet<Diferimento> Diferimento { get; set; }
         public DbSet<DOM_RegimeTributario> DOM_RegimeTributario { get; set; }
         public DbSet<Ecf> Ecf { get; set; }
+        public DbSet<EnderecoEntregaCliente> EnderecoEntregaCliente { get; set; }
         public DbSet<Ensaio> Ensaio { get; set; }
         public DbSet<Entregador> Entregador { get; set; }
         public DbSet<EntregadorRegiao> EntregadorRegiao { get; set; }
