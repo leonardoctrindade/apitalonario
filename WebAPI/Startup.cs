@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
 
 namespace WebAPI
 {
@@ -173,7 +174,10 @@ namespace WebAPI
                };
            });
 
-
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FarmaFácilWeb Api", Version = "v1" });
+            });
 
         }
 
@@ -206,6 +210,13 @@ namespace WebAPI
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FarmaFácilWeb Api V1");
+            });
+
+            app.UseSwagger();
         }
     }
 }
