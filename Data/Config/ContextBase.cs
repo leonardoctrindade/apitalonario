@@ -65,6 +65,7 @@ namespace Data.Config
         public DbSet<GrupoEnsaio> GrupoEnsaio { get; set; }
         public DbSet<GrupoUsuario> GrupoUsuario { get; set; }
         public DbSet<HabitosCliente> HabitosCliente { get; set; }
+        public DbSet<IntervaloDinamizacaoHomeopatia> IntervaloDinamizacaoHomeopatia { get; set; }
         public DbSet<Laboratorio> Laboratorio { get; set; }
         public DbSet<LimiteDeCompraCliente> LimiteDeCompraCliente { get; set; }
         public DbSet<ListaControlado> ListaControlado { get; set; }
@@ -91,6 +92,7 @@ namespace Data.Config
         public DbSet<Prescritor> Prescritor { get; set; }
         public DbSet<PrincipioAtivo> PrincipioAtivo { get; set; }
         public DbSet<Produto> Produto { get; set; }
+        public DbSet<QuantidadeXValorHomeopatia> QuantidadeXValorHomeopatia { get; set; }
         public DbSet<ReacoesAdversas> ReacoesAdversas { get; set; }
         public DbSet<Regiao> Regiao { get; set; }
         public DbSet<RestricaoDeUso> RestricaoDeUso { get; set; } 
@@ -99,7 +101,6 @@ namespace Data.Config
         public DbSet<SetorForma> SetorForma { get; set; }
         public DbSet<TabelaFloral> TabelaFloral { get; set; }
         public DbSet<TabelaHomeopatia> TabelaHomeopatia { get; set; }
-        public DbSet<TabelaHomeopatiaQuantidade> TabelaHomeopatiaQuantidade { get; set; }
         public DbSet<TipoCapsula> TipoCapsula { get; set; }
         public DbSet<TipoContato> TipoContato { get; set; }
         public DbSet<TipoJustificativa> TipoJustificativa { get; set; }
@@ -113,6 +114,7 @@ namespace Data.Config
         public DbSet<Vendedor> Vendedor { get; set; }
         public DbSet<VendedorComissao> VendedorComissao { get; set; }
         public DbSet<Visitador> Visitador { get; set; }
+        public DbSet<VolumeXValorHomeopatia> VolumeXValorHomeopatia { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

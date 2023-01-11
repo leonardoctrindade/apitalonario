@@ -39,8 +39,6 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(TabelaHomeopatia.Metodo))
                     return Json(BadRequest(ModelState));
-                if (TabelaHomeopatia.DinamizacaoInicial <= 0 || TabelaHomeopatia.DinamizacaoFinal <= 0 || TabelaHomeopatia.Volume < 0)
-                    return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.ITabelaHomeopatia.Add(TabelaHomeopatia)));
 
@@ -71,8 +69,6 @@ namespace WebAPI.Controllers
             try
             {
                 if (String.IsNullOrEmpty(TabelaHomeopatia.Metodo))
-                    return Json(BadRequest(ModelState));
-                if (TabelaHomeopatia.DinamizacaoInicial <= 0 || TabelaHomeopatia.DinamizacaoFinal <= 0 || TabelaHomeopatia.Volume < 0)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.ITabelaHomeopatia.Update(TabelaHomeopatia)));

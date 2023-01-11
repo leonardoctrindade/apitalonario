@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 namespace Data.Interfaces
 {
-    public interface ITabelaHomeopatiaQuantidade : IGeneric<TabelaHomeopatiaQuantidade>
+    public interface IVolumeXValorHomeopatia : IGeneric<VolumeXValorHomeopatia>
     {
-        Task<List<TabelaHomeopatiaQuantidade>> ListagemCustomizada();
+        Task<List<VolumeXValorHomeopatia>> ListagemCustomizada();
     }
 }

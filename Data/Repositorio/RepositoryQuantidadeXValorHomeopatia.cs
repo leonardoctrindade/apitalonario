@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace Data.Repositorio
 {
-    public class RepositoryTabelaHomeopatiaQuantidade: RepositoryGenerics<TabelaHomeopatiaQuantidade>, ITabelaHomeopatiaQuantidade
+    public class RepositoryQuantidadeXValorHomeopatia: RepositoryGenerics<QuantidadeXValorHomeopatia>, IQuantidadeXValorHomeopatia
     {
-        public Task<List<TabelaHomeopatiaQuantidade>> ListagemCustomizada()
+        public Task<List<QuantidadeXValorHomeopatia>> ListagemCustomizada()
         {
             throw new NotImplementedException();
         }

@@ -41,33 +41,6 @@ namespace APITest
         }
 
         [Fact]
-        public async Task Insere_DinamizacaoInicial_invalido()
-        {
-            var modelo = MockTabelaHomeopatia.MontaObjetoDinamizacaoInicialInvalida();
-            var apiController = new TabelaHomeopatiaApiController(mock.Object);
-            var result = await apiController.AdicionarTabelaHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
-        }
-
-        [Fact]
-        public async Task Insere_DinamizacaoFinal_invalido()
-        {
-            var modelo = MockTabelaHomeopatia.MontaObjetoDinamizacaoFinalInvalida();
-            var apiController = new TabelaHomeopatiaApiController(mock.Object);
-            var result = await apiController.AdicionarTabelaHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
-        }
-
-        [Fact]
-        public async Task Insere_Volume_invalido()
-        {
-            var modelo = MockTabelaHomeopatia.MontaObjetoVolumeInvalida();
-            var apiController = new TabelaHomeopatiaApiController(mock.Object);
-            var result = await apiController.AdicionarTabelaHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
-        }
-
-        [Fact]
         public async Task Editar_Sucesso()
         {
             var modelo = MockTabelaHomeopatia.MontaObjetoUnico();

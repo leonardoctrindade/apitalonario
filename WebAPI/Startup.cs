@@ -92,6 +92,7 @@ namespace WebAPI
             services.AddSingleton<IGrupoEnsaio, RepositoryGrupoEnsaio>();
             services.AddSingleton<IGrupoUsuario, RepositoryGrupoUsuario>();
             services.AddSingleton<IHabitosCliente, RepositoryHabitosCliente>();
+            services.AddSingleton<IIntervaloDinamizacaoHomeopatia, RepositoryIntervaloDinamizacaoHomeopatia>();
             services.AddSingleton<ILaboratorio, RepositoryLaboratorio>();
             services.AddSingleton<ILimiteDeCompraCliente, RepositoryLimiteDeCompraCliente>();
             services.AddSingleton<IListaControlado, RepositoryListaControlado>();
@@ -118,6 +119,7 @@ namespace WebAPI
             services.AddSingleton<IPrescritor, RepositoryPrescritor>();
             services.AddSingleton<IPrincipioAtivo, RepositoryPrincipioAtivo>();
             services.AddSingleton<IProduto, RepositoryProduto>();
+            services.AddSingleton<IQuantidadeXValorHomeopatia, RepositoryQuantidadeXValorHomeopatia>();
             services.AddSingleton<IReacoesAdversas, RepositoryReacoesAdversas>();
             services.AddSingleton<IRegiao, RepositoryRegiao>();
             services.AddSingleton<IRestricaoDeUso, RepositoryRestricaoDeUso>();
@@ -126,7 +128,6 @@ namespace WebAPI
             services.AddSingleton<ISetorForma, RepositorySetorForma>();
             services.AddSingleton<ITabelaFloral, RepositoryTabelaFloral>();
             services.AddSingleton<ITabelaHomeopatia, RepositoryTabelaHomeopatia>();
-            services.AddSingleton<ITabelaHomeopatiaQuantidade, RepositoryTabelaHomeopatiaQuantidade>();
             services.AddSingleton<ITipoCapsula, RepositoryTipoCapsula>();
             services.AddSingleton<ITipoContato, RepositoryTipoContato>();
             services.AddSingleton<ITipoJustificativa, RepositoryTipoJustificativa>();
@@ -140,6 +141,7 @@ namespace WebAPI
             services.AddSingleton<IVendedor, RepositoryVendedor>();
             services.AddSingleton<IVendedorComissao, RepositoryVendedorComissao>();
             services.AddSingleton<IVisitador, RepositoryVisitador>();
+            services.AddSingleton<IVolumeXValorHomeopatia, RepositoryVolumeXValorHomeopatia>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>
