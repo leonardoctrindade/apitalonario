@@ -133,7 +133,7 @@ namespace Data.Config
             base.OnModelCreating(builder);
         }
 
-        private string GetStringConectionConfig()
+        private static string GetStringConectionConfig()
 
         {
             string strCon = "User ID=postgres; Password=prixpto; Host=zeus.prismafive.com.br; Port=49282; Database=farmafacil-web; Pooling=true;";

@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
             {
                 return Json(await this.IEtapa.List());
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 return Json(BadRequest(ModelState));

@@ -24,4 +24,3 @@ namespace Data.Entidades
         public int? FilialId { get; set; }
     }
 }
-+
