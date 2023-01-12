@@ -34,9 +34,11 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (String.IsNullOrEmpty(Turno.HoraFinal))
+                if (Turno.HoraFinal <= DateTime.MinValue)
                     return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Turno.HoraInicial))
+                if (Turno.HoraInicial <= DateTime.MinValue)
+                    return Json(BadRequest(ModelState));
+                if (Turno.HoraFinal < Turno.HoraInicial)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.ITurno.Add(Turno)));
@@ -67,9 +69,11 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (String.IsNullOrEmpty(Turno.HoraFinal))
+                if (Turno.HoraFinal < DateTime.MinValue)
                     return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Turno.HoraInicial))
+                if (Turno.HoraInicial < DateTime.MinValue)
+                    return Json(BadRequest(ModelState));
+                if (Turno.HoraFinal < Turno.HoraInicial)
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.ITurno.Update(Turno)));

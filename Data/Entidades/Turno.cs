@@ -14,15 +14,14 @@ namespace Data.Entidades
 
         [Column("HoraInicial")]
         [Required(ErrorMessage = "Campo de hora inicial não preenchido")]
-        [MaxLength(5)]
-        public string HoraInicial { get; set; }
+        public DateTime HoraInicial { get; set; }
 
         [Column("HoraFinal")]
         [Required(ErrorMessage = "Campo de hora final não preenchido")]
-        [MaxLength(5)]
-        public string HoraFinal { get; set; }
+        public DateTime HoraFinal { get; set; }
 
         [Column("FilialId")]
         public int? FilialId { get; set; }
     }
 }
++

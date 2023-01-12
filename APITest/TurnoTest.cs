@@ -31,7 +31,7 @@ namespace APITest
         }
 
         [Fact]
-        public async Task Insere_HoraInicial_Preenchido()
+        public async Task Insere_HoraInicial_Nao_Preenchido()
         {
             var modelo = MockTurno.MontaObjetoHoraInicialVazio();
             var apiController = new TurnoApiController(mock.Object);
@@ -40,9 +40,18 @@ namespace APITest
         }
 
         [Fact]
-        public async Task Insere_HoraFinal_Preenchido()
+        public async Task Insere_HoraFinal_Nao_Preenchido()
         {
             var modelo = MockTurno.MontaObjetoHoraFinalVazio();
+            var apiController = new TurnoApiController(mock.Object);
+            var result = await apiController.AdicionarTurno(modelo);
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+        }
+
+        [Fact]
+        public async Task Insere_HoraInicialMaiorQueHoraFinal()
+        {
+            var modelo = MockTurno.MontaObjetoHoraInicialMaiorQueHoraFInal();
             var apiController = new TurnoApiController(mock.Object);
             var result = await apiController.AdicionarTurno(modelo);
             Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
@@ -80,7 +89,7 @@ namespace APITest
             mock.Setup(y => y.GetEntityById(MockTurno.MontaObjetoUnico().Id)).ReturnsAsync(MockTurno.MontaObjetoUnico());
             TurnoApiController ret = new TurnoApiController(mock.Object);
             var result = await ret.RetornaTurnoPorId(1);
-            Assert.Equal("08:00", ((Data.Entidades.Turno)result.Value).HoraInicial);
+            Assert.Equal(1 , ((Data.Entidades.Turno)result.Value).FilialId);
         }
 
         [Fact]
