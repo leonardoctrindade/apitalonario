@@ -119,6 +119,8 @@ namespace Data.Config
 
         public DbSet<Sipro> Sipro { get; set; }
 
+        public DbSet<GestaoEntrega> GestaoEntrega { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
