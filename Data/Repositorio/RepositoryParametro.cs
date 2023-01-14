@@ -15,7 +15,10 @@ namespace Data.Repositorio
             throw new NotImplementedException();
         }
 
-        public async Task AdicionarParametro(Farmacia farmacia, Endereco endereco, Contato contato, Farmaceutico farmaceutico, Impressao impressao, CupomFiscal cupomFiscal)
+        public async Task AdicionarParametro(Farmacia farmacia, Endereco endereco, Contato contato, Farmaceutico farmaceutico, 
+            Impressao impressao, CupomFiscal cupomFiscal, ConvenioParametro convenioParametro, 
+            CartoesTEF cartoesTEF, NfeSped nfeSped, Nfe nfe, GeralFarmacia geralFarmacia
+            ,PrismaSync prismaSync, Sipro sipro)
         {
             using (var data = new ContextBase(_OptionsBuilder))
             {
@@ -50,7 +53,6 @@ namespace Data.Repositorio
                             await data.Set<Farmacia>().AddAsync(farmacia);
                             await data.SaveChangesAsync();
 
-
                             //Impressao
                             await data.Set<Impressao>().AddAsync(impressao);
                             await data.SaveChangesAsync();
@@ -59,11 +61,46 @@ namespace Data.Repositorio
                             await data.Set<CupomFiscal>().AddAsync(cupomFiscal);
                             await data.SaveChangesAsync();
 
+                            //Convenio
+                            await data.Set<ConvenioParametro>().AddAsync(convenioParametro);
+                            await data.SaveChangesAsync();
+
+                            //Cartoes TEF
+                            await data.Set<CartoesTEF>().AddAsync(cartoesTEF);
+                            await data.SaveChangesAsync();
+
+                            //NfeSped
+                            await data.Set<NfeSped>().AddAsync(nfeSped);
+                            await data.SaveChangesAsync();
+
+                            //Nfe
+                            await data.Set<Nfe>().AddAsync(nfe);
+                            await data.SaveChangesAsync();
+
+                            //Geral Farmacia
+                            await data.Set<GeralFarmacia>().AddAsync(geralFarmacia);
+                            await data.SaveChangesAsync();
+
+                            //PrismaSync
+                            await data.Set<PrismaSync>().AddAsync(prismaSync);
+                            await data.SaveChangesAsync();
+
+                            //PrismaSync
+                            await data.Set<Sipro>().AddAsync(sipro);
+                            await data.SaveChangesAsync();
+
                             //Nao esquecer de criar e inserir na tabela parametro todos os ids
                             //IDs Para Parametro
                             //var idFarmacia = farmacia.Id;
                             //var idImpressao = impressao.Id;
                             //var idCupomFiscal = cupomFiscal.Id;
+                            //var idConvenio = convenioParametro.Id;
+                            //var idCartoesTEF = cartoesTEF.Id;
+                            //var idNfeSped = nfeSped.Id;
+                            //var idNfe = nfe.Id;
+                            //var idGeralFarmacia = geralFarmacia.Id;
+                            //var idPrismaSync = prismaSync.Id;
+                            //var idSipro = sipro.Id;
 
                             await transaction.CommitAsync();
 

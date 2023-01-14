@@ -13,5 +13,12 @@ namespace Data.Entidades
         public Farmacia Farmacia { get; set; }
         public Impressao Impressao { get; set; }
         public CupomFiscal CupomFiscal { get; set; }
+        public ConvenioParametro ConvenioParametro { get; set; }
+        public CartoesTEF CartoesTEF { get; set; }
+        public NfeSped NfeSped { get; set; }
+        public Nfe Nfe { get; set; }
+        public GeralFarmacia GeralFarmacia { get; set; }
+        public PrismaSync PrismaSync { get; set; }
+        public Sipro Sipro { get; set; }
     }
 }
