@@ -23,7 +23,6 @@ namespace Data.Repositorio
             using (var context = new ContextBase(this._OptionsBuilder)) 
             {
                 result = await context.EntregadorRegiao
-                    .Include(c => c.Entregador)
                     .Include(c => c.Regiao)
                     .Where(x => x.Id == id)
                     .SingleOrDefaultAsync();

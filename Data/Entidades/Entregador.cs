@@ -70,5 +70,7 @@ namespace Data.Entidades
 
         [Column("DataAtualizacaoRec")]
         public DateTime? DataAtualizacaoRec { get; set; }
+
+        public List<EntregadorRegiao> EntregadorRegiao { get; set; }
     }
 }

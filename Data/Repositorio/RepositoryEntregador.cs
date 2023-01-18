@@ -4,6 +4,9 @@ using Data.Entidades;
 using Data.Interfaces;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Data.Config;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Data.Repositorio
 {
@@ -12,6 +15,20 @@ namespace Data.Repositorio
         public Task<List<Entregador>> ListagemCustomizada()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Entregador> GetEntregador(int id)
+        {
+            var result = new Entregador();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                result = await context.Entregador
+                    .Include(c => c.EntregadorRegiao)
+                    .Where(x => x.Id == id)
+                    .SingleOrDefaultAsync();
+            }
+
+            return result;
         }
     }
 }

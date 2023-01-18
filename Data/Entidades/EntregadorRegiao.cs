@@ -15,8 +15,6 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de EntregadorId não preenchido")]
         public int? EntregadorId { get; set; }
 
-        public Entregador Entregador { get; set; }
-
         [Column("RegiaoId")]
         [Required(ErrorMessage = "Campo de RegiaoId não preenchido")]
         public int? RegiaoId { get; set; }
