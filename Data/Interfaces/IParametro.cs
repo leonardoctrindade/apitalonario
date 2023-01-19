@@ -12,7 +12,8 @@ namespace Data.Interfaces
         Task AdicionarParametro(Farmacia farmacia, Endereco endereco,
             Contato contato, Farmaceutico farmaceutico, Impressao impressao,
             CupomFiscal cupomFiscal, ConvenioParametro convenioParametro, 
-            CartoesTEF cartoesTEF, NfeSped nfeSped, Nfe nfe, GeralFarmacia geralFarmacia
-            PrismaSync prismaSync, Sipro sipro);
+            CartoesTEF cartoesTEF, NfeSped nfeSped, Nfe nfe, GeralFarmacia geralFarmacia,
+            PrismaSync prismaSync, Sipro sipro, GestaoEntrega gestaoEntrega, 
+            GeralManipulacao geralManipulacao);
     }
 }

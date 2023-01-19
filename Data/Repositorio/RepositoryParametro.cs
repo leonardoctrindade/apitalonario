@@ -18,7 +18,8 @@ namespace Data.Repositorio
         public async Task AdicionarParametro(Farmacia farmacia, Endereco endereco, Contato contato, Farmaceutico farmaceutico, 
             Impressao impressao, CupomFiscal cupomFiscal, ConvenioParametro convenioParametro, 
             CartoesTEF cartoesTEF, NfeSped nfeSped, Nfe nfe, GeralFarmacia geralFarmacia
-            ,PrismaSync prismaSync, Sipro sipro, GestaoEntrega gestaoEntrega)
+            ,PrismaSync prismaSync, Sipro sipro, GestaoEntrega gestaoEntrega, 
+            GeralManipulacao geralManipulacao)
         {
             using (var data = new ContextBase(_OptionsBuilder))
             {
@@ -93,6 +94,10 @@ namespace Data.Repositorio
                             await data.Set<GestaoEntrega>().AddAsync(gestaoEntrega);
                             await data.SaveChangesAsync();
 
+                            //Geral Manipulação
+                            await data.Set<GeralManipulacao>().AddAsync(geralManipulacao);
+                            await data.SaveChangesAsync();
+
                             //Nao esquecer de criar e inserir na tabela parametro todos os ids
                             //IDs Para Parametro
                             //var idFarmacia = farmacia.Id;
@@ -104,7 +109,8 @@ namespace Data.Repositorio
                             //var idNfe = nfe.Id;
                             //var idGeralFarmacia = geralFarmacia.Id;
                             //var idPrismaSync = prismaSync.Id;
-                            //var idSipro = sipro.Id;
+                            //var idGestaoEntrega = gestaoEntrega.Id;
+                            //var idGeralManipulacao = geralManipulacao.Id;
 
                             await transaction.CommitAsync();
 

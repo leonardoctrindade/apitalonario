@@ -11,6 +11,6 @@ namespace Data.Entidades
         [Column("Id")]
         public int Id { get; set; }
 
-        public string MapaReferencia { get; set; }
+        public int MapaReferencia { get; set; }
     }
 }

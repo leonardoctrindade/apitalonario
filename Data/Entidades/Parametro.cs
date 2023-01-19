@@ -20,5 +20,7 @@ namespace Data.Entidades
         public GeralFarmacia GeralFarmacia { get; set; }
         public PrismaSync PrismaSync { get; set; }
         public Sipro Sipro { get; set; }
+        public GestaoEntrega GestaoEntrega { get; set; }
+        public GeralManipulacao GeralManipulacao { get; set; }
     }
 }

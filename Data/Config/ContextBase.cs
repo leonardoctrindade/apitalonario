@@ -121,6 +121,8 @@ namespace Data.Config
 
         public DbSet<GestaoEntrega> GestaoEntrega { get; set; }
 
+        public DbSet<GeralManipulacao> GeralManipulacao { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
