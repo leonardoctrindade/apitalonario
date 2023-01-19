@@ -22,5 +22,7 @@ namespace Data.Entidades
         public Sipro Sipro { get; set; }
         public GestaoEntrega GestaoEntrega { get; set; }
         public GeralManipulacao GeralManipulacao { get; set; }
+        public OpcoesManipulacao OpcoesManipulacao { get; set; }
+        public ImpressaoManipulacao ImpressaoManipulacao { get; set; }
     }
 }

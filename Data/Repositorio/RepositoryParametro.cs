@@ -17,9 +17,10 @@ namespace Data.Repositorio
 
         public async Task AdicionarParametro(Farmacia farmacia, Endereco endereco, Contato contato, Farmaceutico farmaceutico, 
             Impressao impressao, CupomFiscal cupomFiscal, ConvenioParametro convenioParametro, 
-            CartoesTEF cartoesTEF, NfeSped nfeSped, Nfe nfe, GeralFarmacia geralFarmacia
-            ,PrismaSync prismaSync, Sipro sipro, GestaoEntrega gestaoEntrega, 
-            GeralManipulacao geralManipulacao)
+            CartoesTEF cartoesTEF, NfeSped nfeSped, Nfe nfe, GeralFarmacia geralFarmacia,
+            PrismaSync prismaSync, Sipro sipro, GestaoEntrega gestaoEntrega, 
+            GeralManipulacao geralManipulacao, OpcoesManipulacao opcoesManipulacao, 
+            ImpressaoManipulacao impressaoManipulacao)
         {
             using (var data = new ContextBase(_OptionsBuilder))
             {
@@ -98,6 +99,14 @@ namespace Data.Repositorio
                             await data.Set<GeralManipulacao>().AddAsync(geralManipulacao);
                             await data.SaveChangesAsync();
 
+                            //Opcoes Manipulação
+                            await data.Set<OpcoesManipulacao>().AddAsync(opcoesManipulacao);
+                            await data.SaveChangesAsync();
+
+                            //Impressão Manipulação
+                            await data.Set<ImpressaoManipulacao>().AddAsync(impressaoManipulacao);
+                            await data.SaveChangesAsync();
+
                             //Nao esquecer de criar e inserir na tabela parametro todos os ids
                             //IDs Para Parametro
                             //var idFarmacia = farmacia.Id;
@@ -111,6 +120,8 @@ namespace Data.Repositorio
                             //var idPrismaSync = prismaSync.Id;
                             //var idGestaoEntrega = gestaoEntrega.Id;
                             //var idGeralManipulacao = geralManipulacao.Id;
+                            //var idOpcoesManipulacao = opcoesManipulacao.Id;
+                            //var idImpressaoManipulacao = impressaoManipulacao.Id;
 
                             await transaction.CommitAsync();
 

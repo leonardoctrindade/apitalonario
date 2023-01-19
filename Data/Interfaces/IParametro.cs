@@ -14,6 +14,7 @@ namespace Data.Interfaces
             CupomFiscal cupomFiscal, ConvenioParametro convenioParametro, 
             CartoesTEF cartoesTEF, NfeSped nfeSped, Nfe nfe, GeralFarmacia geralFarmacia,
             PrismaSync prismaSync, Sipro sipro, GestaoEntrega gestaoEntrega, 
-            GeralManipulacao geralManipulacao);
+            GeralManipulacao geralManipulacao, OpcoesManipulacao opcoesManipulacao,
+            ImpressaoManipulacao impressaoManipulacao);
     }
 }

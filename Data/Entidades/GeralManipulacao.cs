@@ -6,8 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entidades
 {
+
     public class GeralManipulacao
     {
+        [Column("Id")]
         public int Id { get; set; }
         public string PrevisaoEntregaHoras { get; set; }
         public string FormulasHoras { get; set; }

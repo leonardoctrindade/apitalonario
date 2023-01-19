@@ -123,6 +123,10 @@ namespace Data.Config
 
         public DbSet<GeralManipulacao> GeralManipulacao { get; set; }
 
+        public DbSet<OpcoesManipulacao> OpcoesManipulacao { get; set; }
+
+        public DbSet<ImpressaoManipulacao> ImpressaoManipulacao { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
