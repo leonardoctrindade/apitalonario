@@ -39,8 +39,8 @@ namespace Data.Entidades
         public int ContatoId { get; set; }
 
         public int Ativo { get; set; }
-        public DateTime Data { get; set; }
-        public DateTime Hora { get; set; }
+        public DateTime? Data { get; set; }
+        public DateTime? Hora { get; set; }
 
         [Required(ErrorMessage = "Campo Licenca Func não preenchido")]
         public string LicencaFunc { get; set; }

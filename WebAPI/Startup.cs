@@ -123,6 +123,7 @@ namespace WebAPI
             services.AddSingleton<IParametro, RepositoryParametro>();
             services.AddSingleton<IEndereco, RepositoryEndereco>();
             services.AddSingleton<IContato, RepositoryContato>();
+            services.AddSingleton<IFarmacia, RepositoryFarmacia>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>

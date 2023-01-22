@@ -15,6 +15,6 @@ namespace Data.Interfaces
             CartoesTEF cartoesTEF, NfeSped nfeSped, Nfe nfe, GeralFarmacia geralFarmacia,
             PrismaSync prismaSync, Sipro sipro, GestaoEntrega gestaoEntrega, 
             GeralManipulacao geralManipulacao, OpcoesManipulacao opcoesManipulacao,
-            ImpressaoManipulacao impressaoManipulacao);
+            ImpressaoManipulacao impressaoManipulacao, DrogariaAcabado drogariaAcabado);
     }
 }

@@ -24,5 +24,6 @@ namespace Data.Entidades
         public GeralManipulacao GeralManipulacao { get; set; }
         public OpcoesManipulacao OpcoesManipulacao { get; set; }
         public ImpressaoManipulacao ImpressaoManipulacao { get; set; }
+        public DrogariaAcabado DrogariaAcabado { get; set; }
     }
 }

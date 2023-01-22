@@ -20,7 +20,7 @@ namespace Data.Repositorio
             CartoesTEF cartoesTEF, NfeSped nfeSped, Nfe nfe, GeralFarmacia geralFarmacia,
             PrismaSync prismaSync, Sipro sipro, GestaoEntrega gestaoEntrega, 
             GeralManipulacao geralManipulacao, OpcoesManipulacao opcoesManipulacao, 
-            ImpressaoManipulacao impressaoManipulacao)
+            ImpressaoManipulacao impressaoManipulacao, DrogariaAcabado drogariaAcabado)
         {
             using (var data = new ContextBase(_OptionsBuilder))
             {
@@ -107,6 +107,10 @@ namespace Data.Repositorio
                             await data.Set<ImpressaoManipulacao>().AddAsync(impressaoManipulacao);
                             await data.SaveChangesAsync();
 
+                            //Drogaria Acabado
+                            await data.Set<DrogariaAcabado>().AddAsync(drogariaAcabado);
+                            await data.SaveChangesAsync();
+
                             //Nao esquecer de criar e inserir na tabela parametro todos os ids
                             //IDs Para Parametro
                             //var idFarmacia = farmacia.Id;
@@ -122,6 +126,7 @@ namespace Data.Repositorio
                             //var idGeralManipulacao = geralManipulacao.Id;
                             //var idOpcoesManipulacao = opcoesManipulacao.Id;
                             //var idImpressaoManipulacao = impressaoManipulacao.Id;
+                            //var idDrogariaAcabado = drogariaAcabado.Id;
 
                             await transaction.CommitAsync();
 
