@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositorio
 {
-    public class RepositoryParametro : RepositoryGenerics<Parametro>, IParametro
+    public class RepositoryParametro : RepositoryGenerics<ParametroDto>, IParametroDto
     {
-        public Task<List<Parametro>> ListagemCustomizada()
+        public Task<List<ParametroDto>> ListagemCustomizada()
         {
             throw new NotImplementedException();
         }
@@ -52,6 +52,7 @@ namespace Data.Repositorio
                             farmacia.EnderecoId = idEndereco;
                             farmacia.ContatoId = idContato;
                             farmacia.FarmaceuticoId = idFarmaceutico;
+
                             await data.Set<Farmacia>().AddAsync(farmacia);
                             await data.SaveChangesAsync();
 
@@ -113,20 +114,26 @@ namespace Data.Repositorio
 
                             //Nao esquecer de criar e inserir na tabela parametro todos os ids
                             //IDs Para Parametro
-                            //var idFarmacia = farmacia.Id;
-                            //var idImpressao = impressao.Id;
-                            //var idCupomFiscal = cupomFiscal.Id;
-                            //var idConvenio = convenioParametro.Id;
-                            //var idCartoesTEF = cartoesTEF.Id;
-                            //var idNfeSped = nfeSped.Id;
-                            //var idNfe = nfe.Id;
-                            //var idGeralFarmacia = geralFarmacia.Id;
-                            //var idPrismaSync = prismaSync.Id;
-                            //var idGestaoEntrega = gestaoEntrega.Id;
-                            //var idGeralManipulacao = geralManipulacao.Id;
-                            //var idOpcoesManipulacao = opcoesManipulacao.Id;
-                            //var idImpressaoManipulacao = impressaoManipulacao.Id;
-                            //var idDrogariaAcabado = drogariaAcabado.Id;
+                            Parametro parametroFinal = new Parametro();
+                            parametroFinal.idFarmacia = farmacia.Id;
+                            parametroFinal.idImpressao = impressao.Id;
+                            parametroFinal.idCupomFiscal = cupomFiscal.Id;
+                            parametroFinal.idConvenio = convenioParametro.Id;
+                            parametroFinal.idCartoesTEF = cartoesTEF.Id;
+                            parametroFinal.idNfeSped = nfeSped.Id;
+                            parametroFinal.idNfe = nfe.Id;
+                            parametroFinal.idGeralFarmacia = geralFarmacia.Id;
+                            parametroFinal.idPrismaSync = prismaSync.Id;
+                            parametroFinal.idGestaoEntrega = gestaoEntrega.Id;
+                            parametroFinal.idGeralManipulacao = geralManipulacao.Id;
+                            parametroFinal.idOpcoesManipulacao = opcoesManipulacao.Id;
+                            parametroFinal.idImpressaoManipulacao = impressaoManipulacao.Id;
+                            parametroFinal.idDrogariaAcabado = drogariaAcabado.Id;
+                            parametroFinal.idSipro = sipro.Id;
+
+                            //Drogaria Acabado
+                            await data.Set<Parametro>().AddAsync(parametroFinal);
+                            await data.SaveChangesAsync();
 
                             await transaction.CommitAsync();
 

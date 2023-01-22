@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace Data.Interfaces
 {
-    public interface IParametro : IGeneric<Parametro>
+    public interface IParametroDto : IGeneric<ParametroDto>
     {
-        Task<List<Parametro>> ListagemCustomizada();
+        Task<List<ParametroDto>> ListagemCustomizada();
         Task AdicionarParametro(Farmacia farmacia, Endereco endereco,
             Contato contato, Farmaceutico farmaceutico, Impressao impressao,
             CupomFiscal cupomFiscal, ConvenioParametro convenioParametro, 

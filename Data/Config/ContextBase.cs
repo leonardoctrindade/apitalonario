@@ -127,6 +127,9 @@ namespace Data.Config
 
         public DbSet<ImpressaoManipulacao> ImpressaoManipulacao { get; set; }
 
+        public DbSet<DrogariaAcabado> DrogariaAcabado { get; set; }
+        public DbSet<Parametro> Parametro { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

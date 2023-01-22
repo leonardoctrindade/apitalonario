@@ -11,11 +11,11 @@ namespace WebAPI.Controllers
 {
     public class ParametroApiController : Controller
     {
-        private readonly IParametro IParametro;
+        private readonly IParametroDto IParametro;
         private readonly IEndereco IEndereco;
         private readonly IContato IContato;
 
-        public ParametroApiController(IParametro IParametro, IEndereco IEndereco, IContato IContato)
+        public ParametroApiController(IParametroDto IParametro, IEndereco IEndereco, IContato IContato)
         {
             this.IParametro = IParametro;
             this.IEndereco = IEndereco;
@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
         }
       
         [HttpPost("/api/AdicionarParametro")]
-        public async Task<JsonResult> AdicionarParametro([FromBody] Parametro parametro)
+        public async Task<JsonResult> AdicionarParametro([FromBody] ParametroDto parametro)
         {
             try
             {

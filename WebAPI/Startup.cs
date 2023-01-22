@@ -120,7 +120,7 @@ namespace WebAPI
             services.AddSingleton<IVendedor, RepositoryVendedor>();
             services.AddSingleton<IVendedorComissao, RepositoryVendedorComissao>();
             services.AddSingleton<IVisitador, RepositoryVisitador>();
-            services.AddSingleton<IParametro, RepositoryParametro>();
+            services.AddSingleton<IParametroDto, RepositoryParametro>();
             services.AddSingleton<IEndereco, RepositoryEndereco>();
             services.AddSingleton<IContato, RepositoryContato>();
             services.AddSingleton<IFarmacia, RepositoryFarmacia>();
