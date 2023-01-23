@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
-    [Authorize]
     public class PbmApiController : Controller
     {
         private readonly IPbm IPbm;

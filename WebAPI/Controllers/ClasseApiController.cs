@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
             IClasse = iclasse;
         }
 
-        [HttpGet("/api/ListaPaginacaoPbm/{pagina}")]
+        [HttpGet("/api/ListaPaginacaoClasse/{pagina}")]
         public async Task<JsonResult> ListaPaginacao(int pagina)
         {
             try
