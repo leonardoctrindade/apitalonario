@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IAcompanhamentoPessoal : IGeneric<AcompanhamentoPessoal>
     {
-        Task<List<AcompanhamentoPessoal>> ListagemCustomizada();
+        Task<List<AcompanhamentoPessoal>> ListagemCustomizada(int pagina);
     }
 }

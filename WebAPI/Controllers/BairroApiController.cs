@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IBairro = iBairro;
         }
 
+        [HttpGet("/api/ListaPaginacaoBairro/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var bairros = await this.IBairro.List();
+
+                var total = Convert.ToDouble(bairros.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IBairro.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : bairros);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os bairros " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaBairro")]
         public async Task<JsonResult> ListaBairro()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarBairro")]
-        public async Task<JsonResult> AdicionarBairro([FromBody] Bairro Bairro)
+        public async Task<IActionResult> AdicionarBairro([FromBody] Bairro Bairro)
         {
             try 
             {
-                if (String.IsNullOrEmpty(Bairro.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Bairro.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IBairro.Add(Bairro)));
 
@@ -64,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarBairro")]
-        public async Task<JsonResult> EditarBairro([FromBody] Bairro Bairro)
+        public async Task<IActionResult> EditarBairro([FromBody] Bairro Bairro)
         {
             try
             {
-                if (String.IsNullOrEmpty(Bairro.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Bairro.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IBairro.Update(Bairro)));
                 return Json(Ok());

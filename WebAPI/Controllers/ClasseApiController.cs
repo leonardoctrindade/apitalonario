@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             IClasse = iclasse;
         }
 
+        [HttpGet("/api/ListaPaginacaoPbm/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var classes = await this.IClasse.List();
+
+                var total = Convert.ToDouble(classes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IClasse.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : classes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os pbms " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaClasse")]
         public async Task<JsonResult> ListaClasse()
         {
@@ -33,12 +56,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarClasse")]
-        public async Task<JsonResult> AdicionarClasse([FromBody] Classe classe)
+        public async Task<IActionResult> AdicionarClasse([FromBody] Classe classe)
         {
             try
             {
-                if (string.IsNullOrEmpty(classe.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(classe.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+
                 Json(await Task.FromResult(this.IClasse.Add(classe)));
 
                 return Json(Ok());
@@ -63,12 +87,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarClasse")]
-        public async Task<JsonResult> EditarClasse([FromBody] Classe classe)
+        public async Task<IActionResult> EditarClasse([FromBody] Classe classe)
         {
             try
             {
-                if (string.IsNullOrEmpty(classe.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(classe.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+
                 Json(await Task.FromResult(this.IClasse.Update(classe)));
 
                 return Json(Ok());

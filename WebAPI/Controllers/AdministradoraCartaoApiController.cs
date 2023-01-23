@@ -19,6 +19,28 @@ namespace WebAPI.Controllers
             this.IAdministradoraCartao = IAdministradoraCartao;
         }
 
+        [HttpGet("/api/ListaPaginacaoAdministradoraCartao/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var administradoraCartaoes = await this.IAdministradoraCartao.List();
+
+                var total = Convert.ToDouble(administradoraCartaoes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IAdministradoraCartao.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : administradoraCartaoes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as administradoras de cartão " + ex.Message }) { StatusCode = 400 };
+            }
+        }
 
         [HttpGet("/api/ListaAdministradoraCartao")]
         public async Task<JsonResult> ListaAdministradoraCartao()
@@ -34,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarAdministradoraCartao")]
-        public async Task<JsonResult> AdicionarAdministradoraCartao([FromBody] AdministradoraCartao AdministradoraCartao)
+        public async Task<IActionResult> AdicionarAdministradoraCartao([FromBody] AdministradoraCartao AdministradoraCartao)
         {
             try
             {
-                if (String.IsNullOrEmpty(AdministradoraCartao.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(AdministradoraCartao.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IAdministradoraCartao.Add(AdministradoraCartao)));
 
@@ -63,12 +85,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarAdministradoraCartao")]
-        public async Task<JsonResult> EditarAdministradoraCartao([FromBody] AdministradoraCartao AdministradoraCartao)
+        public async Task<IActionResult> EditarAdministradoraCartao([FromBody] AdministradoraCartao AdministradoraCartao)
         {
             try
             {
-                if (String.IsNullOrEmpty(AdministradoraCartao.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(AdministradoraCartao.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IAdministradoraCartao.Update(AdministradoraCartao)));
                 return Json(Ok());

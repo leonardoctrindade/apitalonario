@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IAcompanhamentoPessoal = IAcompanhamentoPessoal;
         }
 
+        [HttpGet("/api/ListaPaginacaoAcompanhamentoPessoal/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var acompanhamentosPessoal = await this.IAcompanhamentoPessoal.List();
+
+                var total = Convert.ToDouble(acompanhamentosPessoal.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IAcompanhamentoPessoal.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : acompanhamentosPessoal);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as administradoras de cartão " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaAcompanhamentoPessoal")]
         public async Task<JsonResult> ListaAcompanhamentoPessoal()
         {
@@ -33,12 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarAcompanhamentoPessoal")]
-        public async Task<JsonResult> AdicionarAcompanhamentoPessoal([FromBody] AcompanhamentoPessoal AcompanhamentoPessoal)
+        public async Task<IActionResult> AdicionarAcompanhamentoPessoal([FromBody] AcompanhamentoPessoal AcompanhamentoPessoal)
         {
             try
             {
-                if (!AcompanhamentoPessoal.Data.HasValue || AcompanhamentoPessoal.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (!AcompanhamentoPessoal.Data.HasValue)
+                    return BadRequest("Campo de data é obrigatório");
+                if (AcompanhamentoPessoal.ClienteId <= 0)
+                    return BadRequest("Campo de clienteId é obrigatório");
 
                 Json(await Task.FromResult(this.IAcompanhamentoPessoal.Add(AcompanhamentoPessoal)));
 
@@ -64,12 +89,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarAcompanhamentoPessoal")]
-        public async Task<JsonResult> EditarAcompanhamentoPessoal([FromBody] AcompanhamentoPessoal AcompanhamentoPessoal)
+        public async Task<IActionResult> EditarAcompanhamentoPessoal([FromBody] AcompanhamentoPessoal AcompanhamentoPessoal)
         {
             try
             {
-                if (!AcompanhamentoPessoal.Data.HasValue || AcompanhamentoPessoal.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (!AcompanhamentoPessoal.Data.HasValue)
+                    return BadRequest("Campo de data é obrigatório");
+                if (AcompanhamentoPessoal.ClienteId <= 0)
+                    return BadRequest("Campo de clienteId é obrigatório");
 
                 Json(await Task.FromResult(this.IAcompanhamentoPessoal.Update(AcompanhamentoPessoal)));
                 return Json(Ok());

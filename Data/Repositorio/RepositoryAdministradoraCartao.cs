@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryAdministradoraCartao: RepositoryGenerics<AdministradoraCartao>, IAdministradoraCartao
     {
-        public Task<List<AdministradoraCartao>> ListagemCustomizada()
+        public async Task<List<AdministradoraCartao>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<AdministradoraCartao>();
+
+                try
+                {
+                    result = await context.AdministradoraCartao
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<AdministradoraCartao> GetAdministradoraCartao(int id)

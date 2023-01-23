@@ -8,7 +8,7 @@ namespace Data.Interfaces
 {
     public interface IAdministradoraCartao : IGeneric<AdministradoraCartao> 
     {
-        Task<List<AdministradoraCartao>> ListagemCustomizada();
+        Task<List<AdministradoraCartao>> ListagemCustomizada(int pagina);
         Task<AdministradoraCartao> GetAdministradoraCartao(int id);
     }
 }

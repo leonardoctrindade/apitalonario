@@ -18,6 +18,28 @@ namespace WebAPI.Controllers
             this.IPbm = IPbm;
         }
 
+        [HttpGet("/api/ListaPaginacaoPbm/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var pbms = await this.IPbm.List();
+
+                var total = Convert.ToDouble(pbms.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IPbm.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : pbms);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os pbms " + ex.Message }) { StatusCode = 400 };
+            }
+        }
 
         [HttpGet("/api/ListaPbm")]
         public async Task<JsonResult> ListaPbm()
@@ -34,12 +56,12 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("/api/AdicionarPbm")]
-        public async Task<JsonResult> AdicionarPbm([FromBody] Pbm Pbm)
+        public async Task<IActionResult> AdicionarPbm([FromBody] Pbm Pbm)
         {
             try
             {
-                if (String.IsNullOrEmpty(Pbm.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Pbm.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IPbm.Add(Pbm)));
 
@@ -66,12 +88,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarPbm")]
-        public async Task<JsonResult> EditarPbm([FromBody] Pbm Pbm)
+        public async Task<IActionResult> EditarPbm([FromBody] Pbm Pbm)
         {
             try
             {
-                if (String.IsNullOrEmpty(Pbm.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Pbm.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IPbm.Update(Pbm)));
                 return Json(Ok());
