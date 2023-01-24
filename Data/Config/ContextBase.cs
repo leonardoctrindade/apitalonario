@@ -127,6 +127,31 @@ namespace Data.Config
 
         public DbSet<CupomFiscal> CupomFiscal { get; set; }
 
+        public DbSet<ConvenioParametro> ConvenioParametro { get; set; }
+
+        public DbSet<CartoesTEF> CartoesTEF { get; set; }
+
+        public DbSet<NfeSped> NfeSped { get; set; }
+
+        public DbSet<Nfe> Nfe { get; set; }
+
+        public DbSet<GeralFarmacia> GeralFarmacia { get; set; }
+
+        public DbSet<PrismaSync> PrismaSync { get; set; }
+
+        public DbSet<Sipro> Sipro { get; set; }
+
+        public DbSet<GestaoEntrega> GestaoEntrega { get; set; }
+
+        public DbSet<GeralManipulacao> GeralManipulacao { get; set; }
+
+        public DbSet<OpcoesManipulacao> OpcoesManipulacao { get; set; }
+
+        public DbSet<ImpressaoManipulacao> ImpressaoManipulacao { get; set; }
+
+        public DbSet<DrogariaAcabado> DrogariaAcabado { get; set; }
+        public DbSet<Parametro> Parametro { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
