@@ -58,6 +58,7 @@ namespace WebAPI
             services.AddSingleton<IConfiguracoesPrismafive, RepositoryConfiguracoesPrismafive>();
             services.AddSingleton<IContabilista, RepositoryContabilista>();
             services.AddSingleton<IContaCorrente, RepositoryContaCorrente>();
+            services.AddSingleton<IContato, RepositoryContato>();
             services.AddSingleton<IConvenio, RepositoryConvenio>();
             services.AddSingleton<IConvenioCliente, RepositoryConvenioCliente>();
             services.AddSingleton<IConvenioGrupo, RepositoryConvenioGrupo>();
@@ -67,6 +68,7 @@ namespace WebAPI
             services.AddSingleton<IDiferimento, RepositoryDiferimento>();
             services.AddSingleton<IDOM_RegimeTributario, RepositoryDOM_RegimeTributario>();
             services.AddSingleton<IEcf, RepositoryEcf>();
+            services.AddSingleton<IEndereco, RepositoryEndereco>();
             services.AddSingleton<IEnderecoEntregaCliente, RepositoryEnderecoEntregaCliente>();
             services.AddSingleton<IEnsaio, RepositoryEnsaio>();
             services.AddSingleton<IEntregador, RepositoryEntregador>();
@@ -77,6 +79,7 @@ namespace WebAPI
             services.AddSingleton<IEstado, RepositoryEstado>();
             services.AddSingleton<IEtapa, RepositoryEtapa>();
             services.AddSingleton<IEtiqueta, RepositoryEtiqueta>();
+            services.AddSingleton<IFarmacia, RepositoryFarmacia>();
             services.AddSingleton<IFarmacopeia, RepositoryFarmacopeia>();
             services.AddSingleton<IFidelidade, RepositoryFidelidade>();
             services.AddSingleton<IFidelidadeFormaPagamento, RepositoryFidelidadeFormaPagamento>();
@@ -112,6 +115,7 @@ namespace WebAPI
             services.AddSingleton<IOperadorCaixa, RepositoryOperadorCaixa>();
             services.AddSingleton<IPaciente, RepositoryPaciente>();
             services.AddSingleton<IPais, RepositoryPais>();
+            services.AddSingleton<IParametroDto, RepositoryParametro>();
             services.AddSingleton<IPbm, RepositoryPbm>();
             services.AddSingleton<IPlanoDeContas, RepositoryPlanoDeContas>();
             services.AddSingleton<IPortador, RepositoryPortador>();
@@ -142,7 +146,7 @@ namespace WebAPI
             services.AddSingleton<IVendedor, RepositoryVendedor>();
             services.AddSingleton<IVendedorComissao, RepositoryVendedorComissao>();
             services.AddSingleton<IVisitador, RepositoryVisitador>();
-            services.AddSingleton<IVolumeXValorHomeopatia, RepositoryVolumeXValorHomeopatia>();
+            services.AddSingleton<IVolumeXValorHomeopatia, RepositoryVolumeXValorHomeopatia>();            
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>
