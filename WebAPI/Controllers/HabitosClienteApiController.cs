@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
             this.IHabitosCliente = IHabitosCliente;
         }
 
-        [HttpGet("/api/ListaPaginacaoPbm/{pagina}")]
+        [HttpGet("/api/ListaPaginacaoHabitosCliente/{pagina}")]
         public async Task<JsonResult> ListaPaginacao(int pagina)
         {
             try

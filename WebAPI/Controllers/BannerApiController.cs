@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
             this.IBanner = IBanner;
         }
 
-        [HttpGet("/api/ListaPaginacaoPbm/{pagina}")]
+        [HttpGet("/api/ListaPaginacaoBanner/{pagina}")]
         public async Task<JsonResult> ListaPaginacao(int pagina)
         {
             try

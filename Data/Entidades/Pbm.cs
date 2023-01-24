@@ -6,7 +6,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entidades
 {
-    [Table("Pbm")]
     public class Pbm
     {
         [Column("Id")]

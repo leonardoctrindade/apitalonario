@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
             this.IListaControlado = IListaControlado;
         }
 
-        [HttpGet("/api/ListaPaginacaoPbm/{pagina}")]
+        [HttpGet("/api/ListaPaginacaoListaControlado/{pagina}")]
         public async Task<IActionResult> ListaPaginacao(int pagina)
         {
             try

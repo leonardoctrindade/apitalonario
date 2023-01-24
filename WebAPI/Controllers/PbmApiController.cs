@@ -5,6 +5,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
@@ -12,9 +13,9 @@ namespace WebAPI.Controllers
     public class PbmApiController : Controller
     {
         private readonly IPbm IPbm;
-        public PbmApiController(IPbm IPbm)
+        public PbmApiController(IPbm iPbm)
         {
-            this.IPbm = IPbm;
+            this.IPbm = iPbm;
         }
 
         [HttpGet("/api/ListaPaginacaoPbm/{pagina}")]
