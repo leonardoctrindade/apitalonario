@@ -21,6 +21,29 @@ namespace WebAPI.Controllers
             IPlanoDeContas = iPlanoDeContas;
         }
 
+        [HttpGet("/api/ListaPaginacaoPlanoDeContas/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var planoDeContas = await this.IPlanoDeContas.List();
+
+                var total = Convert.ToDouble(planoDeContas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IPlanoDeContas.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : planoDeContas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os planos de contas " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaPlanoDeContas")]
         public async Task<JsonResult> ListaPlanoDeContas()
         {
@@ -36,14 +59,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarPlanoDeContas")]
-        public async Task<JsonResult> AdicionarPlanoDeContas([FromBody] PlanoDeContas planoDeContas)
+        public async Task<IActionResult> AdicionarPlanoDeContas([FromBody] PlanoDeContas planoDeContas)
         {
             try
             {
-                if (string.IsNullOrEmpty(planoDeContas.NumeroContaPai) ||
-                planoDeContas.NivelConta <= 0 ||
-                string.IsNullOrEmpty(planoDeContas.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(planoDeContas.NumeroContaPai.Trim()))
+                    return BadRequest("Campo de número conta pai é obrigatório");
+                if (planoDeContas.NivelConta <= 0)
+                    return BadRequest("Campo de nivel de conta é obrigatório");
+                if (string.IsNullOrEmpty(planoDeContas.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IPlanoDeContas.Add(planoDeContas)));
 
@@ -69,14 +94,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarPlanoDeContas")]
-        public async Task<JsonResult> EditarPlanoDeContas([FromBody] PlanoDeContas planoDeContas)
+        public async Task<IActionResult> EditarPlanoDeContas([FromBody] PlanoDeContas planoDeContas)
         {
             try
             {
-                if (string.IsNullOrEmpty(planoDeContas.NumeroContaPai) ||
-                planoDeContas.NivelConta <= 0 ||
-                string.IsNullOrEmpty(planoDeContas.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(planoDeContas.NumeroContaPai.Trim()))
+                    return BadRequest("Campo de número conta pai é obrigatório");
+                if (planoDeContas.NivelConta <= 0)
+                    return BadRequest("Campo de nivel de conta é obrigatório");
+                if (string.IsNullOrEmpty(planoDeContas.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IPlanoDeContas.Update(planoDeContas)));
 

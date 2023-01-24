@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockGrupoUsuario.MontaObjetoDescricaoVazia();
             var apiController = new GrupoUsuarioApiController(mock.Object);
             var result = await apiController.AdicionarGrupoUsuario(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

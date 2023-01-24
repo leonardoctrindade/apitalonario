@@ -15,7 +15,7 @@ namespace APITest
 {
     public class FidelidadeFormaPagamentoTest
     {
-        public Mock<IFidelidadeFormaPagamento> mock = new Mock<IFidelidadeFormaPagamento>();
+        public Mock<IFidelidadeFormaPagamento> mock = new();
 
         [Fact]
         public async Task Insere_Sucesso()
@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockFidelidadeFormaPagamento.MontaObjetoCodigoFidelidadeInvalido();
             var apiController = new FidelidadeFormaPagamentoApiController(mock.Object);
             var result = await apiController.AdicionarFidelidadeFormaPagamento(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockFidelidadeFormaPagamento.MontaObjetoCodigoFormaPagamentoInvalido();
             var apiController = new FidelidadeFormaPagamentoApiController(mock.Object);
             var result = await apiController.AdicionarFidelidadeFormaPagamento(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockFidelidadeFormaPagamento.MontaObjetoPontosInvalido();
             var apiController = new FidelidadeFormaPagamentoApiController(mock.Object);
             var result = await apiController.AdicionarFidelidadeFormaPagamento(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace APITest
             var modelo = MockFidelidadeFormaPagamento.MontaObjetoValorInvalido();
             var apiController = new FidelidadeFormaPagamentoApiController(mock.Object);
             var result = await apiController.AdicionarFidelidadeFormaPagamento(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace APITest
         public async Task RetornaPorId()
         {
             mock.Setup(y => y.GetEntityById(MockFidelidadeFormaPagamento.MontaObjetoUnico().Id)).ReturnsAsync(MockFidelidadeFormaPagamento.MontaObjetoUnico());
-            FidelidadeFormaPagamentoApiController ret = new FidelidadeFormaPagamentoApiController(mock.Object);
+            FidelidadeFormaPagamentoApiController ret = new(mock.Object);
             var result = await ret.RetornaFidelidadeFormaPagamentoPorId(1);
             Assert.Equal(0 , ((Data.Entidades.FidelidadeFormaPagamento)result.Value).Pontos);
         }

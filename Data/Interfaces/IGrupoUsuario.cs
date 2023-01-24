@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IGrupoUsuario : IGeneric<GrupoUsuario>
     {
-        Task<List<GrupoUsuario>> ListagemCustomizada();
+        Task<List<GrupoUsuario>> ListagemCustomizada(int pagina);
     }
 }

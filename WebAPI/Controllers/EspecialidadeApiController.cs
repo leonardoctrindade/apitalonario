@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             IEspecialidade = iEspecialidade;
         }
 
+        [HttpGet("/api/ListaPaginacaoEspecialidade/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var especialidades = await this.IEspecialidade.List();
+
+                var total = Convert.ToDouble(especialidades.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IEspecialidade.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : especialidades);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as especialidades " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaEspecialidade")]
         public async Task<JsonResult> ListaEspecialidade()
         {
@@ -33,10 +56,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarEspecialidade")]
-        public async Task<JsonResult> AdicionarEspecialidade([FromBody] Especialidade especialidade)
+        public async Task<IActionResult> AdicionarEspecialidade([FromBody] Especialidade especialidade)
         {
-            if (string.IsNullOrEmpty(especialidade.Descricao))
-                return Json(BadRequest(ModelState));
+            if (string.IsNullOrEmpty(especialidade.Descricao.Trim()))
+                return BadRequest("Campo de descrição é obrigatório");
 
             try
             {
@@ -63,10 +86,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarEspecialidade")]
-        public async Task<JsonResult> EditarEspecialidade([FromBody] Especialidade especialidade)
+        public async Task<IActionResult> EditarEspecialidade([FromBody] Especialidade especialidade)
         {
-            if (string.IsNullOrEmpty(especialidade.Descricao))
-                return Json(BadRequest(ModelState));
+            if (string.IsNullOrEmpty(especialidade.Descricao.Trim()))
+                return BadRequest("Campo de descrição é obrigatório");
 
             try
             {

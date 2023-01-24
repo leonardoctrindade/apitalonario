@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IFormaFarmaceuticaMargem = IFormaFarmaceuticaMargem;
         }
 
+        [HttpGet("/api/ListaPaginacaoFormaFarmaceuticaMargem/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var formaFarmaceuticas = await this.IFormaFarmaceuticaMargem.List();
+
+                var total = Convert.ToDouble(formaFarmaceuticas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IFormaFarmaceuticaMargem.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : formaFarmaceuticas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as forma farmaceuticas margem" + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaFormaFarmaceuticaMargem")]
         public async Task<JsonResult> ListaFormaFarmaceuticaMargem()
         {
@@ -34,14 +57,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarFormaFarmaceuticaMargem")]
-        public async Task<JsonResult> AdicionarFormaFarmaceuticaMargem([FromBody] FormaFarmaceuticaMargem FormaFarmaceuticaMargem)
+        public async Task<IActionResult> AdicionarFormaFarmaceuticaMargem([FromBody] FormaFarmaceuticaMargem FormaFarmaceuticaMargem)
         {
             try
             {
                 if (FormaFarmaceuticaMargem.FormaFarmaceuticaId == 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de Forma Farmaceutica é obrigatório");
                 if (FormaFarmaceuticaMargem.Margem <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de Margem é obrigatório");
 
                 Json(await Task.FromResult(this.IFormaFarmaceuticaMargem.Add(FormaFarmaceuticaMargem)));
 
@@ -67,14 +90,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarFormaFarmaceuticaMargem")]
-        public async Task<JsonResult> EditarFormaFarmaceuticaMargem([FromBody] FormaFarmaceuticaMargem FormaFarmaceuticaMargem)
+        public async Task<IActionResult> EditarFormaFarmaceuticaMargem([FromBody] FormaFarmaceuticaMargem FormaFarmaceuticaMargem)
         {
             try
             {
                 if (FormaFarmaceuticaMargem.FormaFarmaceuticaId == 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de Forma Farmaceutica é obrigatório");
                 if (FormaFarmaceuticaMargem.Margem <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de Margem é obrigatório");
 
                 Json(await Task.FromResult(this.IFormaFarmaceuticaMargem.Update(FormaFarmaceuticaMargem)));
                 return Json(Ok());

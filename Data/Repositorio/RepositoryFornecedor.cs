@@ -12,9 +12,28 @@ namespace Data.Repositorio
 {
     public class RepositoryFornecedor: RepositoryGenerics<Fornecedor>, IFornecedor
     {
-        public Task<List<Fornecedor>> ListagemCustomizada()
+        public async Task<List<Fornecedor>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<Fornecedor>();
+
+                try
+                {
+                    result = await context.Fornecedor
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<Fornecedor> GetFornecedor(int id)

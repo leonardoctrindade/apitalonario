@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockPosologia.MontaObjetoDescricaoVazia();
             var apiController = new PosologiaApiController(mock.Object);
             var result = await apiController.AdicionarPosologia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryVisitador : RepositoryGenerics<Visitador>, IVisitador
     {
-        public Task<List<Visitador>> ListagemCustomizada()
+        public async Task<List<Visitador>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<Visitador>();
+
+                try
+                {
+                    result = await context.Visitador
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<Visitador> GetVisitador(int id)

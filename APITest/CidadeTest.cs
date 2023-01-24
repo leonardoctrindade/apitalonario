@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockCidade.MontaObjetoNomeVazio();
             var apiController = new CidadeApiController(mock.Object);
             var result = await apiController.AdicionarCidade(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

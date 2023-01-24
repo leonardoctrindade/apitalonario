@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryFormulaPadrao: RepositoryGenerics<FormulaPadrao>, IFormulaPadrao
     {
-        public Task<List<FormulaPadrao>> ListagemCustomizada()
+        public async Task<List<FormulaPadrao>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<FormulaPadrao>();
+
+                try
+                {
+                    result = await context.FormulaPadrao
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<FormulaPadrao> GetFormulaPadrao(int id)

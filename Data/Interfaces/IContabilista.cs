@@ -9,7 +9,7 @@ namespace Data.Interfaces
 {
     public interface IContabilista : IGeneric<Contabilista>
     {
-        Task<List<Contabilista>> ListagemCustomizada();
+        Task<List<Contabilista>> ListagemCustomizada(int pagina);
         Task<Contabilista> GetContabilista(int id);
     }
 }

@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockPosAdquirente.MontaObjetoChaveRequisicaoVazia();
             var apiController = new PosAdquirenteApiController(mock.Object);
             var result = await apiController.AdicionarPosAdquirente(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

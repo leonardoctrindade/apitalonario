@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IFormulaPadrao = IFormulaPadrao;
         }
 
+        [HttpGet("/api/ListaPaginacaoFormulaPadrao/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var formulasPadroes = await this.IFormulaPadrao.List();
+
+                var total = Convert.ToDouble(formulasPadroes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IFormulaPadrao.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : formulasPadroes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as formulas padrões " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaFormulaPadrao")]
         public async Task<JsonResult> ListaFormulaPadrao()
         {
@@ -33,14 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarFormulaPadrao")]
-        public async Task<JsonResult> AdicionarFormulaPadrao([FromBody] FormulaPadrao FormulaPadrao)
+        public async Task<IActionResult> AdicionarFormulaPadrao([FromBody] FormulaPadrao FormulaPadrao)
         {
             try
             {
-                if (String.IsNullOrEmpty(FormulaPadrao.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(FormulaPadrao.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
                 if (FormulaPadrao.FormaFarmaceuticaId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de forma farmaceutica é obrigatório");
 
                 Json(await Task.FromResult(this.IFormulaPadrao.Add(FormulaPadrao)));
                 return Json(Ok());
@@ -65,14 +88,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarFormulaPadrao")]
-        public async Task<JsonResult> EditarFormulaPadrao([FromBody] FormulaPadrao FormulaPadrao)
+        public async Task<IActionResult> EditarFormulaPadrao([FromBody] FormulaPadrao FormulaPadrao)
         {
             try
             {
-                if (String.IsNullOrEmpty(FormulaPadrao.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(FormulaPadrao.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
                 if (FormulaPadrao.FormaFarmaceuticaId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de forma farmaceutica é obrigatório");
 
                 Json(await Task.FromResult(this.IFormulaPadrao.Update(FormulaPadrao)));
                 return Json(Ok());

@@ -4,14 +4,37 @@ using Data.Entidades;
 using Data.Interfaces;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Data.Config;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositorio
 {
     public class RepositoryOperadorCaixa: RepositoryGenerics<OperadorCaixa>, IOperadorCaixa
     {
-        public Task<List<OperadorCaixa>> ListagemCustomizada()
+        public async Task<List<OperadorCaixa>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<OperadorCaixa>();
+
+                try
+                {
+                    result = await context.OperadorCaixa
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
     }
 }

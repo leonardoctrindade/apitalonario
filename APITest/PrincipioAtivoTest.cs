@@ -33,7 +33,7 @@ namespace APITest
             var principioAtivo = MockPrincipioAtivo.MontaObjetoDescricaoVazio();
             var service = new PrincipioAtivoApiController(mock.Object);
             var result = await service.AdicionarPrincipioAtivo(principioAtivo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Editar_Sucesso()

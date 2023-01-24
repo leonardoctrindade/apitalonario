@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryAliquotaEstado: RepositoryGenerics<AliquotaEstado>, IAliquotaEstado
     {
-        public Task<List<AliquotaEstado>> ListagemCustomizada()
+        public async Task<List<AliquotaEstado>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<AliquotaEstado>();
+
+                try
+                {
+                    result = await context.AliquotaEstado
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
     }
 }

@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             IVisitador = iVisitador;
         }
 
+        [HttpGet("/api/ListaPaginacaoVisitador/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var visitadores = await this.IVisitador.List();
+
+                var total = Convert.ToDouble(visitadores.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IVisitador.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : visitadores);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os visitadores " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaVisitador")]
         public async Task<JsonResult> ListaVisitador()
         {
@@ -33,13 +56,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarVisitador")]
-        public async Task<JsonResult> AdicionarVisitador([FromBody] Visitador visitador)
+        public async Task<IActionResult> AdicionarVisitador([FromBody] Visitador visitador)
         {
-            if (string.IsNullOrEmpty(visitador.Nome))
-                return Json(BadRequest(ModelState));
-
             try
             {
+                if (string.IsNullOrEmpty(visitador.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+
                 Json(await Task.FromResult(this.IVisitador.Add(visitador)));
 
             }
@@ -65,13 +88,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarVisitador")]
-        public async Task<JsonResult> EditarVisitador([FromBody] Visitador visitador)
+        public async Task<IActionResult> EditarVisitador([FromBody] Visitador visitador)
         {
-            if (string.IsNullOrEmpty(visitador.Nome))
-                return Json(BadRequest(ModelState));
-
             try
             {
+                if (string.IsNullOrEmpty(visitador.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+
                 Json(await Task.FromResult(this.IVisitador.Update(visitador)));
 
             }

@@ -15,7 +15,7 @@ namespace APITest
 {
     public class FormaFarmaceuticaEnsaioTest
     {
-        public Mock<IFormaFarmaceuticaEnsaio> mock = new Mock<IFormaFarmaceuticaEnsaio>();
+        public Mock<IFormaFarmaceuticaEnsaio> mock = new();
 
         [Fact]
         public async Task Insere_Sucesso()
@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockFormaFarmaceuticaEnsaio.MontaObjetoDescricaoVazia();
             var apiController = new FormaFarmaceuticaEnsaioApiController(mock.Object);
             var result = await apiController.AdicionarFormaFarmaceuticaEnsaio(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockFormaFarmaceuticaEnsaio.MontaObjetoFormaFarmaceuticaIdInvalido();
             var apiController = new FormaFarmaceuticaEnsaioApiController(mock.Object);
             var result = await apiController.AdicionarFormaFarmaceuticaEnsaio(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace APITest
         public async Task RetornaPorId()
         {
             mock.Setup(y => y.GetEntityById(MockFormaFarmaceuticaEnsaio.MontaObjetoUnico().Id)).ReturnsAsync(MockFormaFarmaceuticaEnsaio.MontaObjetoUnico());
-            FormaFarmaceuticaEnsaioApiController ret = new FormaFarmaceuticaEnsaioApiController(mock.Object);
+            FormaFarmaceuticaEnsaioApiController ret = new(mock.Object);
             var result = await ret.RetornaFormaFarmaceuticaEnsaioPorId(1);
             Assert.Equal("Teste Mock 1", ((Data.Entidades.FormaFarmaceuticaEnsaio)result.Value).Descricao);
         }

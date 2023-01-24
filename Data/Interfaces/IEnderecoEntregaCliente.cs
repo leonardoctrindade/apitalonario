@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IEnderecoEntregaCliente: IGeneric<EnderecoEntregaCliente>
     {
-        Task<List<EnderecoEntregaCliente>> ListagemCustomizada();
+        Task<List<EnderecoEntregaCliente>> ListagemCustomizada(int pagina);
     }
 }

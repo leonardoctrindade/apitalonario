@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IObservacoesCliente : IGeneric<ObservacoesCliente>
     {
-        Task<List<ObservacoesCliente>> ListagemCustomizada();
+        Task<List<ObservacoesCliente>> ListagemCustomizada(int pagina);
     }
 }

@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IGrupoEnsaio = IGrupoEnsaio;
         }
 
+        [HttpGet("/api/ListaPaginacaoGrupoEnsaio/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var gruposEnsaios = await this.IGrupoEnsaio.List();
+
+                var total = Convert.ToDouble(gruposEnsaios.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IGrupoEnsaio.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : gruposEnsaios);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os grupos de ensaios " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaGrupoEnsaio")]
         public async Task<JsonResult> ListaGrupoEnsaio()
         {
@@ -33,12 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarGrupoEnsaio")]
-        public async Task<JsonResult> AdicionarGrupoEnsaio([FromBody] GrupoEnsaio GrupoEnsaio)
+        public async Task<IActionResult> AdicionarGrupoEnsaio([FromBody] GrupoEnsaio GrupoEnsaio)
         {
             try
             {
-                if (GrupoEnsaio.EnsaioId <= 0 || GrupoEnsaio.GrupoId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (GrupoEnsaio.EnsaioId <= 0)
+                    return BadRequest("Campo de ensaio é obrigatório");
+                if (GrupoEnsaio.GrupoId <= 0)
+                    return BadRequest("Campo de grupo é obrigatório");
 
                 Json(await Task.FromResult(this.IGrupoEnsaio.Add(GrupoEnsaio)));
 
@@ -64,12 +89,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarGrupoEnsaio")]
-        public async Task<JsonResult> EditarGrupoEnsaio([FromBody] GrupoEnsaio GrupoEnsaio)
+        public async Task<IActionResult> EditarGrupoEnsaio([FromBody] GrupoEnsaio GrupoEnsaio)
         {
             try
             {
-                if (GrupoEnsaio.EnsaioId <= 0 || GrupoEnsaio.GrupoId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (GrupoEnsaio.EnsaioId <= 0)
+                    return BadRequest("Campo de ensaio é obrigatório");
+                if (GrupoEnsaio.GrupoId <= 0)
+                    return BadRequest("Campo de grupo é obrigatório");
 
                 Json(await Task.FromResult(this.IGrupoEnsaio.Update(GrupoEnsaio)));
                 return Json(Ok());

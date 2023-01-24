@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IEtiqueta = IEtiqueta;
         }
 
+        [HttpGet("/api/ListaPaginacaoEtiqueta/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var etiquetas = await this.IEtiqueta.List();
+
+                var total = Convert.ToDouble(etiquetas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IEtiqueta.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : etiquetas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as etiquetas " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaEtiqueta")]
         public async Task<JsonResult> ListaEtiqueta()
         {
@@ -33,27 +56,37 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarEtiqueta")]
-        public async Task<JsonResult> AdicionarEtiqueta([FromBody] Etiqueta Etiqueta)
+        public async Task<IActionResult> AdicionarEtiqueta([FromBody] Etiqueta Etiqueta)
         {
             try
             {
-                if (
-                    String.IsNullOrEmpty(Etiqueta.Descricao) ||
-                    Etiqueta.Tipo < 0 ||
-                    Etiqueta.MargemSuperior < 0 ||
-                    Etiqueta.MargemLateral < 0 ||
-                    Etiqueta.AlturaEtiqueta < 0 ||
-                    Etiqueta.LarguraEtiqueta < 0 ||
-                    Etiqueta.DistanciaVertical < 0 ||
-                    Etiqueta.DistanciaHorizontal < 0 ||
-                    Etiqueta.LinhasPorPagina < 0 ||
-                    Etiqueta.ColunasPorPagina < 0 ||
-                    Etiqueta.LayoutEtiquetaEntrada < 0 ||
-                    Etiqueta.LinhasPorEtiqueta < 0 ||
-                    Etiqueta.EspacoEntreLinhas < 0
-                ){
-                    return Json(BadRequest(ModelState));
-                }
+                if (String.IsNullOrEmpty(Etiqueta.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+                if (Etiqueta.Tipo < 0)
+                    return BadRequest("Campo de tipo é obrigatório");
+                if (Etiqueta.MargemSuperior < 0)
+                    return BadRequest("Campo de maergem superior é obrigatório");
+                if (Etiqueta.MargemLateral < 0)
+                    return BadRequest("Campo de margem lateral é obrigatório");
+                if (Etiqueta.AlturaEtiqueta < 0)
+                    return BadRequest("Campo de altura da etiqueta é obrigatório");
+                if (Etiqueta.LarguraEtiqueta < 0)
+                    return BadRequest("Campo de largura da etiqueta é obrigatório");
+                if (Etiqueta.DistanciaVertical < 0)
+                    return BadRequest("Campo de distância vertical é obrigatório");
+                if (Etiqueta.DistanciaHorizontal < 0)
+                    return BadRequest("Campo de Distancia horizontal é obrigatório");
+                if (Etiqueta.LinhasPorPagina < 0)
+                    return BadRequest("Campo de linhas por página é obrigatório");
+                if (Etiqueta.ColunasPorPagina < 0)
+                    return BadRequest("Campo de colunas por página é obrigatório");
+                if (Etiqueta.LayoutEtiquetaEntrada < 0)
+                    return BadRequest("Campo de layout da etiqueta de entrada é obrigatório");
+                if (Etiqueta.LinhasPorEtiqueta < 0)
+                    return BadRequest("Campo de linhas por etiqueta é obrigatório");
+                if (Etiqueta.EspacoEntreLinhas < 0)
+                    return BadRequest("Campo de espaço entre linhas é obrigatório");
+
 
                 Json(await Task.FromResult(this.IEtiqueta.Add(Etiqueta)));
 
@@ -79,28 +112,36 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarEtiqueta")]
-        public async Task<JsonResult> EditarEtiqueta([FromBody] Etiqueta Etiqueta)
+        public async Task<IActionResult> EditarEtiqueta([FromBody] Etiqueta Etiqueta)
         {
             try
             {
-                if (
-                    String.IsNullOrEmpty(Etiqueta.Descricao) ||
-                    Etiqueta.Tipo < 0 ||
-                    Etiqueta.MargemSuperior < 0 ||
-                    Etiqueta.MargemLateral < 0 ||
-                    Etiqueta.AlturaEtiqueta < 0 ||
-                    Etiqueta.LarguraEtiqueta < 0 ||
-                    Etiqueta.DistanciaVertical < 0 ||
-                    Etiqueta.DistanciaHorizontal < 0 ||
-                    Etiqueta.LinhasPorPagina < 0 ||
-                    Etiqueta.ColunasPorPagina < 0 ||
-                    Etiqueta.LayoutEtiquetaEntrada < 0 ||
-                    Etiqueta.LinhasPorEtiqueta < 0 ||
-                    Etiqueta.EspacoEntreLinhas < 0
-                )
-                {
-                    return Json(BadRequest(ModelState));
-                }
+                if (String.IsNullOrEmpty(Etiqueta.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+                if (Etiqueta.Tipo < 0)
+                    return BadRequest("Campo de tipo é obrigatório");
+                if (Etiqueta.MargemSuperior < 0)
+                    return BadRequest("Campo de maergem superior é obrigatório");
+                if (Etiqueta.MargemLateral < 0)
+                    return BadRequest("Campo de margem lateral é obrigatório");
+                if (Etiqueta.AlturaEtiqueta < 0)
+                    return BadRequest("Campo de altura da etiqueta é obrigatório");
+                if (Etiqueta.LarguraEtiqueta < 0)
+                    return BadRequest("Campo de largura da etiqueta é obrigatório");
+                if (Etiqueta.DistanciaVertical < 0)
+                    return BadRequest("Campo de distância vertical é obrigatório");
+                if (Etiqueta.DistanciaHorizontal < 0)
+                    return BadRequest("Campo de Distancia horizontal é obrigatório");
+                if (Etiqueta.LinhasPorPagina < 0)
+                    return BadRequest("Campo de linhas por página é obrigatório");
+                if (Etiqueta.ColunasPorPagina < 0)
+                    return BadRequest("Campo de colunas por página é obrigatório");
+                if (Etiqueta.LayoutEtiquetaEntrada < 0)
+                    return BadRequest("Campo de layout da etiqueta de entrada é obrigatório");
+                if (Etiqueta.LinhasPorEtiqueta < 0)
+                    return BadRequest("Campo de linhas por etiqueta é obrigatório");
+                if (Etiqueta.EspacoEntreLinhas < 0)
+                    return BadRequest("Campo de espaço entre linhas é obrigatório");
 
                 Json(await Task.FromResult(this.IEtiqueta.Update(Etiqueta)));
                 return Json(Ok());

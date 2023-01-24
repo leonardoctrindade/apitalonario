@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockTabelaFloral.MontaObjetoVolumeVazio();
             var apiController = new TabelaFloralApiController(mock.Object);
             var result = await apiController.AdicionarTabelaFloral(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockTabelaFloral.MontaObjetoQuantidadeInicialVazio();
             var apiController = new TabelaFloralApiController(mock.Object);
             var result = await apiController.AdicionarTabelaFloral(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockTabelaFloral.MontaObjetoQuantidadeFinalVazio();
             var apiController = new TabelaFloralApiController(mock.Object);
             var result = await apiController.AdicionarTabelaFloral(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace APITest
             var modelo = MockTabelaFloral.MontaObjetoValorVendaVazio();
             var apiController = new TabelaFloralApiController(mock.Object);
             var result = await apiController.AdicionarTabelaFloral(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

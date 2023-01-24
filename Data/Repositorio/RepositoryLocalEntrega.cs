@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryLocalEntrega : RepositoryGenerics<LocalEntrega>, ILocalEntrega
     {
-        public Task<List<LocalEntrega>> ListagemCustomizada()
+        public async Task<List<LocalEntrega>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<LocalEntrega>();
+
+                try
+                {
+                    result = await context.LocalEntrega
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<LocalEntrega> GetLocalEntrega(int id)

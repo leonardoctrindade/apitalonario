@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.INcmEstado = INcmEstado;
         }
 
+        [HttpGet("/api/ListaPaginacaoNcmEstado/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var ncmEstados = await this.INcmEstado.List();
+
+                var total = Convert.ToDouble(ncmEstados.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.INcmEstado.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : ncmEstados);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os ncm dos estados " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaNcmEstado")]
         public async Task<JsonResult> ListaNcmEstado()
         {
@@ -33,12 +56,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarNcmEstado")]
-        public async Task<JsonResult> AdicionarNcmEstado([FromBody] NcmEstado NcmEstado)
+        public async Task<IActionResult> AdicionarNcmEstado([FromBody] NcmEstado NcmEstado)
         {
             try
             {
-                if (NcmEstado.EstadoOrigemId <= 0 || NcmEstado.EstadoDestinoId <= 0 || NcmEstado.NcmId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (NcmEstado.EstadoOrigemId <= 0)
+                    return BadRequest("Campo de estado de origem é obrigatório");
+                if (NcmEstado.EstadoDestinoId <= 0)
+                    return BadRequest("Campo de estado de destino é obrigatório");
+                if (NcmEstado.NcmId <= 0)
+                    return BadRequest("Campo de Ncm é obrigatório");
 
                 Json(await Task.FromResult(this.INcmEstado.Add(NcmEstado)));
 
@@ -62,12 +89,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarNcmEstado")]
-        public async Task<JsonResult> EditarNcmEstado([FromBody] NcmEstado NcmEstado)
+        public async Task<IActionResult> EditarNcmEstado([FromBody] NcmEstado NcmEstado)
         {
             try
             {
-                if (NcmEstado.EstadoOrigemId <= 0 || NcmEstado.EstadoDestinoId <= 0 || NcmEstado.NcmId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (NcmEstado.EstadoOrigemId <= 0)
+                    return BadRequest("Campo de estado de origem é obrigatório");
+                if (NcmEstado.EstadoDestinoId <= 0)
+                    return BadRequest("Campo de estado de destino é obrigatório");
+                if (NcmEstado.NcmId <= 0)
+                    return BadRequest("Campo de Ncm é obrigatório");
 
                 Json(await Task.FromResult(this.INcmEstado.Update(NcmEstado)));
                 return Json(Ok());

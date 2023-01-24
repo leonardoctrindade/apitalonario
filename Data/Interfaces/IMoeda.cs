@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IMoeda : IGeneric<Moeda>
     {
-        Task<List<Moeda>> ListagemCustomizada();
+        Task<List<Moeda>> ListagemCustomizada(int pagina);
     }
 }

@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockLocalEntrega.MontaObjetoDescricaoVazia();
             var apiController = new LocalEntregaApiController(mock.Object);
             var result = await apiController.AdicionarLocalEntrega(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockLocalEntrega.MontaObjetoTaxaEntregaInvalida();
             var apiController = new LocalEntregaApiController(mock.Object);
             var result = await apiController.AdicionarLocalEntrega(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

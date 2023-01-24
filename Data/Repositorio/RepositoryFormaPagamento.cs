@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryFormaPagamento: RepositoryGenerics<FormaPagamento>, IFormaPagamento
     {
-        public Task<List<FormaPagamento>> ListagemCustomizada()
+        public async Task<List<FormaPagamento>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<FormaPagamento>();
+
+                try
+                {
+                    result = await context.FormaPagamento
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<FormaPagamento> GetFormaPagamento(int id)

@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IFormaFarmaceutica = IFormaFarmaceutica;
         }
 
+        [HttpGet("/api/ListaPaginacaoFormaFarmaceutica/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var formaFarmaceuticas = await this.IFormaFarmaceutica.List();
+
+                var total = Convert.ToDouble(formaFarmaceuticas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IFormaFarmaceutica.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : formaFarmaceuticas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as formas farmaceuticas " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaFormaFarmaceutica")]
         public async Task<JsonResult> ListaFormaFarmaceutica()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarFormaFarmaceutica")]
-        public async Task<JsonResult> AdicionarFormaFarmaceutica([FromBody] FormaFarmaceutica FormaFarmaceutica)
+        public async Task<IActionResult> AdicionarFormaFarmaceutica([FromBody] FormaFarmaceutica FormaFarmaceutica)
         {
             try
             {
-                if (String.IsNullOrEmpty(FormaFarmaceutica.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(FormaFarmaceutica.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 if (!string.IsNullOrEmpty(FormaFarmaceutica.Imagem))
                 {
@@ -75,12 +98,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarFormaFarmaceutica")]
-        public async Task<JsonResult> EditarFormaFarmaceutica([FromBody] FormaFarmaceutica FormaFarmaceutica)
+        public async Task<IActionResult> EditarFormaFarmaceutica([FromBody] FormaFarmaceutica FormaFarmaceutica)
         {
             try
             {
-                if (String.IsNullOrEmpty(FormaFarmaceutica.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(FormaFarmaceutica.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 if (!string.IsNullOrEmpty(FormaFarmaceutica.Imagem))
                 {

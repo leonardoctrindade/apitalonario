@@ -18,6 +18,29 @@ namespace WebAPI.Controllers
             iContaCorrente = icontacorrente;
         }
 
+        [HttpGet("/api/ListaPaginacaoContaCorrente/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var contascorrentes = await this.iContaCorrente.List();
+
+                var total = Convert.ToDouble(contascorrentes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.iContaCorrente.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : contascorrentes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as contas correntes " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListarContaCorrente")]
         public async Task<JsonResult> ListarContaCorrente()
         {
@@ -31,14 +54,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarContaCorrente")]
-        public async Task<JsonResult> AdicionarContaCorrente([FromBody] ContaCorrente contaCorrente)
+        public async Task<IActionResult> AdicionarContaCorrente([FromBody] ContaCorrente contaCorrente)
         {
             try
             {
-                if (string.IsNullOrEmpty(contaCorrente.Nome) || string.IsNullOrEmpty(contaCorrente.NumeroConta))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(contaCorrente.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (string.IsNullOrEmpty(contaCorrente.NumeroConta.Trim()))
+                    return BadRequest("Campo de numero da conta é obrigatório");
 
-                Json(await Task.FromResult(this.iContaCorrente.Add(contaCorrente)));
+                    Json(await Task.FromResult(this.iContaCorrente.Add(contaCorrente)));
 
                 return Json(Ok());
             } catch (Exception ex) 
@@ -60,12 +85,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarContaCorrente")]
-        public async Task<JsonResult> EditarContaCorrente([FromBody] ContaCorrente contaCorrente)
+        public async Task<IActionResult> EditarContaCorrente([FromBody] ContaCorrente contaCorrente)
         {
             try
             {
-                if (string.IsNullOrEmpty(contaCorrente.Nome) || string.IsNullOrEmpty(contaCorrente.NumeroConta))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(contaCorrente.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (string.IsNullOrEmpty(contaCorrente.NumeroConta.Trim()))
+                    return BadRequest("Campo de numero da conta é obrigatório");
 
                 Json(await Task.FromResult(this.iContaCorrente.Update(contaCorrente)));
 

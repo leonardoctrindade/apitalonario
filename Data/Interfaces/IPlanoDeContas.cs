@@ -9,6 +9,6 @@ namespace Data.Interfaces
 {
     public interface IPlanoDeContas : IGeneric<PlanoDeContas>
     {
-        Task<List<PlanoDeContas>> ListagemCustomizada();
+        Task<List<PlanoDeContas>> ListagemCustomizada(int pagina);
     }
 }

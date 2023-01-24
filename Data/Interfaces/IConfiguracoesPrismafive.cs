@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IConfiguracoesPrismafive : IGeneric<ConfiguracoesPrismafive>
     {
-        Task<List<ConfiguracoesPrismafive>> ListagemCustomizada();
+        Task<List<ConfiguracoesPrismafive>> ListagemCustomizada(int pagina);
     }
 }

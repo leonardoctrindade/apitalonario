@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockContabilista.MontaObjetoNomeVazio();
             var apiController = new ContabilistaApiController(mock.Object);
             var result = await apiController.AdicionarContabilista(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

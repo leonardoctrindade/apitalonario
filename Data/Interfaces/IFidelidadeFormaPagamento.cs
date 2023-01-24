@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IFidelidadeFormaPagamento : IGeneric<FidelidadeFormaPagamento>
     {
-        Task<List<FidelidadeFormaPagamento>> ListagemCustomizada();
+        Task<List<FidelidadeFormaPagamento>> ListagemCustomizada(int pagina);
     }
 }

@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IPaciente = IPaciente;
         }
 
+        [HttpGet("/api/ListaPaginacaoPaciente/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var pacientes = await this.IPaciente.List();
+
+                var total = Convert.ToDouble(pacientes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IPaciente.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : pacientes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os pacientes " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaPaciente")]
         public async Task<JsonResult> ListaPaciente()
         {
@@ -33,12 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarPaciente")]
-        public async Task<JsonResult> AdicionarPaciente([FromBody] Paciente Paciente)
+        public async Task<IActionResult> AdicionarPaciente([FromBody] Paciente Paciente)
         {
             try
             {
-                if (Paciente.ClienteId <= 0 || string.IsNullOrEmpty(Paciente.Nome))
-                    return Json(BadRequest(ModelState));
+                if (Paciente.ClienteId <= 0)
+                    return BadRequest("Campo de cliente é obrigatório");
+                if (string.IsNullOrEmpty(Paciente.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IPaciente.Add(Paciente)));
 
@@ -64,12 +89,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarPaciente")]
-        public async Task<JsonResult> EditarPaciente([FromBody] Paciente Paciente)
+        public async Task<IActionResult> EditarPaciente([FromBody] Paciente Paciente)
         {
             try
             {
-                if (Paciente.ClienteId <= 0 || string.IsNullOrEmpty(Paciente.Nome))
-                    return Json(BadRequest(ModelState));
+                if (Paciente.ClienteId <= 0)
+                    return BadRequest("Campo de cliente é obrigatório");
+                if (string.IsNullOrEmpty(Paciente.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IPaciente.Update(Paciente)));
                 return Json(Ok());

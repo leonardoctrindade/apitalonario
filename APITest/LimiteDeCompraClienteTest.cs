@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockLimiteDeCompraCliente.MontaObjetoClienteIdInvalido();
             var apiController = new LimiteDeCompraClienteApiController(mock.Object);
             var result = await apiController.AdicionarLimiteDeCompraCliente(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

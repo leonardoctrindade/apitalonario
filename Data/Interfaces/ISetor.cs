@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface ISetor : IGeneric<Setor>
     {
-        Task<List<Setor>> ListagemCustomizada();
+        Task<List<Setor>> ListagemCustomizada(int pagina);
     }
 }

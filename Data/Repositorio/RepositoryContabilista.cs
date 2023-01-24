@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryContabilista : RepositoryGenerics<Contabilista>, IContabilista
     {
-        public Task<List<Contabilista>> ListagemCustomizada()
+        public async Task<List<Contabilista>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<Contabilista>();
+
+                try
+                {
+                    result = await context.Contabilista
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<Contabilista> GetContabilista(int id)

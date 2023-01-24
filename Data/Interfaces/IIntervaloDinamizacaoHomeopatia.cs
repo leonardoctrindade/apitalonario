@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IIntervaloDinamizacaoHomeopatia : IGeneric<IntervaloDinamizacaoHomeopatia>
     {
-        Task<List<IntervaloDinamizacaoHomeopatia>> ListagemCustomizada();
+        Task<List<IntervaloDinamizacaoHomeopatia>> ListagemCustomizada(int pagina);
     }
 }

@@ -9,6 +9,6 @@ namespace Data.Interfaces
 {
     public interface ITipoContato: IGeneric<TipoContato>
     {
-        Task<List<TipoContato>> ListagemCustomizada();
+        Task<List<TipoContato>> ListagemCustomizada(int pagina);
     }
 }

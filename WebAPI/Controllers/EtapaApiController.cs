@@ -17,7 +17,30 @@ namespace WebAPI.Controllers
         public EtapaApiController(IEtapa iEtapa)
         {
             IEtapa = iEtapa;
-        }   
+        }
+
+        [HttpGet("/api/ListaPaginacaoEtapa/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var etapas = await this.IEtapa.List();
+
+                var total = Convert.ToDouble(etapas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IEtapa.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : etapas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as etapas " + ex.Message }) { StatusCode = 400 };
+            }
+        }
 
         [HttpGet("/api/ListaEtapa")]
         public async Task<JsonResult> ListaEtapa()
@@ -34,13 +57,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarEtapa")]
-        public async Task<JsonResult> AdicionarEtapa([FromBody] Etapa etapa)
+        public async Task<IActionResult> AdicionarEtapa([FromBody] Etapa etapa)
         {
             try
             {
-                if (string.IsNullOrEmpty(etapa.Descricao) || etapa.Sequencia <= 0
-                || string.IsNullOrEmpty(etapa.Tipo))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(etapa.Descricao.Trim()))
+                    return BadRequest("Campo de descricao é obrigatório");
+                if (etapa.Sequencia <= 0)
+                    return BadRequest("Campo de sequencia é obrigatório");
+                if (string.IsNullOrEmpty(etapa.Tipo.Trim()))
+                    return BadRequest("Campo de tipo é obrigatório");
 
                 Json(await Task.FromResult(this.IEtapa.Add(etapa)));
 
@@ -66,13 +92,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarEtapa")]
-        public async Task<JsonResult> EditarEtapa([FromBody] Etapa etapa)
+        public async Task<IActionResult> EditarEtapa([FromBody] Etapa etapa)
         {
             try
             {
-                if (string.IsNullOrEmpty(etapa.Descricao) || etapa.Sequencia <= 0
-                || string.IsNullOrEmpty(etapa.Tipo))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(etapa.Descricao.Trim()))
+                    return BadRequest("Campo de descricao é obrigatório");
+                if (etapa.Sequencia <= 0)
+                    return BadRequest("Campo de sequencia é obrigatório");
+                if (string.IsNullOrEmpty(etapa.Tipo.Trim()))
+                    return BadRequest("Campo de tipo é obrigatório");
 
                 Json(await Task.FromResult(this.IEtapa.Update(etapa)));
 

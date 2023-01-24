@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockTipoCapsula.MontaObjetoDescricaoVazia();
             var apiController = new TipoCapsulaApiController(mock.Object);
             var result = await apiController.AdicionarTipoCapsula(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

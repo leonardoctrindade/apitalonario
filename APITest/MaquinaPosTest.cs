@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockMaquinaPos.MontaObjetoSerialPosVazio();
             var apiController = new MaquinaPosApiController(mock.Object);
             var result = await apiController.AdicionarMaquinaPos(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

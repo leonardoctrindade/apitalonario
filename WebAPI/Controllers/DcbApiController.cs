@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             iDcb = idcb;
         }
 
+        [HttpGet("/api/ListaPaginacaoDcb/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var dcbs = await this.iDcb.List();
+
+                var total = Convert.ToDouble(dcbs.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.iDcb.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : dcbs);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os dcbs " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListarDcb")]
         public async Task<JsonResult> ListarDcb()
         {
@@ -32,12 +55,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarDcb")]
-        public async Task<JsonResult> AdicionarDcb([FromBody] Dcb dcb)
+        public async Task<IActionResult> AdicionarDcb([FromBody] Dcb dcb)
         {
             try
             {
-                if (string.IsNullOrEmpty(dcb.Descricao) || string.IsNullOrEmpty(dcb.CodigoDcb))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(dcb.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+                if (string.IsNullOrEmpty(dcb.CodigoDcb.Trim()))
+                    return BadRequest("Campo de código Dcb é obrigatório");
 
                 Json(await Task.FromResult(this.iDcb.Add(dcb)));
 
@@ -61,12 +86,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarDcb")]
-        public async Task<JsonResult> EditarDcb([FromBody] Dcb dcb)
+        public async Task<IActionResult> EditarDcb([FromBody] Dcb dcb)
         {
             try
             {
-                if (string.IsNullOrEmpty(dcb.Descricao) || string.IsNullOrEmpty(dcb.CodigoDcb))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(dcb.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+                if (string.IsNullOrEmpty(dcb.CodigoDcb.Trim()))
+                    return BadRequest("Campo de código Dcb é obrigatório");
 
                 Json(await Task.FromResult(this.iDcb.Update(dcb)));
 

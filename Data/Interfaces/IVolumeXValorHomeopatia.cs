@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IVolumeXValorHomeopatia : IGeneric<VolumeXValorHomeopatia>
     {
-        Task<List<VolumeXValorHomeopatia>> ListagemCustomizada();
+        Task<List<VolumeXValorHomeopatia>> ListagemCustomizada(int pagina);
     }
 }

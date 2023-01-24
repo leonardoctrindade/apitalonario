@@ -15,7 +15,7 @@ namespace APITest
 {
     public class BannerTest
     {
-        public Mock<IBanner> mock = new Mock<IBanner>();
+        public Mock<IBanner> mock = new();
 
         [Fact]
         public async Task Insere_Sucesso()
@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockBanner.MontaObjetoPosicaoInvalida();
             var apiController = new BannerApiController(mock.Object);
             var result = await apiController.AdicionarBanner(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockBanner.MontaObjetoDescricaoVazia();
             var apiController = new BannerApiController(mock.Object);
             var result = await apiController.AdicionarBanner(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockBanner.MontaObjetoLinkVazio();
             var apiController = new BannerApiController(mock.Object);
             var result = await apiController.AdicionarBanner(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace APITest
             var modelo = MockBanner.MontaObjetoAcaoLinkInvalida();
             var apiController = new BannerApiController(mock.Object);
             var result = await apiController.AdicionarBanner(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace APITest
             var modelo = MockBanner.MontaObjetoDataInicioVazia();
             var apiController = new BannerApiController(mock.Object);
             var result = await apiController.AdicionarBanner(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace APITest
             var modelo = MockBanner.MontaObjetoDataFimVazia();
             var apiController = new BannerApiController(mock.Object);
             var result = await apiController.AdicionarBanner(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -114,7 +114,7 @@ namespace APITest
         public async Task RetornaPorId()
         {
             mock.Setup(y => y.GetEntityById(MockBanner.MontaObjetoUnico().Id)).ReturnsAsync(MockBanner.MontaObjetoUnico());
-            BannerApiController ret = new BannerApiController(mock.Object);
+            BannerApiController ret = new(mock.Object);
             var result = await ret.RetornaBannerPorId(1);
             Assert.Equal(324 , ((Data.Entidades.Banner)result.Value).Posicao);
         }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace WebAPI.Controllers
 {
@@ -17,6 +18,29 @@ namespace WebAPI.Controllers
         public EcfApiController(IEcf IEcf)
         {
             this.IEcf = IEcf;
+        }
+
+        [HttpGet("/api/ListaPaginacaoEcf/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var ecfs = await this.IEcf.List();
+
+                var total = Convert.ToDouble(ecfs.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IEcf.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : ecfs);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os ecfs " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaEcf")]
@@ -33,12 +57,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarEcf")]
-        public async Task<JsonResult> AdicionarEcf([FromBody] Ecf Ecf)
+        public async Task<IActionResult> AdicionarEcf([FromBody] Ecf Ecf)
         {
             try
             {
-                if (String.IsNullOrEmpty(Ecf.NumeroSerie) || Ecf.NumeroEquipamento < 0)
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Ecf.NumeroSerie.Trim()))
+                    return BadRequest("Campo de número de série é obrigatório");
+                if (Ecf.NumeroEquipamento < 0)
+                    return BadRequest("Campo de número do equipamento é obrigatório");
 
                 Json(await Task.FromResult(this.IEcf.Add(Ecf)));
 
@@ -64,12 +90,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarEcf")]
-        public async Task<JsonResult> EditarEcf([FromBody] Ecf Ecf)
+        public async Task<IActionResult> EditarEcf([FromBody] Ecf Ecf)
         {
             try
             {
-                if (String.IsNullOrEmpty(Ecf.NumeroSerie) || Ecf.NumeroEquipamento < 0)
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Ecf.NumeroSerie.Trim()))
+                    return BadRequest("Campo de número de série é obrigatório");
+                if (Ecf.NumeroEquipamento < 0)
+                    return BadRequest("Campo de número do equipamento é obrigatório");
 
                 Json(await Task.FromResult(this.IEcf.Update(Ecf)));
                 return Json(Ok());

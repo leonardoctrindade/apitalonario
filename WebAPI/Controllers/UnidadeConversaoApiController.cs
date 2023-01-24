@@ -20,6 +20,29 @@ namespace WebAPI.Controllers
             IUnidadeConversao = iUnidadeConversao;
         }
 
+        [HttpGet("/api/ListaPaginacaoUnidadeConversao/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var unidades = await this.IUnidadeConversao.List();
+
+                var total = Convert.ToDouble(unidades.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IUnidadeConversao.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : unidades);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os unidades de conversão " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaUnidadeConversao")]
         public async Task<JsonResult> ListaUnidadeConversao()
         {
@@ -34,12 +57,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarUnidadeConversao")]
-        public async Task<JsonResult> AdicionarUnidadeConversao([FromBody] UnidadeConversao unidadeConversao)
+        public async Task<IActionResult> AdicionarUnidadeConversao([FromBody] UnidadeConversao unidadeConversao)
         {
             try
             {
-                if (string.IsNullOrEmpty(unidadeConversao.Sigla) || string.IsNullOrEmpty(unidadeConversao.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(unidadeConversao.Sigla.Trim()))
+                    return BadRequest("Campo de sigla é obrigatório");
+                if (string.IsNullOrEmpty(unidadeConversao.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IUnidadeConversao.Add(unidadeConversao)));
 
@@ -65,12 +90,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarUnidadeConversao")]
-        public async Task<JsonResult> EditarUnidadeConversao([FromBody] UnidadeConversao unidadeConversao)
+        public async Task<IActionResult> EditarUnidadeConversao([FromBody] UnidadeConversao unidadeConversao)
         {
             try
             {
-                if (string.IsNullOrEmpty(unidadeConversao.Sigla) || string.IsNullOrEmpty(unidadeConversao.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(unidadeConversao.Sigla.Trim()))
+                    return BadRequest("Campo de sigla é obrigatório");
+                if (string.IsNullOrEmpty(unidadeConversao.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IUnidadeConversao.Update(unidadeConversao)));
 

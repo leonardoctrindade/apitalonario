@@ -2,6 +2,7 @@
 using Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -13,6 +14,29 @@ namespace WebAPI.Controllers
         public PosAdquirenteApiController(IPosAdquirente IPosAdquirente)
         {
             this.IPosAdquirente = IPosAdquirente;
+        }
+
+        [HttpGet("/api/ListaPaginacaoPosAdquirente/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var posAdquirentes = await this.IPosAdquirente.List();
+
+                var total = Convert.ToDouble(posAdquirentes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IPosAdquirente.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : posAdquirentes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os pos adquirente " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaPosAdquirente")]
@@ -29,12 +53,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarPosAdquirente")]
-        public async Task<JsonResult> AdicionarPosAdquirente([FromBody] PosAdquirente PosAdquirente)
+        public async Task<IActionResult> AdicionarPosAdquirente([FromBody] PosAdquirente PosAdquirente)
         {
             try
             {
-                if (String.IsNullOrEmpty(PosAdquirente.ChaveRequisicao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(PosAdquirente.ChaveRequisicao.Trim()))
+                    return BadRequest("Campo de chave de requisição é obrigatória");
 
                 Json(await Task.FromResult(this.IPosAdquirente.Add(PosAdquirente)));
 
@@ -60,12 +84,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarPosAdquirente")]
-        public async Task<JsonResult> EditarPosAdquirente([FromBody] PosAdquirente PosAdquirente)
+        public async Task<IActionResult> EditarPosAdquirente([FromBody] PosAdquirente PosAdquirente)
         {
             try
             {
-                if (String.IsNullOrEmpty(PosAdquirente.ChaveRequisicao))
-                    return Json(BadRequest(ModelState));
+                if(string.IsNullOrEmpty(PosAdquirente.ChaveRequisicao.Trim()))
+                    return BadRequest("Campo de chave de requisição é obrigatória");
 
                 Json(await Task.FromResult(this.IPosAdquirente.Update(PosAdquirente)));
                 return Json(Ok());

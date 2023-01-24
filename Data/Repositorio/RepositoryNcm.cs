@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryNcm : RepositoryGenerics<Ncm>, INcm
     {
-        public Task<List<Ncm>> ListagemCustomizada()
+        public async Task<List<Ncm>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<Ncm>();
+
+                try
+                {
+                    result = await context.Ncm
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<Ncm> GetNcm(int id)

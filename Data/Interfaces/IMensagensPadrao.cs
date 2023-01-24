@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IMensagensPadrao : IGeneric<MensagensPadrao>
     {
-        Task<List<MensagensPadrao>> ListagemCustomizada(); 
+        Task<List<MensagensPadrao>> ListagemCustomizada(int pagina); 
     }
 }

@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public MetodoApiController(IMetodo IMetodo)
         {
             this.IMetodo = IMetodo;
+        }
+
+        [HttpGet("/api/ListaPaginacaoMetodo/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var metodos = await this.IMetodo.List();
+
+                var total = Convert.ToDouble(metodos.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IMetodo.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : metodos);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os metodos " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaMetodo")]
@@ -30,12 +54,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarMetodo")]
-        public async Task<JsonResult> AdicionarMetodo([FromBody] Metodo Metodo)
+        public async Task<IActionResult> AdicionarMetodo([FromBody] Metodo Metodo)
         {
             try
             {
-                if (String.IsNullOrEmpty(Metodo.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Metodo.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IMetodo.Add(Metodo)));
 
@@ -61,12 +85,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarMetodo")]
-        public async Task<JsonResult> EditarMetodo([FromBody] Metodo Metodo)
+        public async Task<IActionResult> EditarMetodo([FromBody] Metodo Metodo)
         {
             try
             {
-                if (String.IsNullOrEmpty(Metodo.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Metodo.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IMetodo.Update(Metodo)));
                 return Json(Ok());

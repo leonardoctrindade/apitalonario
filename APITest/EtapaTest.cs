@@ -35,7 +35,7 @@ namespace APITest
             var etapa = MockEtapa.MontaObjetoDescricoVazio();
             var service = new EtapaApiController(mock.Object);
             var result = await service.AdicionarEtapa(etapa);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Insere_Sequencia_Zero()
@@ -43,7 +43,7 @@ namespace APITest
             var etapa = MockEtapa.MontaObjetoSequenciaZero();
             var service = new EtapaApiController(mock.Object);
             var result = await service.AdicionarEtapa(etapa);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Insere_Tipo_Vazio()
@@ -51,7 +51,7 @@ namespace APITest
             var etapa = MockEtapa.MontaObjetoTipoVazio();
             var service = new EtapaApiController(mock.Object);
             var result = await service.AdicionarEtapa(etapa);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Editar_Sucesso()

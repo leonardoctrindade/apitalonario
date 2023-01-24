@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.ILaboratorio = ilaboratorio;
         }
 
+        [HttpGet("/api/ListaPaginacaoLaboratorio/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var laboratorios = await this.ILaboratorio.List();
+
+                var total = Convert.ToDouble(laboratorios.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ILaboratorio.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : laboratorios);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os laboratorios " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaLaboratorio")]
         public async Task<JsonResult> ListaLaboratorio()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarLaboratorio")]
-        public async Task<JsonResult> AdicionarLaboratorio([FromBody] Laboratorio laboratorio)
+        public async Task<IActionResult> AdicionarLaboratorio([FromBody] Laboratorio laboratorio)
         {
             try
             {
-                if (string.IsNullOrEmpty(laboratorio.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(laboratorio.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.ILaboratorio.Add(laboratorio)));
 
@@ -67,12 +90,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarLaboratorio")]
-        public async Task<JsonResult> EditarLaboratorio([FromBody] Laboratorio laboratorio)
+        public async Task<IActionResult> EditarLaboratorio([FromBody] Laboratorio laboratorio)
         {
             try
             {
-                if (string.IsNullOrEmpty(laboratorio.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(laboratorio.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.ILaboratorio.Update(laboratorio)));
 

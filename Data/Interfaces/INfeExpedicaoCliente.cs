@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface INfeExpedicaoCliente : IGeneric<NfeExpedicaoCliente>
     {
-        Task<List<NfeExpedicaoCliente>> ListagemCustomizada();
+        Task<List<NfeExpedicaoCliente>> ListagemCustomizada(int pagina);
     }
 }

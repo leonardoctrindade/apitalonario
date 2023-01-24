@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.ITipoCapsula = ITipoCapsula;
         }
 
+        [HttpGet("/api/ListaPaginacaoTipoCapsula/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var tipoCapsulas = await this.ITipoCapsula.List();
+
+                var total = Convert.ToDouble(tipoCapsulas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ITipoCapsula.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : tipoCapsulas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os tipos de capsulas " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaTipoCapsula")]
         public async Task<JsonResult> ListaTipoCapsula()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarTipoCapsula")]
-        public async Task<JsonResult> AdicionarTipoCapsula([FromBody] TipoCapsula TipoCapsula)
+        public async Task<IActionResult> AdicionarTipoCapsula([FromBody] TipoCapsula TipoCapsula)
         {
             try
             {
-                if (String.IsNullOrEmpty(TipoCapsula.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(TipoCapsula.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.ITipoCapsula.Add(TipoCapsula)));
 
@@ -64,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarTipoCapsula")]
-        public async Task<JsonResult> EditarTipoCapsula([FromBody] TipoCapsula TipoCapsula)
+        public async Task<IActionResult> EditarTipoCapsula([FromBody] TipoCapsula TipoCapsula)
         {
             try
             {
-                if (String.IsNullOrEmpty(TipoCapsula.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(TipoCapsula.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.ITipoCapsula.Update(TipoCapsula)));
                 return Json(Ok());

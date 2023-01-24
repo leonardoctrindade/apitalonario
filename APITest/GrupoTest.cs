@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockGrupo.MontaObjetoDescricaoVazia();
             var apiController = new GrupoApiController(mock.Object);
             var result = await apiController.AdicionarGrupo(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockGrupo.MontaObjetoPercentualDescontoInvalido();
             var apiController = new GrupoApiController(mock.Object);
             var result = await apiController.AdicionarGrupo(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

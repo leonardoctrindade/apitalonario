@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockConfiguracoesPrismafive.MontaObjetoSecaoVazia();
             var apiController = new ConfiguracoesPrismafiveApiController(mock.Object);
             var result = await apiController.AdicionarConfiguracoesPrismafive(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockConfiguracoesPrismafive.MontaObjetoChaveVazia();
             var apiController = new ConfiguracoesPrismafiveApiController(mock.Object);
             var result = await apiController.AdicionarConfiguracoesPrismafive(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockConfiguracoesPrismafive.MontaObjetoUserMacVazio();
             var apiController = new ConfiguracoesPrismafiveApiController(mock.Object);
             var result = await apiController.AdicionarConfiguracoesPrismafive(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

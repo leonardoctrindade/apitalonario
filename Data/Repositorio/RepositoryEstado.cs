@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryEstado : RepositoryGenerics<Estado>, IEstado
     {
-        public Task<List<Estado>> ListagemCustomizada()
+        public async Task<List<Estado>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<Estado>();
+
+                try
+                {
+                    result = await context.Estado
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<Estado> GetEstado(int id)

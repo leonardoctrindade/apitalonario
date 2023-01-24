@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IReacoesAdversas = IReacoesAdversas;
         }
 
+        [HttpGet("/api/ListaPaginacaoReacoesAdversas/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var reacoesAdversas = await this.IReacoesAdversas.List();
+
+                var total = Convert.ToDouble(reacoesAdversas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IReacoesAdversas.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : reacoesAdversas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as reacoes adversas " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaReacoesAdversas")]
         public async Task<JsonResult> ListaReacoesAdversas()
         {
@@ -33,13 +56,19 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarReacoesAdversas")]
-        public async Task<JsonResult> AdicionarReacoesAdversas([FromBody] ReacoesAdversas ReacoesAdversas)
+        public async Task<IActionResult> AdicionarReacoesAdversas([FromBody] ReacoesAdversas ReacoesAdversas)
         {
             try
             {
-                if (!ReacoesAdversas.Data.HasValue || string.IsNullOrEmpty(ReacoesAdversas.Medicamento) || string.IsNullOrEmpty(ReacoesAdversas.Dose) || ReacoesAdversas.ClienteId <= 0 )
-                    return Json(BadRequest(ModelState));
-                    
+                if (!ReacoesAdversas.Data.HasValue)
+                    return BadRequest("Campo de data é obrigatório");
+                if (string.IsNullOrEmpty(ReacoesAdversas.Medicamento.Trim()))
+                    return BadRequest("Campo de medicamento é obrigatório");
+                if (string.IsNullOrEmpty(ReacoesAdversas.Dose.Trim()))
+                    return BadRequest("Campo de dose é obrigatório");
+                if (ReacoesAdversas.ClienteId <= 0)
+                    return BadRequest("Campo de cliente é obrigatório");
+
                 Json(await Task.FromResult(this.IReacoesAdversas.Add(ReacoesAdversas)));
 
                 return Json(Ok());
@@ -64,12 +93,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarReacoesAdversas")]
-        public async Task<JsonResult> EditarReacoesAdversas([FromBody] ReacoesAdversas ReacoesAdversas)
+        public async Task<IActionResult> EditarReacoesAdversas([FromBody] ReacoesAdversas ReacoesAdversas)
         {
             try
             {
-                if (!ReacoesAdversas.Data.HasValue || string.IsNullOrEmpty(ReacoesAdversas.Medicamento) || string.IsNullOrEmpty(ReacoesAdversas.Dose) || ReacoesAdversas.ClienteId <= 0 )
-                    return Json(BadRequest(ModelState));
+                if (!ReacoesAdversas.Data.HasValue)
+                    return BadRequest("Campo de data é obrigatório");
+                if (string.IsNullOrEmpty(ReacoesAdversas.Medicamento.Trim()))
+                    return BadRequest("Campo de medicamento é obrigatório");
+                if (string.IsNullOrEmpty(ReacoesAdversas.Dose.Trim()))
+                    return BadRequest("Campo de dose é obrigatório");
+                if (ReacoesAdversas.ClienteId <= 0)
+                    return BadRequest("Campo de cliente é obrigatório");
 
                 Json(await Task.FromResult(this.IReacoesAdversas.Update(ReacoesAdversas)));
                 return Json(Ok());

@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IEspecialidadePrescritor = especialidadePrescritor;
         }
 
+        [HttpGet("/api/ListaPaginacaoEspecialidadePrescritor/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var especialidadesPrescritor = await this.IEspecialidadePrescritor.List();
+
+                var total = Convert.ToDouble(especialidadesPrescritor.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IEspecialidadePrescritor.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : especialidadesPrescritor);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as especialidades do prescritor " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaEspecialidadePrescritor")]
         public async Task<JsonResult> ListaEspecialidadePrescritor()
         {
@@ -33,12 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarEspecialidadePrescritor")]
-        public async Task<JsonResult> AdicionarEspecialidadePrescritor([FromBody] EspecialidadePrescritor especialidadePrescritor)
+        public async Task<IActionResult> AdicionarEspecialidadePrescritor([FromBody] EspecialidadePrescritor especialidadePrescritor)
         {
             try
             {
-                if (especialidadePrescritor.EspecialidadeId == 0 || especialidadePrescritor.PrescritorId == 0)
-                    return Json(BadRequest(ModelState));
+                if (especialidadePrescritor.EspecialidadeId == 0)
+                    return BadRequest("Campo de especialidade é obrigatório");
+                if (especialidadePrescritor.PrescritorId == 0)
+                    return BadRequest("Campo de prescritor é obrigatório");
 
                 Json(await Task.FromResult(this.IEspecialidadePrescritor.Add(especialidadePrescritor)));
 

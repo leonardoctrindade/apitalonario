@@ -13,9 +13,29 @@ namespace Data.Repositorio
 {
     public class RepositoryTransacao: RepositoryGenerics<Transacao>, ITransacao
     {
-        public Task<List<Transacao>> ListagemCustomizada()
+        public async Task<List<Transacao>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<Transacao>();
+
+                try
+                {
+                    result = await context.Transacao
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<Transacao> GetTransacao(int id)

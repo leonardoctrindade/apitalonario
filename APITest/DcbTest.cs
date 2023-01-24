@@ -36,7 +36,7 @@ namespace APITest
             var service = new DcbApiController(mock.Object);
             var result = await service.AdicionarDcb(dcb);
 
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Insere_Codigo_Dcb_Nao_Preenchido()
@@ -45,7 +45,7 @@ namespace APITest
             var service = new DcbApiController(mock.Object);
             var result = await service.AdicionarDcb(dcb);
 
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Editar_Sucesso()

@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.ITributo = ITributo;
         }
 
+        [HttpGet("/api/ListaPaginacaoTributo/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var tributos = await this.ITributo.List();
+
+                var total = Convert.ToDouble(tributos.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ITributo.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : tributos);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os tributos " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaTributo")]
         public async Task<JsonResult> ListaTributo()
         {
@@ -33,14 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarTributo")]
-        public async Task<JsonResult> AdicionarTributo([FromBody] Tributo Tributo)
+        public async Task<IActionResult> AdicionarTributo([FromBody] Tributo Tributo)
         {
             try
             {
-                if (string.IsNullOrEmpty(Tributo.Codigo))
-                    return Json(BadRequest(ModelState));
-                if (string.IsNullOrEmpty(Tributo.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Tributo.Codigo.Trim()))
+                    return BadRequest("Campo de código é obrigatório");
+                if (string.IsNullOrEmpty(Tributo.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.ITributo.Add(Tributo)));
 
@@ -66,14 +89,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarTributo")]
-        public async Task<JsonResult> EditarTributo([FromBody] Tributo Tributo)
+        public async Task<IActionResult> EditarTributo([FromBody] Tributo Tributo)
         {
             try
             {
-                if (string.IsNullOrEmpty(Tributo.Codigo))
-                    return Json(BadRequest(ModelState));
-                if (string.IsNullOrEmpty(Tributo.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Tributo.Codigo.Trim()))
+                    return BadRequest("Campo de código é obrigatório");
+                if (string.IsNullOrEmpty(Tributo.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.ITributo.Update(Tributo)));
                 return Json(Ok());

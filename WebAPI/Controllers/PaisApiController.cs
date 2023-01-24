@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,30 @@ namespace WebAPI.Controllers
         public PaisApiController(IPais IPais)
         {
             this.IPais = IPais;
+        }
+
+
+        [HttpGet("/api/ListaPaginacaoPais/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var paises = await this.IPais.List();
+
+                var total = Convert.ToDouble(paises.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IPais.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : paises);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os paises " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaPais")]
@@ -30,12 +55,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarPais")]
-        public async Task<JsonResult> AdicionarPais([FromBody] Pais Pais)
+        public async Task<IActionResult> AdicionarPais([FromBody] Pais Pais)
         {
             try
             {
-                if (String.IsNullOrEmpty(Pais.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Pais.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IPais.Add(Pais)));
 
@@ -61,12 +86,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarPais")]
-        public async Task<JsonResult> EditarPais([FromBody] Pais Pais)
+        public async Task<IActionResult> EditarPais([FromBody] Pais Pais)
         {
             try
             {
-                if (String.IsNullOrEmpty(Pais.Nome))
-                    return Json(BadRequest(ModelState));
+                if(String.IsNullOrEmpty(Pais.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IPais.Update(Pais)));
                 return Json(Ok());

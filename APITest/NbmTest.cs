@@ -36,7 +36,7 @@ namespace APITest
             var nbm = MockNbm.MontaObjetoCodigoNbmVazio();
             var service = new NbmApiController(mock.Object);
             var result = await service.AdicionarNbm(nbm);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Insere_Descricao_Vazio()
@@ -44,7 +44,7 @@ namespace APITest
             var nbm = MockNbm.MontaObjetoDescricaoVazio();
             var service = new NbmApiController(mock.Object);
             var result = await service.AdicionarNbm(nbm);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Editar_Sucesso()

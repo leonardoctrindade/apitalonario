@@ -35,7 +35,7 @@ namespace APITest
             var dci = MockDci.MontaObjetoCodigoDciVazio();
             var service = new DciApiController(mock.Object);
             var result = await service.AdicionarDci(dci);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Insere_Descricao_Vazio()
@@ -43,7 +43,7 @@ namespace APITest
             var dci = MockDci.MontaObjetoDescricaoVazio();
             var service = new DciApiController(mock.Object);
             var result = await service.AdicionarDci(dci);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Editar_Sucesso()

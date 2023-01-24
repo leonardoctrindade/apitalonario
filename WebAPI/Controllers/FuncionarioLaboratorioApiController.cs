@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public FuncionarioLaboratorioApiController(IFuncionarioLaboratorio IFuncionarioLaboratorio)
         {
             this.IFuncionarioLaboratorio = IFuncionarioLaboratorio;
+        }
+
+        [HttpGet("/api/ListaPaginacaoFuncionarioLaboratorio/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var funcionarioLaboratorios = await this.IFuncionarioLaboratorio.List();
+
+                var total = Convert.ToDouble(funcionarioLaboratorios.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IFuncionarioLaboratorio.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : funcionarioLaboratorios);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os funcionarios do laboratorio " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaFuncionarioLaboratorio")]
@@ -30,12 +54,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarFuncionarioLaboratorio")]
-        public async Task<JsonResult> AdicionarFuncionarioLaboratorio([FromBody] FuncionarioLaboratorio FuncionarioLaboratorio)
+        public async Task<IActionResult> AdicionarFuncionarioLaboratorio([FromBody] FuncionarioLaboratorio FuncionarioLaboratorio)
         {
             try
             {
-                if (String.IsNullOrEmpty(FuncionarioLaboratorio.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(FuncionarioLaboratorio.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IFuncionarioLaboratorio.Add(FuncionarioLaboratorio)));
 
@@ -61,12 +85,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarFuncionarioLaboratorio")]
-        public async Task<JsonResult> EditarFuncionarioLaboratorio([FromBody] FuncionarioLaboratorio FuncionarioLaboratorio)
+        public async Task<IActionResult> EditarFuncionarioLaboratorio([FromBody] FuncionarioLaboratorio FuncionarioLaboratorio)
         {
             try
             {
-                if (String.IsNullOrEmpty(FuncionarioLaboratorio.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(FuncionarioLaboratorio.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IFuncionarioLaboratorio.Update(FuncionarioLaboratorio)));
                 return Json(Ok());

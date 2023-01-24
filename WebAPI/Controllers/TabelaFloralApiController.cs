@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public TabelaFloralApiController(ITabelaFloral ITabelaFloral)
         {
             this.ITabelaFloral = ITabelaFloral;
+        }
+
+        [HttpGet("/api/ListaPaginacaoTabelaFloral/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var tabelas = await this.ITabelaFloral.List();
+
+                var total = Convert.ToDouble(tabelas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ITabelaFloral.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : tabelas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os tabelas florais " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaTabelaFloral")]
@@ -30,12 +54,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarTabelaFloral")]
-        public async Task<JsonResult> AdicionarTabelaFloral([FromBody] TabelaFloral TabelaFloral)
+        public async Task<IActionResult> AdicionarTabelaFloral([FromBody] TabelaFloral TabelaFloral)
         {
             try
             {
-                if (TabelaFloral.Volume <= 0 || TabelaFloral.QuantidadeInicial <= 0 || TabelaFloral.QuantidadeFinal <= 0 || TabelaFloral.ValorVenda <= 0)
-                    return Json(BadRequest(ModelState));
+                if (TabelaFloral.Volume <= 0)
+                    return BadRequest("Campo de volume é obrigatório");
+                if (TabelaFloral.QuantidadeInicial <= 0)
+                    return BadRequest("Campo de quantidade inicial é obrigatório");
+                if (TabelaFloral.QuantidadeFinal <= 0)
+                    return BadRequest("Campo de quantidade final é obrigatório");
+                if (TabelaFloral.ValorVenda <= 0)
+                    return BadRequest("Campo de valor de venda é obrigatório");
 
                 Json(await Task.FromResult(this.ITabelaFloral.Add(TabelaFloral)));
 
@@ -61,12 +91,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarTabelaFloral")]
-        public async Task<JsonResult> EditarTabelaFloral([FromBody] TabelaFloral TabelaFloral)
+        public async Task<IActionResult> EditarTabelaFloral([FromBody] TabelaFloral TabelaFloral)
         {
             try
             {
-                if (TabelaFloral.Volume <= 0 || TabelaFloral.QuantidadeInicial <= 0 || TabelaFloral.QuantidadeFinal <= 0 || TabelaFloral.ValorVenda <= 0)
-                    return Json(BadRequest(ModelState));
+                if (TabelaFloral.Volume <= 0)
+                    return BadRequest("Campo de volume é obrigatório");
+                if (TabelaFloral.QuantidadeInicial <= 0)
+                    return BadRequest("Campo de quantidade inicial é obrigatório");
+                if (TabelaFloral.QuantidadeFinal <= 0)
+                    return BadRequest("Campo de quantidade final é obrigatório");
+                if (TabelaFloral.ValorVenda <= 0)
+                    return BadRequest("Campo de valor de venda é obrigatório");
 
                 Json(await Task.FromResult(this.ITabelaFloral.Update(TabelaFloral)));
                 return Json(Ok());

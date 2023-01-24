@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IEntregadorRegiao = IEntregadorRegiao;
         }
 
+        [HttpGet("/api/ListaPaginacaoEntregadorRegiao/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var entregadoresRegiao = await this.IEntregadorRegiao.List();
+
+                var total = Convert.ToDouble(entregadoresRegiao.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IEntregadorRegiao.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : entregadoresRegiao);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os entregadores região " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaEntregadorRegiao")]
         public async Task<JsonResult> ListaEntregadorRegiao()
         {
@@ -33,12 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarEntregadorRegiao")]
-        public async Task<JsonResult> AdicionarEntregadorRegiao([FromBody] EntregadorRegiao EntregadorRegiao)
+        public async Task<IActionResult> AdicionarEntregadorRegiao([FromBody] EntregadorRegiao EntregadorRegiao)
         {
             try
             {
-                if (EntregadorRegiao.EntregadorId == 0 || EntregadorRegiao.RegiaoId == 0)
-                    return Json(BadRequest(ModelState));
+                if (EntregadorRegiao.EntregadorId == 0)
+                    return BadRequest("Campo de entregador é obrigatório");
+                if (EntregadorRegiao.RegiaoId == 0)
+                    return BadRequest("Campo de regiao é obrigatório");
 
                 Json(await Task.FromResult(this.IEntregadorRegiao.Add(EntregadorRegiao)));
 
@@ -64,12 +89,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarEntregadorRegiao")]
-        public async Task<JsonResult> EditarEntregadorRegiao([FromBody] EntregadorRegiao EntregadorRegiao)
+        public async Task<IActionResult> EditarEntregadorRegiao([FromBody] EntregadorRegiao EntregadorRegiao)
         {
             try
             {
-                if (EntregadorRegiao.EntregadorId == 0 || EntregadorRegiao.RegiaoId == 0)
-                    return Json(BadRequest(ModelState));
+                if (EntregadorRegiao.EntregadorId == 0)
+                    return BadRequest("Campo de entregador é obrigatório");
+                if (EntregadorRegiao.RegiaoId == 0)
+                    return BadRequest("Campo de regiao é obrigatório");
 
                 Json(await Task.FromResult(this.IEntregadorRegiao.Update(EntregadorRegiao)));
                 return Json(Ok());

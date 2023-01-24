@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public MensagensPadraoApiController(IMensagensPadrao IMensagensPadrao)
         {
             this.IMensagensPadrao = IMensagensPadrao;
+        }
+
+        [HttpGet("/api/ListaPaginacaoMensagensPadrao/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var mensagens = await this.IMensagensPadrao.List();
+
+                var total = Convert.ToDouble(mensagens.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IMensagensPadrao.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : mensagens);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os mensagens padrões " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaMensagensPadrao")]
@@ -30,14 +54,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarMensagensPadrao")]
-        public async Task<JsonResult> AdicionarMensagensPadrao([FromBody] MensagensPadrao MensagensPadrao)
+        public async Task<IActionResult> AdicionarMensagensPadrao([FromBody] MensagensPadrao MensagensPadrao)
         {
             try
             {
-                if (String.IsNullOrEmpty(MensagensPadrao.StatusDescricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(MensagensPadrao.StatusDescricao.Trim()))
+                    return BadRequest("Campo de status descrição é obrigatório");
                 if (String.IsNullOrEmpty(MensagensPadrao.Mensagem))
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de mensagem é obrigatório");
 
                 Json(await Task.FromResult(this.IMensagensPadrao.Add(MensagensPadrao)));
                 return Json(Ok());
@@ -62,14 +86,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarMensagensPadrao")]
-        public async Task<JsonResult> EditarMensagensPadrao([FromBody] MensagensPadrao MensagensPadrao)
+        public async Task<IActionResult> EditarMensagensPadrao([FromBody] MensagensPadrao MensagensPadrao)
         {
             try
             {
-                if (String.IsNullOrEmpty(MensagensPadrao.StatusDescricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(MensagensPadrao.StatusDescricao.Trim()))
+                    return BadRequest("Campo de status descrição é obrigatório");
                 if (String.IsNullOrEmpty(MensagensPadrao.Mensagem))
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de mensagem é obrigatório");
 
                 Json(await Task.FromResult(this.IMensagensPadrao.Update(MensagensPadrao)));
                 return Json(Ok());

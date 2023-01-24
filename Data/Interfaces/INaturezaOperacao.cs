@@ -9,7 +9,7 @@ namespace Data.Interfaces
 {
     public interface INaturezaOperacao: IGeneric<NaturezaOperacao>
     {
-        Task<List<NaturezaOperacao>> ListagemCustomizada();
+        Task<List<NaturezaOperacao>> ListagemCustomizada(int pagina);
         Task<NaturezaOperacao> GetNaturezaOperacao(int id);
     }
 }

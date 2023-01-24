@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.ISetorDiasHoras = ISetorDiasHoras;
         }
 
+        [HttpGet("/api/ListaPaginacaoSetorDiasHoras/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var setores = await this.ISetorDiasHoras.List();
+
+                var total = Convert.ToDouble(setores.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ISetorDiasHoras.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : setores);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os setores dias horas " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaSetorDiasHoras")]
         public async Task<JsonResult> ListaSetorDiasHoras()
         {
@@ -33,12 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarSetorDiasHoras")]
-        public async Task<JsonResult> AdicionarSetorDiasHoras([FromBody] SetorDiasHoras SetorDiasHoras)
+        public async Task<IActionResult> AdicionarSetorDiasHoras([FromBody] SetorDiasHoras SetorDiasHoras)
         {
             try
             {
-                if (SetorDiasHoras.DiasHorasId <= 0 || SetorDiasHoras.SetorId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (SetorDiasHoras.DiasHorasId <= 0)
+                    return BadRequest("Campo de dias/horas é obrigatório");
+                if (SetorDiasHoras.SetorId <= 0)
+                    return BadRequest("Campo de setor é obrigatório");
 
                 Json(await Task.FromResult(this.ISetorDiasHoras.Add(SetorDiasHoras)));
 
@@ -64,12 +89,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarSetorDiasHoras")]
-        public async Task<JsonResult> EditarSetorDiasHoras([FromBody] SetorDiasHoras SetorDiasHoras)
+        public async Task<IActionResult> EditarSetorDiasHoras([FromBody] SetorDiasHoras SetorDiasHoras)
         {
             try
             {
-                if (SetorDiasHoras.DiasHorasId <= 0 || SetorDiasHoras.SetorId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (SetorDiasHoras.DiasHorasId <= 0)
+                    return BadRequest("Campo de dias/horas é obrigatório");
+                if (SetorDiasHoras.SetorId <= 0)
+                    return BadRequest("Campo de setor é obrigatório");
 
                 Json(await Task.FromResult(this.ISetorDiasHoras.Update(SetorDiasHoras)));
                 return Json(Ok());

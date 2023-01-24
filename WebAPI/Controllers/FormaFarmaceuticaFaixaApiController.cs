@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IFormaFarmaceuticaFaixa = IFormaFarmaceuticaFaixa;
         }
 
+        [HttpGet("/api/ListaPaginacaoFormaFarmaceuticaFaixa/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var formasFarmaceuticas = await this.IFormaFarmaceuticaFaixa.List();
+
+                var total = Convert.ToDouble(formasFarmaceuticas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IFormaFarmaceuticaFaixa.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : formasFarmaceuticas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as formas farmaceuticas " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
 
         [HttpGet("/api/ListaFormaFarmaceuticaFaixa")]
         public async Task<JsonResult> ListaFormaFarmaceuticaFaixa()
@@ -35,12 +58,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarFormaFarmaceuticaFaixa")]
-        public async Task<JsonResult> AdicionarFormaFarmaceuticaFaixa([FromBody] FormaFarmaceuticaFaixa FormaFarmaceuticaFaixa)
+        public async Task<IActionResult> AdicionarFormaFarmaceuticaFaixa([FromBody] FormaFarmaceuticaFaixa FormaFarmaceuticaFaixa)
         {
             try
             {
                 if (FormaFarmaceuticaFaixa.FormaFarmaceuticaId == 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de FormaFarmaceutica é obrigatório");
 
                 Json(await Task.FromResult(this.IFormaFarmaceuticaFaixa.Add(FormaFarmaceuticaFaixa)));
 
@@ -66,12 +89,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarFormaFarmaceuticaFaixa")]
-        public async Task<JsonResult> EditarFormaFarmaceuticaFaixa([FromBody] FormaFarmaceuticaFaixa FormaFarmaceuticaFaixa)
+        public async Task<IActionResult> EditarFormaFarmaceuticaFaixa([FromBody] FormaFarmaceuticaFaixa FormaFarmaceuticaFaixa)
         {
             try
             {
                 if (FormaFarmaceuticaFaixa.FormaFarmaceuticaId == 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de FormaFarmaceutica é obrigatório");
 
                 Json(await Task.FromResult(this.IFormaFarmaceuticaFaixa.Update(FormaFarmaceuticaFaixa)));
                 return Json(Ok());

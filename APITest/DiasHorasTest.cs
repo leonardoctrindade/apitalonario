@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockDiasHoras.MontaObjetoCodigoDiaVazio();
             var apiController = new DiasHorasApiController(mock.Object);
             var result = await apiController.AdicionarDiasHoras(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockDiasHoras.MontaObjetoSequenciaVazio();
             var apiController = new DiasHorasApiController(mock.Object);
             var result = await apiController.AdicionarDiasHoras(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

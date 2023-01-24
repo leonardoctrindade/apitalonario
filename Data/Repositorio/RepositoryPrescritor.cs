@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryPrescritor : RepositoryGenerics<Prescritor>, IPrescritor
     {
-        public Task<List<Prescritor>> ListagemCustomizada()
+        public async Task<List<Prescritor>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<Prescritor>();
+
+                try
+                {
+                    result = await context.Prescritor
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<Prescritor> GetPrescritor(int id)

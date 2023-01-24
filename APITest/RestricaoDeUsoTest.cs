@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockRestricaoDeUso.MontaObjetoProdutoIdInvalido();
             var apiController = new RestricaoDeUsoApiController(mock.Object);
             var result = await apiController.AdicionarRestricaoDeUso(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockRestricaoDeUso.MontaObjetoGrupoIdInvalido();
             var apiController = new RestricaoDeUsoApiController(mock.Object);
             var result = await apiController.AdicionarRestricaoDeUso(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockRestricaoDeUso.MontaObjetoClienteIdInvalido();
             var apiController = new RestricaoDeUsoApiController(mock.Object);
             var result = await apiController.AdicionarRestricaoDeUso(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

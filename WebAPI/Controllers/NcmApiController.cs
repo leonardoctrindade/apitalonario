@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public NcmApiController(INcm INcm)
         {
             this.INcm = INcm;
+        }
+
+        [HttpGet("/api/ListaPaginacaoNcm/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var ncms = await this.INcm.List();
+
+                var total = Convert.ToDouble(ncms.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.INcm.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : ncms);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os ncms " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaNcm")]
@@ -30,14 +54,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarNcm")]
-        public async Task<JsonResult> AdicionarNcm([FromBody] Ncm Ncm)
+        public async Task<IActionResult> AdicionarNcm([FromBody] Ncm Ncm)
         {
             try
             {
-                if (String.IsNullOrEmpty(Ncm.Descricao))
-                    return Json(BadRequest(ModelState));
-                if (string.IsNullOrEmpty(Ncm.CodigoNcm))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Ncm.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+                if (string.IsNullOrEmpty(Ncm.CodigoNcm.Trim()))
+                    return BadRequest("Campo de código ncm é obrigatório");
 
                 Json(await Task.FromResult(this.INcm.Add(Ncm)));
 
@@ -63,14 +87,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarNcm")]
-        public async Task<JsonResult> EditarNcm([FromBody] Ncm Ncm)
+        public async Task<IActionResult> EditarNcm([FromBody] Ncm Ncm)
         {
             try
             {
-                if (String.IsNullOrEmpty(Ncm.Descricao))
-                    return Json(BadRequest(ModelState));
-                if (string.IsNullOrEmpty(Ncm.CodigoNcm))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Ncm.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+                if (string.IsNullOrEmpty(Ncm.CodigoNcm.Trim()))
+                    return BadRequest("Campo de código ncm é obrigatório");
 
                 Json(await Task.FromResult(this.INcm.Update(Ncm)));
                 return Json(Ok());

@@ -37,7 +37,7 @@ namespace APITest
             var modelo = MockUsuario.MontaObjetoNomeVazio();
             var apiController = new UsuarioApiController(mock.Object);
             var result = await apiController.AdicionarUsuario(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace APITest
             var modelo = MockUsuario.MontaObjetoNomeAbreviadoVazio();
             var apiController = new UsuarioApiController(mock.Object);
             var result = await apiController.AdicionarUsuario(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace APITest
             var modelo = MockUsuario.MontaObjetoSenhaVazia();
             var apiController = new UsuarioApiController(mock.Object);
             var result = await apiController.AdicionarUsuario(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace APITest
             var modelo = MockUsuario.MontaObjetoIdGrupoUsuarioInvalido();
             var apiController = new UsuarioApiController(mock.Object);
             var result = await apiController.AdicionarUsuario(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

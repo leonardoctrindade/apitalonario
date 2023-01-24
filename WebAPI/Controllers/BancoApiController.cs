@@ -16,6 +16,29 @@ namespace WebAPI.Controllers
             this.IBanco = IBanco;
         }
 
+        [HttpGet("/api/ListaPaginacaoBanco/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var bancos = await this.IBanco.List();
+
+                var total = Convert.ToDouble(bancos.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IBanco.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : bancos);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os bancos " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaBanco")]
         public async Task<JsonResult> ListaBanco()
         {
@@ -29,14 +52,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarBanco")]
-        public async Task<JsonResult> AdicionarBanco([FromBody] Banco Banco)
+        public async Task<IActionResult> AdicionarBanco([FromBody] Banco Banco)
         {
             try
             {
-                if (String.IsNullOrEmpty(Banco.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Banco.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
                 if (Banco.CodigoBanco.Count() == 0 || Banco.CodigoBanco.Count() > 3)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de Codigo do Banco está vazio ou invalido");
 
                 Json(await Task.FromResult(this.IBanco.Add(Banco)));
 
@@ -60,14 +83,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarBanco")]
-        public async Task<JsonResult> EditarBanco([FromBody] Banco Banco)
+        public async Task<IActionResult> EditarBanco([FromBody] Banco Banco)
         {
             try
             {
-                if (String.IsNullOrEmpty(Banco.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Banco.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
                 if (Banco.CodigoBanco.Count() == 0 || Banco.CodigoBanco.Count() > 3)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de Codigo do Banco está vazio ou invalido");
 
                 Json(await Task.FromResult(this.IBanco.Update(Banco)));
                 return Json(Ok());

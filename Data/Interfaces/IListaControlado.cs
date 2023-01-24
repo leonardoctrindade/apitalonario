@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IListaControlado: IGeneric<ListaControlado>
     {
-        Task<List<ListaControlado>> ListagemCustomizada();
+        Task<List<ListaControlado>> ListagemCustomizada(int pagina);
     }
 }

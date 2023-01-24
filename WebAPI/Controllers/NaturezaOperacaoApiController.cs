@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.INaturezaOperacao = INaturezaOperacao;
         }
 
+        [HttpGet("/api/ListaPaginacaoNaturezaOperacao/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var naturezas = await this.INaturezaOperacao.List();
+
+                var total = Convert.ToDouble(naturezas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.INaturezaOperacao.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : naturezas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os naturezas da operação " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaNaturezaOperacao")]
         public async Task<JsonResult> ListaNaturezaOperacao()
         {
@@ -33,16 +56,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarNaturezaOperacao")]
-        public async Task<JsonResult> AdicionarNaturezaOperacao([FromBody] NaturezaOperacao NaturezaOperacao)
+        public async Task<IActionResult> AdicionarNaturezaOperacao([FromBody] NaturezaOperacao NaturezaOperacao)
         {
             try
             {
-                if (String.IsNullOrEmpty(NaturezaOperacao.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(NaturezaOperacao.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
                 if (NaturezaOperacao.Tipo != 1 && NaturezaOperacao.Tipo != 2)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de tipo é obrigatório");
                 if (NaturezaOperacao.Codigo <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de código é obrigatório");
 
                 Json(await Task.FromResult(this.INaturezaOperacao.Add(NaturezaOperacao)));
 
@@ -68,16 +91,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarNaturezaOperacao")]
-        public async Task<JsonResult> EditarNaturezaOperacao([FromBody] NaturezaOperacao NaturezaOperacao)
+        public async Task<IActionResult> EditarNaturezaOperacao([FromBody] NaturezaOperacao NaturezaOperacao)
         {
             try
             {
-                if (String.IsNullOrEmpty(NaturezaOperacao.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(NaturezaOperacao.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
                 if (NaturezaOperacao.Tipo != 1 && NaturezaOperacao.Tipo != 2)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de tipo é obrigatório");
                 if (NaturezaOperacao.Codigo <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de código é obrigatório");
 
                 Json(await Task.FromResult(this.INaturezaOperacao.Update(NaturezaOperacao)));
                 return Json(Ok());

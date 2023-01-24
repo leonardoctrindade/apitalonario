@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockListaControlado.MontaObjetoCodigoVazio();
             var apiController = new ListaControladoApiController(mock.Object);
             var result = await apiController.AdicionarListaControlado(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockListaControlado.MontaObjetoDescricaoVazia();
             var apiController = new ListaControladoApiController(mock.Object);
             var result = await apiController.AdicionarListaControlado(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

@@ -8,7 +8,7 @@ namespace Data.Interfaces
 {
     public interface IEstado : IGeneric<Estado>
     {
-        Task<List<Estado>> ListagemCustomizada();
+        Task<List<Estado>> ListagemCustomizada(int pagina);
         Task<Estado> GetEstado(int id);
     }
 }

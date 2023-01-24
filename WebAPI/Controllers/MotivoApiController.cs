@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             IMotivo = imotivo;
         }
 
+        [HttpGet("/api/ListaPaginacaoMotivo/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var motivos = await this.IMotivo.List();
+
+                var total = Convert.ToDouble(motivos.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IMotivo.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : motivos);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os motivos " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaMotivo")]
         public async Task<JsonResult> ListaMotivo()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarMotivo")]
-        public async Task<JsonResult> AdicionarMotivo([FromBody] Motivo motivo)
+        public async Task<IActionResult> AdicionarMotivo([FromBody] Motivo motivo)
         {
             try
             {
-                if (string.IsNullOrEmpty(motivo.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(motivo.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IMotivo.Add(motivo)));
 
@@ -67,12 +90,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarMotivo")]
-        public async Task<JsonResult> EditarMotivo([FromBody] Motivo motivo)
+        public async Task<IActionResult> EditarMotivo([FromBody] Motivo motivo)
         {
             try
             {
-                if (string.IsNullOrEmpty(motivo.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(motivo.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IMotivo.Update(motivo)));
 

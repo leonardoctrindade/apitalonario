@@ -76,9 +76,9 @@ namespace Data.Entidades
         [MaxLength(20)]
         public string Telefone { get; set; }
 
-        [Column("Fax")]
+        [Column("Celular")]
         [MaxLength(20)]
-        public string Fax { get; set; }
+        public string Celular { get; set; }
 
         [Column("Email")]
         [MaxLength(60)]

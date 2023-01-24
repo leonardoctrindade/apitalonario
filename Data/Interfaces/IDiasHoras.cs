@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IDiasHoras : IGeneric<DiasHoras>
     {
-        Task<List<DiasHoras>> ListagemCustomizada();
+        Task<List<DiasHoras>> ListagemCustomizada(int pagina);
     }
 }

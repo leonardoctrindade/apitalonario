@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IVolumeXValorHomeopatia = IVolumeXValorHomeopatia;
         }
 
+        [HttpGet("/api/ListaPaginacaoVolumeXValorHomeopatia/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var volumes = await this.IVolumeXValorHomeopatia.List();
+
+                var total = Convert.ToDouble(volumes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IVolumeXValorHomeopatia.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : volumes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os volumes por valor homeopatia " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaVolumeXValorHomeopatia")]
         public async Task<JsonResult> ListaVolumeXValorHomeopatia()
         {
@@ -33,12 +56,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarVolumeXValorHomeopatia")]
-        public async Task<JsonResult> AdicionarVolumeXValorHomeopatia([FromBody] VolumeXValorHomeopatia VolumeXValorHomeopatia)
+        public async Task<IActionResult> AdicionarVolumeXValorHomeopatia([FromBody] VolumeXValorHomeopatia VolumeXValorHomeopatia)
         {
             try
             {
-                if (VolumeXValorHomeopatia.Volume <= 0 || VolumeXValorHomeopatia.IntervaloDinamizacaoId <= 0 || VolumeXValorHomeopatia.ValorVenda <= 0 || VolumeXValorHomeopatia.ValorAdicional <= 0)
-                    return Json(BadRequest(ModelState));
+                if (VolumeXValorHomeopatia.Volume <= 0)
+                    return BadRequest("Campo de volume é obrigatório");
+                if (VolumeXValorHomeopatia.IntervaloDinamizacaoId <= 0)
+                    return BadRequest("Campo de intervalo de dinamização é obrigatório");
+                if (VolumeXValorHomeopatia.ValorVenda <= 0)
+                    return BadRequest("Campo de valor de venda é obrigatório");
+                if (VolumeXValorHomeopatia.ValorAdicional <= 0)
+                    return BadRequest("Campo de valor adicional é obrigatório");
 
                 Json(await Task.FromResult(this.IVolumeXValorHomeopatia.Add(VolumeXValorHomeopatia)));
 
@@ -64,12 +93,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarVolumeXValorHomeopatia")]
-        public async Task<JsonResult> EditarVolumeXValorHomeopatia([FromBody] VolumeXValorHomeopatia VolumeXValorHomeopatia)
+        public async Task<IActionResult> EditarVolumeXValorHomeopatia([FromBody] VolumeXValorHomeopatia VolumeXValorHomeopatia)
         {
             try
             {
-                if (VolumeXValorHomeopatia.Volume <= 0 || VolumeXValorHomeopatia.IntervaloDinamizacaoId <= 0 || VolumeXValorHomeopatia.ValorVenda <= 0 || VolumeXValorHomeopatia.ValorAdicional <= 0)
-                    return Json(BadRequest(ModelState));
+                if (VolumeXValorHomeopatia.Volume <= 0)
+                    return BadRequest("Campo de volume é obrigatório");
+                if (VolumeXValorHomeopatia.IntervaloDinamizacaoId <= 0)
+                    return BadRequest("Campo de intervalo de dinamização é obrigatório");
+                if (VolumeXValorHomeopatia.ValorVenda <= 0)
+                    return BadRequest("Campo de valor de venda é obrigatório");
+                if (VolumeXValorHomeopatia.ValorAdicional <= 0)
+                    return BadRequest("Campo de valor adicional é obrigatório");
 
                 Json(await Task.FromResult(this.IVolumeXValorHomeopatia.Update(VolumeXValorHomeopatia)));
                 return Json(Ok());

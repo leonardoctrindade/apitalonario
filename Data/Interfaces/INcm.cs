@@ -8,7 +8,7 @@ namespace Data.Interfaces
 {
     public interface INcm : IGeneric<Ncm>
     {
-        Task<List<Ncm>> ListagemCustomizada();
+        Task<List<Ncm>> ListagemCustomizada(int pagina);
         Task<Ncm> GetNcm(int id);
     }
 }

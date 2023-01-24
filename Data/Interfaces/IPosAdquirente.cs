@@ -9,6 +9,6 @@ namespace Data.Interfaces
 {
     public interface IPosAdquirente : IGeneric<PosAdquirente>
     {
-        Task<List<PosAdquirente>> ListagemCustomizada();
+        Task<List<PosAdquirente>> ListagemCustomizada(int pagina);
     }
 }

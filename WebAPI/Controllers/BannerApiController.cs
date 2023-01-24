@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IBanner = IBanner;
         }
 
+        [HttpGet("/api/ListaPaginacaoPbm/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var banners = await this.IBanner.List();
+
+                var total = Convert.ToDouble(banners.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IBanner.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : banners);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os banners " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaBanner")]
         public async Task<JsonResult> ListaBanner()
         {
@@ -33,20 +56,22 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarBanner")]
-        public async Task<JsonResult> AdicionarBanner([FromBody] Banner Banner)
+        public async Task<IActionResult> AdicionarBanner([FromBody] Banner Banner)
         {
             try
             {
-                if (Banner.Posicao < 0 ||
-                    string.IsNullOrEmpty(Banner.Descricao) ||
-                    string.IsNullOrEmpty(Banner.Link) ||
-                    Banner.AcaoLink < 0 ||
-                    !Banner.DataInicio.HasValue ||
-                    !Banner.DataFim.HasValue
-                    )
-                {
-                    return Json(BadRequest(ModelState));
-                }
+                if (Banner.Posicao < 0)
+                    return BadRequest("Campo de posição não pode ser menor que 0");
+                if (string.IsNullOrEmpty(Banner.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+                if (string.IsNullOrEmpty(Banner.Link.Trim()))
+                    return BadRequest("Campo de link é obrigatório");
+                if (Banner.AcaoLink < 0)
+                    return BadRequest("Campo de Ação Link não pode ser menor que 0");
+                if (!Banner.DataInicio.HasValue)
+                    return BadRequest("Campo de data inicio é obrigatório");
+                if (!Banner.DataFim.HasValue)
+                    return BadRequest("Campo de data fim é obrigatório");
 
                 if (!string.IsNullOrEmpty(Banner.Imagem))
                 {
@@ -83,20 +108,22 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarBanner")]
-        public async Task<JsonResult> EditarBanner([FromBody] Banner Banner)
+        public async Task<IActionResult> EditarBanner([FromBody] Banner Banner)
         {
             try
             {
-                if (Banner.Posicao < 0 ||
-                    string.IsNullOrEmpty(Banner.Descricao) ||
-                    string.IsNullOrEmpty(Banner.Link) ||
-                    Banner.AcaoLink < 0 ||
-                    !Banner.DataInicio.HasValue ||
-                    !Banner.DataFim.HasValue
-                    )
-                {
-                    return Json(BadRequest(ModelState));
-                }
+                if (Banner.Posicao < 0)
+                    return BadRequest("Campo de posição não pode ser menor que 0");
+                if (string.IsNullOrEmpty(Banner.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+                if (string.IsNullOrEmpty(Banner.Link.Trim()))
+                    return BadRequest("Campo de link é obrigatório");
+                if (Banner.AcaoLink < 0)
+                    return BadRequest("Campo de Ação Link não pode ser menor que 0");
+                if (!Banner.DataInicio.HasValue)
+                    return BadRequest("Campo de data inicio é obrigatório");
+                if (!Banner.DataFim.HasValue)
+                    return BadRequest("Campo de data fim é obrigatório");
 
                 if (!string.IsNullOrEmpty(Banner.Imagem))
                 {

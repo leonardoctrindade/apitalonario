@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface INcmEstado : IGeneric<NcmEstado>
     {
-        Task<List<NcmEstado>> ListagemCustomizada();
+        Task<List<NcmEstado>> ListagemCustomizada(int pagina);
     }
 }

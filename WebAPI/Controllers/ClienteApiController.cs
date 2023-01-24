@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.ICliente = ICliente;
         }
 
+        [HttpGet("/api/ListaPaginacaoCliente/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var clientes = await this.ICliente.List();
+
+                var total = Convert.ToDouble(clientes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ICliente.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : clientes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os pbms " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaCliente")]
         public async Task<JsonResult> ListaCliente()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarCliente")]
-        public async Task<JsonResult> AdicionarCliente([FromBody] Cliente Cliente)
+        public async Task<IActionResult> AdicionarCliente([FromBody] Cliente Cliente)
         {
             try
             {
-                if (String.IsNullOrEmpty(Cliente.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Cliente.Nome.Trim()))
+                    return BadRequest("Campo de nome não preenchido");
 
                 Json(await Task.FromResult(this.ICliente.Add(Cliente)));
 
@@ -64,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarCliente")]
-        public async Task<JsonResult> EditarCliente([FromBody] Cliente Cliente)
+        public async Task<IActionResult> EditarCliente([FromBody] Cliente Cliente)
         {
             try
             {
-                if (String.IsNullOrEmpty(Cliente.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Cliente.Nome.Trim()))
+                    return BadRequest("Campo de nome não preenchido");
 
                 Json(await Task.FromResult(this.ICliente.Update(Cliente)));
                 return Json(Ok());

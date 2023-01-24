@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IHabitosCliente : IGeneric<HabitosCliente>
     {
-        Task<List<HabitosCliente>> ListagemCustomizada();
+        Task<List<HabitosCliente>> ListagemCustomizada(int pagina);
     }
 }

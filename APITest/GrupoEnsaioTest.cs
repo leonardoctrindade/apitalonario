@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockGrupoEnsaio.MontaObjetoGrupoIdInvalido();
             var apiController = new GrupoEnsaioApiController(mock.Object);
             var result = await apiController.AdicionarGrupoEnsaio(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockGrupoEnsaio.MontaObjetoEnsaioIdInvalido();
             var apiController = new GrupoEnsaioApiController(mock.Object);
             var result = await apiController.AdicionarGrupoEnsaio(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

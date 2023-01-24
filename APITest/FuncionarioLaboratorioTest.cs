@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockFuncionarioLaboratorio.MontaObjetoNomeVazio();
             var apiController = new FuncionarioLaboratorioApiController(mock.Object);
             var result = await apiController.AdicionarFuncionarioLaboratorio(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

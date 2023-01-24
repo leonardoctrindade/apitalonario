@@ -37,7 +37,7 @@ namespace APITest
             var modelo = MockTabelaHomeopatia.MontaObjetoMetodoVazio();
             var apiController = new TabelaHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarTabelaHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

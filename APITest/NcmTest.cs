@@ -37,7 +37,7 @@ namespace APITest
             var modelo = MockNcm.MontaObjetoCodigoNcmVazio();
             var apiController = new NcmApiController(mock.Object);
             var result = await apiController.AdicionarNcm(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace APITest
             var modelo = MockNcm.MontaObjetoDescricaoVazia();
             var apiController = new NcmApiController(mock.Object);
             var result = await apiController.AdicionarNcm(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

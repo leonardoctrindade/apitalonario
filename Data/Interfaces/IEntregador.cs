@@ -8,7 +8,7 @@ namespace Data.Interfaces
 {
     public interface IEntregador : IGeneric<Entregador>
     {
-        Task<List<Entregador>> ListagemCustomizada();
+        Task<List<Entregador>> ListagemCustomizada(int pagina);
         Task<Entregador> GetEntregador(int id);
     }
 }

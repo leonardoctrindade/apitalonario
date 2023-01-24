@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryCidade : RepositoryGenerics<Cidade>, ICidade
     {
-        public Task<List<Cidade>> ListagemCustomizada()
+        public async Task<List<Cidade>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<Cidade>();
+
+                try
+                {
+                    result = await context.Cidade
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<Cidade> GetCidade(int id)

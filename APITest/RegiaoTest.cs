@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockRegiao.MontaObjetoDescricaoVazia();
             var apiController = new RegiaoApiController(mock.Object);
             var result = await apiController.AdicionarRegiao(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

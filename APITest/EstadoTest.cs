@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockEstado.MontaObjetoNomeVazio();
             var apiController = new EstadoApiController(mock.Object);
             var result = await apiController.AdicionarEstado(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -91,7 +91,7 @@ namespace APITest
             var modelo = MockEstado.MontaObjetoSiglaVazia();
             var apiController = new EstadoApiController(mock.Object);
             var result = await apiController.AdicionarEstado(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -100,7 +100,7 @@ namespace APITest
             var modelo = MockEstado.MontaObjetoSiglaUmCaracter();
             var apiController = new EstadoApiController(mock.Object);
             var result = await apiController.AdicionarEstado(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace APITest
             var modelo = MockEstado.MontaObjetoSiglaTresCaracter();
             var apiController = new EstadoApiController(mock.Object);
             var result = await apiController.AdicionarEstado(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
     }
 }

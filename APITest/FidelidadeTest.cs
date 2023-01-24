@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockFidelidade.MontaObjetoDescricaoVazia();
             var apiController = new FidelidadeApiController(mock.Object);
             var result = await apiController.AdicionarFidelidade(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

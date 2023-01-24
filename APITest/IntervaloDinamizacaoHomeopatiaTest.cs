@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockIntervaloDinamizacaoHomeopatia.MontaObjetoInicialInvalido();
             var apiController = new IntervaloDinamizacaoHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarIntervaloDinamizacaoHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockIntervaloDinamizacaoHomeopatia.MontaObjetoFinalInvalido();
             var apiController = new IntervaloDinamizacaoHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarIntervaloDinamizacaoHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockIntervaloDinamizacaoHomeopatia.MontaObjetoTabelaHomeopatiaIdInvalido();
             var apiController = new IntervaloDinamizacaoHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarIntervaloDinamizacaoHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace APITest
             var modelo = MockIntervaloDinamizacaoHomeopatia.MontaObjetoFinalMenorQueInicial();
             var apiController = new IntervaloDinamizacaoHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarIntervaloDinamizacaoHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

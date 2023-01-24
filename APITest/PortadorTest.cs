@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockPortador.MontaObjetoNomeVazio();
             var apiController = new PortadorApiController(mock.Object);
             var result = await apiController.AdicionarPortador(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

@@ -34,7 +34,7 @@ namespace APITest
             var unidade = MockUnidade.MontaObjetoSiglaVazio();
             var service = new UnidadeApiController(mock.Object);
             var result  = await service.AdicionarUnidade(unidade);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Insere_Descricao_Vazio()
@@ -42,7 +42,7 @@ namespace APITest
             var unidade = MockUnidade.MontaObjetoDescricaoVazio();
             var service = new UnidadeApiController(mock.Object);
             var result = await service.AdicionarUnidade(unidade);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

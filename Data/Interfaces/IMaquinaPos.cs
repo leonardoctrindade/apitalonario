@@ -9,7 +9,7 @@ namespace Data.Interfaces
 {
     public interface IMaquinaPos : IGeneric<MaquinaPos>
     {
-        Task<List<MaquinaPos>> ListagemCustomizada();
+        Task<List<MaquinaPos>> ListagemCustomizada(int paginaa);
         Task<MaquinaPos> GetMaquinaPos(int id);
     }
 }

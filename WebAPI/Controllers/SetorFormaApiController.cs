@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.ISetorForma = ISetorForma;
         }
 
+        [HttpGet("/api/ListaPaginacaoSetorForma/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var setores = await this.ISetorForma.List();
+
+                var total = Convert.ToDouble(setores.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ISetorForma.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : setores);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os setores forma " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaSetorForma")]
         public async Task<JsonResult> ListaSetorForma()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarSetorForma")]
-        public async Task<JsonResult> AdicionarSetorForma([FromBody] SetorForma SetorForma)
+        public async Task<IActionResult> AdicionarSetorForma([FromBody] SetorForma SetorForma)
         {
             try
             {
                 if (SetorForma.SetorId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de setor é obrigatório");
 
                 Json(await Task.FromResult(this.ISetorForma.Add(SetorForma)));
 
@@ -64,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarSetorForma")]
-        public async Task<JsonResult> EditarSetorForma([FromBody] SetorForma SetorForma)
+        public async Task<IActionResult> EditarSetorForma([FromBody] SetorForma SetorForma)
         {
             try
             {
                 if (SetorForma.SetorId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de setor é obrigatório");
 
                 Json(await Task.FromResult(this.ISetorForma.Update(SetorForma)));
                 return Json(Ok());

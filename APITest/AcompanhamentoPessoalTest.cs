@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockAcompanhamentoPessoal.MontaObjetoDataVazia();
             var apiController = new AcompanhamentoPessoalApiController(mock.Object);
             var result = await apiController.AdicionarAcompanhamentoPessoal(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockAcompanhamentoPessoal.MontaObjetoClienteIdInvalido();
             var apiController = new AcompanhamentoPessoalApiController(mock.Object);
             var result = await apiController.AdicionarAcompanhamentoPessoal(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

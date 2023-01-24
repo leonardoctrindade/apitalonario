@@ -35,7 +35,7 @@ namespace APITest
             var service = new ContaCorrenteApiController(mock.Object);
             var result = await service.AdicionarContaCorrente(contaCorrente);
 
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(),((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(),((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var service = new ContaCorrenteApiController(mock.Object);
             var result = await service.AdicionarContaCorrente(contaCorrente);
 
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
         [Fact]
         public async Task Editar_Sucesso()

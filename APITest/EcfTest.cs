@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockEcf.MontaObjetoNumeroEquipamentoInvalido();
             var apiController = new EcfApiController(mock.Object);
             var result = await apiController.AdicionarEcf(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockEcf.MontaObjetoNumeroSerieVazia();
             var apiController = new EcfApiController(mock.Object);
             var result = await apiController.AdicionarEcf(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

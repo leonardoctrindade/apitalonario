@@ -37,7 +37,7 @@ namespace APITest
             var service = new MotivoApiController(mock.Object);
 
             var result = await service.AdicionarMotivo(motivo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
 
         }
         [Fact]

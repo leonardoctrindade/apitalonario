@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockConvenioGrupo.MontaObjetoIdGrupoInvalido();
             var apiController = new ConvenioGrupoApiController(mock.Object);
             var result = await apiController.AdicionarConvenioGrupo(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockConvenioGrupo.MontaObjetoDescontoInvalido();
             var apiController = new ConvenioGrupoApiController(mock.Object);
             var result = await apiController.AdicionarConvenioGrupo(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockConvenioGrupo.MontaObjetoIdConvenioInvalido();
             var apiController = new ConvenioGrupoApiController(mock.Object);
             var result = await apiController.AdicionarConvenioGrupo(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockSetorDiasHoras.MontaObjetoSetorIdInvalido();
             var apiController = new SetorDiasHorasApiController(mock.Object);
             var result = await apiController.AdicionarSetorDiasHoras(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockSetorDiasHoras.MontaObjetoDiasHorasIdInvalido();
             var apiController = new SetorDiasHorasApiController(mock.Object);
             var result = await apiController.AdicionarSetorDiasHoras(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace APITest
         public async Task RetornaPorId()
         {
             mock.Setup(y => y.GetEntityById(MockSetorDiasHoras.MontaObjetoUnico().Id)).ReturnsAsync(MockSetorDiasHoras.MontaObjetoUnico());
-            SetorDiasHorasApiController ret = new SetorDiasHorasApiController(mock.Object);
+            SetorDiasHorasApiController ret = new(mock.Object);
             var result = await ret.RetornaSetorDiasHorasPorId(1);
             Assert.Equal(1, ((Data.Entidades.SetorDiasHoras)result.Value).SetorId);
         }

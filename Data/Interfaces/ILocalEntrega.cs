@@ -8,7 +8,7 @@ namespace Data.Interfaces
 {
     public interface ILocalEntrega : IGeneric<LocalEntrega>
     {
-        Task<List<LocalEntrega>> ListagemCustomizada();
+        Task<List<LocalEntrega>> ListagemCustomizada(int pagina);
         Task<LocalEntrega> GetLocalEntrega(int id);
     }
 }

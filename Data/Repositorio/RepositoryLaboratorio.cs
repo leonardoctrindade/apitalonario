@@ -1,7 +1,10 @@
-﻿using Data.Entidades;
+﻿using Data.Config;
+using Data.Entidades;
 using Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryLaboratorio : RepositoryGenerics<Laboratorio>, ILaboratorio
     {
-        public Task<List<Laboratorio>> ListagemCustomizada()
+        public async Task<List<Laboratorio>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<Laboratorio>();
+
+                try
+                {
+                    result = await context.Laboratorio
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
     }
 }

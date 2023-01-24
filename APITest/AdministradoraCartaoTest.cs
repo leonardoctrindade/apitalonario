@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockAdministradoraCartao.MontaObjetoNomeVazio();
             var apiController = new AdministradoraCartaoApiController(mock.Object);
             var result = await apiController.AdicionarAdministradoraCartao(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

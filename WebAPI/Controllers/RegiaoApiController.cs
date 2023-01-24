@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IRegiao = IRegiao;
         }
 
+        [HttpGet("/api/ListaPaginacaoRegiao/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var regioes = await this.IRegiao.List();
+
+                var total = Convert.ToDouble(regioes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IRegiao.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : regioes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as regiões " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaRegiao")]
         public async Task<JsonResult> ListaRegiao()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarRegiao")]
-        public async Task<JsonResult> AdicionarRegiao([FromBody] Regiao Regiao)
+        public async Task<IActionResult> AdicionarRegiao([FromBody] Regiao Regiao)
         {
             try
             {
-                if (String.IsNullOrEmpty(Regiao.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Regiao.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IRegiao.Add(Regiao)));
 
@@ -64,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarRegiao")]
-        public async Task<JsonResult> EditarRegiao([FromBody] Regiao Regiao)
+        public async Task<IActionResult> EditarRegiao([FromBody] Regiao Regiao)
         {
             try
             {
-                if (String.IsNullOrEmpty(Regiao.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Regiao.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IRegiao.Update(Regiao)));
                 return Json(Ok());

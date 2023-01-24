@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockDiferimento.MontaObjetoCstNaoPreenchido();
             var apiController = new DiferimentoApiController(mock.Object);
             var result = await apiController.AdicionarDiferimento(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockDiferimento.MontaObjetoSiglaEstadoNaoPreenchido();
             var apiController = new DiferimentoApiController(mock.Object);
             var result = await apiController.AdicionarDiferimento(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockDiferimento.MontaObjetoAliquotaDiferimentoInvalido();
             var apiController = new DiferimentoApiController(mock.Object);
             var result = await apiController.AdicionarDiferimento(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

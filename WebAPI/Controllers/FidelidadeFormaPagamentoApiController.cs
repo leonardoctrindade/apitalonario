@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IFidelidadeFormaPagamento = IFidelidadeFormaPagamento;
         }
 
+        [HttpGet("/api/ListaPaginacaoFidelidadeFormaPagamento/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var fidelidadesFormaPagamento = await this.IFidelidadeFormaPagamento.List();
+
+                var total = Convert.ToDouble(fidelidadesFormaPagamento.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IFidelidadeFormaPagamento.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : fidelidadesFormaPagamento);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as fidelidades forma pagamento" + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaFidelidadeFormaPagamento")]
         public async Task<JsonResult> ListaFidelidadeFormaPagamento()
         {
@@ -33,12 +56,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarFidelidadeFormaPagamento")]
-        public async Task<JsonResult> AdicionarFidelidadeFormaPagamento([FromBody] FidelidadeFormaPagamento FidelidadeFormaPagamento)
+        public async Task<IActionResult> AdicionarFidelidadeFormaPagamento([FromBody] FidelidadeFormaPagamento FidelidadeFormaPagamento)
         {
             try
             {
-                if (FidelidadeFormaPagamento.Valor < 0 || FidelidadeFormaPagamento.Pontos < 0 || FidelidadeFormaPagamento.CodigoFormaPagamento == 0 || FidelidadeFormaPagamento.CodigoFidelidade == 0)
-                    return Json(BadRequest(ModelState));
+                if (FidelidadeFormaPagamento.Valor < 0)
+                    return BadRequest("Campo de valor é obrigatório");
+                if (FidelidadeFormaPagamento.Pontos < 0)
+                    return BadRequest("Campo de pontos é obrigatório");
+                if (FidelidadeFormaPagamento.CodigoFormaPagamento == 0)
+                    return BadRequest("Campo de codigo forma pagamento é obrigatório");
+                if (FidelidadeFormaPagamento.CodigoFidelidade == 0)
+                    return BadRequest("Campo de codigo fidelidade é obrigatório");
 
                 Json(await Task.FromResult(this.IFidelidadeFormaPagamento.Add(FidelidadeFormaPagamento)));
 
@@ -64,12 +93,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarFidelidadeFormaPagamento")]
-        public async Task<JsonResult> EditarFidelidadeFormaPagamento([FromBody] FidelidadeFormaPagamento FidelidadeFormaPagamento)
+        public async Task<IActionResult> EditarFidelidadeFormaPagamento([FromBody] FidelidadeFormaPagamento FidelidadeFormaPagamento)
         {
             try
             {
-                if (FidelidadeFormaPagamento.Valor < 0 || FidelidadeFormaPagamento.Pontos < 0 || FidelidadeFormaPagamento.CodigoFormaPagamento == 0 || FidelidadeFormaPagamento.CodigoFidelidade == 0)
-                    return Json(BadRequest(ModelState));
+                if (FidelidadeFormaPagamento.Valor < 0)
+                    return BadRequest("Campo de valor é obrigatório");
+                if (FidelidadeFormaPagamento.Pontos < 0)
+                    return BadRequest("Campo de pontos é obrigatório");
+                if (FidelidadeFormaPagamento.CodigoFormaPagamento == 0)
+                    return BadRequest("Campo de codigo forma pagamento é obrigatório");
+                if (FidelidadeFormaPagamento.CodigoFidelidade == 0)
+                    return BadRequest("Campo de codigo fidelidade é obrigatório");
 
                 Json(await Task.FromResult(this.IFidelidadeFormaPagamento.Update(FidelidadeFormaPagamento)));
                 return Json(Ok());

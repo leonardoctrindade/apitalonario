@@ -9,6 +9,6 @@ namespace Data.Interfaces
 {
     public interface ITipoJustificativa : IGeneric<TipoJustificativa>
     {
-        Task<List<TipoJustificativa>> ListagemCustomizada();
+        Task<List<TipoJustificativa>> ListagemCustomizada(int pagina);
     }
 }

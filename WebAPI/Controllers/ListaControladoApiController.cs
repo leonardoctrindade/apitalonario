@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public ListaControladoApiController(IListaControlado IListaControlado)
         {
             this.IListaControlado = IListaControlado;
+        }
+
+        [HttpGet("/api/ListaPaginacaoPbm/{pagina}")]
+        public async Task<IActionResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var listaControlados = await this.IListaControlado.List();
+
+                var total = Convert.ToDouble(listaControlados.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IListaControlado.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : listaControlados);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os listaControlados " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaListaControlado")]
@@ -30,14 +54,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarListaControlado")]
-        public async Task<JsonResult> AdicionarListaControlado([FromBody] ListaControlado ListaControlado)
+        public async Task<IActionResult> AdicionarListaControlado([FromBody] ListaControlado ListaControlado)
         {
             try
             {
-                if (String.IsNullOrEmpty(ListaControlado.Descricao))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(ListaControlado.Codigo))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(ListaControlado.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+                if (String.IsNullOrEmpty(ListaControlado.Codigo.Trim()))
+                    return BadRequest("Campo de código é obrigatório");
 
                 Json(await Task.FromResult(this.IListaControlado.Add(ListaControlado)));
 
@@ -63,14 +87,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarListaControlado")]
-        public async Task<JsonResult> EditarListaControlado([FromBody] ListaControlado ListaControlado)
+        public async Task<IActionResult> EditarListaControlado([FromBody] ListaControlado ListaControlado)
         {
             try
             {
-                if (String.IsNullOrEmpty(ListaControlado.Descricao))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(ListaControlado.Codigo))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(ListaControlado.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+                if (String.IsNullOrEmpty(ListaControlado.Codigo.Trim()))
+                    return BadRequest("Campo de código é obrigatório");
 
                 Json(await Task.FromResult(this.IListaControlado.Update(ListaControlado)));
                 return Json(Ok());

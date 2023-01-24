@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockTransportador.MontaObjetoNomeVazio();
             var apiController = new TransportadorApiController(mock.Object);
             var result = await apiController.AdicionarTransportador(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockTransportador.MontaObjetoCpfOuCnpjVazio();
             var apiController = new TransportadorApiController(mock.Object);
             var result = await apiController.AdicionarTransportador(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

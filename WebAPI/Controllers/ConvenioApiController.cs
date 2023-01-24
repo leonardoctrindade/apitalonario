@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IConvenio = IConvenio;
         }
 
+        [HttpGet("/api/ListaPaginacaoConvenio/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var convenios = await this.IConvenio.List();
+
+                var total = Convert.ToDouble(convenios.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IConvenio.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : convenios);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os convenios " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaConvenio")]
         public async Task<JsonResult> ListaConvenio()
         {
@@ -32,12 +55,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarConvenio")]
-        public async Task<JsonResult> AdicionarConvenio([FromBody] Convenio Convenio)
+        public async Task<IActionResult> AdicionarConvenio([FromBody] Convenio Convenio)
         {
             try
             {
-                if (String.IsNullOrEmpty(Convenio.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Convenio.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IConvenio.Add(Convenio)));
 
@@ -61,12 +84,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarConvenio")]
-        public async Task<JsonResult> EditarConvenio([FromBody] Convenio Convenio)
+        public async Task<IActionResult> EditarConvenio([FromBody] Convenio Convenio)
         {
             try
             {
-                if (String.IsNullOrEmpty(Convenio.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Convenio.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IConvenio.Update(Convenio)));
                 return Json(Ok());

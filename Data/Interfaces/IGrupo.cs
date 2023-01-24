@@ -8,7 +8,7 @@ namespace Data.Interfaces
 {
     public interface IGrupo : IGeneric<Grupo>
     {
-        Task<List<Grupo>> ListagemCustomizada();
+        Task<List<Grupo>> ListagemCustomizada(int pagina);
         Task<Grupo> GetGrupo(int Id);
     }
 }

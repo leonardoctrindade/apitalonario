@@ -15,7 +15,7 @@ namespace APITest
 {
     public class FormaFarmaceuticaMargemTest
     {
-        public Mock<IFormaFarmaceuticaMargem> mock = new Mock<IFormaFarmaceuticaMargem>();
+        public Mock<IFormaFarmaceuticaMargem> mock = new();
 
         [Fact]
         public async Task Insere_Sucesso()
@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockFormaFarmaceuticaMargem.MontaObjetoFormaFarmaceuticaIdVazia();
             var apiController = new FormaFarmaceuticaMargemApiController(mock.Object);
             var result = await apiController.AdicionarFormaFarmaceuticaMargem(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockFormaFarmaceuticaMargem.MontaObjetoMargemInvalida();
             var apiController = new FormaFarmaceuticaMargemApiController(mock.Object);
             var result = await apiController.AdicionarFormaFarmaceuticaMargem(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace APITest
         public async Task RetornaPorId()
         {
             mock.Setup(y => y.GetEntityById(MockFormaFarmaceuticaMargem.MontaObjetoUnico().Id)).ReturnsAsync(MockFormaFarmaceuticaMargem.MontaObjetoUnico());
-            FormaFarmaceuticaMargemApiController ret = new FormaFarmaceuticaMargemApiController(mock.Object);
+            FormaFarmaceuticaMargemApiController ret = new(mock.Object);
             var result = await ret.RetornaFormaFarmaceuticaMargemPorId(1);
             Assert.Equal(1, ((Data.Entidades.FormaFarmaceuticaMargem)result.Value).Id);
         }

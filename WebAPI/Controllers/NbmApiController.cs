@@ -20,6 +20,29 @@ namespace WebAPI.Controllers
             this.INbm = iNbm;
         }
 
+        [HttpGet("/api/ListaPaginacaoNbm/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var nbms = await this.INbm.List();
+
+                var total = Convert.ToDouble(nbms.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.INbm.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : nbms);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os nbms " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaNbm")]
         public async Task<JsonResult> ListaNbm()
         {
@@ -34,11 +57,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarNbm")]
-        public async Task<JsonResult> AdicionarNbm([FromBody] Nbm nbm)
+        public async Task<IActionResult> AdicionarNbm([FromBody] Nbm nbm)
         {
             try
             {
-                if (string.IsNullOrEmpty(nbm.CodigoNbm) || string.IsNullOrEmpty(nbm.Descricao))
+                if (string.IsNullOrEmpty(nbm.CodigoNbm.Trim()))
+                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(nbm.Descricao.Trim()))
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.INbm.Add(nbm)));
@@ -68,11 +93,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarNbm")]
-        public async Task<JsonResult> EditarNbm([FromBody] Nbm nbm)
+        public async Task<IActionResult> EditarNbm([FromBody] Nbm nbm)
         {
             try
             {
-                if (string.IsNullOrEmpty(nbm.CodigoNbm) || string.IsNullOrEmpty(nbm.Descricao))
+                if (string.IsNullOrEmpty(nbm.CodigoNbm.Trim()))
+                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(nbm.Descricao.Trim()))
                     return Json(BadRequest(ModelState));
 
                 Json(await Task.FromResult(this.INbm.Update(nbm)));

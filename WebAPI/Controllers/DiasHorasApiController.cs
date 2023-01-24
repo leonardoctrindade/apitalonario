@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IDiasHoras = IDiasHoras;
         }
 
+        [HttpGet("/api/ListaPaginacaoDiasHoras/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var diashoras = await this.IDiasHoras.List();
+
+                var total = Convert.ToDouble(diashoras.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IDiasHoras.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : diashoras);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os dias/horas " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaDiasHoras")]
         public async Task<JsonResult> ListaDiasHoras()
         {
@@ -33,12 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarDiasHoras")]
-        public async Task<JsonResult> AdicionarDiasHoras([FromBody] DiasHoras DiasHoras)
+        public async Task<IActionResult> AdicionarDiasHoras([FromBody] DiasHoras DiasHoras)
         {
             try
             {
-                if (DiasHoras.CodigoDia <= 0 || DiasHoras.Sequencia <= 0)
-                    return Json(BadRequest(ModelState));
+                if (DiasHoras.CodigoDia <= 0)
+                    return BadRequest("Campo de código dia é obrigatório");
+                if (DiasHoras.Sequencia <= 0)
+                    return BadRequest("Campo de sequencia é obrigatório");
 
                 Json(await Task.FromResult(this.IDiasHoras.Add(DiasHoras)));
 
@@ -64,12 +89,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarDiasHoras")]
-        public async Task<JsonResult> EditarDiasHoras([FromBody] DiasHoras DiasHoras)
+        public async Task<IActionResult> EditarDiasHoras([FromBody] DiasHoras DiasHoras)
         {
             try
             {
-                if (DiasHoras.CodigoDia <= 0 || DiasHoras.Sequencia <= 0)
-                    return Json(BadRequest(ModelState));
+                if (DiasHoras.CodigoDia <= 0)
+                    return BadRequest("Campo de código dia é obrigatório");
+                if (DiasHoras.Sequencia <= 0)
+                    return BadRequest("Campo de sequencia é obrigatório");
 
                 Json(await Task.FromResult(this.IDiasHoras.Update(DiasHoras)));
                 return Json(Ok());

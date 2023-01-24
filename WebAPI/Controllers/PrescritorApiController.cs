@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IPrescritor = prescritor;
         }
 
+        [HttpGet("/api/ListaPaginacaoPrescritor/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var prescritores = await this.IPrescritor.List();
+
+                var total = Convert.ToDouble(prescritores.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IPrescritor.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : prescritores);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os prescritores " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaPrescritor")]
         public async Task<JsonResult> ListaPrescritor()
         {
@@ -33,13 +56,17 @@ namespace WebAPI.Controllers
             
         }
         [HttpPost("/api/AdicionarPrescritor")]
-        public async Task<JsonResult> AdicionarPrescritor([FromBody] Prescritor prescritor)
+        public async Task<IActionResult> AdicionarPrescritor([FromBody] Prescritor prescritor)
         {
-            if (string.IsNullOrEmpty(prescritor.Nome) || string.IsNullOrEmpty(prescritor.CrmEstado)
-                || string.IsNullOrEmpty(prescritor.CrmNumero))
-                return Json(BadRequest(ModelState));
             try
             {
+                if (string.IsNullOrEmpty(prescritor.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (string.IsNullOrEmpty(prescritor.CrmEstado.Trim()))
+                    return BadRequest("Campo de crm estado é obrigatório");
+                if (string.IsNullOrEmpty(prescritor.CrmNumero.Trim()))
+                    return BadRequest("Campo de crm número é obrigatório");
+
                 Json(await Task.FromResult(this.IPrescritor.Add(prescritor)));
 
             }
@@ -66,13 +93,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarPrescritor")]
-        public async Task<JsonResult> EditarPrescritor([FromBody] Prescritor prescritor)
+        public async Task<IActionResult> EditarPrescritor([FromBody] Prescritor prescritor)
         {
             try
             {
-                if (string.IsNullOrEmpty(prescritor.Nome) || string.IsNullOrEmpty(prescritor.CrmEstado)
-                || string.IsNullOrEmpty(prescritor.CrmNumero))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(prescritor.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (string.IsNullOrEmpty(prescritor.CrmEstado.Trim()))
+                    return BadRequest("Campo de crm estado é obrigatório");
+                if (string.IsNullOrEmpty(prescritor.CrmNumero.Trim()))
+                    return BadRequest("Campo de crm número é obrigatório");
 
                 Json(await Task.FromResult(this.IPrescritor.Update(prescritor)));
 

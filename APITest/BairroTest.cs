@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockBairro.MontaObjetoNomeVazio();
             var apiController = new BairroApiController(mock.Object);
             var result = await apiController.AdicionarBairro(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

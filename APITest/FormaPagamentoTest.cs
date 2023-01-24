@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockFormaPagamento.MontaObjetoDescricaoVazio();
             var apiController = new FormaPagamentoApiController(mock.Object);
             var result = await apiController.AdicionarFormaPagamento(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

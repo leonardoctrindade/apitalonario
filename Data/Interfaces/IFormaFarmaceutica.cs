@@ -8,7 +8,7 @@ namespace Data.Interfaces
 {
     public interface IFormaFarmaceutica : IGeneric<FormaFarmaceutica>
     {
-        Task<List<FormaFarmaceutica>> ListagemCustomizada();
+        Task<List<FormaFarmaceutica>> ListagemCustomizada(int pagina);
         Task<FormaFarmaceutica> GetFormaFarmaceutica(int id);
     }
 }

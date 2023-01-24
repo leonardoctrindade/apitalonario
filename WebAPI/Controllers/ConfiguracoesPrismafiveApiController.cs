@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IConfiguracoesPrismafive = IConfiguracoesPrismafive;
         }
 
+        [HttpGet("/api/ListaPaginacaoConfiguracoesPrismafive/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var configuracoes = await this.IConfiguracoesPrismafive.List();
+
+                var total = Convert.ToDouble(configuracoes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IConfiguracoesPrismafive.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : configuracoes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as configurações prismafive " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaConfiguracoesPrismafive")]
         public async Task<JsonResult> ListaConfiguracoesPrismafive()
         {
@@ -33,12 +56,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarConfiguracoesPrismafive")]
-        public async Task<JsonResult> AdicionarConfiguracoesPrismafive([FromBody] ConfiguracoesPrismafive ConfiguracoesPrismafive)
+        public async Task<IActionResult> AdicionarConfiguracoesPrismafive([FromBody] ConfiguracoesPrismafive ConfiguracoesPrismafive)
         {
             try
             {
-                if (String.IsNullOrEmpty(ConfiguracoesPrismafive.Secao) || String.IsNullOrEmpty(ConfiguracoesPrismafive.UserMac) || String.IsNullOrEmpty(ConfiguracoesPrismafive.Chave))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(ConfiguracoesPrismafive.Secao.Trim()))
+                    return BadRequest("Campo de seção é obrigatorio");
+                if (string.IsNullOrEmpty(ConfiguracoesPrismafive.UserMac))
+                    return BadRequest("Campo de UserMac é obrigatório");
+                if (string.IsNullOrEmpty(ConfiguracoesPrismafive.Chave.Trim()))
+                    return BadRequest("Campo de chave é obrigatório");
 
                 Json(await Task.FromResult(this.IConfiguracoesPrismafive.Add(ConfiguracoesPrismafive)));
 
@@ -64,12 +91,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarConfiguracoesPrismafive")]
-        public async Task<JsonResult> EditarConfiguracoesPrismafive([FromBody] ConfiguracoesPrismafive ConfiguracoesPrismafive)
+        public async Task<IActionResult> EditarConfiguracoesPrismafive([FromBody] ConfiguracoesPrismafive ConfiguracoesPrismafive)
         {
             try
             {
-                if (String.IsNullOrEmpty(ConfiguracoesPrismafive.Secao) || String.IsNullOrEmpty(ConfiguracoesPrismafive.UserMac) || String.IsNullOrEmpty(ConfiguracoesPrismafive.Chave))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(ConfiguracoesPrismafive.Secao.Trim()))
+                    return BadRequest("Campo de seção é obrigatorio");
+                if (string.IsNullOrEmpty(ConfiguracoesPrismafive.UserMac))
+                    return BadRequest("Campo de UserMac é obrigatório");
+                if (string.IsNullOrEmpty(ConfiguracoesPrismafive.Chave.Trim()))
+                    return BadRequest("Campo de chave é obrigatório");
 
                 Json(await Task.FromResult(this.IConfiguracoesPrismafive.Update(ConfiguracoesPrismafive)));
                 return Json(Ok());

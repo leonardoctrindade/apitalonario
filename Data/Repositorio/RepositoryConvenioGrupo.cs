@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryConvenioGrupo: RepositoryGenerics<ConvenioGrupo>, IConvenioGrupo
     {
-        public Task<List<ConvenioGrupo>> ListagemCustomizada()
+        public async Task<List<ConvenioGrupo>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<ConvenioGrupo>();
+
+                try
+                {
+                    result = await context.ConvenioGrupo
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
     }
 }

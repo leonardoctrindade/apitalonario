@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockEtiqueta.MontaObjetoDescricaoVazia();
             var apiController = new EtiquetaApiController(mock.Object);
             var result = await apiController.AdicionarEtiqueta(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockEtiqueta.MontaObjetoMargemSuperiorInvalida();
             var apiController = new EtiquetaApiController(mock.Object);
             var result = await apiController.AdicionarEtiqueta(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockEtiqueta.MontaObjetoMargemLateralInvalida();
             var apiController = new EtiquetaApiController(mock.Object);
             var result = await apiController.AdicionarEtiqueta(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace APITest
             var modelo = MockEtiqueta.MontaObjetoAlturaEtiquetaInvalida();
             var apiController = new EtiquetaApiController(mock.Object);
             var result = await apiController.AdicionarEtiqueta(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace APITest
             var modelo = MockEtiqueta.MontaObjetoDistanciaVerticalInvalida();
             var apiController = new EtiquetaApiController(mock.Object);
             var result = await apiController.AdicionarEtiqueta(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace APITest
             var modelo = MockEtiqueta.MontaObjetoDistanciaHorizontalInvalida();
             var apiController = new EtiquetaApiController(mock.Object);
             var result = await apiController.AdicionarEtiqueta(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -90,7 +90,7 @@ namespace APITest
             var modelo = MockEtiqueta.MontaObjetoLinhasPorPaginaInvalida();
             var apiController = new EtiquetaApiController(mock.Object);
             var result = await apiController.AdicionarEtiqueta(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -99,7 +99,7 @@ namespace APITest
             var modelo = MockEtiqueta.MontaObjetoColunasPorPaginaInvalida();
             var apiController = new EtiquetaApiController(mock.Object);
             var result = await apiController.AdicionarEtiqueta(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -108,7 +108,7 @@ namespace APITest
             var modelo = MockEtiqueta.MontaObjetoLayoutEtiquetaEntradaInvalida();
             var apiController = new EtiquetaApiController(mock.Object);
             var result = await apiController.AdicionarEtiqueta(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace APITest
             var modelo = MockEtiqueta.MontaObjetoLinhasPorEtiquetaInvalida();
             var apiController = new EtiquetaApiController(mock.Object);
             var result = await apiController.AdicionarEtiqueta(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -126,7 +126,7 @@ namespace APITest
             var modelo = MockEtiqueta.MontaObjetoEspacoEntreLinhasInvalida();
             var apiController = new EtiquetaApiController(mock.Object);
             var result = await apiController.AdicionarEtiqueta(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

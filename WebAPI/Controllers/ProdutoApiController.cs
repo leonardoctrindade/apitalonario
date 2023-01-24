@@ -18,6 +18,29 @@ namespace WebAPI.Controllers
             this.IProduto = IProduto;
         }
 
+        [HttpGet("/api/ListaPaginacaoProduto/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var produtos = await this.IProduto.List();
+
+                var total = Convert.ToDouble(produtos.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IProduto.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : produtos);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os produtos " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
 
         [HttpGet("/api/ListaProdutos")]
         public async Task<JsonResult> ListaProdutos()

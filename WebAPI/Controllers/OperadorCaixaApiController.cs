@@ -19,6 +19,30 @@ namespace WebAPI.Controllers
             this.IOperadorCaixa = IOperadorCaixa;
         }
 
+
+        [HttpGet("/api/ListaPaginacaoOperadorCaixa/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var operadores = await this.IOperadorCaixa.List();
+
+                var total = Convert.ToDouble(operadores.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IOperadorCaixa.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : operadores);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os operadores de caixa " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaOperadorCaixa")]
         public async Task<JsonResult> ListaOperadorCaixa()
         {
@@ -33,12 +57,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarOperadorCaixa")]
-        public async Task<JsonResult> AdicionarOperadorCaixa([FromBody] OperadorCaixa OperadorCaixa)
+        public async Task<IActionResult> AdicionarOperadorCaixa([FromBody] OperadorCaixa OperadorCaixa)
         {
             try
             {
-                if (String.IsNullOrEmpty(OperadorCaixa.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(OperadorCaixa.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IOperadorCaixa.Add(OperadorCaixa)));
 
@@ -64,12 +88,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarOperadorCaixa")]
-        public async Task<JsonResult> EditarOperadorCaixa([FromBody] OperadorCaixa OperadorCaixa)
+        public async Task<IActionResult> EditarOperadorCaixa([FromBody] OperadorCaixa OperadorCaixa)
         {
             try
             {
-                if (String.IsNullOrEmpty(OperadorCaixa.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(OperadorCaixa.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IOperadorCaixa.Update(OperadorCaixa)));
                 return Json(Ok());

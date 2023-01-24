@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IContaCorrente : IGeneric<ContaCorrente>
     {
-        Task<List<ContaCorrente>> ListagemCustomizada();
+        Task<List<ContaCorrente>> ListagemCustomizada(int pagina);
     }
 }

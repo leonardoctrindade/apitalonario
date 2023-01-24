@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public VendedorApiController(IVendedor IVendedor)
         {
             this.IVendedor = IVendedor;
+        }
+
+        [HttpGet("/api/ListaPaginacaoVendedor/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var vendedores = await this.IVendedor.List();
+
+                var total = Convert.ToDouble(vendedores.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IVendedor.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : vendedores);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os vendedores " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaVendedor")]
@@ -30,12 +54,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarVendedor")]
-        public async Task<JsonResult> AdicionarVendedor([FromBody] Vendedor Vendedor)
+        public async Task<IActionResult> AdicionarVendedor([FromBody] Vendedor Vendedor)
         {
             try
             {
-                if (String.IsNullOrEmpty(Vendedor.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Vendedor.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IVendedor.Add(Vendedor)));
 
@@ -61,12 +85,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarVendedor")]
-        public async Task<JsonResult> EditarVendedor([FromBody] Vendedor Vendedor)
+        public async Task<IActionResult> EditarVendedor([FromBody] Vendedor Vendedor)
         {
             try
             {
-                if (String.IsNullOrEmpty(Vendedor.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Vendedor.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IVendedor.Update(Vendedor)));
                 return Json(Ok());

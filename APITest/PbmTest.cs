@@ -38,7 +38,7 @@ namespace APITest
             var modelo = MockPbm.MontaObjetoNomeVazio();
             var apiController = new PbmApiController(mock.Object);
             var result = await apiController.AdicionarPbm(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
 
@@ -62,7 +62,7 @@ namespace APITest
             var modelo = MockPbm.MontaObjetoNomeVazio();
             var apiController = new PbmApiController(mock.Object);
             var result = await apiController.EditarPbm(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
 

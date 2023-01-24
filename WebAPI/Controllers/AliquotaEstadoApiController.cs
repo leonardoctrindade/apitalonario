@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IAliquotaEstado = IAliquotaEstado;
         }
 
+        [HttpGet("/api/ListaPaginacaoAliquotaEstado/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var aliquotas = await this.IAliquotaEstado.List();
+
+                var total = Convert.ToDouble(aliquotas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IAliquotaEstado.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : aliquotas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as aliquotas " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaAliquotaEstado")]
         public async Task<JsonResult> ListaAliquotaEstado()
         {

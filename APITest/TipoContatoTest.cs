@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockTipoContato.MontaObjetoDescricaoVazio();
             var apiController = new TipoContatoApiController(mock.Object);
             var result = await apiController.AdicionarTipoContato(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

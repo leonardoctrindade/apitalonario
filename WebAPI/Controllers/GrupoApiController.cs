@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public GrupoApiController(IGrupo IGrupo)
         {
             this.IGrupo = IGrupo;
+        }
+
+        [HttpGet("/api/ListaPaginacaoGrupo/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var grupos = await this.IGrupo.List();
+
+                var total = Convert.ToDouble(grupos.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IGrupo.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : grupos);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os grupos " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaGrupo")]
@@ -30,14 +54,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarGrupo")]
-        public async Task<JsonResult> AdicionarGrupo([FromBody] Grupo Grupo)
+        public async Task<IActionResult> AdicionarGrupo([FromBody] Grupo Grupo)
         {
             try
             {
-                if (String.IsNullOrEmpty(Grupo.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Grupo.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
                 if (Grupo.PercentualDesconto <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("campo de percentual de desconto é obrigatório");
 
                 Json(await Task.FromResult(this.IGrupo.Add(Grupo)));
 
@@ -63,14 +87,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarGrupo")]
-        public async Task<JsonResult> EditarGrupo([FromBody] Grupo Grupo)
+        public async Task<IActionResult> EditarGrupo([FromBody] Grupo Grupo)
         {
             try
             {
-                if (String.IsNullOrEmpty(Grupo.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Grupo.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
                 if (Grupo.PercentualDesconto <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("campo de percentual de desconto é obrigatório");
 
                 Json(await Task.FromResult(this.IGrupo.Update(Grupo)));
                 return Json(Ok());

@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.ITransportador = transportador;
         }
 
+        [HttpGet("/api/ListaPaginacaoTransportador/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var transportadores = await this.ITransportador.List();
+
+                var total = Convert.ToDouble(transportadores.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ITransportador.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : transportadores);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os transportadores " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaTransportador")]
         public async Task<JsonResult> ListaTransportador()
         {
@@ -33,12 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarTransportador")]
-        public async Task<JsonResult> AdicionarTransportador([FromBody] Transportador transportador)
+        public async Task<IActionResult> AdicionarTransportador([FromBody] Transportador transportador)
         {
             try
             {
-                if (string.IsNullOrEmpty(transportador.Nome) || string.IsNullOrEmpty(transportador.CpfCnpj))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(transportador.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (string.IsNullOrEmpty(transportador.CpfCnpj.Trim()))
+                    return BadRequest("Campo de cpf/cnpj é obrigatório");
 
                 Json(await Task.FromResult(this.ITransportador.Add(transportador)));
 
@@ -67,12 +92,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarTransportador")]
-        public async Task<JsonResult> EditarTransportador([FromBody] Transportador transportador)
+        public async Task<IActionResult> EditarTransportador([FromBody] Transportador transportador)
         {
             try
             {
-                if (string.IsNullOrEmpty(transportador.Nome) || string.IsNullOrEmpty(transportador.CpfCnpj))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(transportador.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (string.IsNullOrEmpty(transportador.CpfCnpj.Trim()))
+                    return BadRequest("Campo de cpf/cnpj é obrigatório");
 
                 Json(await Task.FromResult(this.ITransportador.Update(transportador)));
 

@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockVolumeXValorHomeopatia.MontaObjetoVolumeInvalido();
             var apiController = new VolumeXValorHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarVolumeXValorHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockVolumeXValorHomeopatia.MontaObjetoIntervaloDinanamizacaoIdInvalido();
             var apiController = new VolumeXValorHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarVolumeXValorHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockVolumeXValorHomeopatia.MontaObjetoValorVendaInvalido();
             var apiController = new VolumeXValorHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarVolumeXValorHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace APITest
             var modelo = MockVolumeXValorHomeopatia.MontaObjetoValorAdicionalInvalido();
             var apiController = new VolumeXValorHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarVolumeXValorHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

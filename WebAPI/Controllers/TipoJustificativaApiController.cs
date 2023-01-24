@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.ITipoJustificativa = itipoJustificativa;
         }
 
+        [HttpGet("/api/ListaPaginacaoTipoJustificativa/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var tipoJustificativas = await this.ITipoJustificativa.List();
+
+                var total = Convert.ToDouble(tipoJustificativas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ITipoJustificativa.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : tipoJustificativas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os tipos de justificativas " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaTipoJustificativa")]
         public async Task<JsonResult> ListaTipoJustificativa()
         {
@@ -33,13 +56,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarTipoJustificativa")]
-        public async Task<JsonResult> AdicionarTipoJustificativa([FromBody] TipoJustificativa tipoJustificativa)
-        {
-            if (string.IsNullOrEmpty(tipoJustificativa.Descricao))
-                return Json(BadRequest(ModelState));
-
+        public async Task<IActionResult> AdicionarTipoJustificativa([FromBody] TipoJustificativa tipoJustificativa)
+        { 
             try
             {
+                if (string.IsNullOrEmpty(tipoJustificativa.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+
                 return Json(await Task.FromResult(this.ITipoJustificativa.Add(tipoJustificativa)));
             }
             catch (Exception)
@@ -62,13 +85,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarTipoJustificativa")]
-        public async Task<JsonResult> EditarTipoJustificativa([FromBody] TipoJustificativa tipoJustificativa)
+        public async Task<IActionResult> EditarTipoJustificativa([FromBody] TipoJustificativa tipoJustificativa)
         {
-            if (string.IsNullOrEmpty(tipoJustificativa.Descricao))
-                return Json(BadRequest(ModelState));
-
             try
             {
+                if (string.IsNullOrEmpty(tipoJustificativa.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+
                 return Json(await Task.FromResult(this.ITipoJustificativa.Update(tipoJustificativa)));
             }
             catch (Exception)

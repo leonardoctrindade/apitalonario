@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IBula : IGeneric<Bula>
     {
-        Task<List<Bula>> ListagemCustomizada();
+        Task<List<Bula>> ListagemCustomizada(int pagina);
     }
 }

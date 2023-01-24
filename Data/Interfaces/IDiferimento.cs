@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IDiferimento : IGeneric<Diferimento>
     {
-        Task<List<Diferimento>> ListagemCustomizada();
+        Task<List<Diferimento>> ListagemCustomizada(int pagina);
     }
 }

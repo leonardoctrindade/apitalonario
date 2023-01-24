@@ -9,6 +9,6 @@ namespace Data.Interfaces
 {
     public interface IEspecialidade : IGeneric<Especialidade>
     {
-        Task<List<Especialidade>> ListagemCustomizada();
+        Task<List<Especialidade>> ListagemCustomizada(int pagina);
     }
 }

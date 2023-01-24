@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IFarmacopeia = IFarmacopeia;
         }
 
+        [HttpGet("/api/ListaPaginacaoFarmacopeia/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var farmacopeias = await this.IFarmacopeia.List();
+
+                var total = Convert.ToDouble(farmacopeias.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IFarmacopeia.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : farmacopeias);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as farmacopeias " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaFarmacopeia")]
         public async Task<JsonResult> ListaFarmacopeia()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarFarmacopeia")]
-        public async Task<JsonResult> AdicionarFarmacopeia([FromBody] Farmacopeia Farmacopeia)
+        public async Task<IActionResult> AdicionarFarmacopeia([FromBody] Farmacopeia Farmacopeia)
         {
             try
             {
-                if (String.IsNullOrEmpty(Farmacopeia.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Farmacopeia.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IFarmacopeia.Add(Farmacopeia)));
 
@@ -64,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarFarmacopeia")]
-        public async Task<JsonResult> EditarFarmacopeia([FromBody] Farmacopeia Farmacopeia)
+        public async Task<IActionResult> EditarFarmacopeia([FromBody] Farmacopeia Farmacopeia)
         {
             try
             {
-                if (String.IsNullOrEmpty(Farmacopeia.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Farmacopeia.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.IFarmacopeia.Update(Farmacopeia)));
                 return Json(Ok());

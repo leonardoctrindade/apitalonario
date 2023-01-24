@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IFidelidadePremios = IFidelidadePremios;
         }
 
+        [HttpGet("/api/ListaPaginacaoFidelidadePremios/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var fidelidadePremios = await this.IFidelidadePremios.List();
+
+                var total = Convert.ToDouble(fidelidadePremios.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IFidelidadePremios.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : fidelidadePremios);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as fidelidades premios " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaFidelidadePremios")]
         public async Task<JsonResult> ListaFidelidadePremios()
         {
@@ -33,12 +56,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarFidelidadePremios")]
-        public async Task<JsonResult> AdicionarFidelidadePremios([FromBody] FidelidadePremios FidelidadePremios)
+        public async Task<IActionResult> AdicionarFidelidadePremios([FromBody] FidelidadePremios FidelidadePremios)
         {
             try
             {
-                if (FidelidadePremios.FidelidadeId == 0 || FidelidadePremios.GrupoId == 0 || FidelidadePremios.ProdutoId == 0 || FidelidadePremios.Pontos < 0)
-                    return Json(BadRequest(ModelState));
+                if (FidelidadePremios.FidelidadeId == 0)
+                    return BadRequest("Campo de fidelidade é obrigatório");
+                if (FidelidadePremios.GrupoId == 0)
+                    return BadRequest("Campo de grupo é obrigatório");
+                if (FidelidadePremios.ProdutoId == 0)
+                    return BadRequest("Campo de produto é obrigatório");
+                if (FidelidadePremios.Pontos < 0)
+                    return BadRequest("Campo de pontos é obrigatório");
 
                 Json(await Task.FromResult(this.IFidelidadePremios.Add(FidelidadePremios)));
 
@@ -64,12 +93,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarFidelidadePremios")]
-        public async Task<JsonResult> EditarFidelidadePremios([FromBody] FidelidadePremios FidelidadePremios)
+        public async Task<IActionResult> EditarFidelidadePremios([FromBody] FidelidadePremios FidelidadePremios)
         {
             try
             {
-                if (FidelidadePremios.FidelidadeId == 0 || FidelidadePremios.GrupoId == 0 || FidelidadePremios.ProdutoId == 0 || FidelidadePremios.Pontos < 0)
-                    return Json(BadRequest(ModelState));
+                if (FidelidadePremios.FidelidadeId == 0)
+                    return BadRequest("Campo de fidelidade é obrigatório");
+                if (FidelidadePremios.GrupoId == 0)
+                    return BadRequest("Campo de grupo é obrigatório");
+                if (FidelidadePremios.ProdutoId == 0)
+                    return BadRequest("Campo de produto é obrigatório");
+                if (FidelidadePremios.Pontos < 0)
+                    return BadRequest("Campo de pontos é obrigatório");
 
                 Json(await Task.FromResult(this.IFidelidadePremios.Update(FidelidadePremios)));
                 return Json(Ok());

@@ -8,7 +8,7 @@ namespace Data.Interfaces
 {
     public interface IUsuario : IGeneric<Usuario>
     {
-        Task<List<Usuario>> ListagemCustomizada();
+        Task<List<Usuario>> ListagemCustomizada(int pagina);
         Task<Usuario> GetUsuario(int id);
     }
 }

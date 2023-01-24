@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IEstado = IEstado;
         }
 
+        [HttpGet("/api/ListaPaginacaoEstado/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var estados = await this.IEstado.List();
+
+                var total = Convert.ToDouble(estados.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IEstado.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : estados);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os estados " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaEstado")]
         public async Task<JsonResult> ListaEstado()
         {
@@ -33,14 +56,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarEstado")]
-        public async Task<JsonResult> AdicionarEstado([FromBody] Estado Estado)
+        public async Task<IActionResult> AdicionarEstado([FromBody] Estado Estado)
         {
             try
             {
-                if (String.IsNullOrEmpty(Estado.Nome))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Estado.Sigla) || Estado.Sigla.Count() != 2)
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Estado.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (String.IsNullOrEmpty(Estado.Sigla.Trim()))
+                    return BadRequest("Campo de sigle é obrigatório");
+                if (Estado.Sigla.Count() != 2)
+                    return BadRequest("O tamanho do campo deve ser de 2 Caracteres!");
 
                 Json(await Task.FromResult(this.IEstado.Add(Estado)));
 
@@ -66,14 +91,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarEstado")]
-        public async Task<JsonResult> EditarEstado([FromBody] Estado Estado)
+        public async Task<IActionResult> EditarEstado([FromBody] Estado Estado)
         {
             try
             {
-                if (String.IsNullOrEmpty(Estado.Nome))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Estado.Sigla) || Estado.Sigla.Count() != 2)
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Estado.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (String.IsNullOrEmpty(Estado.Sigla.Trim()))
+                    return BadRequest("Campo de sigle é obrigatório");
+                if (Estado.Sigla.Count() != 2)
+                    return BadRequest("O tamanho do campo deve ser de 2 Caracteres!");
 
                 Json(await Task.FromResult(this.IEstado.Update(Estado)));
                 return Json(Ok());

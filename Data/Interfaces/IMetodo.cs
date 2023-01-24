@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IMetodo: IGeneric<Metodo>
     {
-        Task<List<Metodo>> ListagemCustomizada();
+        Task<List<Metodo>> ListagemCustomizada(int pagina);
     }
 }

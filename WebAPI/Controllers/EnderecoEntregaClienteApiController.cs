@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IEnderecoEntregaCliente = IEnderecoEntregaCliente;
         }
 
+        [HttpGet("/api/ListaPaginacaoEnderecoEntregaCliente/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var enderecosDeEntregasCliente = await this.IEnderecoEntregaCliente.List();
+
+                var total = Convert.ToDouble(enderecosDeEntregasCliente.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IEnderecoEntregaCliente.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : enderecosDeEntregasCliente);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os pbms " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaEnderecoEntregaCliente")]
         public async Task<JsonResult> ListaEnderecoEntregaCliente()
         {
@@ -33,12 +56,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarEnderecoEntregaCliente")]
-        public async Task<JsonResult> AdicionarEnderecoEntregaCliente([FromBody] EnderecoEntregaCliente EnderecoEntregaCliente)
+        public async Task<IActionResult> AdicionarEnderecoEntregaCliente([FromBody] EnderecoEntregaCliente EnderecoEntregaCliente)
         {
             try
             {
-                if (EnderecoEntregaCliente.ClienteId <= 0 || string.IsNullOrEmpty(EnderecoEntregaCliente.Titulo) || string.IsNullOrEmpty(EnderecoEntregaCliente.Endereco)) 
-                    return Json(BadRequest(ModelState));
+                if (EnderecoEntregaCliente.ClienteId <= 0) 
+                    return BadRequest("Campo de cliente é obrigatório");
+                if (string.IsNullOrEmpty(EnderecoEntregaCliente.Titulo.Trim()))
+                    return BadRequest("Campo de título é obrigatório");
+                if (string.IsNullOrEmpty(EnderecoEntregaCliente.Endereco.Trim()))
+                    return BadRequest("Campo de endereço é obrigatório");
 
                 Json(await Task.FromResult(this.IEnderecoEntregaCliente.Add(EnderecoEntregaCliente)));
 
@@ -64,12 +91,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarEnderecoEntregaCliente")]
-        public async Task<JsonResult> EditarEnderecoEntregaCliente([FromBody] EnderecoEntregaCliente EnderecoEntregaCliente)
+        public async Task<IActionResult> EditarEnderecoEntregaCliente([FromBody] EnderecoEntregaCliente EnderecoEntregaCliente)
         {
             try
             {
-                if (EnderecoEntregaCliente.ClienteId <= 0 || string.IsNullOrEmpty(EnderecoEntregaCliente.Titulo) || string.IsNullOrEmpty(EnderecoEntregaCliente.Endereco))
-                    return Json(BadRequest(ModelState));
+                if (EnderecoEntregaCliente.ClienteId <= 0)
+                    return BadRequest("Campo de cliente é obrigatório");
+                if (string.IsNullOrEmpty(EnderecoEntregaCliente.Titulo.Trim()))
+                    return BadRequest("Campo de título é obrigatório");
+                if (string.IsNullOrEmpty(EnderecoEntregaCliente.Endereco.Trim()))
+                    return BadRequest("Campo de endereço é obrigatório");
 
                 Json(await Task.FromResult(this.IEnderecoEntregaCliente.Update(EnderecoEntregaCliente)));
                 return Json(Ok());

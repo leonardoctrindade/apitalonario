@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -16,6 +17,29 @@ namespace WebAPI.Controllers
         public EspecificacaoCapsulaApiController(IEspecificacaoCapsula IEspecificacaoCapsula)
         {
             this.IEspecificacaoCapsula = IEspecificacaoCapsula;
+        }
+
+        [HttpGet("/api/ListaPaginacaoEspecificacaoCapsula/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var especificacaoCapsulas = await this.IEspecificacaoCapsula.List();
+
+                var total = Convert.ToDouble(especificacaoCapsulas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IEspecificacaoCapsula.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : especificacaoCapsulas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as especificaoes capsula " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaEspecificacaoCapsula")]
@@ -32,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarEspecificacaoCapsula")]
-        public async Task<JsonResult> AdicionarEspecificacaoCapsula([FromBody] EspecificacaoCapsula EspecificacaoCapsula)
+        public async Task<IActionResult> AdicionarEspecificacaoCapsula([FromBody] EspecificacaoCapsula EspecificacaoCapsula)
         {
             try
             {
-                if (String.IsNullOrEmpty(EspecificacaoCapsula.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(EspecificacaoCapsula.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IEspecificacaoCapsula.Add(EspecificacaoCapsula)));
 
@@ -63,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarEspecificacaoCapsula")]
-        public async Task<JsonResult> EditarEspecificacaoCapsula([FromBody] EspecificacaoCapsula EspecificacaoCapsula)
+        public async Task<IActionResult> EditarEspecificacaoCapsula([FromBody] EspecificacaoCapsula EspecificacaoCapsula)
         {
             try
             {
-                if (String.IsNullOrEmpty(EspecificacaoCapsula.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(EspecificacaoCapsula.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IEspecificacaoCapsula.Update(EspecificacaoCapsula)));
                 return Json(Ok());

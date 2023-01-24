@@ -8,7 +8,7 @@ namespace Data.Interfaces
 {
     public interface IFidelidadePremios : IGeneric<FidelidadePremios>
     {
-        Task<List<FidelidadePremios>> ListagemCustomizada();
+        Task<List<FidelidadePremios>> ListagemCustomizada(int pagina);
         Task<FidelidadePremios> GetFidelidadePremios(int id);
     }
 }

@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockTurno.MontaObjetoHoraInicialVazio();
             var apiController = new TurnoApiController(mock.Object);
             var result = await apiController.AdicionarTurno(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockTurno.MontaObjetoHoraFinalVazio();
             var apiController = new TurnoApiController(mock.Object);
             var result = await apiController.AdicionarTurno(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockTurno.MontaObjetoHoraInicialMaiorQueHoraFInal();
             var apiController = new TurnoApiController(mock.Object);
             var result = await apiController.AdicionarTurno(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

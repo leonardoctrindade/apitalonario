@@ -15,7 +15,7 @@ namespace APITest
 {
     public class PacienteTest
     {
-        public Mock<IPaciente> mock = new Mock<IPaciente>();
+        public Mock<IPaciente> mock = new();
 
         [Fact]
         public async Task Insere_Sucesso()
@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockPaciente.MontaObjetoNomeVazio();
             var apiController = new PacienteApiController(mock.Object);
             var result = await apiController.AdicionarPaciente(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockPaciente.MontaObjetoClienteIdInvalido();
             var apiController = new PacienteApiController(mock.Object);
             var result = await apiController.AdicionarPaciente(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace APITest
         public async Task RetornaPorId()
         {
             mock.Setup(y => y.GetEntityById(MockPaciente.MontaObjetoUnico().Id)).ReturnsAsync(MockPaciente.MontaObjetoUnico());
-            PacienteApiController ret = new PacienteApiController(mock.Object);
+            PacienteApiController ret = new(mock.Object);
             var result = await ret.RetornaPacientePorId(1);
             Assert.Equal("Teste Mock 1", ((Data.Entidades.Paciente)result.Value).Nome);
         }

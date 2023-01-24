@@ -9,6 +9,6 @@ namespace Data.Interfaces
 {
     public interface IPosologia : IGeneric<Posologia>
     {
-        Task<List<Posologia>> ListagemCustomizada();
+        Task<List<Posologia>> ListagemCustomizada(int pagina);
     }
 }

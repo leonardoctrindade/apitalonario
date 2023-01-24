@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public UsuarioApiController(IUsuario IUsuario)
         {
             this.IUsuario = IUsuario;
+        }
+
+        [HttpGet("/api/ListaPaginacaoUsuario/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var usuarios = await this.IUsuario.List();
+
+                var total = Convert.ToDouble(usuarios.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IUsuario.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : usuarios);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os usuarios " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaUsuario")]
@@ -30,18 +54,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarUsuario")]
-        public async Task<JsonResult> AdicionarUsuario([FromBody] Usuario Usuario)
+        public async Task<IActionResult> AdicionarUsuario([FromBody] Usuario Usuario)
         {
             try
             {
-                if (String.IsNullOrEmpty(Usuario.Nome))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Usuario.NomeAbreviado))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Usuario.Senha))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Usuario.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (string.IsNullOrEmpty(Usuario.NomeAbreviado.Trim()))
+                    return BadRequest("Campo de nome abreviado é obrigatório");
+                if (string.IsNullOrEmpty(Usuario.Senha.Trim()))
+                    return BadRequest("Campo de senha é obrigatório");
                 if (Usuario.GrupoUsuarioId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de grupo de usuario é obrigatório");
 
                 Json(await Task.FromResult(this.IUsuario.Add(Usuario)));
 
@@ -67,18 +91,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarUsuario")]
-        public async Task<JsonResult> EditarUsuario([FromBody] Usuario Usuario)
+        public async Task<IActionResult> EditarUsuario([FromBody] Usuario Usuario)
         {
             try
             {
-                if (String.IsNullOrEmpty(Usuario.Nome))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Usuario.NomeAbreviado))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Usuario.Senha))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Usuario.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (string.IsNullOrEmpty(Usuario.NomeAbreviado.Trim()))
+                    return BadRequest("Campo de nome abreviado é obrigatório");
+                if (string.IsNullOrEmpty(Usuario.Senha.Trim()))
+                    return BadRequest("Campo de senha é obrigatório");
                 if (Usuario.GrupoUsuarioId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de grupo de usuario é obrigatório");
 
                 Json(await Task.FromResult(this.IUsuario.Update(Usuario)));
                 return Json(Ok());

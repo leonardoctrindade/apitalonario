@@ -10,7 +10,7 @@ namespace Data.Interfaces
 {
     public interface IVisitador : IGeneric<Visitador>
     {
-        Task<List<Visitador>> ListagemCustomizada();
+        Task<List<Visitador>> ListagemCustomizada(int pagina);
         Task<Visitador> GetVisitador(int id);
     }
 }

@@ -15,7 +15,7 @@ namespace APITest
 {
     public class FornecedorTest
     {
-        public Mock<IFornecedor> mock = new Mock<IFornecedor>();
+        public Mock<IFornecedor> mock = new();
 
         [Fact]
         public async Task Insere_Sucesso()
@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockFornecedor.MontaObjetoNomeFornecedorVazio();
             var apiController = new FornecedorApiController(mock.Object);
             var result = await apiController.AdicionarFornecedor(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockFornecedor.MontaObjetoNomeFantasiaVazio();
             var apiController = new FornecedorApiController(mock.Object);
             var result = await apiController.AdicionarFornecedor(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockFornecedor.MontaObjetoCnpjVazio();
             var apiController = new FornecedorApiController(mock.Object);
             var result = await apiController.AdicionarFornecedor(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace APITest
             var modelo = MockFornecedor.MontaObjetoCpfVazio();
             var apiController = new FornecedorApiController(mock.Object);
             var result = await apiController.AdicionarFornecedor(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace APITest
             var modelo = MockFornecedor.MontaObjetoIncricaoEstadualVazio();
             var apiController = new FornecedorApiController(mock.Object);
             var result = await apiController.AdicionarFornecedor(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace APITest
             var modelo = MockFornecedor.MontaObjetoIdEstadoInvalido();
             var apiController = new FornecedorApiController(mock.Object);
             var result = await apiController.AdicionarFornecedor(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

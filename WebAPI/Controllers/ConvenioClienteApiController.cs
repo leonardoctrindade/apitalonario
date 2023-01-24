@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IConvenioCliente = IConvenioCliente;
         }
 
+        [HttpGet("/api/ListaPaginacaoConvenioCliente/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var conveniosCliente = await this.IConvenioCliente.List();
+
+                var total = Convert.ToDouble(conveniosCliente.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IConvenioCliente.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : conveniosCliente);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os convenios cliente " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaConvenioCliente")]
         public async Task<JsonResult> ListaConvenioCliente()
         {
@@ -33,12 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarConvenioCliente")]
-        public async Task<JsonResult> AdicionarConvenioCliente([FromBody] ConvenioCliente ConvenioCliente)
+        public async Task<IActionResult> AdicionarConvenioCliente([FromBody] ConvenioCliente ConvenioCliente)
         {
             try
             {
-                if (ConvenioCliente.ClienteId <= 0 || ConvenioCliente.ConvenioId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (ConvenioCliente.ClienteId <= 0)
+                    return BadRequest("Campo de cliente é obrigatório");
+                if (ConvenioCliente.ConvenioId <= 0)
+                    return BadRequest("Campo de Convenio é obrigatório");
 
                 Json(await Task.FromResult(this.IConvenioCliente.Add(ConvenioCliente)));
 
@@ -64,12 +89,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarConvenioCliente")]
-        public async Task<JsonResult> EditarConvenioCliente([FromBody] ConvenioCliente ConvenioCliente)
+        public async Task<IActionResult> EditarConvenioCliente([FromBody] ConvenioCliente ConvenioCliente)
         {
             try
             {
-                if (ConvenioCliente.ClienteId <= 0 || ConvenioCliente.ConvenioId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (ConvenioCliente.ClienteId <= 0)
+                    return BadRequest("Campo de cliente é obrigatório");
+                if (ConvenioCliente.ConvenioId <= 0)
+                    return BadRequest("Campo de Convenio é obrigatório");
 
                 Json(await Task.FromResult(this.IConvenioCliente.Update(ConvenioCliente)));
                 return Json(Ok());

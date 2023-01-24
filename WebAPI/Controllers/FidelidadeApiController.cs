@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IFidelidade = IFidelidade;
         }
 
+        [HttpGet("/api/ListaPaginacaoFidelidade/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var fidelidades = await this.IFidelidade.List();
+
+                var total = Convert.ToDouble(fidelidades.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IFidelidade.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : fidelidades);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as fidelidades " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaFidelidade")]
         public async Task<JsonResult> ListaFidelidade()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarFidelidade")]
-        public async Task<JsonResult> AdicionarFidelidade([FromBody] Fidelidade Fidelidade)
+        public async Task<IActionResult> AdicionarFidelidade([FromBody] Fidelidade Fidelidade)
         {
             try
             {
-                if (String.IsNullOrEmpty(Fidelidade.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Fidelidade.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IFidelidade.Add(Fidelidade)));
 
@@ -64,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarFidelidade")]
-        public async Task<JsonResult> EditarFidelidade([FromBody] Fidelidade Fidelidade)
+        public async Task<IActionResult> EditarFidelidade([FromBody] Fidelidade Fidelidade)
         {
             try
             {
-                if (String.IsNullOrEmpty(Fidelidade.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Fidelidade.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IFidelidade.Update(Fidelidade)));
                 return Json(Ok());

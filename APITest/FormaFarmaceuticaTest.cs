@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockFormaFarmaceutica.MontaObjetoDescricaoVazia();
             var apiController = new FormaFarmaceuticaApiController(mock.Object);
             var result = await apiController.AdicionarFormaFarmaceutica(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace APITest
         public async Task RetornaPorId()
         {
             mock.Setup(y => y.GetEntityById(MockFormaFarmaceutica.MontaObjetoUnico().Id)).ReturnsAsync(MockFormaFarmaceutica.MontaObjetoUnico());
-            FormaFarmaceuticaApiController ret = new FormaFarmaceuticaApiController(mock.Object);
+            FormaFarmaceuticaApiController ret = new(mock.Object);
             var result = await ret.RetornaFormaFarmaceuticaPorId(1);
             //Assert.Equal("Teste Mock 1", ((Data.Entidades.FormaFarmaceutica)result.Value).Descricao);
         }

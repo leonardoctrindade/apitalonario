@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IConvenioCliente : IGeneric<ConvenioCliente>
     {
-        Task<List<ConvenioCliente>> ListagemCustomizada();
+        Task<List<ConvenioCliente>> ListagemCustomizada(int pagina);
     }
 }

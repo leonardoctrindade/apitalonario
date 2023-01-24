@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public BulaApiController(IBula IBula)
         {
             this.IBula = IBula;
+        }
+
+        [HttpGet("/api/ListaPaginacaoBula/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var bulas = await this.IBula.List();
+
+                var total = Convert.ToDouble(bulas.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IBula.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : bulas);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as bulas " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaBula")]
@@ -29,14 +53,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarBula")]
-        public async Task<JsonResult> AdicionarBula([FromBody] Bula Bula)
+        public async Task<IActionResult> AdicionarBula([FromBody] Bula Bula)
         {
             try
             {
-                if (String.IsNullOrEmpty(Bula.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Bula.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
                 if (Bula.Tipo != 1 && Bula.Tipo != 2)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de tipo é obrigatório");
 
                 Json(await Task.FromResult(this.IBula.Add(Bula)));
 
@@ -60,14 +84,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarBula")]
-        public async Task<JsonResult> EditarBula([FromBody] Bula Bula)
+        public async Task<IActionResult> EditarBula([FromBody] Bula Bula)
         {
             try
             {
-                if (String.IsNullOrEmpty(Bula.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Bula.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
                 if (Bula.Tipo != 1 && Bula.Tipo != 2)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de tipo é obrigatório");
 
                 Json(await Task.FromResult(this.IBula.Update(Bula)));
                 return Json(Ok());

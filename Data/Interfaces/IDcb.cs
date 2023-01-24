@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IDcb : IGeneric<Dcb>
     {
-        Task<List<Dcb>> ListagemCustomizada();
+        Task<List<Dcb>> ListagemCustomizada(int pagina);
     }
 }

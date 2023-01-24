@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryFormaFarmaceutica: RepositoryGenerics<FormaFarmaceutica>, IFormaFarmaceutica
     {
-        public Task<List<FormaFarmaceutica>> ListagemCustomizada()
+        public async Task<List<FormaFarmaceutica>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<FormaFarmaceutica>();
+
+                try
+                {
+                    result = await context.FormaFarmaceutica
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<FormaFarmaceutica> GetFormaFarmaceutica(int id)

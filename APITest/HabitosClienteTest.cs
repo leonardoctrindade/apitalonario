@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockHabitosCliente.MontaObjetoClienteIdInvalido();
             var apiController = new HabitosClienteApiController(mock.Object);
             var result = await apiController.AdicionarHabitosCliente(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

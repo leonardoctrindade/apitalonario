@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public TipoContatoApiController(ITipoContato ITipoContato)
         {
             this.ITipoContato = ITipoContato;
+        }
+
+        [HttpGet("/api/ListaPaginacaoTipoContato/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var tipoContatos = await this.ITipoContato.List();
+
+                var total = Convert.ToDouble(tipoContatos.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ITipoContato.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : tipoContatos);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os tipos de contatos " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaTipoContato")]
@@ -30,12 +54,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarTipoContato")]
-        public async Task<JsonResult> AdicionarTipoContato([FromBody] TipoContato TipoContato)
+        public async Task<IActionResult> AdicionarTipoContato([FromBody] TipoContato TipoContato)
         {
             try
             {
-                if (String.IsNullOrEmpty(TipoContato.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(TipoContato.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.ITipoContato.Add(TipoContato)));
 
@@ -61,12 +85,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarTipoContato")]
-        public async Task<JsonResult> EditarTipoContato([FromBody] TipoContato TipoContato)
+        public async Task<IActionResult> EditarTipoContato([FromBody] TipoContato TipoContato)
         {
             try
             {
-                if (String.IsNullOrEmpty(TipoContato.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(TipoContato.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.ITipoContato.Update(TipoContato)));
                 return Json(Ok());

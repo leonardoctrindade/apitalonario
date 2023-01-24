@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryMaquinaPos : RepositoryGenerics<MaquinaPos>, IMaquinaPos
     {
-        public Task<List<MaquinaPos>> ListagemCustomizada()
+        public async Task<List<MaquinaPos>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<MaquinaPos>();
+
+                try
+                {
+                    result = await context.MaquinaPos
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<MaquinaPos> GetMaquinaPos(int id)

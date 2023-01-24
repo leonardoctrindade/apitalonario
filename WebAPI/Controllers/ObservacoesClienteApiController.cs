@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IObservacoesCliente = IObservacoesCliente;
         }
 
+        [HttpGet("/api/ListaPaginacaoObservacoesCliente/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var observacoes = await this.IObservacoesCliente.List();
+
+                var total = Convert.ToDouble(observacoes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IObservacoesCliente.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : observacoes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as observacoes do cliente " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaObservacoesCliente")]
         public async Task<JsonResult> ListaObservacoesCliente()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarObservacoesCliente")]
-        public async Task<JsonResult> AdicionarObservacoesCliente([FromBody] ObservacoesCliente ObservacoesCliente)
+        public async Task<IActionResult> AdicionarObservacoesCliente([FromBody] ObservacoesCliente ObservacoesCliente)
         {
             try
             {
                 if (ObservacoesCliente.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de observacoesCliente");
 
                 Json(await Task.FromResult(this.IObservacoesCliente.Add(ObservacoesCliente)));
 
@@ -64,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarObservacoesCliente")]
-        public async Task<JsonResult> EditarObservacoesCliente([FromBody] ObservacoesCliente ObservacoesCliente)
+        public async Task<IActionResult> EditarObservacoesCliente([FromBody] ObservacoesCliente ObservacoesCliente)
         {
             try
             {
                 if (ObservacoesCliente.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de observacoesCliente");
 
                 Json(await Task.FromResult(this.IObservacoesCliente.Update(ObservacoesCliente)));
                 return Json(Ok());

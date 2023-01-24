@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockNfeExpedicaoCliente.MontaObjetoClienteIdInvalido();
             var apiController = new NfeExpedicaoClienteApiController(mock.Object);
             var result = await apiController.AdicionarNfeExpedicaoCliente(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

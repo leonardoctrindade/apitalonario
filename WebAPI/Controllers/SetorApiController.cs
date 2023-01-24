@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.ISetor = ISetor;
         }
 
+        [HttpGet("/api/ListaPaginacaoSetor/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var setores = await this.ISetor.List();
+
+                var total = Convert.ToDouble(setores.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ISetor.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : setores);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os setores " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaSetor")]
         public async Task<JsonResult> ListaSetor()
         {

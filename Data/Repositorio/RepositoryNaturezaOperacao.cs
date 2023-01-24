@@ -12,9 +12,29 @@ namespace Data.Repositorio
 {
     public class RepositoryNaturezaOperacao: RepositoryGenerics<NaturezaOperacao>, INaturezaOperacao
     {
-        public Task<List<NaturezaOperacao>> ListagemCustomizada()
+        public async Task<List<NaturezaOperacao>> ListagemCustomizada(int pagina)
         {
-            throw new NotImplementedException();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                var result = new List<NaturezaOperacao>();
+
+                try
+                {
+                    result = await context.NaturezaOperacao
+                   .OrderBy(x => x.Id)
+                   .Skip((pagina - 1) * 10)
+                   .Take(10)
+                   .ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+                return result;
+            }
         }
 
         public async Task<NaturezaOperacao> GetNaturezaOperacao(int id)

@@ -15,7 +15,7 @@ namespace APITest
 {
     public class OperadorCaixaTest
     {
-        public Mock<IOperadorCaixa> mock = new Mock<IOperadorCaixa>();
+        public Mock<IOperadorCaixa> mock = new();
 
         [Fact]
         public async Task Insere_Sucesso()
@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockOperadorCaixa.MontaObjetoNomeVazio();
             var apiController = new OperadorCaixaApiController(mock.Object);
             var result = await apiController.AdicionarOperadorCaixa(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

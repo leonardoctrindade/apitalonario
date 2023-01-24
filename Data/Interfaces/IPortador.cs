@@ -9,6 +9,6 @@ namespace Data.Interfaces
 {
     public interface IPortador : IGeneric<Portador>
     {
-        Task<List<Portador>> ListagemCustomizada();
+        Task<List<Portador>> ListagemCustomizada(int pagina);
     }
 }

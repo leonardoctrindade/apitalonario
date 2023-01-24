@@ -9,7 +9,7 @@ namespace Data.Interfaces
 {
     public interface ITransportador : IGeneric<Transportador>
     {
-        Task<List<Transportador>> ListagemCustomizada();
+        Task<List<Transportador>> ListagemCustomizada(int pagina);
         Task<Transportador> GetTransportador(int id);
     }
 }

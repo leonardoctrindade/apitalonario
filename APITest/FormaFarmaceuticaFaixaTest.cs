@@ -15,7 +15,7 @@ namespace APITest
 {
     public class FormaFarmaceuticaFaixaTest
     {
-        public Mock<IFormaFarmaceuticaFaixa> mock = new Mock<IFormaFarmaceuticaFaixa>();
+        public Mock<IFormaFarmaceuticaFaixa> mock = new();
 
         [Fact]
         public async Task Insere_Sucesso()
@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockFormaFarmaceuticaFaixa.MontaObjetoFormaFarmaceuticaIdVazio();
             var apiController = new FormaFarmaceuticaFaixaApiController(mock.Object);
             var result = await apiController.AdicionarFormaFarmaceuticaFaixa(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace APITest
         public async Task RetornaPorId()
         {
             mock.Setup(y => y.GetEntityById(MockFormaFarmaceuticaFaixa.MontaObjetoUnico().Id)).ReturnsAsync(MockFormaFarmaceuticaFaixa.MontaObjetoUnico());
-            FormaFarmaceuticaFaixaApiController ret = new FormaFarmaceuticaFaixaApiController(mock.Object);
+            FormaFarmaceuticaFaixaApiController ret = new(mock.Object);
             var result = await ret.RetornaFormaFarmaceuticaFaixaPorId(1);
             Assert.Equal(1, ((Data.Entidades.FormaFarmaceuticaFaixa)result.Value).Id);
         }

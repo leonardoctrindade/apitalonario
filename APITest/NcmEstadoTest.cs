@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockNcmEstado.MontaObjetoIdEstadoOrigemInvalido();
             var apiController = new NcmEstadoApiController(mock.Object);
             var result = await apiController.AdicionarNcmEstado(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockNcmEstado.MontaObjetoIdEstadoDestinoInvalido();
             var apiController = new NcmEstadoApiController(mock.Object);
             var result = await apiController.AdicionarNcmEstado(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockNcmEstado.MontaObjetoIdNcmInvalido();
             var apiController = new NcmEstadoApiController(mock.Object);
             var result = await apiController.AdicionarNcmEstado(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

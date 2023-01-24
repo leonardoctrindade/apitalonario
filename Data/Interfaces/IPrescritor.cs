@@ -9,7 +9,7 @@ namespace Data.Interfaces
 {
     public interface IPrescritor : IGeneric<Prescritor>
     {
-        Task<List<Prescritor>> ListagemCustomizada();
+        Task<List<Prescritor>> ListagemCustomizada(int pagina);
         Task<Prescritor> GetPrescritor(int id);
     }
 }

@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             IPrincipioAtivo = iprincipioAtivo;
         }
 
+        [HttpGet("/api/ListaPaginacaoPrincipioAtivo/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var principios = await this.IPrincipioAtivo.List();
+
+                var total = Convert.ToDouble(principios.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IPrincipioAtivo.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : principios);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os principios ativos " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaPrincipioAtivo")]
         public async Task<JsonResult> ListaPrincipioAtivo()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarPrincipioAtivo")]
-        public async Task<JsonResult> AdicionarPrincipioAtivo([FromBody] PrincipioAtivo principioAtivo)
+        public async Task<IActionResult> AdicionarPrincipioAtivo([FromBody] PrincipioAtivo principioAtivo)
         {
             try
             {
-                if (string.IsNullOrEmpty(principioAtivo.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(principioAtivo.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IPrincipioAtivo.Add(principioAtivo)));
 
@@ -66,12 +89,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarPrincipioAtivo")]
-        public async Task<JsonResult> EditarPrincipioAtivo([FromBody] PrincipioAtivo principioAtivo)
+        public async Task<IActionResult> EditarPrincipioAtivo([FromBody] PrincipioAtivo principioAtivo)
         {
             try
             {
-                if (string.IsNullOrEmpty(principioAtivo.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(principioAtivo.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IPrincipioAtivo.Update(principioAtivo)));
 

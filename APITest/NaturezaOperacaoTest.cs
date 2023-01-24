@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockNaturezaOperacao.MontaObjetoDescricaoVazia();
             var apiController = new NaturezaOperacaoApiController(mock.Object);
             var result = await apiController.AdicionarNaturezaOperacao(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockNaturezaOperacao.MontaObjetoTipoInvalido();
             var apiController = new NaturezaOperacaoApiController(mock.Object);
             var result = await apiController.AdicionarNaturezaOperacao(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

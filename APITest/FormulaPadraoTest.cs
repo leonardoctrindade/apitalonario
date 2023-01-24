@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockFormulaPadrao.MontaObjetoDescricaoVazia();
             var apiController = new FormulaPadraoApiController(mock.Object);
             var result = await apiController.AdicionarFormulaPadrao(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockFormulaPadrao.MontaObjetoIdFormaFarmaceuticaInvalido();
             var apiController = new FormulaPadraoApiController(mock.Object);
             var result = await apiController.AdicionarFormulaPadrao(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace APITest
         public async Task RetornaPorId()
         {
             mock.Setup(y => y.GetEntityById(MockFormulaPadrao.MontaObjetoUnico().Id)).ReturnsAsync(MockFormulaPadrao.MontaObjetoUnico());
-            FormulaPadraoApiController ret = new FormulaPadraoApiController(mock.Object);
+            FormulaPadraoApiController ret = new(mock.Object);
             var result = await ret.RetornaFormulaPadraoPorId(1);
             //Assert.Equal("Teste Mock 1", ((Data.Entidades.FormulaPadrao)result.Value).Descricao);
         }

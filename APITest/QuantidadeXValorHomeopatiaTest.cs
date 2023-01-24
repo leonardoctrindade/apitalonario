@@ -15,7 +15,7 @@ namespace APITest
 {
     public class QuantidadeXValorHomeopatiaTest
     {
-        public Mock<IQuantidadeXValorHomeopatia> mock = new Mock<IQuantidadeXValorHomeopatia>();
+        public Mock<IQuantidadeXValorHomeopatia> mock = new();
 
         [Fact]
         public async Task Insere_Sucesso()
@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockQuantidadeXValorHomeopatia.MontaObjetoQuantidadeInicialInvalida();
             var apiController = new QuantidadeXValorHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarQuantidadeXValorHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockQuantidadeXValorHomeopatia.MontaObjetoQuantidadeFinalInvalida();
             var apiController = new QuantidadeXValorHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarQuantidadeXValorHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockQuantidadeXValorHomeopatia.MontaObjetoValorVendaInvalida();
             var apiController = new QuantidadeXValorHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarQuantidadeXValorHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace APITest
             var modelo = MockQuantidadeXValorHomeopatia.MontaObjetoValorAdicionalInvalido();
             var apiController = new QuantidadeXValorHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarQuantidadeXValorHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace APITest
             var modelo = MockQuantidadeXValorHomeopatia.MontaObjetoIntervaloDinamizacaoIdInvalido();
             var apiController = new QuantidadeXValorHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarQuantidadeXValorHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace APITest
             var modelo = MockQuantidadeXValorHomeopatia.MontaObjetoQuantidadeFinalMenorQueQuantidadeInicial();
             var apiController = new QuantidadeXValorHomeopatiaApiController(mock.Object);
             var result = await apiController.AdicionarQuantidadeXValorHomeopatia(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -114,7 +114,7 @@ namespace APITest
         public async Task RetornaPorId()
         {
             mock.Setup(y => y.GetEntityById(MockQuantidadeXValorHomeopatia.MontaObjetoUnico().Id)).ReturnsAsync(MockQuantidadeXValorHomeopatia.MontaObjetoUnico());
-            QuantidadeXValorHomeopatiaApiController ret = new QuantidadeXValorHomeopatiaApiController(mock.Object);
+            QuantidadeXValorHomeopatiaApiController ret = new(mock.Object);
             var result = await ret.RetornaQuantidadeXValorHomeopatiaPorId(1);
             Assert.Equal(1, ((Data.Entidades.QuantidadeXValorHomeopatia)result.Value).IntervaloDinamizacaoId);
         }

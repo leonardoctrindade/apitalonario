@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.ILimiteDeCompraCliente = ILimiteDeCompraCliente;
         }
 
+        [HttpGet("/api/ListaPaginacaoLimiteDeCompra/{pagina}")]
+        public async Task<IActionResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var limitesDeCompraClientes = await this.ILimiteDeCompraCliente.List();
+
+                var total = Convert.ToDouble(limitesDeCompraClientes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ILimiteDeCompraCliente.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : limitesDeCompraClientes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os limites de compra dos clientes " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaLimiteDeCompraCliente")]
         public async Task<JsonResult> ListaLimiteDeCompraCliente()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarLimiteDeCompraCliente")]
-        public async Task<JsonResult> AdicionarLimiteDeCompraCliente([FromBody] LimiteDeCompraCliente LimiteDeCompraCliente)
+        public async Task<IActionResult> AdicionarLimiteDeCompraCliente([FromBody] LimiteDeCompraCliente LimiteDeCompraCliente)
         {
             try
             {
                 if (LimiteDeCompraCliente.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de cliente é obrigatório");
 
                 Json(await Task.FromResult(this.ILimiteDeCompraCliente.Add(LimiteDeCompraCliente)));
 
@@ -64,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarLimiteDeCompraCliente")]
-        public async Task<JsonResult> EditarLimiteDeCompraCliente([FromBody] LimiteDeCompraCliente LimiteDeCompraCliente)
+        public async Task<IActionResult> EditarLimiteDeCompraCliente([FromBody] LimiteDeCompraCliente LimiteDeCompraCliente)
         {
             try
             {
                 if (LimiteDeCompraCliente.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de cliente é obrigatório");
 
                 Json(await Task.FromResult(this.ILimiteDeCompraCliente.Update(LimiteDeCompraCliente)));
                 return Json(Ok());

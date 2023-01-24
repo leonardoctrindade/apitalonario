@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IEcf : IGeneric<Ecf>
     {
-        Task<List<Ecf>> ListagemCustomizada();
+        Task<List<Ecf>> ListagemCustomizada(int pagina);
     }
 }

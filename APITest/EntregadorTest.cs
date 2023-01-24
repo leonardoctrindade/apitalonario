@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockEntregador.MontaObjetoNomeVazio();
             var apiController = new EntregadorApiController(mock.Object);
             var result = await apiController.AdicionarEntregador(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockEntregador.MontaObjetoDddVazio();
             var apiController = new EntregadorApiController(mock.Object);
             var result = await apiController.AdicionarEntregador(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockEntregador.MontaObjetoTelefoneVazio();
             var apiController = new EntregadorApiController(mock.Object);
             var result = await apiController.AdicionarEntregador(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

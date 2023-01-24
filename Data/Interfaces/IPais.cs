@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IPais : IGeneric<Pais>
     {
-        Task<List<Pais>> ListagemCustomizada();
+        Task<List<Pais>> ListagemCustomizada(int pagina);
     }
 }

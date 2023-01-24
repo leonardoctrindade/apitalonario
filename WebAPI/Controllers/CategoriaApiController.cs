@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.ICategoria = ICategoria;
         }
 
+        [HttpGet("/api/ListaPaginacaoCategoria/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var categorias = await this.ICategoria.List();
+
+                var total = Convert.ToDouble(categorias.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ICategoria.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : categorias);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar as categorias " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaCategoria")]
         public async Task<JsonResult> ListaCategoria()
         {
@@ -32,12 +55,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarCategoria")]
-        public async Task<JsonResult> AdicionarCategoria([FromBody] Categoria Categoria)
+        public async Task<IActionResult> AdicionarCategoria([FromBody] Categoria Categoria)
         {
             try
             {
-                if (String.IsNullOrEmpty(Categoria.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Categoria.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.ICategoria.Add(Categoria)));
 
@@ -61,12 +84,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarCategoria")]
-        public async Task<JsonResult> EditarCategoria([FromBody] Categoria Categoria)
+        public async Task<IActionResult> EditarCategoria([FromBody] Categoria Categoria)
         {
             try
             {
-                if (String.IsNullOrEmpty(Categoria.Nome))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Categoria.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
 
                 Json(await Task.FromResult(this.ICategoria.Update(Categoria)));
                 return Json(Ok());

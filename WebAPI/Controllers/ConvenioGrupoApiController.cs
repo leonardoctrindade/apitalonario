@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IConvenioGrupo = IConvenioGrupo;
         }
 
+        [HttpGet("/api/ListaPaginacaoConvenioGrupo/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var conveniosgrupos = await this.IConvenioGrupo.List();
+
+                var total = Convert.ToDouble(conveniosgrupos.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IConvenioGrupo.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : conveniosgrupos);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os convenios grupos " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaConvenioGrupo")]
         public async Task<JsonResult> ListaConvenioGrupo()
         {
@@ -32,12 +55,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarConvenioGrupo")]
-        public async Task<JsonResult> AdicionarConvenioGrupo([FromBody] ConvenioGrupo ConvenioGrupo)
+        public async Task<IActionResult> AdicionarConvenioGrupo([FromBody] ConvenioGrupo ConvenioGrupo)
         {
             try
             {
-                if (ConvenioGrupo.GrupoId == 0 || ConvenioGrupo.ConvenioId == 0 || ConvenioGrupo.Desconto <= 0)
-                    return Json(BadRequest(ModelState));
+                if (ConvenioGrupo.GrupoId == 0)
+                    return BadRequest("Campo de grupo é obrigatório");
+                if (ConvenioGrupo.ConvenioId == 0)
+                    return BadRequest("Campo de convenio é obrigatório");
+                if (ConvenioGrupo.Desconto <= 0)
+                    return BadRequest("Campo de desconto é obrigatório");
 
                 Json(await Task.FromResult(this.IConvenioGrupo.Add(ConvenioGrupo)));
 
@@ -61,12 +88,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarConvenioGrupo")]
-        public async Task<JsonResult> EditarConvenioGrupo([FromBody] ConvenioGrupo ConvenioGrupo)
+        public async Task<IActionResult> EditarConvenioGrupo([FromBody] ConvenioGrupo ConvenioGrupo)
         {
             try
             {
-                if (ConvenioGrupo.GrupoId == 0 || ConvenioGrupo.ConvenioId == 0 || ConvenioGrupo.Desconto <= 0)
-                    return Json(BadRequest(ModelState));
+                if (ConvenioGrupo.GrupoId == 0)
+                    return BadRequest("Campo de grupo é obrigatório");
+                if (ConvenioGrupo.ConvenioId == 0)
+                    return BadRequest("Campo de convenio é obrigatório");
+                if (ConvenioGrupo.Desconto <= 0)
+                    return BadRequest("Campo de desconto é obrigatório");
 
                 Json(await Task.FromResult(this.IConvenioGrupo.Update(ConvenioGrupo)));
                 return Json(Ok());

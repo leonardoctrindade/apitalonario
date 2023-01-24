@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.INfeExpedicaoCliente = INfeExpedicaoCliente;
         }
 
+        [HttpGet("/api/ListaPaginacaoNfeExpedicaoCliente/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var nfes = await this.INfeExpedicaoCliente.List();
+
+                var total = Convert.ToDouble(nfes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.INfeExpedicaoCliente.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : nfes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os nfes de expedição do cliente " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaNfeExpedicaoCliente")]
         public async Task<JsonResult> ListaNfeExpedicaoCliente()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarNfeExpedicaoCliente")]
-        public async Task<JsonResult> AdicionarNfeExpedicaoCliente([FromBody] NfeExpedicaoCliente NfeExpedicaoCliente)
+        public async Task<IActionResult> AdicionarNfeExpedicaoCliente([FromBody] NfeExpedicaoCliente NfeExpedicaoCliente)
         {
             try
             {
                 if (NfeExpedicaoCliente.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de cliente é obrigatório");
 
                 Json(await Task.FromResult(this.INfeExpedicaoCliente.Add(NfeExpedicaoCliente)));
 
@@ -64,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarNfeExpedicaoCliente")]
-        public async Task<JsonResult> EditarNfeExpedicaoCliente([FromBody] NfeExpedicaoCliente NfeExpedicaoCliente)
+        public async Task<IActionResult> EditarNfeExpedicaoCliente([FromBody] NfeExpedicaoCliente NfeExpedicaoCliente)
         {
             try
             {
                 if (NfeExpedicaoCliente.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de cliente é obrigatório");
 
                 Json(await Task.FromResult(this.INfeExpedicaoCliente.Update(NfeExpedicaoCliente)));
                 return Json(Ok());

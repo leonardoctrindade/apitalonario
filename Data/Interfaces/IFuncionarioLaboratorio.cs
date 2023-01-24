@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface IFuncionarioLaboratorio: IGeneric<FuncionarioLaboratorio>
     {
-        Task<List<FuncionarioLaboratorio>> ListagemCustomizada();
+        Task<List<FuncionarioLaboratorio>> ListagemCustomizada(int pagina);
     }
 }

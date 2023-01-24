@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public TransacaoApiController(ITransacao ITransacao)
         {
             this.ITransacao = ITransacao;
+        }
+
+        [HttpGet("/api/ListaPaginacaoTransacao/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var transacoes = await this.ITransacao.List();
+
+                var total = Convert.ToDouble(transacoes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.ITransacao.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : transacoes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os transações " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaTransacao")]
@@ -30,14 +54,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarTransacao")]
-        public async Task<JsonResult> AdicionarTransacao([FromBody] Transacao Transacao)
+        public async Task<IActionResult> AdicionarTransacao([FromBody] Transacao Transacao)
         {
             try
             {
-                if (String.IsNullOrEmpty(Transacao.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Transacao.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
                 if (Transacao.Tipo != 1 && Transacao.Tipo != 2)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de Tipo é obrigatório");
 
                 Json(await Task.FromResult(this.ITransacao.Add(Transacao)));
 
@@ -63,14 +87,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarTransacao")]
-        public async Task<JsonResult> EditarTransacao([FromBody] Transacao Transacao)
+        public async Task<IActionResult> EditarTransacao([FromBody] Transacao Transacao)
         {
             try
             {
-                if (String.IsNullOrEmpty(Transacao.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Transacao.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
                 if (Transacao.Tipo != 1 && Transacao.Tipo != 2)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de Tipo é obrigatório");
 
                 Json(await Task.FromResult(this.ITransacao.Update(Transacao)));
                 return Json(Ok());

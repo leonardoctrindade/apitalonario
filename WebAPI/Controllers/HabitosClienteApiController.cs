@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IHabitosCliente = IHabitosCliente;
         }
 
+        [HttpGet("/api/ListaPaginacaoPbm/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var habitosClientes = await this.IHabitosCliente.List();
+
+                var total = Convert.ToDouble(habitosClientes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IHabitosCliente.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : habitosClientes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os habitos dos clientes " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaHabitosCliente")]
         public async Task<JsonResult> ListaHabitosCliente()
         {
@@ -33,12 +56,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarHabitosCliente")]
-        public async Task<JsonResult> AdicionarHabitosCliente([FromBody] HabitosCliente HabitosCliente)
+        public async Task<IActionResult> AdicionarHabitosCliente([FromBody] HabitosCliente HabitosCliente)
         {
             try
             {
                 if (HabitosCliente.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de cliente é obrigatório");
 
                 Json(await Task.FromResult(this.IHabitosCliente.Add(HabitosCliente)));
 
@@ -64,12 +87,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarHabitosCliente")]
-        public async Task<JsonResult> EditarHabitosCliente([FromBody] HabitosCliente HabitosCliente)
+        public async Task<IActionResult> EditarHabitosCliente([FromBody] HabitosCliente HabitosCliente)
         {
             try
             {
                 if (HabitosCliente.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de cliente é obrigatório");
 
                 Json(await Task.FromResult(this.IHabitosCliente.Update(HabitosCliente)));
                 return Json(Ok());

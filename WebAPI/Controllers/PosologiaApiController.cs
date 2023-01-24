@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public PosologiaApiController(IPosologia IPosologia)
         {
             this.IPosologia = IPosologia;
+        }
+
+        [HttpGet("/api/ListaPaginacaoPosologia/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var posologias = await this.IPosologia.List();
+
+                var total = Convert.ToDouble(posologias.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IPosologia.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : posologias);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os posologias " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaPosologia")]
@@ -30,12 +54,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarPosologia")]
-        public async Task<JsonResult> AdicionarPosologia([FromBody] Posologia Posologia)
+        public async Task<IActionResult> AdicionarPosologia([FromBody] Posologia Posologia)
         {
             try
             {
-                if (String.IsNullOrEmpty(Posologia.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Posologia.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IPosologia.Add(Posologia)));
 
@@ -61,12 +85,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarPosologia")]
-        public async Task<JsonResult> EditarPosologia([FromBody] Posologia Posologia)
+        public async Task<IActionResult> EditarPosologia([FromBody] Posologia Posologia)
         {
             try
             {
-                if (String.IsNullOrEmpty(Posologia.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(Posologia.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IPosologia.Update(Posologia)));
                 return Json(Ok());

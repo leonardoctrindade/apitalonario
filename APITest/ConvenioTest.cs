@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockConvenio.MontaObjetoNomeVazio();
             var apiController = new ConvenioApiController(mock.Object);
             var result = await apiController.AdicionarConvenio(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

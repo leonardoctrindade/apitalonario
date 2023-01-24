@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Authorization;
+using Data.Repositorio;
 
 namespace WebAPI.Controllers
 {
@@ -17,6 +18,29 @@ namespace WebAPI.Controllers
         public DciApiController(IDci idci)
         {
             IDci = idci;
+        }
+
+        [HttpGet("/api/ListaPaginacaoDci/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var dcis = await this.IDci.List();
+
+                var total = Convert.ToDouble(dcis.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IDci.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : dcis);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os dcis " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaDci")]
@@ -32,12 +56,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarDci")]
-        public async Task<JsonResult> AdicionarDci([FromBody] Dci dci)
+        public async Task<IActionResult> AdicionarDci([FromBody] Dci dci)
         {
             try
             {
-                if (string.IsNullOrEmpty(dci.CodigoDci) || string.IsNullOrEmpty(dci.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(dci.CodigoDci.Trim()))
+                    return BadRequest("Campo de código Dci é obrigatório");
+                if (string.IsNullOrEmpty(dci.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IDci.Add(dci)));
 
@@ -62,12 +88,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarDci")]
-        public async Task<JsonResult> EditarDci([FromBody] Dci dci)
+        public async Task<IActionResult> EditarDci([FromBody] Dci dci)
         {
             try
             {
-                if (string.IsNullOrEmpty(dci.CodigoDci) || string.IsNullOrEmpty(dci.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(dci.CodigoDci.Trim()))
+                    return BadRequest("Campo de código Dci é obrigatório");
+                if (string.IsNullOrEmpty(dci.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IDci.Update(dci)));
 

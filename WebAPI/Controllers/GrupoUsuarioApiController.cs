@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public GrupoUsuarioApiController(IGrupoUsuario IGrupoUsuario)
         {
             this.IGrupoUsuario = IGrupoUsuario;
+        }
+
+        [HttpGet("/api/ListaPaginacaoGrupoUsuario/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var gruposUsuarios = await this.IGrupoUsuario.List();
+
+                var total = Convert.ToDouble(gruposUsuarios.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IGrupoUsuario.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : gruposUsuarios);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os grupos de usuarios " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaGrupoUsuario")]
@@ -30,12 +54,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarGrupoUsuario")]
-        public async Task<JsonResult> AdicionarGrupoUsuario([FromBody] GrupoUsuario GrupoUsuario)
+        public async Task<IActionResult> AdicionarGrupoUsuario([FromBody] GrupoUsuario GrupoUsuario)
         {
             try 
             {
-                if (String.IsNullOrEmpty(GrupoUsuario.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(GrupoUsuario.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IGrupoUsuario.Add(GrupoUsuario)));
 
@@ -61,12 +85,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarGrupoUsuario")]
-        public async Task<JsonResult> EditarGrupoUsuario([FromBody] GrupoUsuario GrupoUsuario)
+        public async Task<IActionResult> EditarGrupoUsuario([FromBody] GrupoUsuario GrupoUsuario)
         {
             try
             {
-                if (String.IsNullOrEmpty(GrupoUsuario.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(GrupoUsuario.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IGrupoUsuario.Update(GrupoUsuario)));
                 return Json(Ok());

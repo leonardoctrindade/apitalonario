@@ -82,7 +82,7 @@ namespace APITest
             var modelo = MockMensagensPadrao.MontaObjetoMensagemVazia();
             var apiController = new MensagensPadraoApiController(mock.Object);
             var result = await apiController.AdicionarMensagensPadrao(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -91,7 +91,7 @@ namespace APITest
             var modelo = MockMensagensPadrao.MontaObjetoStatusDescricaoVazio();
             var apiController = new MensagensPadraoApiController(mock.Object);
             var result = await apiController.AdicionarMensagensPadrao(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
     }
 }

@@ -20,6 +20,29 @@ namespace WebAPI.Controllers
             this.IUnidade = iunidade;
         }
 
+        [HttpGet("/api/ListaPaginacaoUnidade/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var unidades = await this.IUnidade.List();
+
+                var total = Convert.ToDouble(unidades.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IUnidade.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : unidades);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os unidades " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaUnidade")]
         public async Task<JsonResult> ListaUnidade()
         {
@@ -34,12 +57,15 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarUnidade")]
-        public async Task<JsonResult> AdicionarUnidade([FromBody] Unidade unidade)
+        public async Task<IActionResult> AdicionarUnidade([FromBody] Unidade unidade)
         {
-            if (string.IsNullOrEmpty(unidade.Sigla) || string.IsNullOrEmpty(unidade.Descricao))
-                return Json(BadRequest(ModelState));
             try
             {
+                if (string.IsNullOrEmpty(unidade.Sigla.Trim()))
+                    return BadRequest("Campo de sigla é obrigatório");
+                if (string.IsNullOrEmpty(unidade.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
+
                 Json(await Task.FromResult(this.IUnidade.Add(unidade)));
                 
                 return Json(Ok());
@@ -68,12 +94,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarUnidade")]
-        public async Task<JsonResult> EditarUnidade([FromBody] Unidade unidade)
+        public async Task<IActionResult> EditarUnidade([FromBody] Unidade unidade)
         {
             try
             {
-                if (string.IsNullOrEmpty(unidade.Sigla) || string.IsNullOrEmpty(unidade.Descricao))
-                    return Json(BadRequest(ModelState));
+                if (string.IsNullOrEmpty(unidade.Sigla.Trim()))
+                    return BadRequest("Campo de sigla é obrigatório");
+                if (string.IsNullOrEmpty(unidade.Descricao.Trim()))
+                    return BadRequest("Campo de descrição é obrigatório");
 
                 Json(await Task.FromResult(this.IUnidade.Update(unidade)));
 

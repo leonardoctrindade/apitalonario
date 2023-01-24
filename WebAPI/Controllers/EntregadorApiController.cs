@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IEntregador = IEntregador;
         }
 
+        [HttpGet("/api/ListaPaginacaoEntregador/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var entregadores = await this.IEntregador.List();
+
+                var total = Convert.ToDouble(entregadores.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IEntregador.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : entregadores);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os entregadores " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaEntregador")]
         public async Task<JsonResult> ListaEntregador()
         {
@@ -33,16 +56,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarEntregador")]
-        public async Task<JsonResult> AdicionarEntregador([FromBody] Entregador Entregador)
+        public async Task<IActionResult> AdicionarEntregador([FromBody] Entregador Entregador)
         {
             try
             {
-                if (String.IsNullOrEmpty(Entregador.Nome))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Entregador.Ddd))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Entregador.Telefone))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Entregador.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (String.IsNullOrEmpty(Entregador.Ddd.Trim()))
+                    return BadRequest("Campo de ddd é obrigatório");
+                if (String.IsNullOrEmpty(Entregador.Telefone.Trim()))
+                    return BadRequest("Campo de telefone é obrigatório");
 
                 Json(await Task.FromResult(this.IEntregador.Add(Entregador)));
 
@@ -68,16 +91,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarEntregador")]
-        public async Task<JsonResult> EditarEntregador([FromBody] Entregador Entregador)
+        public async Task<IActionResult> EditarEntregador([FromBody] Entregador Entregador)
         {
             try
             {
-                if (String.IsNullOrEmpty(Entregador.Nome))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Entregador.Ddd))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Entregador.Telefone))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Entregador.Nome.Trim()))
+                    return BadRequest("Campo de nome é obrigatório");
+                if (String.IsNullOrEmpty(Entregador.Ddd.Trim()))
+                    return BadRequest("Campo de ddd é obrigatório");
+                if (String.IsNullOrEmpty(Entregador.Telefone.Trim()))
+                    return BadRequest("Campo de telefone é obrigatório");
 
                 Json(await Task.FromResult(this.IEntregador.Update(Entregador)));
                 return Json(Ok());

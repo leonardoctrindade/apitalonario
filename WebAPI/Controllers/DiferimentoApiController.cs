@@ -4,6 +4,7 @@ using Data.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,29 @@ namespace WebAPI.Controllers
         public DiferimentoApiController(IDiferimento IDiferimento)
         {
             this.IDiferimento = IDiferimento;
+        }
+
+        [HttpGet("/api/ListaPaginacaoDiferimento/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var diferimentos = await this.IDiferimento.List();
+
+                var total = Convert.ToDouble(diferimentos.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IDiferimento.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : diferimentos);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os diferimentos " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaDiferimento")]
@@ -29,16 +53,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarDiferimento")]
-        public async Task<JsonResult> AdicionarDiferimento([FromBody] Diferimento Diferimento)
+        public async Task<IActionResult> AdicionarDiferimento([FromBody] Diferimento Diferimento)
         {
             try
             {
-                if (String.IsNullOrEmpty(Diferimento.Cst))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Diferimento.SiglaEstado))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Diferimento.Cst.Trim()))
+                    return BadRequest("Campo de Cst é obrigatório");
+                if (String.IsNullOrEmpty(Diferimento.SiglaEstado.Trim()))
+                    return BadRequest("Campo de sigla do estado é obrigatório");
                 if (Diferimento.AliquotaDiferimento <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de alíquota de diferimento é obrigatório");
 
                 Json(await Task.FromResult(this.IDiferimento.Add(Diferimento)));
 
@@ -62,16 +86,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarDiferimento")]
-        public async Task<JsonResult> EditarDiferimento([FromBody] Diferimento Diferimento)
+        public async Task<IActionResult> EditarDiferimento([FromBody] Diferimento Diferimento)
         {
             try
             {
-                if (String.IsNullOrEmpty(Diferimento.Cst))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Diferimento.SiglaEstado))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Diferimento.Cst.Trim()))
+                    return BadRequest("Campo de Cst é obrigatório");
+                if (String.IsNullOrEmpty(Diferimento.SiglaEstado.Trim()))
+                    return BadRequest("Campo de sigla do estado é obrigatório");
                 if (Diferimento.AliquotaDiferimento <= 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de alíquota de diferimento é obrigatório");
 
                 Json(await Task.FromResult(this.IDiferimento.Update(Diferimento)));
                 return Json(Ok());

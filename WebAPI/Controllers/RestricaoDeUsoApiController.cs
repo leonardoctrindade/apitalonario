@@ -19,6 +19,29 @@ namespace WebAPI.Controllers
             this.IRestricaoDeUso = IRestricaoDeUso;
         }
 
+        [HttpGet("/api/ListaPaginacaoRestricaoDeUso/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var restricoes = await this.IRestricaoDeUso.List();
+
+                var total = Convert.ToDouble(restricoes.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IRestricaoDeUso.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : restricoes);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os restrições de uso " + ex.Message }) { StatusCode = 400 };
+            }
+        }
+
         [HttpGet("/api/ListaRestricaoDeUso")]
         public async Task<JsonResult> ListaRestricaoDeUso()
         {
@@ -33,12 +56,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarRestricaoDeUso")]
-        public async Task<JsonResult> AdicionarRestricaoDeUso([FromBody] RestricaoDeUso RestricaoDeUso)
+        public async Task<IActionResult> AdicionarRestricaoDeUso([FromBody] RestricaoDeUso RestricaoDeUso)
         {
             try
             {
-                if (RestricaoDeUso.ProdutoId <= 0 || RestricaoDeUso.GrupoId <= 0 || RestricaoDeUso.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (RestricaoDeUso.ProdutoId <= 0)
+                    return BadRequest("Campo de produto é obrigatório");
+                if (RestricaoDeUso.GrupoId <= 0)
+                    return BadRequest("Campo de grupo é obrigatório");
+                if (RestricaoDeUso.ClienteId <= 0)
+                    return BadRequest("Campo de cliente é obrigatório");
 
                 Json(await Task.FromResult(this.IRestricaoDeUso.Add(RestricaoDeUso)));
 
@@ -64,12 +91,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarRestricaoDeUso")]
-        public async Task<JsonResult> EditarRestricaoDeUso([FromBody] RestricaoDeUso RestricaoDeUso)
+        public async Task<IActionResult> EditarRestricaoDeUso([FromBody] RestricaoDeUso RestricaoDeUso)
         {
             try
             {
-                if (RestricaoDeUso.ProdutoId <= 0 || RestricaoDeUso.GrupoId <= 0 || RestricaoDeUso.ClienteId <= 0)
-                    return Json(BadRequest(ModelState));
+                if (RestricaoDeUso.ProdutoId <= 0)
+                    return BadRequest("Campo de produto é obrigatório");
+                if (RestricaoDeUso.GrupoId <= 0)
+                    return BadRequest("Campo de grupo é obrigatório");
+                if (RestricaoDeUso.ClienteId <= 0)
+                    return BadRequest("Campo de cliente é obrigatório");
 
                 Json(await Task.FromResult(this.IRestricaoDeUso.Update(RestricaoDeUso)));
                 return Json(Ok());

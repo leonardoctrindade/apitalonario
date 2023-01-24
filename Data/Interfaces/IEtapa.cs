@@ -9,6 +9,6 @@ namespace Data.Interfaces
 {
     public interface IEtapa : IGeneric<Etapa>
     {
-        Task<List<Etapa>> ListagemCustomizada();
+        Task<List<Etapa>> ListagemCustomizada(int pagina);
     }
 }

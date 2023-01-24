@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface ITabelaFloral : IGeneric<TabelaFloral>
     {
-        Task<List<TabelaFloral>> ListagemCustomizada();
+        Task<List<TabelaFloral>> ListagemCustomizada(int pagina);
     }
 }

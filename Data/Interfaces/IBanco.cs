@@ -9,6 +9,6 @@ namespace Data.Interfaces
 {
     public interface IBanco : IGeneric<Banco>
     {
-        Task<List<Banco>> ListagemCustomizada();
+        Task<List<Banco>> ListagemCustomizada(int pagina);
     }
 }

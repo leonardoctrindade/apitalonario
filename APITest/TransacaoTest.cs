@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockTransacao.MontaObjetoDescricaoVazia();
             var apiController = new TransacaoApiController(mock.Object);
             var result = await apiController.AdicionarTransacao(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockTransacao.MontaObjetoTipoInvalido();
             var apiController = new TransacaoApiController(mock.Object);
             var result = await apiController.AdicionarTransacao(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface INbm : IGeneric<Nbm>
     {
-        Task<List<Nbm>> ListagemCustomizada();
+        Task<List<Nbm>> ListagemCustomizada(int pagina);
     }
 }

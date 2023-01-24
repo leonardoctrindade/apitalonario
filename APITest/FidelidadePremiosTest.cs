@@ -36,7 +36,7 @@ namespace APITest
             var modelo = MockFidelidadePremios.MontaObjetoIdGrupoInvalido();
             var apiController = new FidelidadePremiosApiController(mock.Object);
             var result = await apiController.AdicionarFidelidadePremios(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace APITest
             var modelo = MockFidelidadePremios.MontaObjetoIdProdutoInvalido();
             var apiController = new FidelidadePremiosApiController(mock.Object);
             var result = await apiController.AdicionarFidelidadePremios(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace APITest
             var modelo = MockFidelidadePremios.MontaObjetoIdFidelidadeInvalido();
             var apiController = new FidelidadePremiosApiController(mock.Object);
             var result = await apiController.AdicionarFidelidadePremios(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace APITest
             var modelo = MockFidelidadePremios.MontaObjetoPontosInvalido();
             var apiController = new FidelidadePremiosApiController(mock.Object);
             var result = await apiController.AdicionarFidelidadePremios(modelo);
-            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result.Value).StatusCode.Value.ToString());
+            Assert.Equal(new StatusCodeResult(400).StatusCode.ToString(), ((ObjectResult)result).StatusCode.Value.ToString());
         }
 
         [Fact]

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Data.Config;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -15,6 +16,29 @@ namespace WebAPI.Controllers
         public FornecedorApiController(IFornecedor IFornecedor)
         {
             this.IFornecedor = IFornecedor;
+        }
+
+        [HttpGet("/api/ListaPaginacaoFornecedor/{pagina}")]
+        public async Task<JsonResult> ListaPaginacao(int pagina)
+        {
+            try
+            {
+                var fornecedores = await this.IFornecedor.List();
+
+                var total = Convert.ToDouble(fornecedores.Count() / 10);
+
+                var num = total / 2;
+
+                if (!num.Equals(0)) total = total + 1;
+
+                var listGroup = await this.IFornecedor.ListagemCustomizada(pagina);
+
+                return Json(listGroup.Count() > 0 ? new { listGroup, total } : fornecedores);
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { message = "Error ao listar os fornecedores " + ex.Message }) { StatusCode = 400 };
+            }
         }
 
         [HttpGet("/api/ListaFornecedor")]
@@ -31,22 +55,22 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/AdicionarFornecedor")]
-        public async Task<JsonResult> AdicionarFornecedor([FromBody] Fornecedor Fornecedor)
+        public async Task<IActionResult> AdicionarFornecedor([FromBody] Fornecedor Fornecedor)
         {
             try
             {
-                if (String.IsNullOrEmpty(Fornecedor.NomeFornecedor))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Fornecedor.NomeFantasia))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Fornecedor.Cnpj))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Fornecedor.Cpf))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Fornecedor.InscricaoEstadual))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Fornecedor.NomeFornecedor.Trim()))
+                    return BadRequest("Campo de nome fornecedor é obrigatório");
+                if (String.IsNullOrEmpty(Fornecedor.NomeFantasia.Trim()))
+                    return BadRequest("Campo do nome fantasia é obrigatório");
+                if (String.IsNullOrEmpty(Fornecedor.Cnpj.Trim()))
+                    return BadRequest("Campo de cnpj é obrigatório");
+                if (String.IsNullOrEmpty(Fornecedor.Cpf.Trim()))
+                    return BadRequest("Campo de cpf é obrigatório");
+                if (String.IsNullOrEmpty(Fornecedor.InscricaoEstadual.Trim()))
+                    return BadRequest("Campo de inscrição estadual é obrigatório");
                 if (Fornecedor.EstadoId == 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de estado é obrigatório");
 
                 Json(await Task.FromResult(this.IFornecedor.Add(Fornecedor)));
 
@@ -72,22 +96,22 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/api/EditarFornecedor")]
-        public async Task<JsonResult> EditarFornecedor([FromBody] Fornecedor Fornecedor)
+        public async Task<IActionResult> EditarFornecedor([FromBody] Fornecedor Fornecedor)
         {
             try
             {
-                if (String.IsNullOrEmpty(Fornecedor.NomeFornecedor))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Fornecedor.NomeFantasia))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Fornecedor.Cnpj))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Fornecedor.Cpf))
-                    return Json(BadRequest(ModelState));
-                if (String.IsNullOrEmpty(Fornecedor.InscricaoEstadual))
-                    return Json(BadRequest(ModelState));
+                if (String.IsNullOrEmpty(Fornecedor.NomeFornecedor.Trim()))
+                    return BadRequest("Campo de nome fornecedor é obrigatório");
+                if (String.IsNullOrEmpty(Fornecedor.NomeFantasia.Trim()))
+                    return BadRequest("Campo do nome fantasia é obrigatório");
+                if (String.IsNullOrEmpty(Fornecedor.Cnpj.Trim()))
+                    return BadRequest("Campo de cnpj é obrigatório");
+                if (String.IsNullOrEmpty(Fornecedor.Cpf.Trim()))
+                    return BadRequest("Campo de cpf é obrigatório");
+                if (String.IsNullOrEmpty(Fornecedor.InscricaoEstadual.Trim()))
+                    return BadRequest("Campo de inscrição estadual é obrigatório");
                 if (Fornecedor.EstadoId == 0)
-                    return Json(BadRequest(ModelState));
+                    return BadRequest("Campo de estado é obrigatório");
 
                 Json(await Task.FromResult(this.IFornecedor.Update(Fornecedor)));
                 return Json(Ok());

@@ -8,6 +8,6 @@ namespace Data.Interfaces
 {
     public interface ILimiteDeCompraCliente : IGeneric<LimiteDeCompraCliente>
     {
-        Task<List<LimiteDeCompraCliente>> ListagemCustomizada();
+        Task<List<LimiteDeCompraCliente>> ListagemCustomizada(int pagina);
     }
 }

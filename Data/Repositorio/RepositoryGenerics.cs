@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using Microsoft.Win32.SafeHandles;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.InteropServices;
+using System.Linq;
+using System.Threading;
 
 namespace Data.Repositorio
 {
@@ -97,8 +99,6 @@ namespace Data.Repositorio
                 throw;
             }
         }
-
-
 
         #region Disposed https://docs.microsoft.com/pt-br/dotnet/standard/garbage-collection/implementing-dispose
         // Flag: Has Dispose already been called?
