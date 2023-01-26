@@ -73,7 +73,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornarLaboratorioId/{id}")]
+        [HttpGet("/api/RetornaLaboratorioPorId/{id}")]
         public async Task<JsonResult> RetornarLaboratorioId(int id)
         {
             try

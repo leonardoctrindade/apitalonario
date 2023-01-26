@@ -76,7 +76,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornarNbmProId/{id}")]
+        [HttpGet("/api/RetornaNbmPorId/{id}")]
         public async Task<JsonResult> RetornarNbmPorId(int id)
         {
             try

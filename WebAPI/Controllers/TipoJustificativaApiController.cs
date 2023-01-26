@@ -63,7 +63,9 @@ namespace WebAPI.Controllers
                 if (string.IsNullOrEmpty(tipoJustificativa.Descricao.Trim()))
                     return BadRequest("Campo de descrição é obrigatório");
 
-                return Json(await Task.FromResult(this.ITipoJustificativa.Add(tipoJustificativa)));
+                Json(await Task.FromResult(this.ITipoJustificativa.Add(tipoJustificativa)));
+
+                return Json(Ok());
             }
             catch (Exception)
             {
@@ -71,7 +73,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornarTipoJustificativaPorId/{id}")]
+        [HttpGet("/api/RetornaTipoJustificativaPorId/{id}")]
         public async Task<JsonResult> RetornarTipoJustificativaPorId(int id)
         {
             try
@@ -92,7 +94,9 @@ namespace WebAPI.Controllers
                 if (string.IsNullOrEmpty(tipoJustificativa.Descricao.Trim()))
                     return BadRequest("Campo de descrição é obrigatório");
 
-                return Json(await Task.FromResult(this.ITipoJustificativa.Update(tipoJustificativa)));
+                Json(await Task.FromResult(this.ITipoJustificativa.Update(tipoJustificativa)));
+
+                return Json(Ok());
             }
             catch (Exception)
             {
@@ -100,7 +104,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPost("/api/ExcluiTipoJustificativa")]
+        [HttpPost("/api/ExcluirTipoJustificativa")]
         public async Task<JsonResult> ExcluiTipoJustificativa([FromBody] TipoJustificativa tipoJustificativa)
         {
             try

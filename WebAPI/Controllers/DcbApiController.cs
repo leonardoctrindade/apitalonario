@@ -73,7 +73,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornarDcbPorId/{id}")]
+        [HttpGet("/api/RetornaDcbPorId/{id}")]
         public async Task<JsonResult> RetornarDcbPorId(int id)
         {
             try
