@@ -101,7 +101,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPost("/api/ExlcuirMaquinaPos")]
+        [HttpPost("/api/ExcluirMaquinaPos")]
         public async Task<JsonResult> ExcluirMaquinaPos([FromBody] MaquinaPos MaquinaPos)
         {
             try
