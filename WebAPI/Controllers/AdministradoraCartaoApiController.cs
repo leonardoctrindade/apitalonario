@@ -72,7 +72,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornaAdministradoraCartaoPorId/{id}")]
+        [HttpGet("/api/RetornaAdministradoraDeCartaoPorId/{id}")]
         public async Task<JsonResult> RetornaAdministradoraCartaoPorId(int id)
         {
             try
@@ -100,7 +100,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPost("/api/ExcluirAdministradoraCartao")]
+        [HttpPost("/api/ExcluirAdministradoraDeCartao")]
         public async Task<JsonResult> ExcluirAdministradoraCartao([FromBody] AdministradoraCartao AdministradoraCartao)
         {
             try

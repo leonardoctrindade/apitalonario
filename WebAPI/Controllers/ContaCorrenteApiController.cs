@@ -72,7 +72,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornarContaCorrentePorId/{id}")]
+        [HttpGet("/api/RetornaContaCorrentePorId/{id}")]
         public async Task<JsonResult> RetornarContaCorrentePorId(int id)
         {
             try

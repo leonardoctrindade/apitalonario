@@ -78,7 +78,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornarEtapaPorId/{id}")]
+        [HttpGet("/api/RetornaEtapaPorId/{id}")]
         public async Task<JsonResult> RetornarEtapaPorId(int id)
         {
             try

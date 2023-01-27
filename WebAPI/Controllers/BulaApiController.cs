@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(Bula.Descricao.Trim()))
                     return BadRequest("Campo de descrição é obrigatório");
-                if (Bula.Tipo != 1 && Bula.Tipo != 2)
+                if (Bula.Tipo != 1 && Bula.Tipo != 0)
                     return BadRequest("Campo de tipo é obrigatório");
 
                 Json(await Task.FromResult(this.IBula.Add(Bula)));
@@ -90,7 +90,7 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(Bula.Descricao.Trim()))
                     return BadRequest("Campo de descrição é obrigatório");
-                if (Bula.Tipo != 1 && Bula.Tipo != 2)
+                if (Bula.Tipo != 1 && Bula.Tipo != 0)
                     return BadRequest("Campo de tipo é obrigatório");
 
                 Json(await Task.FromResult(this.IBula.Update(Bula)));
