@@ -155,8 +155,8 @@ namespace Data.Config
         private static string GetStringConectionConfig()
 
         {
-            //string strCon = "User ID=postgres; Password=prixpto; Host=zeus.prismafive.com.br; Port=49282; Database=farmafacil-web2; Pooling=true;";
-            string strCon = "User ID=postgres; Password=prixpto; Host=10.3.25.11; Port=49282; Database=farmafacil-web2; Pooling=true;";
+            string strCon = "User ID=postgres; Password=prixpto; Host=zeus.prismafive.com.br; Port=49282; Database=farmafacil-web2; Pooling=true;";
+            //string strCon = "User ID=postgres; Password=prixpto; Host=10.3.25.11; Port=49282; Database=farmafacil-web2; Pooling=true;";
             return strCon;
         }
     }

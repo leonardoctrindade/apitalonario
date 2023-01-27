@@ -71,7 +71,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornaFormaPagamentoPorId/{id}")]
+        [HttpGet("/api/RetornaFormaDePagamentoPorId/{id}")]
         public async Task<JsonResult> RetornaFormaPagamentoPorId(int id)
         {
             try
@@ -101,7 +101,7 @@ namespace WebAPI.Controllers
             }   
         }
 
-        [HttpPost("/api/ExcluirFormaPagamento")]
+        [HttpPost("/api/ExcluirFormaDePagamento")]
         public async Task<JsonResult> ExcluirFormaPagamento([FromBody] FormaPagamento FormaPagamento)
         {
             try
