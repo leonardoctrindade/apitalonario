@@ -75,7 +75,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornarTransportadorPorId/{id}")]
+        [HttpGet("/api/RetornaTransportadorPorId/{id}")]
         public async Task<JsonResult> RetornarTransportadorPorId(int id)
         {
             try

@@ -76,7 +76,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.ICategoria.GetEntityById(id));
+                return Json(await this.ICategoria.GetCategoria(id));
             } catch (Exception ex)
             {
                 return new JsonResult(new { message = "Error ao retorna a categoria " + ex.Message }) { StatusCode = 400 };

@@ -82,7 +82,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Json(await this.IUsuario.GetUsuario(id));
+                //return Json(await this.IUsuario.GetUsuario(id));
+                return Json(new List<Usuario>()); // Retornar cadastro de usuário quando for feita as devidas alterações
             }
             catch(Exception ex)
             {

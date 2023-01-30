@@ -14,19 +14,24 @@ namespace Data.Entidades
         public int Id { get; set; }
 
         [Column("Nome")]
+        [MaxLength(100)]
         [Required]
         public string Nome { get; set; }
 
         [Column("Cep")]
+        [MaxLength(14)]
         public string Cep { get; set; }
 
         [Column("Endereco")]
+        [MaxLength(60)]
         public string Endereco { get; set; }
 
         [Column("Numero")]
+        [MaxLength(10)] 
         public string Numero { get; set; }
 
         [Column("Complemento")]
+        [MaxLength(100)]
         public string Complemento { get; set; }
 
         [Column("BairroId")]
@@ -45,12 +50,15 @@ namespace Data.Entidades
         public Estado Estado { get; set; }
 
         [Column("DDD")]
+        [MaxLength(2)]
         public string DDD { get; set; }
 
         [Column("Telefone")]
+        [MaxLength(10)]
         public string Telefone { get; set; }
 
         [Column("Celular")]
+        [MaxLength(10)]
         public string Celular { get; set; }
 
         [Column("Comissao")]

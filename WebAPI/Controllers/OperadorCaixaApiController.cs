@@ -63,6 +63,8 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(OperadorCaixa.Nome.Trim()))
                     return BadRequest("Campo de nome é obrigatório");
+                if (OperadorCaixa.UsuarioId <= 0)
+                    return BadRequest("Campo de usuario id é obrigatório");
 
                 Json(await Task.FromResult(this.IOperadorCaixa.Add(OperadorCaixa)));
 
@@ -74,12 +76,12 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornaOperadorCaixaPorId/{id}")]
+        [HttpGet("/api/RetornaOperadorDeCaixaPorId/{id}")]
         public async Task<JsonResult> RetornaOperadorCaixaPorId(int id)
         {
             try
             {
-                return Json(await this.IOperadorCaixa.GetEntityById(id));
+                return Json(await this.IOperadorCaixa.GetOperadorCaixa(id));
             }
             catch(Exception ex)
             {
@@ -92,8 +94,10 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (String.IsNullOrEmpty(OperadorCaixa.Nome.Trim()))
+                if (string.IsNullOrEmpty(OperadorCaixa.Nome.Trim()))
                     return BadRequest("Campo de nome é obrigatório");
+                if (OperadorCaixa.UsuarioId <= 0)
+                    return BadRequest("Campo de usuario id é obrigatório");
 
                 Json(await Task.FromResult(this.IOperadorCaixa.Update(OperadorCaixa)));
                 return Json(Ok());
@@ -104,7 +108,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPost("/api/ExcluirOperadorCaixa")]
+        [HttpPost("/api/ExcluirOperadorDeCaixa")]
         public async Task<JsonResult> ExcluirOperadorCaixa([FromBody] OperadorCaixa OperadorCaixa)
         {
             try

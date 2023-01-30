@@ -18,6 +18,12 @@ namespace Data.Entidades
         [Required(ErrorMessage = "Campo de nome não preenchido")]
         public string Nome { get; set; }
 
+        [Column("UsuarioId")]
+        [Required(ErrorMessage = "Campo de usuario é obrigatório")]
+        public int UsuarioId { get; set; }
+
+        public Usuario Usuario { get; set; }
+
         [Column("NomeAbreviado")]
         [MaxLength(20)]
         public string NomeAbreviado { get; set; }

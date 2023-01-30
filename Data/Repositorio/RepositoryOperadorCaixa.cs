@@ -36,5 +36,19 @@ namespace Data.Repositorio
                 return result;
             }
         }
+
+        public async Task<OperadorCaixa> GetOperadorCaixa(int id)
+        {
+            var result = new OperadorCaixa();
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                result = await context.OperadorCaixa
+                    .Include(c => c.Usuario)
+                    .Where(x => x.Id == id)
+                    .SingleOrDefaultAsync();
+            }
+
+            return result;
+        }
     }
 }

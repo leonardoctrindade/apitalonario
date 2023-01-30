@@ -62,7 +62,7 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(NaturezaOperacao.Descricao.Trim()))
                     return BadRequest("Campo de descrição é obrigatório");
-                if (NaturezaOperacao.Tipo != 1 && NaturezaOperacao.Tipo != 2)
+                if (NaturezaOperacao.Tipo != 1 && NaturezaOperacao.Tipo != 0)
                     return BadRequest("Campo de tipo é obrigatório");
                 if (NaturezaOperacao.Codigo <= 0)
                     return BadRequest("Campo de código é obrigatório");
@@ -77,7 +77,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornaNaturezaOperacaoPorId/{id}")]
+        [HttpGet("/api/RetornaNaturezaDeOperacaoPorId/{id}")]
         public async Task<JsonResult> RetornaNaturezaOperacaoPorId(int id)
         {
             try
@@ -97,7 +97,7 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(NaturezaOperacao.Descricao.Trim()))
                     return BadRequest("Campo de descrição é obrigatório");
-                if (NaturezaOperacao.Tipo != 1 && NaturezaOperacao.Tipo != 2)
+                if (NaturezaOperacao.Tipo != 1 && NaturezaOperacao.Tipo != 0)
                     return BadRequest("Campo de tipo é obrigatório");
                 if (NaturezaOperacao.Codigo <= 0)
                     return BadRequest("Campo de código é obrigatório");
@@ -111,7 +111,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPost("/api/ExcluirNaturezaOperacao")]
+        [HttpPost("/api/ExcluirNaturezaDeOperacao")]
         public async Task<JsonResult> ExcluirNaturezaOperacao([FromBody] NaturezaOperacao NaturezaOperacao)
         {
             try

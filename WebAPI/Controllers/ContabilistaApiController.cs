@@ -78,7 +78,7 @@ namespace WebAPI.Controllers
             
         }
 
-        [HttpGet("/api/RetornarContabilistaPorId/{id}")]
+        [HttpGet("/api/RetornaContabilistaPorId/{id}")]
         public async Task<JsonResult> RetornarContabilistaPorId(int id)
         {
             try

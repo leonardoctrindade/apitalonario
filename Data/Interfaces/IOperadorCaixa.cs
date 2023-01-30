@@ -9,5 +9,6 @@ namespace Data.Interfaces
     public interface IOperadorCaixa : IGeneric<OperadorCaixa>
     {
         Task<List<OperadorCaixa>> ListagemCustomizada(int pagina);
+        Task<OperadorCaixa> GetOperadorCaixa(int id);
     }
 }

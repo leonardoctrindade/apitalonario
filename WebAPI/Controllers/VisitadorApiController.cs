@@ -74,7 +74,7 @@ namespace WebAPI.Controllers
             return Json(Ok());
         }
 
-        [HttpGet("/api/RetornarVisitadorPorId/{id}")]
+        [HttpGet("/api/RetornaVisitadorPorId/{id}")]
         public async Task<JsonResult> RetornarVisitadorPorId(int id)
         {
             try

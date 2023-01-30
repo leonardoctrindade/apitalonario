@@ -77,7 +77,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("/api/RetornarUnidadePorId/{id}")]
+        [HttpGet("/api/RetornaUnidadePorId/{id}")]
         public async Task<JsonResult> RetornarUnidadeProId(int id)
         {
             try
