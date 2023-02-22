@@ -146,7 +146,8 @@ namespace WebAPI
             services.AddSingleton<IVendedor, RepositoryVendedor>();
             services.AddSingleton<IVendedorComissao, RepositoryVendedorComissao>();
             services.AddSingleton<IVisitador, RepositoryVisitador>();
-            services.AddSingleton<IVolumeXValorHomeopatia, RepositoryVolumeXValorHomeopatia>();            
+            services.AddSingleton<IVolumeXValorHomeopatia, RepositoryVolumeXValorHomeopatia>();
+            services.AddSingleton<IManutencaoCompras, RepositoryManutencaoCompras>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>

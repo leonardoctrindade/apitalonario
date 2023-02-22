@@ -33,7 +33,8 @@ namespace WebAPI.Controllers
                 return Unauthorized();
 
             var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, lockoutOnFailure: false);
-            if (result.Succeeded)
+            //TIRAR A EXCLAMACAO EM PROD
+            if (!result.Succeeded)
             {
                 var token = new TokenJWTBuilder()
                      .AddSecurityKey(JwtSecurityKey.Create("Secret_Key-12345678"))

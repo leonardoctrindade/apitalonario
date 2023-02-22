@@ -14,6 +14,7 @@ namespace Data.Config
             Database.EnsureCreated();
         }
 
+        //Compras
         public DbSet<AcompanhamentoPessoal> AcompanhamentoPessoal { get; set; }
         public DbSet<AdministradoraCartao> AdministradoraCartao { get; set; }
         public DbSet<AliquotaEstado> AliquotaEstado { get; set; }
@@ -133,7 +134,8 @@ namespace Data.Config
         public DbSet<Vendedor> Vendedor { get; set; }
         public DbSet<VendedorComissao> VendedorComissao { get; set; }
         public DbSet<Visitador> Visitador { get; set; }
-        public DbSet<VolumeXValorHomeopatia> VolumeXValorHomeopatia { get; set; }        
+        public DbSet<VolumeXValorHomeopatia> VolumeXValorHomeopatia { get; set; }
+        public DbSet<ManutencaoCompras> ManutencaoCompras { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -155,7 +157,7 @@ namespace Data.Config
         private static string GetStringConectionConfig()
 
         {
-            string strCon = "User ID=postgres; Password=prixpto; Host=zeus.prismafive.com.br; Port=49282; Database=farmafacil-web2; Pooling=true;";
+            string strCon = "User ID=postgres; Password=prixpto; Host=zeus.prismafive.com.br; Port=49282; Database=farmacil-web-compras; Pooling=true;";
             //string strCon = "User ID=postgres; Password=prixpto; Host=10.3.25.11; Port=49282; Database=farmafacil-web2; Pooling=true;";
             return strCon;
         }
