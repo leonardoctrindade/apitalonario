@@ -15,6 +15,7 @@ namespace Data.Config
         }
 
         //Compras
+        public DbSet<Agente> Agente { get; set; }
         public DbSet<AcompanhamentoPessoal> AcompanhamentoPessoal { get; set; }
         public DbSet<AdministradoraCartao> AdministradoraCartao { get; set; }
         public DbSet<AliquotaEstado> AliquotaEstado { get; set; }
@@ -141,7 +142,7 @@ namespace Data.Config
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql(GetStringConectionConfig());
+                optionsBuilder.UseSqlServer(GetStringConectionConfig());
                 base.OnConfiguring(optionsBuilder);
             }
         }
@@ -154,11 +155,10 @@ namespace Data.Config
             base.OnModelCreating(builder);
         }
 
-        private static string GetStringConectionConfig()
-
+        private string GetStringConectionConfig()
         {
-            string strCon = "User ID=postgres; Password=prixpto; Host=zeus.prismafive.com.br; Port=49282; Database=farmacil-web-compras; Pooling=true;";
-            //string strCon = "User ID=postgres; Password=prixpto; Host=10.3.25.11; Port=49282; Database=farmafacil-web2; Pooling=true;";
+            string strCon = "Data Source=mssql.mastersoftbr.com.br;Initial Catalog=mastersoftbr12;Integrated Security=False;User ID=mastersoftbr14;Password=legiao22;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;";
+
             return strCon;
         }
     }

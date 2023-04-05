@@ -34,14 +34,22 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+            //services.AddDbContext<ContextBase>(options =>
+            //  options.UseNpgsql(
+            //      Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ContextBase>(options =>
-              options.UseNpgsql(
-                  Configuration.GetConnectionString("DefaultConnection")));
+                         options.UseSqlServer(
+                             Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
+
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ContextBase>();
 
+           
             services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));
             services.AddSingleton<IAcompanhamentoPessoal, RepositoryAcompanhamentoPessoal>();
             services.AddSingleton<IAdministradoraCartao, RepositoryAdministradoraCartao>();
@@ -192,6 +200,9 @@ namespace WebAPI
                                       policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                                   });
             });
+
+            services.AddMvc();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
