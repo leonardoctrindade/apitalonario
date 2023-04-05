@@ -37,7 +37,7 @@ namespace Data.Config
 
         private string GetStringConectionConfig()
         {
-            string strCon = "Data Source=mssql.mastersoftbr.com.br;Initial Catalog=mastersoftbr12;Integrated Security=False;User ID=mastersoftbr14;Password=legiao22;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;";
+            string strCon = "Data Source=mssql.mastersoftbr.com.br;Database=mastersoftbr12;Initial Catalog=mastersoftbr12;Integrated Security=False;User ID=mastersoftbr12;Password=legiao22;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;";
 
             return strCon;
         }

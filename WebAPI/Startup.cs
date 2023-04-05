@@ -51,7 +51,7 @@ namespace WebAPI
 
            
             services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));
-           // services.AddSingleton<IAcompanhamentoPessoal, RepositoryAcompanhamentoPessoal>();
+            services.AddSingleton<IAgente, RepositoryAgente>();
            
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
