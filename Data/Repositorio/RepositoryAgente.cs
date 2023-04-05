@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using Data.Config;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Data.Helper;
 
 namespace Data.Repositorio
 {
-    public class RepositoryAgente: RepositoryGenerics<Agente>, IAgente
+    public class RepositoryAgente : RepositoryGenerics<Agente>, IAgente
     {
         public async Task<List<Agente>> ListagemCustomizada(int pagina)
         {
@@ -34,6 +35,16 @@ namespace Data.Repositorio
 
 
                 return result;
+            }
+        }
+
+        public async Task<Agente> BuscarAgente(int matricula, string senha)
+        {
+            var senhaCriptografada = Encryptor.MD5Encryption(senha);
+
+            using (var context = new ContextBase(this._OptionsBuilder))
+            {
+                return await context.Agente.Where(x => x.Matricula == matricula && x.Senha == senhaCriptografada).FirstOrDefaultAsync();
             }
         }
     }

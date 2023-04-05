@@ -9,5 +9,6 @@ namespace Data.Interfaces
     public interface IAgente : IGeneric<Agente>
     {
         Task<List<Agente>> ListagemCustomizada(int pagina);
+        Task<Agente> BuscarAgente(int matricula, string senha);
     }
 }

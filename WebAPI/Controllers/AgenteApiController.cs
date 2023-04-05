@@ -1,7 +1,9 @@
 ﻿using Data.Entidades;
+using Data.Helper;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +30,32 @@ namespace WebAPI.Controllers
             return Json(await this.iAgente.List());
         }
 
+        [HttpGet("/api/BuscarAgente/{matricula}/{senha}")]
+        public async Task<JsonResult> BuscarAgente(int matricula, string senha)
+        {
+            if (matricula == 0)
+                return Json(BadRequest("Informe a Matrícula"));
+
+            if (String.IsNullOrEmpty(senha))
+                return Json(BadRequest("Informe a Senha"));
+
+            var ret = await this.iAgente.BuscarAgente(matricula, senha);
+
+            if (ret == null)
+                return Json(NotFound());
+
+            return Json(ret);
+        }
+
 
         [HttpPost("/api/AdicionarAgente")]
         public async Task<JsonResult> AdicionarAgente([FromBody] Agente Agente)
         {
             if (String.IsNullOrEmpty(Agente.Nome))
                 return Json(BadRequest(ModelState));
+
+            var senhaCriptografada = Encryptor.MD5Encryption(Agente.Senha);
+            Agente.Senha = senhaCriptografada;
 
             Json(await Task.FromResult(this.iAgente.Add(Agente)));
 
