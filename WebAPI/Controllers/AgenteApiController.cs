@@ -39,12 +39,34 @@ namespace WebAPI.Controllers
             if (String.IsNullOrEmpty(senha))
                 return Json(BadRequest("Informe a Senha"));
 
-            var ret = await this.iAgente.BuscarAgente(matricula, senha);
+            var senhaCriptografada = Encryptor.MD5Encryption(senha);
+
+            var ret = await this.iAgente.BuscarAgente(matricula, senhaCriptografada);
 
             if (ret == null)
                 return Json(NotFound());
 
             return Json(ret);
+        }
+
+        [HttpGet("/api/MudarSenhaAgente/{matricula}/{senha}")]
+        public async Task<JsonResult> MudarSenhaAgente(int matricula, string senha)
+        {
+            if (matricula == 0)
+                return Json(BadRequest("Informe a Matrícula"));
+
+            if (String.IsNullOrEmpty(senha))
+                return Json(BadRequest("Informe a Senha"));
+
+            var senhaCriptografada = Encryptor.MD5Encryption(senha);
+
+            var ret = await this.iAgente.BuscarAgente(matricula);
+            if (ret == null)
+                return Json(NotFound());
+
+            Json(await Task.FromResult(this.iAgente.MudarSenhaAgente(matricula, senhaCriptografada)));
+
+            return Json(Ok());
         }
 
 

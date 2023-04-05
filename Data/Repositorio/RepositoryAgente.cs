@@ -40,11 +40,52 @@ namespace Data.Repositorio
 
         public async Task<Agente> BuscarAgente(int matricula, string senha)
         {
-            var senhaCriptografada = Encryptor.MD5Encryption(senha);
-
-            using (var context = new ContextBase(this._OptionsBuilder))
+            try
             {
-                return await context.Agente.Where(x => x.Matricula == matricula && x.Senha == senhaCriptografada).FirstOrDefaultAsync();
+                using (var context = new ContextBase(this._OptionsBuilder))
+                {
+                    return await context.Agente.Where(x => x.Matricula == matricula && x.Senha == senha).FirstOrDefaultAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Agente> BuscarAgente(int matricula)
+        {
+            try
+            {
+                using (var context = new ContextBase(this._OptionsBuilder))
+                {
+                    return await context.Agente.Where(x => x.Matricula == matricula).FirstOrDefaultAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public async Task MudarSenhaAgente(int matricula, string senha)
+        {
+            try
+            {
+                using (var context = new ContextBase(_OptionsBuilder))
+                {
+
+                    var result = await context.Agente.Where(x => x.Matricula == matricula).FirstOrDefaultAsync();
+                    if (result != null)
+                    {
+                        result.Senha = senha;
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
             }
         }
     }
