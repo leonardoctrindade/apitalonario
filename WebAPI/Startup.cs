@@ -52,7 +52,8 @@ namespace WebAPI
            
             services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));
             services.AddSingleton<IAgente, RepositoryAgente>();
-           
+            services.AddSingleton<IMultas, RepositoryMultas>();
+
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>

@@ -14,9 +14,9 @@ namespace Data.Config
             Database.EnsureCreated();
         }
 
-        //Compras
         public DbSet<Agente> Agente { get; set; }
-        
+        public DbSet<Multas> Multas { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

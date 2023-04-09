@@ -68,17 +68,17 @@ namespace Data.Repositorio
             }
         }
 
-        public async Task MudarSenhaAgente(int matricula, string senha)
+        public async Task MudarSenhaAgente(int matricula, string senha, string assinaturaDigital)
         {
             try
             {
                 using (var context = new ContextBase(_OptionsBuilder))
                 {
-
                     var result = await context.Agente.Where(x => x.Matricula == matricula).FirstOrDefaultAsync();
                     if (result != null)
                     {
                         result.Senha = senha;
+                        result.Assinatura = assinaturaDigital;
                         context.SaveChanges();
                     }
                 }

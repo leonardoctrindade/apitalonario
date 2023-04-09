@@ -11,6 +11,6 @@ namespace Data.Interfaces
         Task<List<Agente>> ListagemCustomizada(int pagina);
         Task<Agente> BuscarAgente(int matricula, string senha);
         Task<Agente> BuscarAgente(int matricula);
-        Task MudarSenhaAgente(int matricula, string senha);
+        Task MudarSenhaAgente(int matricula, string senha, string assinaturaDigital);
     }
 }

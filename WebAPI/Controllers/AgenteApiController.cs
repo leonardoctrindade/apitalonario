@@ -49,22 +49,22 @@ namespace WebAPI.Controllers
             return Json(ret);
         }
 
-        [HttpGet("/api/MudarSenhaAgente/{matricula}/{senha}")]
-        public async Task<JsonResult> MudarSenhaAgente(int matricula, string senha)
+        [HttpGet("/api/MudarSenhaAgente/{matricula}/{novaSenha}/{assinaturaDigital}")]
+        public async Task<JsonResult> MudarSenhaAgente(int matricula, string novaSenha, string assinaturaDigital)
         {
             if (matricula == 0)
                 return Json(BadRequest("Informe a Matrícula"));
 
-            if (String.IsNullOrEmpty(senha))
+            if (String.IsNullOrEmpty(novaSenha))
                 return Json(BadRequest("Informe a Senha"));
 
-            var senhaCriptografada = Encryptor.MD5Encryption(senha);
+            var senhaCriptografada = Encryptor.MD5Encryption(novaSenha);
 
             var ret = await this.iAgente.BuscarAgente(matricula);
             if (ret == null)
                 return Json(NotFound());
 
-            Json(await Task.FromResult(this.iAgente.MudarSenhaAgente(matricula, senhaCriptografada)));
+            Json(await Task.FromResult(this.iAgente.MudarSenhaAgente(matricula, senhaCriptografada, assinaturaDigital)));
 
             return Json(Ok());
         }
