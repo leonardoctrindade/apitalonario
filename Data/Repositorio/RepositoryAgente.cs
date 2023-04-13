@@ -88,5 +88,25 @@ namespace Data.Repositorio
                 throw;
             }
         }
+
+        public async Task MudarSenhaAgenteSemMatricula(int matricula, string senha)
+        {
+            try
+            {
+                using (var context = new ContextBase(_OptionsBuilder))
+                {
+                    var result = await context.Agente.Where(x => x.Matricula == matricula).FirstOrDefaultAsync();
+                    if (result != null)
+                    {
+                        result.Senha = senha;
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
     }
 }

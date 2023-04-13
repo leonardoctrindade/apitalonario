@@ -46,25 +46,40 @@ namespace WebAPI.Controllers
             if (ret == null)
                 return Json(NotFound());
 
+            ret.Senha = senha;
+
             return Json(ret);
         }
 
-        [HttpGet("/api/MudarSenhaAgente/{matricula}/{novaSenha}/{assinaturaDigital}")]
-        public async Task<JsonResult> MudarSenhaAgente(int matricula, string novaSenha, string assinaturaDigital)
+        [HttpPost("/api/MudarSenhaAgente")]
+        public async Task<JsonResult> MudarSenhaAgente([FromBody] NovaSenha novaSenha)
         {
-            if (matricula == 0)
+            if (novaSenha.Matricula == 0)
                 return Json(BadRequest("Informe a Matrícula"));
 
-            if (String.IsNullOrEmpty(novaSenha))
+            if (String.IsNullOrEmpty(novaSenha.Senha))
                 return Json(BadRequest("Informe a Senha"));
 
-            var senhaCriptografada = Encryptor.MD5Encryption(novaSenha);
+            var senhaCriptografada = Encryptor.MD5Encryption(novaSenha.Senha);
 
-            var ret = await this.iAgente.BuscarAgente(matricula);
+            var ret = await this.iAgente.BuscarAgente(novaSenha.Matricula);
             if (ret == null)
                 return Json(NotFound());
 
-            Json(await Task.FromResult(this.iAgente.MudarSenhaAgente(matricula, senhaCriptografada, assinaturaDigital)));
+            Json(await Task.FromResult(this.iAgente.MudarSenhaAgente(novaSenha.Matricula, senhaCriptografada, novaSenha.Assinatura)));
+
+            return Json(Ok());
+        }
+
+        [HttpPost("/api/MudarSenhaAgenteSemMatricula")]
+        public async Task<JsonResult> MudarSenhaAgenteSemMatricula([FromBody] NovaSenha novaSenha)
+        {
+            if (String.IsNullOrEmpty(novaSenha.Senha))
+                return Json(BadRequest("Informe a Senha"));
+
+            var senhaCriptografada = Encryptor.MD5Encryption(novaSenha.Senha);
+
+            Json(await Task.FromResult(this.iAgente.MudarSenhaAgenteSemMatricula(novaSenha.Matricula, senhaCriptografada)));
 
             return Json(Ok());
         }

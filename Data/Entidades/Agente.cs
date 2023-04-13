@@ -36,5 +36,13 @@ namespace Data.Entidades
 
         [Column("PrimeiroAcesso")]
         public int PrimeiroAcesso { get; set; }
+
+        [Column("Cpf")]
+        [Required]
+        public string Cpf { get; set; }
+
+        [Column("Cargo")]
+        [Required]
+        public string Cargo { get; set; }
     }
 }

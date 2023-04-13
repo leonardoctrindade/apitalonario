@@ -19,6 +19,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace WebAPI
 {
@@ -40,6 +42,9 @@ namespace WebAPI
             //  options.UseNpgsql(
             //      Configuration.GetConnectionString("DefaultConnection")));
 
+
+
+
             services.AddDbContext<ContextBase>(options =>
                          options.UseSqlServer(
                              Configuration.GetConnectionString("DefaultConnection")));
@@ -53,7 +58,7 @@ namespace WebAPI
             services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));
             services.AddSingleton<IAgente, RepositoryAgente>();
             services.AddSingleton<IMultas, RepositoryMultas>();
-
+            services.AddSingleton<IUsuario, RepositoryUsuario>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(option =>
@@ -140,6 +145,16 @@ namespace WebAPI
             });
 
             app.UseSwagger();
+
+            var supportedCultures = new[] { new CultureInfo("pt-BR") };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(culture: "pt-BR", uiCulture: "pt-BR"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+
+
         }
     }
 }

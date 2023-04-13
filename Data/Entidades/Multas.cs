@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +10,9 @@ namespace Data.Entidades
 {
     public class Multas
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         public int OrgaoAutuador { get; set; }
+        [Key]
         public long NumeroTalao { get; set; }
         public string Placa { get; set; }
         public string Marca { get; set; }
@@ -34,7 +37,7 @@ namespace Data.Entidades
         public string Situacao { get; set; }
         public string Modelo { get; set; }
         public string Ano { get; set; }
-        public int? AnoModelo { get; set; }
+        public string AnoModelo { get; set; }
         public string UF { get; set; }
         public string MunicipioPlaca { get; set; }
         public string Chassi { get; set; }
@@ -43,6 +46,12 @@ namespace Data.Entidades
         public int? Transmitida { get; set; }
         public int? Cancelada { get; set; }
         public int? Ativa { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public string NumeroTalaoDetran { get; set; }
+        public string MedidaAdm { get; set; }
+        public string DataString { get; set; }
+
     }
 
 }
