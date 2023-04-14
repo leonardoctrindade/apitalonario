@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,12 @@ namespace Data.Entidades
         public string NumeroTalaoDetran { get; set; }
         public string MedidaAdm { get; set; }
         public string DataString { get; set; }
+        
+        [NotMapped]
+        public string Nome { get; set; }
+
+        [NotMapped]
+        public string Total { get; set; }
 
     }
 

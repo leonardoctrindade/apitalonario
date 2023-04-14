@@ -17,6 +17,7 @@ namespace Data.Config
         public DbSet<Agente> Agente { get; set; }
         public DbSet<Multas> Multas { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<ValoresMultas> ValoresMultas { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

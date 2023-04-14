@@ -15,5 +15,9 @@ namespace Data.Interfaces
         Task<InformacaoChassi> BuscaChassi(string chassi);
         Task<List<Multas>> BuscaMultaAgente(int idMatricula);
         Task<Multas> BuscaMultaTalao(int numeroTalao);
+        Task<List<Multas>> BuscarMultasData(int matricula, DateTime dataInicial, DateTime dataFinal);
+        Task<List<TotalMultas>> BuscarMultasTotal(int matricula, DateTime dataInicial, DateTime dataFinal);
+        Task<List<ValoresMultas>> ArrecadacaoPorData(DateTime dataInicial, DateTime dataFinal);
+
     }
 }

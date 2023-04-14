@@ -40,6 +40,33 @@ namespace WebAPI.Controllers
 
         }
 
+
+        [HttpGet("/api/BuscarMultasTotal/{matricula}/{dataInicial}/{dataFinal}")]
+        public async Task<List<TotalMultas>> BuscarMultasTotal(int matricula, DateTime dataInicial, DateTime dataFinal)
+        {
+            var ret = await this.iMultas.BuscarMultasTotal(matricula, dataInicial, dataFinal);
+            return ret;
+
+        }
+
+
+        [HttpGet("/api/ArrecadacaoPorData/{dataInicial}/{dataFinal}")]
+        public async Task<List<ValoresMultas>> ArrecadacaoPorData(DateTime dataInicial, DateTime dataFinal)
+        {
+            var ret = await this.iMultas.ArrecadacaoPorData(dataInicial, dataFinal);
+            return ret;
+
+        }
+
+
+        [HttpGet("/api/BuscarMultasData/{matricula}/{dataInicial}/{dataFinal}")]
+        public async Task<List<Multas>> BuscarMultasData(int matricula, DateTime dataInicial, DateTime dataFinal)
+        {
+            var ret = await this.iMultas.BuscarMultasData(matricula, dataInicial, dataFinal);
+            return ret;
+
+        }
+
         [HttpPost("/api/AdicionarMultas")]
         public async Task<JsonResult> AdicionarMultas([FromBody] Multas multas)
         {
