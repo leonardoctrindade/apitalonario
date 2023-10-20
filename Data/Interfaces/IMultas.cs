@@ -12,6 +12,7 @@ namespace Data.Interfaces
         Task<List<Multas>> ListagemCustomizada(int pagina);
         Task<Multas> BuscarMulta(int matricula, string placa, string data, string hora, string infracao);
         Task<ConsultaResponse> BuscaPlaca(string placa);
+        Task<ConsultaResponse> BuscaPlacaAgente(string placa);
         Task<InformacaoChassi> BuscaChassi(string chassi);
         Task<List<Multas>> BuscaMultaAgente(int idMatricula);
         Task<Multas> BuscaMultaTalao(int numeroTalao);

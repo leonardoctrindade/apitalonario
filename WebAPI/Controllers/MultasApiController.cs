@@ -81,10 +81,17 @@ namespace WebAPI.Controllers
                 //DateTime agora = dataAtualBrasil.Date;
                 System.Globalization.CultureInfo brasil = new System.Globalization.CultureInfo("pt-BR");
 
-                string horaAtual = DateTime.Now.AddHours(2).ToString("HH:mm", brasil);
 
-                String dataBr = DateTime.Now.AddHours(2).ToString(brasil);
-                String dataBr2 = DateTime.Now.AddHours(2).ToString("yyyy-MM-dd");
+
+                //string horaAtual = DateTime.Now.AddHours(2).ToString("HH:mm", brasil);
+
+                //String dataBr = DateTime.Now.AddHours(2).ToString(brasil);
+                //String dataBr2 = DateTime.Now.AddHours(2).ToString("yyyy-MM-dd");
+
+                string horaAtual = multas.Hora;
+
+                String dataBr = multas.Data.ToString(brasil);
+                String dataBr2 = multas.Data.ToString("yyyy-MM-dd");
 
                 var retMulta = await BuscarMulta(multas.idMatricula, multas.Placa, dataBr2.ToString(), horaAtual, multas.Infracao);
 
@@ -122,22 +129,31 @@ namespace WebAPI.Controllers
             TimeZoneInfo brTimeZone = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
             var ret = await this.iMultas.BuscaMultaAgente(idMatricula);
 
-            System.Globalization.CultureInfo brasil = new System.Globalization.CultureInfo("pt-BR");
-            String dataBr = DateTime.Now.AddHours(2).ToString(brasil);
 
-            string dia = DateTime.Now.AddHours(2).Day.ToString(brasil);
-            string mes = DateTime.Now.AddHours(2).Month.ToString(brasil);
-            string ano = DateTime.Now.AddHours(2).Year.ToString(brasil);
-            string dataFormatada = dia + "/" + mes + "/" + ano;
 
             foreach (var item in ret)
             {
+                System.Globalization.CultureInfo brasil = new System.Globalization.CultureInfo("pt-BR");
+                //String dataBr = item.DataInclusao.AddHours(2).ToString(brasil);
+
+                //string dia = item.DataInclusao.AddHours(2).Day.ToString(brasil);
+                //string mes = item.DataInclusao.AddHours(2).Month.ToString(brasil);
+                //string ano = item.DataInclusao.AddHours(2).Year.ToString(brasil);
+
+                String dataBr = item.DataInclusao.ToString(brasil);
+
+                string dia = item.DataInclusao.Day.ToString(brasil);
+                string mes = item.DataInclusao.Month.ToString(brasil);
+                string ano = item.DataInclusao.Year.ToString(brasil);
+
+
+                string dataFormatada = dia + "/" + mes + "/" + ano;
 
                 //  item.NomeEmbarcador = DateTime.Parse(dataBr, brasil).ToString();
                 item.NomeEmbarcador = dataFormatada;
             }
 
-            return Json(ret);
+            return Json(ret.OrderByDescending(x => x.Data).ThenByDescending(x => x.Hora));
         }
 
 
@@ -145,17 +161,159 @@ namespace WebAPI.Controllers
         public async Task<JsonResult> BuscaMultaTalao(int numeroTalao)
         {
             System.Globalization.CultureInfo brasil = new System.Globalization.CultureInfo("pt-BR");
-            String dataBr = DateTime.Now.AddHours(2).ToString(brasil);
+            //String dataBr = DateTime.Now.AddHours(2).ToString(brasil);
 
-            string dia = DateTime.Now.AddHours(2).Day.ToString(brasil);
-            string mes = DateTime.Now.AddHours(2).Month.ToString(brasil);
-            string ano = DateTime.Now.AddHours(2).Year.ToString(brasil);
-            string dataFormatada = dia + "/" + mes + "/" + ano;
+            //var ret = await this.iMultas.BuscaMultaTalao(numeroTalao);
+
+            //string dia = ret.DataInclusao.AddHours(2).Day.ToString(brasil);
+            //string mes = ret.DataInclusao.AddHours(2).Month.ToString(brasil);
+            //string ano = ret.DataInclusao.AddHours(2).Year.ToString(brasil);
+
+
+            String dataBr = DateTime.Now.ToString(brasil);
 
             var ret = await this.iMultas.BuscaMultaTalao(numeroTalao);
+
+            string dia = ret.DataInclusao.Day.ToString(brasil);
+            string mes = ret.DataInclusao.Month.ToString(brasil);
+            string ano = ret.DataInclusao.Year.ToString(brasil);
+
+            string dataFormatada = dia + "/" + mes + "/" + ano;
+
+
             ret.NomeEmbarcador = dataFormatada;
+            ret.length = 1;
 
             return Json(ret);
+        }
+
+
+
+        [HttpGet("/api/BuscaPlacaWsDenatran/{value}")]
+        public async Task<JsonResult> BuscaPlacaWsDenatran(string value)
+        {
+            try
+            {
+
+                if (value.Length > 7)
+                {
+                    var ret = await this.iMultas.BuscaChassi(value);
+
+                    ConsultaResponseEngine consultaResponse = new ConsultaResponseEngine();
+                    if (ret.isSucess)
+                    {
+                        consultaResponse.isSucess = ret.isSucess;
+
+                        if (ret.data != null)
+                        {
+                            foreach (var item in ret.data)
+                            {
+                                consultaResponse.data = new ConsultaDataEngine();
+                                consultaResponse.data.plate = item.placa;
+                                consultaResponse.data.chassis = item.chassi;
+                                consultaResponse.data.uf = item.municipioUf;
+                                consultaResponse.data.brand = item.marcaModelo;
+                                consultaResponse.data.model = item.marcaModelo;
+                                consultaResponse.data.brand_model = item.marcaModelo;
+                                consultaResponse.data.yaer = item.ano;
+                                consultaResponse.data.country = item.procedencia;
+                                consultaResponse.data.specie = item.especie;
+                                consultaResponse.data.type = item.tipoAutomovel;
+                                consultaResponse.data.renavam = item.renavam;
+                                consultaResponse.data.engine_number = "";
+                                consultaResponse.data.fuel = item.combustivel;
+                                consultaResponse.data.potency = item.potencia;
+                                consultaResponse.data.color = item.cor;
+                                consultaResponse.data.axis_number = item.eixos.ToString();
+                                consultaResponse.data.type_bodywork = item.carroceria;
+                                consultaResponse.data.seal_number = "";
+
+                                consultaResponse.data.weight = "";
+                                consultaResponse.data.passenger_number = item.PossuidorNome;
+                                consultaResponse.data.owner_document_type = "";
+                                consultaResponse.data.owner_name = item.PossuidorDocumento;
+
+                                consultaResponse.data.last_owner = item.NomeComprador;
+                                consultaResponse.data.last_licensing = item.dataEmissaoCrv;
+
+                                consultaResponse.data.situation = item.situacao;
+
+                                consultaResponse.data.theft = item.situacao;
+                                consultaResponse.data.park_retention = item.restricao1;
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        consultaResponse.isSucess = false;
+                    }
+
+                    return Json(consultaResponse);
+                }
+                else
+                {
+                    var ret1 = await this.iMultas.BuscaPlacaAgente(value);
+
+                    ConsultaResponseEngine consultaResponse = new ConsultaResponseEngine();
+                    if (ret1.isSucess)
+                    {
+                        consultaResponse.isSucess = ret1.isSucess;
+
+                        if (ret1.data != null)
+                        {
+
+                            var item = ret1.data;
+                            //foreach (var item in ret1.data)
+                            //{
+                            consultaResponse.data = new ConsultaDataEngine();
+                            consultaResponse.data.plate = item.placa;
+                            consultaResponse.data.chassis = item.chassi;
+                            consultaResponse.data.uf = item.municipioUf;
+                            consultaResponse.data.brand = item.marcaModelo;
+                            consultaResponse.data.model = item.marcaModelo;
+                            consultaResponse.data.brand_model = item.marcaModelo;
+                            consultaResponse.data.yaer = item.ano;
+                            consultaResponse.data.country = item.procedencia;
+                            consultaResponse.data.specie = item.especie;
+                            consultaResponse.data.type = item.tipoAutomovel;
+                            consultaResponse.data.renavam = item.renavam;
+                            consultaResponse.data.engine_number = "";
+                            consultaResponse.data.fuel = item.combustivel;
+                            consultaResponse.data.potency = item.potencia;
+                            consultaResponse.data.color = item.cor;
+                            consultaResponse.data.axis_number = item.eixos.ToString();
+                            consultaResponse.data.type_bodywork = item.carroceria;
+                            consultaResponse.data.seal_number = "";
+
+                            consultaResponse.data.weight = "";
+                            consultaResponse.data.passenger_number = item.possuidorNome;
+                            consultaResponse.data.owner_document_type = "";
+                            consultaResponse.data.owner_name = item.docProprietario;
+
+                            consultaResponse.data.last_owner = item.nomeComprador.ToString();
+                            consultaResponse.data.last_licensing = item.dataEmissaoCrv;
+
+                            consultaResponse.data.situation = item.situacao;
+
+                            consultaResponse.data.theft = item.situacao;
+                            consultaResponse.data.park_retention = item.restricao1;
+
+                        }
+                    }
+                    else
+                    {
+                        consultaResponse.isSucess = false;
+                    }
+
+                    return Json(consultaResponse);
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
 
@@ -164,6 +322,8 @@ namespace WebAPI.Controllers
         {
             try
             {
+                //8190
+                //8247
 
                 if (placa.Length > 7)
                 {
@@ -193,7 +353,8 @@ namespace WebAPI.Controllers
                                 consultaResponse.data.especie = item.especie;
                             }
                         }
-                    }else
+                    }
+                    else
                     {
                         consultaResponse.isSucess = false;
                     }

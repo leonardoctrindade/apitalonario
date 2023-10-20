@@ -84,7 +84,7 @@ namespace WebAPI.Controllers
             return Json(Ok());
         }
 
-
+        [AllowAnonymous]
         [HttpPost("/api/AdicionarAgente")]
         public async Task<JsonResult> AdicionarAgente([FromBody] Agente Agente)
         {

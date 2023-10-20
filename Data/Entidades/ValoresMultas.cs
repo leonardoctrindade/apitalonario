@@ -12,8 +12,13 @@ namespace Data.Entidades
         public string Codigo { get; set; }
 
         public int Pontos { get; set; }
-
+  
         public double Valor { get; set; }
+
+        [NotMapped]
+        public double ValorLiquido { get; set; }
+        [NotMapped]
+        public double ValorCincoPorcento { get; set; }
 
         [NotMapped]
         public string ValorString { get; set; }
@@ -34,6 +39,9 @@ namespace Data.Entidades
         [NotMapped]
         public string ValorGeral { get; set; }
 
+
+        [NotMapped]
+        public string ValorGeralLiquido { get; set; }
 
         [NotMapped]
         public string ValorUnitarioString { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -100,4 +101,31 @@ namespace Data.Entidades
         public bool messageCript { get; set; }
         public object errors { get; set; }
     }
+
+    public class ConsultaApiResponse
+    {
+        public string MARCA { get; set; }
+        public string SUBMODELO { get; set; }
+        public string VERSAO { get; set; }
+        public string ano { get; set; }
+        public string anoModelo { get; set; }
+        public string chassi { get; set; }
+
+        public string logo { get; set; }
+        public string marcaModelo { get; set; }
+        public string modelo { get; set; }
+        public string municipio { get; set; }
+        public string origem { get; set; }
+        public string placa { get; set; }
+
+        public string placa_alternativa { get; set; }
+        public string segmento { get; set; }
+        public string situacao { get; set; }
+        public string sub_segmento { get; set; }
+        public string token { get; set; }
+        public string uf { get; set; }
+        public string cor { get; set; }
+    }
+
+
 }

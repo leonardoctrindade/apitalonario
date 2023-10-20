@@ -4,6 +4,7 @@ using Data.Entidades;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Data.Config
 {
@@ -18,6 +19,7 @@ namespace Data.Config
         public DbSet<Multas> Multas { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<ValoresMultas> ValoresMultas { get; set; }
+        public DbSet<TotalMultas> TotalMultas { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,14 +34,14 @@ namespace Data.Config
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<ApplicationUser>().ToTable("AspNetUsers").HasKey(t => t.Id);
-          
-           // builder.ForNpgsqlUseIdentityColumns();
+            builder.Entity<TotalMultas>().HasNoKey();
+            // builder.ForNpgsqlUseIdentityColumns();
             base.OnModelCreating(builder);
         }
 
         private string GetStringConectionConfig()
         {
-            string strCon = "Data Source=mssql.mastersoftbr.com.br;Database=mastersoftbr12;Initial Catalog=mastersoftbr12;Integrated Security=False;User ID=mastersoftbr12;Password=legiao22;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;";
+            string strCon = "Data Source=mssql.mastersoftbr.com.br;Database=mastersoftbr15;Initial Catalog=mastersoftbr15;Integrated Security=False;User ID=mastersoftbr15;Password=legiao22;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;";
 
             return strCon;
         }

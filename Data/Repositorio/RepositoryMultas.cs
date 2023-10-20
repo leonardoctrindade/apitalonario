@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using System.Numerics;
 using static Data.Entidades.ConsultaChassi;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Data.SqlClient;
 
 namespace Data.Repositorio
 {
@@ -220,6 +221,9 @@ namespace Data.Repositorio
                                 x = 0;
                                 x = x + item.Valor;
                                 m.Valor = x;
+                                //(200 / 100) * 5
+                                m.ValorCincoPorcento = (m.Valor / 100) * 5;
+                                m.ValorLiquido = m.Valor - (m.ValorCincoPorcento + double.Parse("35,55"));
                                 m.Infracao = item2.Infracao;
                                 m.Endereco = item2.Logradouro;
                                 m.Data = item2.Data;
@@ -237,6 +241,7 @@ namespace Data.Repositorio
                                        Infracao = g.Key,
                                        Endereco = g.FirstOrDefault().Endereco,
                                        Valor = g.Sum(o => o.Valor),
+                                       ValorLiquido = g.Sum(o => o.ValorLiquido),
                                        Data = g.FirstOrDefault().Data,
                                        Pontos = g.FirstOrDefault().Pontos
                                    })
@@ -257,6 +262,18 @@ namespace Data.Repositorio
                         item.ValorUnitarioString = item.Valor.ToString("C2");
                     }
 
+                    z = 0;
+
+                    foreach (var item in listaTotal)
+                    {
+                        z = z + item.ValorLiquido;
+                    }
+
+                    foreach (var item in listaTotal)
+                    {
+                        item.ValorGeralLiquido = z.ToString("C2");
+                    }
+
                     return await Task.Run(() => listaTotal.ToList());
                 }
             }
@@ -269,34 +286,40 @@ namespace Data.Repositorio
 
         public async Task<List<TotalMultas>> BuscarMultasTotal(int matricula, DateTime dataInicial, DateTime dataFinal)
         {
+
+            var dataInicial1 = DateTime.Parse(dataInicial.ToString("yyyy-MM-dd"));
+            var dataFinal1 = DateTime.Parse(dataFinal.ToString("yyyy-MM-dd"));
+            var conta = 0;
+
             try
             {
                 using (var context = new ContextBase(_OptionsBuilder))
                 {
                     if (matricula != 0)
                     {
-                        var m = matricula;
-                        var result = context.Multas
-                           .Join(context.Agente, o => o.idMatricula, oi => oi.Matricula, (o, oi) => new { Multas = o, Agente = oi })
-                           .GroupBy(x => x.Agente.Nome)
-                           .Select(g => new TotalMultas { Nome = g.Key, Total = g.Count(), Matricula = g.FirstOrDefault().Multas.idMatricula, DataInclusao = g.FirstOrDefault().Multas.DataInclusao })
-                           .Where(x => x.Matricula == m && x.DataInclusao.Date >= dataInicial.Date && x.DataInclusao.Date <= dataFinal.Date)
-                           .OrderByDescending(x => x.Total)
-                           .ToListAsync();
+                        var m = new SqlParameter("@matricula", matricula);
+                        var di = new SqlParameter("@dataInicial", dataInicial1);
+                        var df = new SqlParameter("@dataFinal", dataFinal1);
 
-                        return await result;
+                        IQueryable<TotalMultas> retorno = context.TotalMultas
+    .FromSql($"BuscarMultasTotalMatricula {m},{di},{df}");
+
+                        return await retorno.ToListAsync();
+
+
                     }
                     else
                     {
-                        var result = context.Multas
-                          .Join(context.Agente, o => o.idMatricula, oi => oi.Matricula, (o, oi) => new { Multas = o, Agente = oi })
-                          .GroupBy(x => x.Agente.Nome)
-                          .Select(g => new TotalMultas { Nome = g.Key, Total = g.Count(), Matricula = g.FirstOrDefault().Multas.idMatricula, DataInclusao = g.FirstOrDefault().Multas.DataInclusao })
-                          .Where(x => x.DataInclusao.Date >= dataInicial.Date && x.DataInclusao.Date <= dataFinal.Date)
-                          .OrderByDescending(x => x.Total)
-                          .ToListAsync();
 
-                        return await result;
+                        var di = new SqlParameter("@dataInicial", dataInicial1);
+                        var df = new SqlParameter("@dataFinal", dataFinal1);
+
+                        IQueryable<TotalMultas> retorno = context.TotalMultas
+    .FromSql($"BuscarMultasTotalSemMatricula {di},{df}");
+
+                        return await retorno.ToListAsync();
+
+
                     }
 
                 }
@@ -329,8 +352,127 @@ namespace Data.Repositorio
             }
         }
 
+        public async Task<ConsultaResponse> BuscaPlacaAgente(string placa)
+        {
+
+
+            var apiToken = "Lzwba4twyvfhG5B6N4b1abGiRS3I4I";
+            var userIdEncripted = "7648C11ED3B911EDB51DF23C93327545";
+            var tipoParametro = "Placa";
+            var parametro = placa;
+
+            var requestUri = $"https://sis.mtix.com.br/consultaveicular/api/Request/GetBinNacionalAsync?tipoParametro={tipoParametro}&parametro={parametro}";
+
+            var httpClient = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, requestUri);
+            request.Headers.Add("accept", "*/*");
+            request.Content = new StringContent(JsonConvert.SerializeObject(new { apiToken, userIdEncripted }), System.Text.Encoding.UTF8, "application/json");
+
+            var response = await httpClient.SendAsync(request);
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            var result = JsonConvert.DeserializeObject<ConsultaResponse>(responseContent);
+            
+            if (result.data != null)
+                result.data.dataEmissaoCrv = DateTime.Parse(result.data.dataEmissaoCrv).ToString("dd/MM/yyyy");
+
+            return result;
+
+
+        }
+
 
         public async Task<ConsultaResponse> BuscaPlaca(string placa)
+        {
+            var requestUri = $"https://wdapi.com.br/placas/" + placa + "/53c7c21c349d8fb3b5cc7129165561be";
+
+            var httpClient = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+            request.Headers.Add("accept", "*/*");
+            //request.Content = new StringContent(JsonConvert.SerializeObject(new { apiToken, userIdEncripted }), System.Text.Encoding.UTF8, "application/json");
+
+            var response = await httpClient.SendAsync(request);
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            var result = JsonConvert.DeserializeObject<ConsultaApiResponse>(responseContent);
+
+            ConsultaResponse c = new ConsultaResponse();
+            c.isSucess = true;
+            c.data = new ConsultaData();
+            c.data.ano = result.ano;
+            c.data.chassi = result.chassi;
+            c.data.placa = result.placa;
+            c.data.cor = result.cor;
+            c.data.dataEmissaoCrv = "##/##/####";
+            c.data.situacao = result.situacao;
+            c.data.ocorrencia = result.situacao;
+            c.data.marcaModelo = result.modelo;
+            c.data.municipioUf = result.uf;
+            c.data.possuidorNome = "################";
+            c.data.renavam = "################";
+            c.data.especie = "################";
+            c.data.possuidorDocumento = "################";
+
+            //result.data.dataEmissaoCrv = DateTime.Parse(result.data.dataEmissaoCrv).ToString("dd/MM/yyyy");
+
+            return c;
+
+
+        }
+
+        //public async Task<ConsultaResponse> BuscaPlaca(string placa)
+        //{
+
+
+        //    var apiToken = "Lzwba4twyvfhG5B6N4b1abGiRS3I4I";
+        //    var userIdEncripted = "7648C11ED3B911EDB51DF23C93327545";
+        //    var tipoParametro = "Placa";
+        //    var parametro = placa;
+
+        //    var requestUri = $"https://sis.mtix.com.br/consultaveicular/api/Request/GetBinNacionalAsync?tipoParametro={tipoParametro}&parametro={parametro}";
+
+        //    var httpClient = new HttpClient();
+        //    var request = new HttpRequestMessage(HttpMethod.Post, requestUri);
+        //    request.Headers.Add("accept", "*/*");
+        //    request.Content = new StringContent(JsonConvert.SerializeObject(new { apiToken, userIdEncripted }), System.Text.Encoding.UTF8, "application/json");
+
+        //    var response = await httpClient.SendAsync(request);
+        //    var responseContent = await response.Content.ReadAsStringAsync();
+
+        //    var result = JsonConvert.DeserializeObject<ConsultaResponse>(responseContent);
+
+        //    result.data.dataEmissaoCrv = DateTime.Parse(result.data.dataEmissaoCrv).ToString("dd/MM/yyyy");
+
+        //    return result;
+
+
+        //}
+
+        public async Task<InformacaoChassi> BuscaChassi(string chassi)
+        {
+            var apiToken = "Lzwba4twyvfhG5B6N4b1abGiRS3I4I";
+            var userIdEncripted = "7648C11ED3B911EDB51DF23C93327545";
+            var tipoParametro = "Chassi";
+            var parametro = chassi;
+
+            var requestUri = $"https://sis.mtix.com.br/consultaveicular/api/Request/GetBinNacionalListAsync?tipoParametro={tipoParametro}&parametro={parametro}";
+
+            var httpClient = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, requestUri);
+            request.Headers.Add("accept", "*/*");
+            request.Content = new StringContent(JsonConvert.SerializeObject(new { apiToken, userIdEncripted }), System.Text.Encoding.UTF8, "application/json");
+
+            var response = await httpClient.SendAsync(request);
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            var result = JsonConvert.DeserializeObject<InformacaoChassi>(responseContent);
+
+            return result;
+
+        }
+
+
+        public async Task<ConsultaResponse> BuscaPlacaEngine(string placa)
         {
 
 
@@ -355,29 +497,6 @@ namespace Data.Repositorio
 
             return result;
 
-
-        }
-
-        public async Task<InformacaoChassi> BuscaChassi(string chassi)
-        {
-            var apiToken = "Lzwba4twyvfhG5B6N4b1abGiRS3I4I";
-            var userIdEncripted = "7648C11ED3B911EDB51DF23C93327545";
-            var tipoParametro = "Chassi";
-            var parametro = chassi;
-
-            var requestUri = $"https://sis.mtix.com.br/consultaveicular/api/Request/GetBinNacionalListAsync?tipoParametro={tipoParametro}&parametro={parametro}";
-
-            var httpClient = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Post, requestUri);
-            request.Headers.Add("accept", "*/*");
-            request.Content = new StringContent(JsonConvert.SerializeObject(new { apiToken, userIdEncripted }), System.Text.Encoding.UTF8, "application/json");
-
-            var response = await httpClient.SendAsync(request);
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            var result = JsonConvert.DeserializeObject<InformacaoChassi>(responseContent);
-
-            return result;
 
         }
 

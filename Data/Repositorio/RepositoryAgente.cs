@@ -44,7 +44,8 @@ namespace Data.Repositorio
             {
                 using (var context = new ContextBase(this._OptionsBuilder))
                 {
-                    return await context.Agente.Where(x => x.Matricula == matricula && x.Senha == senha).FirstOrDefaultAsync();
+                    var r = await context.Agente.Where(x => x.Matricula == matricula && x.Senha == senha).FirstOrDefaultAsync();
+                    return r;
                 }
             }
             catch (Exception e)

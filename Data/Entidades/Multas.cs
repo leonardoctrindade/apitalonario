@@ -28,6 +28,9 @@ namespace Data.Entidades
         public string Municipio { get; set; }
         public string Infracao { get; set; }
         public int idMatricula { get; set; }
+        
+        [NotMapped]
+        public int length { get; set; }
         public string NomeEmbarcador { get; set; }
         public string CpfEmbarcador { get; set; }
         public string NomeTransportador { get; set; }
